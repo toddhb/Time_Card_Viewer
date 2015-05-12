@@ -1,6 +1,8 @@
 # TimeCardView
 A web front-end to the Kronos API.
 
+[![Build Status](https://travis-ci.org/TeamACapstone2015/TimeCardView.png?branch=master)](https://travis-ci.org/TeamACapstone2015/TimeCardView)
+
 ## Development
 
 ### Setting up development environment
