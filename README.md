@@ -48,6 +48,13 @@ builds. http://gulpjs.com/
 
     sudo npm install --global gulp
 
+#### Install Sass
+
+Sass is an alternative to CSS. Gulp will compile any Sass in to CSS at
+build time.
+
+    sudo gem install Sass
+
 #### Install node dependencies
 
 In root directory of project the following command will install of the
