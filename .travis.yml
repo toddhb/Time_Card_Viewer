@@ -2,7 +2,6 @@ nguage: node_js
 node_js:
 - stable
 install:
-- npm install
 - bower install
 script:
 - npm test
