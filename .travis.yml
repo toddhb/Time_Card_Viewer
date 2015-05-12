@@ -1,8 +1,6 @@
 nguage: node_js
 node_js:
 - stable
-install:
-- bower install
 script:
 - npm test
 notifications:
