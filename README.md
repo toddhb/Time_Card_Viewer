@@ -55,19 +55,13 @@ build time.
 
     sudo gem install Sass
 
-#### Install node dependencies
+#### Install npm/bower dependencies
 
 In root directory of project the following command will install of the
-NPM dependencies under the `./node_modules/` directory.
+NPM dependencies under the `./node_modules/` directory  and bower 
+dependencies under the `./app/bower_components/` directory.
 
     npm install
-
-#### Install bower dependencies
-
-In root directory of project the following command will install of the
-bower dependencies under the `./app/bower_components/` directory.
-
-    bower install
 
 ### Automatic build for development
 
