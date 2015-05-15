@@ -31,6 +31,10 @@ Note, root permissions may be required if the `--global` flag is used.
 
     brew install npm 
 
+##### Windows
+
+Install Cygwin it should come with npm.
+
 #### Install Bower
 
 Bower is the second package manager used in this project. It is very
@@ -62,6 +66,12 @@ NPM dependencies under the `./node_modules/` directory  and bower
 dependencies under the `./app/bower_components/` directory.
 
     npm install
+
+You may need to set your PYTHON enviroment variable, this has been a
+problem from some people on Windows. If the npm command does not work
+then try this one first.
+
+    export PYTHON=$(which python)
 
 ### Automatic build for development
 
