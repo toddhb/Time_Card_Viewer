@@ -40,24 +40,25 @@ Install Cygwin it should come with npm.
 Bower is the second package manager used in this project. It is very
 similar to NPM but install packages in a way the browser understands.
 Bower will install the dependencies under the `app/bower_components/`
-directory.
+directory. `sudo` or evelvated permission may be needed on some systems.
 
-    sudo npm install --global bower
+    npm install --global bower
 
 #### Install Gulp
     
 Gulp is the build system for this project. It is responsible for 
 compiling JSX and Sass as well as constructing the test and production 
-builds. http://gulpjs.com/
+builds. http://gulpjs.com/. `sudo` or evelvated permission may be needed 
+on some systems.
 
-    sudo npm install --global gulp
+    npm install --global gulp
 
 #### Install Sass
 
 Sass is an alternative to CSS. Gulp will compile any Sass in to CSS at
-build time.
+build time.  `sudo` or evelvated permission may be needed on some systems.
 
-    sudo gem install Sass
+    gem install Sass
 
 #### Install npm/bower dependencies
 
