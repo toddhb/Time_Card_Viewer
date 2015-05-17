@@ -1,6 +1,10 @@
 {
   "name": "timecardview",
   "version": "0.0.0",
+  "repository" : { 
+      "type" : "git",
+      "url" : "https://github.com/TeamACapstone2015/TeamACapstone2015.git"
+  },
   "dependencies": {
     "bower": "^1.4.1"
   },
