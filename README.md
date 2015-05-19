@@ -24,7 +24,7 @@ You will need to add all the things we just downloaded to you path. This will al
 
 Mine, for example, looked like this:
 
-    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files (x86)\nodejs\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\bin\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\cmd\;C:\Ruby22\bin\;C:\Pytho27", "User")
+    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files (x86)\nodejs\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\bin\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\cmd\;C:\Ruby22\bin\;C:\Python27\", "User")
 
 Restart to make the changes take effect. Once you restart, you should see the changes by running in the cmd line
 
@@ -36,7 +36,7 @@ The npm packaged with the version of Node we downloaded is not the version we wa
 
     npm install npm@2.1.5
     
-Continue with Get the source code and Install npm steps.
+Continue with steps
 
 *If at any point the npm install fails, you should completely delete the node modules folder, fix the issue, then run npm install again.
 
@@ -87,7 +87,7 @@ on some systems.
 Sass is an alternative to CSS. Gulp will compile any Sass in to CSS at
 build time.  `sudo` or evelvated permission may be needed on some systems.
 
-    gem install Sass
+    gem install sass
 
 #### Install npm/bower dependencies
 
@@ -96,7 +96,7 @@ NPM dependencies under the `./node_modules/` directory  and bower
 dependencies under the `./app/bower_components/` directory.
 
     npm install
-
+    
 
 ### Automatic build for development
 
@@ -104,6 +104,10 @@ Run this command when developing. Gulp will watch for any changes and
 automatically rebuild and open in a browser.
 
     gulp watch
+
+For windows:
+
+    .\node_modules\.bin\gulp watch
 
 ### Running the test suite
 
