@@ -30,16 +30,15 @@ Restart to make the changes take effect. Once you restart, you should see the ch
 
     echo %PATH% 
 
-Udpate NPM
+Update NPM
 
 The npm packaged with the version of Node we downloaded is not the version we want. Open the command line as an administrator (right-click > run as admin), cd to C:\Program Files (x86)\nodejs [this might be different if you aren't on a 64-bit system]. Do
 
     npm install npm@2.1.5
     
-Continue with cloning and running npm install
+Continue with Get the source code and Install npm steps.
 
 *If at any point the npm install fails, you should completely delete the node modules folder, fix the issue, then run npm install again.
-
 
 #### Get the source code  
 
@@ -64,8 +63,6 @@ Note, root permissions may be required if the `--global` flag is used.
 ##### Mac
 
     brew install npm 
-
-
 
 #### Install Bower
 
@@ -100,11 +97,6 @@ dependencies under the `./app/bower_components/` directory.
 
     npm install
 
-You may need to set your PYTHON enviroment variable, this has been a
-problem from some people on Windows. If the npm command does not work
-then try this one first.
-
-    export PYTHON=$(which python)
 
 ### Automatic build for development
 
