@@ -9,7 +9,39 @@ A web front-end to the Kronos API.
 
 ### Setting up development environment
 
-#### Get the source code
+##### Windows
+
+Download: 
+  - nodeJS v0.10.9 (https://nodejs.org/dist/)
+  - python (https://www.python.org/downloads/release/python-279/)
+  - ruby (http://rubyinstaller.org/)
+
+Set up path:
+
+You will need to add all the things we just downloaded to you path. This will allow you to use Git, node, python, etc. in your command line. Open a powershell and enter the following command (filling in with correct locations)
+
+    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\NodeJS;C:\GIT\BIN\;C:\GIT\CMD\;C:\RUBY\;C:\PYTHON", "User")
+
+Mine, for example, looked like this:
+
+    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files (x86)\nodejs\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\bin\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\cmd\;C:\Ruby22\bin\;C:\Pytho27", "User")
+
+Restart to make the changes take effect. Once you restart, you should see the changes by running in the cmd line
+
+    echo %PATH% 
+
+Udpate NPM
+
+The npm packaged with the version of Node we downloaded is not the version we want. Open the command line as an administrator (right-click > run as admin), cd to C:\Program Files (x86)\nodejs [this might be different if you aren't on a 64-bit system]. Do
+
+    npm install npm@2.1.5
+    
+Continue with cloning and running npm install
+
+*If at any point the npm install fails, you should completely delete the node modules folder, fix the issue, then run npm install again.
+
+
+#### Get the source code  
 
     git clone git@github.com:TeamACapstone2015/TimeCardView.git
     cd TimeCardView
@@ -33,9 +65,7 @@ Note, root permissions may be required if the `--global` flag is used.
 
     brew install npm 
 
-##### Windows
 
-Install Cygwin it should come with npm.
 
 #### Install Bower
 
