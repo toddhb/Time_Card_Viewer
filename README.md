@@ -12,7 +12,7 @@ A web front-end to the Kronos API.
 ##### Windows
 
 Download: 
-  - nodeJS v0.10.9 (https://nodejs.org/dist/)
+  - nodeJS v0.10.9 (http://nodejs.org/dist/v0.10.9/node-v0.10.9-x86.msi)
   - python (https://www.python.org/downloads/release/python-279/)
   - ruby (http://rubyinstaller.org/)
 
