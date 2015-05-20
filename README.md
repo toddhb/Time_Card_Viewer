@@ -121,4 +121,4 @@ Command to run the test suite.
 
 Command to build for production. 
 
-    gulp deploy
+    gulp build
