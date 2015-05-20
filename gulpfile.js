@@ -3,10 +3,6 @@
 var gulp = require('gulp');
 var del = require('del');
 
-
-var path = require('path');
-
-
 // Load plugins
 var $ = require('gulp-load-plugins')();
 var browserify = require('browserify');
@@ -14,7 +10,6 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream'),
 
     sourceFile = './app/scripts/app.js',
-
     destFolder = './dist/scripts',
     destFileName = 'app.js';
 
@@ -54,9 +49,6 @@ var bundler = watchify(browserify({
     fullPaths: true
 }));
 
-bundler.on('update', rebundle);
-bundler.on('log', $.util.log);
-
 function rebundle() {
     return bundler.bundle()
         // log errors if they happen
@@ -68,6 +60,9 @@ function rebundle() {
         });
 }
 
+bundler.on('update', rebundle);
+bundler.on('log', $.util.log);
+
 // Scripts
 gulp.task('scripts', rebundle);
 
@@ -77,9 +72,6 @@ gulp.task('buildScripts', function() {
         .pipe(source(destFileName))
         .pipe(gulp.dest('dist/scripts'));
 });
-
-
-
 
 // HTML
 gulp.task('html', function() {
@@ -138,7 +130,6 @@ gulp.task('bower', function() {
             base: 'app/bower_components'
         })
         .pipe(gulp.dest('dist/bower_components/'));
-
 });
 
 gulp.task('json', function() {
@@ -175,8 +166,6 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
     gulp.watch('app/*.html', ['html']);
 
     gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles', reload]);
-
-    
 
     // Watch image files
     gulp.watch('app/images/**/*', reload);
