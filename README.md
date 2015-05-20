@@ -4,6 +4,7 @@ A web front-end to the Kronos API.
 [![Build Status](https://travis-ci.org/TeamACapstone2015/TimeCardView.png?branch=master)](https://travis-ci.org/TeamACapstone2015/TimeCardView)
 [![Code Climate](https://codeclimate.com/github/TeamACapstone2015/TimeCardView/badges/gpa.svg)](https://codeclimate.com/github/TeamACapstone2015/TimeCardView)
 [![Test Coverage](https://codeclimate.com/github/TeamACapstone2015/TimeCardView/badges/coverage.svg)](https://codeclimate.com/github/TeamACapstone2015/TimeCardView/coverage)
+[![Coverage Status](https://coveralls.io/repos/TeamACapstone2015/TimeCardView/badge.svg?branch=master)](https://coveralls.io/r/TeamACapstone2015/TimeCardView?branch=master) 
 
 ## Development
 
