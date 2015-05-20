@@ -25,6 +25,8 @@ You will need to add all the things we just downloaded to you path. This will al
 Mine, for example, looked like this:
 
     [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files (x86)\nodejs\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\bin\;C:\Users\Che\AppData\Local\GitHub\PortableGit_c2ba306e536fdf878271f7fe636a147ff37326ad\cmd\;C:\Ruby22\bin\;C:\Python27\", "User")
+    
+You can also do this via the GUI:  http://www.computerhope.com/issues/ch000549.htm
 
 Restart to make the changes take effect. Once you restart, you should see the changes by running in the cmd line
 
