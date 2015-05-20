@@ -38,7 +38,7 @@ The npm packaged with the version of Node we downloaded is not the version we wa
 
     npm install npm@2.1.5
     
-Continue with steps (You can skip installing bower and gulp -- the npm install command will do this for you).
+Continue with install.
 
 *If at any point the npm install fails, you should completely delete the node modules folder, fix the issue, then run npm install again.
 
