@@ -9,6 +9,8 @@ A web front-end to the Kronos API.
 [![Version Eye package.json](https://www.versioneye.com/user/projects/555cb971634daa5dc8000985/badge.svg?style=flat)](https://www.versioneye.com/user/projects/555cb971634daa5dc8000985)
 [![Version Eye bower.json](https://www.versioneye.com/user/projects/555cb970634daacd410007e7/badge.svg?style=flat)](https://www.versioneye.com/user/projects/555cb970634daacd410007e7)
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/TeamACapstone2015/timecardview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 ## Development
 
 ### Setting up development environment
