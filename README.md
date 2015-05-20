@@ -6,6 +6,8 @@ A web front-end to the Kronos API.
 [![Test Coverage](https://codeclimate.com/github/TeamACapstone2015/TimeCardView/badges/coverage.svg)](https://codeclimate.com/github/TeamACapstone2015/TimeCardView/coverage)
 [![Coverage Status](https://coveralls.io/repos/TeamACapstone2015/TimeCardView/badge.svg?branch=master)](https://coveralls.io/r/TeamACapstone2015/TimeCardView?branch=master) 
 
+[![Version Eye](https://www.versioneye.com/user/projects/555cb971634daa5dc8000985/badge.svg?style=flat)](https://www.versioneye.com/user/projects/555cb971634daa5dc8000985)
+
 ## Development
 
 ### Setting up development environment
