@@ -1,11 +1,30 @@
-$icon-font-path: "../fonts/";
-
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
+$border-color: #002b36;
+$hover-color: #e7e7e7;
+
+.calendar {
+    height: 100vh 
+}
+
 table {
-    height: 100vh
+   height: 80vh;
+   border-spacing: 0.5em;
+   text-align: left;
     
-    tr.week {
-        
+    th {
+        vertical-align: bottom;
+        text-align: center;
+    }   
+
+    td {
+       vertical-align: top;
+       padding: 5px;
+       border: 1px solid $border-color;
+    }
+    
+    td:hover {
+      background-color: $hover-color;   
     }
 }
+
