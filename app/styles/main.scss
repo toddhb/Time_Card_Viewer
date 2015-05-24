@@ -2,6 +2,23 @@ $icon-font-path: "../fonts/";
 
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
+.boxed {
+  border: 1px solid #000000;   
+}
+
+.in {
+   border-left: 5px solid green;   
+}
+
+.out {
+   border-left: 5px solid red;   
+}
+
+li {
+ list-style-type: none;
+ float: left;   
+}
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;

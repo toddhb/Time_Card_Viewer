@@ -5,14 +5,14 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>TimeCardView</title>
+        <title>Default View</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/calendar.css">
-        
+        <link rel="stylesheet" href="styles/defaultView.css">
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -22,17 +22,70 @@
         
         <div class="container">
             <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">TimeCardView</h3>
+                <h3 class="text-muted"><a href="index.html">Steve's Time Card</a></h3>
             </div>
 
-            <div id="app">
-            </div>
+            <!--<div class="jumbotron" id="app"></div>-->
+            <div class="alert alert-info" role="alert">You're next due at work <strong>Wednesday at 8:00 am</strong></div>
 
+            
+            <div class="row time-overview">
+                <div class="col-xs-12 time-entries">
+                    <h3>May 1 - 7</h3>
+                    
+                    <ul class="week-overview clearfix">
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Sunday <span class="date">May 1</span></p>
+                                                            <p><span class="hours">8</span> hours worked</p>
+                                                            </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Monday <span class="date">May 2</span></p>
+                                                            <p><span class="hours">0</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Tuesday <span class="date">May 3</span></p>
+                                                            <p><span class="hours">0</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Wednesday <span class="date">May 4</span></p>
+                                                            <p><span class="hours">4.5</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Thursday <span class="date">May 5</span></p>
+                                                            <p><span class="hours">7.26</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Friday <span class="date">May 6</span></p>
+                                                            <p><span class="hours">8</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Saturday <span class="date">May 7</span></p>
+                                                            <p><span class="hours">8</span> hours worked</p>
+                                        </a></div></li>                        
+                    </ul>
+                </div>
+                
+                <div class="col-xs-12">
+                    <h3>May 8 - 14</h3>
+                    
+                    <ul class="week-overview clearfix">
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Sunday <span class="date">May 8</span></p>
+                                                            <p><span class="hours">0</span> hours worked</p>
+                                                            </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Monday <span class="date">May 9</span></p>
+                                                            <p><span class="hours">3.59</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Tuesday <span class="date">May 10</span></p>
+                                                            <p><span class="hours">5</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Wednesday <span class="date">May 11</span></p>
+                                                            <p><span class="hours">4.5</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Thursday <span class="date">May 12</span></p>
+                                                            <p><span class="hours">7</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Friday <span class="date">May 13</span></p>
+                                                            <p><span class="hours">8</span> hours worked</p>
+                                        </a></div></li>
+                        <li class="day"><div class="time-entry"><a href="/day.html"><p>Saturday <span class="date">May 14</span></p>
+                                                            <p><span class="hours">0</span> hours worked</p>
+                                        </a></div></li>                        
+                    </ul>
+                </div>
+            </div>
         </div>
         
 
