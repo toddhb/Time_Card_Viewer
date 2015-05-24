@@ -1,8 +1,38 @@
 
 var React = window.React = require('react'),
     Timer = require("./ui/Timer"),
+    Calendar = require("./ui/Calendar"),
     mountNode = document.getElementById("app");
 
+var TimeStamp = React.createClass({
+    render: function() {
+        return (
+            <div>{this.props.date}</div>        
+        )
+    }
+});
+var TimeStamps = React.createClass({
+    getInitialState: function() {
+        return {
+            timeStamps: [
+                (new Date).toString(),
+                (new Date).toString(),
+                (new Date).toString(),
+                (new Date).toString()
+            ]
+        };
+    },
+    render: function() {
+        var timeStamps =  this.state.timeStamps.map(function(each) {
+            return (
+                <tr><td><TimeStamp date={each} /></td></tr>
+            )
+        });
+        return (
+            <list>{timeStamps}</list>
+        )
+    }
+});
 var TodoList = React.createClass({
   render: function() {
     var createItem = function(itemText) {
@@ -11,34 +41,23 @@ var TodoList = React.createClass({
     return <ul>{this.props.items.map(createItem)}</ul>;
   }
 });
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {items: [], text: ''};
-  },
-  onChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var nextItems = this.state.items.concat([this.state.text]);
-    var nextText = '';
-    this.setState({items: nextItems, text: nextText});
-  },
+
+var CalendarApp = React.createClass({
   render: function() {
     return (
       <div>
-        <h3>TODO</h3>
-        <TodoList items={this.state.items} />
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange} value={this.state.text} />
-          <button>{'Add #' + (this.state.items.length + 1)}</button>
-        </form>
-        <Timer />
+        <Calendar year="2015" month="0"/>
+        <Calendar year="2015" month="1"/>
+        <Calendar year="2015" month="2"/>
+        <Calendar year="2015" month="3"/>
+        <Calendar year="2015" month="4"/>
+        <Calendar year="2015" month="5"/>
+        <Calendar year="2015" month="6"/>
+        <Calendar year="2015" month="7"/>
       </div>
     );
   }
 });
 
 
-React.render(<TodoApp />, mountNode);
-
+React.render(<CalendarApp />, mountNode);
