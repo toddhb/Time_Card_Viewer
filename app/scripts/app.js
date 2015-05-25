@@ -2,6 +2,7 @@
 var React = window.React = require('react'),
     Timer = require("./ui/Timer"),
     Calendar = require("./ui/Calendar"),
+    WeekOverview = require("./ui/TimeOverview.js"),
     mountNode = document.getElementById("app");
 
 var TimeStamp = React.createClass({
@@ -47,17 +48,21 @@ var CalendarApp = React.createClass({
     return (
       <div>
         <Calendar year="2015" month="0"/>
-        <Calendar year="2015" month="1"/>
-        <Calendar year="2015" month="2"/>
-        <Calendar year="2015" month="3"/>
-        <Calendar year="2015" month="4"/>
-        <Calendar year="2015" month="5"/>
-        <Calendar year="2015" month="6"/>
-        <Calendar year="2015" month="7"/>
+      </div>
+    );
+  }
+});
+
+var TimeOverviewApp= React.createClass({
+  render: function() {
+    return (
+      <div>
+        <WeekOverview />
       </div>
     );
   }
 });
 
 
-React.render(<CalendarApp />, mountNode);
+
+React.render(<TimeOverviewApp />, mountNode);
