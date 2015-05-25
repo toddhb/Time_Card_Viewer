@@ -10,7 +10,7 @@ var days = [
   },{
     dayOfTheWeek: "Monday",
     date: "May 2",
-    hours: 8
+    hours: 5
   },{
     dayOfTheWeek: "Tuesday",
     date: "May 3",
@@ -69,26 +69,22 @@ var WeekOverview = React.createClass({
     }
   },
   render: function() {
-    var weeks = []
-    var days = this.state.days.slice()
-    while (days.length > 0) {
-      weeks.push(days.splice(0,7))
-    }
-    weeks = weeks.map(function(eachWeek) {
-      return <Week date="Month X- Month Y">{
-        eachWeek.map(function (eachDay) {
+    var weeks = _.chain(this.state.days)
+      .groupBy(function(element, index){ return Math.floor(index/7); })
+      .map(function(eachWeek) {
+        var days = _.chain(eachWeek).map(function(eachDay) {
           return (
             <Day dayOfTheWeek={eachDay.dayOfTheWeek} date={eachDay.date}
                  hours={eachDay.hours} url="/day.html"/>
           )
         })
-      }</Week>
-    });
+        var start_date = _.first(eachWeek).date
+        var end_date = _.last(eachWeek).date
+        return <Week date={start_date+" - "+end_date}>{days}</Week>
+      })
     return (
-      <div className="row time-overview">
-        {weeks}
-      </div>
-    );
+      <div className="row time-overview">{weeks}</div>
+    )
   }
 });
 
