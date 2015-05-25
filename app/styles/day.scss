@@ -1,0 +1,32 @@
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+@import 'periodTotals';
+
+$time-in: #178701;
+$time-out: #026475;
+$info: #ddd;
+
+.time-entry {
+    .panel-body { padding: 15px 10px 10px 10px; }
+
+    span { //The icon. Probably should use a better selector
+        font-size: 1em;
+        padding-right: 8px;
+    }
+}
+
+.time-in {
+    border-left: 3px solid $time-in !important; 
+}
+
+.time-out {
+    border-left: 3px solid $time-out !important; 
+}
+
+.shift-info {
+    border-left: 3px solid $info !important; 
+}
+
+
+
+
