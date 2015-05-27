@@ -9,14 +9,10 @@ var Calendar = React.createClass({
   dayOfDate: function(year,month,day) {
     return new Date(year, month, day).getDay();
   },
-  headers: function() {
-     return this.props.headers || [
-       "Sunday",  "Monday",  "Tuesday",  "Wednesday",
-       "Thursday",  "Friday",  "Saturday"
-     ]
-  },
   render: function() {
-    var headers = this.headers().map((each) => { return (<th>{each}</th>) });
+    console.log(this.props.headers)
+    var headers = !this.props.headers
+               || this.props.headers.map((each) => { return (<th>{each}</th>) })
 
     var day = this.dayOfDate(+this.props.year, +this.props.month, 1)
     var daysInMonth = this.daysInMonth(+this.props.year, +this.props.month, 1)
@@ -38,13 +34,8 @@ var Calendar = React.createClass({
     return (
       <div className="container-fluid">
         <div className="calendar">
-          <div className="row month-title">
-            <div className="col-xs-12">
-              <h1>{this.props.month}</h1>
-            </div>
-          </div>
           <div className="row calendar-row">
-            <div className="col-xs-12">
+            <div>
               <table width="100%">
                 {headers}
                 {rows}
