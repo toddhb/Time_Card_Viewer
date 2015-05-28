@@ -1,9 +1,15 @@
 
 var React = window.React = require('react'),
+    Router = window.ReactRouter = require('react-router'),
     Timer = require("./ui/Timer"),
     Calendar = require("./ui/Calendar"),
     WeekOverview = require("./ui/TimeOverview.js"),
     mountNode = document.getElementById("app");
+
+var DefaultRoute = Router.DefaultRoute;
+var Link = Router.Link;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
 
 var TimeStamp = React.createClass({
     render: function() {
@@ -43,26 +49,41 @@ var TodoList = React.createClass({
   }
 });
 
+var App = React.createClass({
+  render: function() {
+    return (
+      <RouteHandler/>
+    );
+  }
+});
+
 var CalendarApp = React.createClass({
   render: function() {
+    var calendars = _.range(0, 12+1).map((i) => {
+      return <Calendar year="2015" month={i} />
+    })
     return (
-      <div>
-        <Calendar year="2015" month="0"/>
-      </div>
+      <div>{calendars}</div>
     );
   }
 });
 
-var TimeOverviewApp= React.createClass({
+var WeekOverviewApp= React.createClass({
   render: function() {
     return (
-      <div>
-        <WeekOverview />
-      </div>
+      <WeekOverview />
     );
   }
 });
 
+var routes = (
+  <Route name="app" handler={App} path="/">
+    <DefaultRoute handler={WeekOverviewApp}/>
+    {/* TEST ROUTES */}
+    <Route name="calendar" path="calendar/" handler={CalendarApp} />
+  </Route>
+);
 
-
-React.render(<TimeOverviewApp />, mountNode);
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, mountNode);
+});
