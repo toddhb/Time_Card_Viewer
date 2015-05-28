@@ -1,4 +1,3 @@
-
 var React = window.React = require('react'),
     Router = window.ReactRouter = require('react-router'),
     Timer = require("./ui/Timer"),
@@ -11,48 +10,19 @@ var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
-var TimeStamp = React.createClass({
-    render: function() {
-        return (
-            <div>{this.props.date}</div>        
-        )
-    }
-});
-var TimeStamps = React.createClass({
-    getInitialState: function() {
-        return {
-            timeStamps: [
-                (new Date).toString(),
-                (new Date).toString(),
-                (new Date).toString(),
-                (new Date).toString()
-            ]
-        };
-    },
-    render: function() {
-        var timeStamps =  this.state.timeStamps.map(function(each) {
-            return (
-                <tr><td><TimeStamp date={each} /></td></tr>
-            )
-        });
-        return (
-            <list>{timeStamps}</list>
-        )
-    }
-});
-var TodoList = React.createClass({
-  render: function() {
-    var createItem = function(itemText) {
-      return <li>{itemText}</li>;
-    };
-    return <ul>{this.props.items.map(createItem)}</ul>;
-  }
-});
-
 var App = React.createClass({
   render: function() {
     return (
-      <RouteHandler/>
+      <div className="container">
+        <div className="header">
+          <h3 className="text-muted">
+            <a href="index.html">Steve's Time Card</a>
+          </h3>
+        </div>
+        {/*div className="jumbotron" id="app"></div>*/}
+        <div className="alert alert-info" role="alert">You're next due at work <strong>Wednesday at 8:00 am</strong></div>
+        <RouteHandler/>
+      </div>
     );
   }
 });
@@ -80,7 +50,7 @@ var routes = (
   <Route name="app" handler={App} path="/">
     <DefaultRoute handler={WeekOverviewApp}/>
     {/* TEST ROUTES */}
-    <Route name="calendar" path="calendar/" handler={CalendarApp} />
+    <Route name="calendar" handler={CalendarApp} />
   </Route>
 );
 
