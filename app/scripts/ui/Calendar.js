@@ -22,12 +22,6 @@ var Calendar = React.createClass({
     var daysInMonth = this.daysInMonth(+this.props.year, +this.props.month)
     var daysInPreviousMonth = this.daysInPreviousMonth(+this.props.year, +this.props.month)
 
-    console.log("day: " + day)
-    console.log("daysInMonth: " + daysInMonth)
-    console.log("range: " + (7-((day+daysInMonth)%7)))
-    console.log("day+daysInMonth: " + (day+daysInMonth))
-    console.log("(day+daysInMonth)%7: " + (day+daysInMonth)%7)
-
     var days = [].concat(
         _.range(daysInPreviousMonth-day+1, daysInPreviousMonth+1)
          .map((each) => { return (<td className="previousMonth">{each}</td>) })
