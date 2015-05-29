@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var _ = require('underscore');
 
 var Calendar = React.createClass({
   daysInMonth: function(year, month) {
