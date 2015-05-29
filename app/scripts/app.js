@@ -3,6 +3,7 @@ var React = window.React = require('react'),
     Timer = require("./ui/Timer"),
     Calendar = require("./ui/Calendar"),
     WeekOverview = require("./ui/TimeOverview.js"),
+    DayStream = require("./ui/DayStream.js"),
     mountNode = document.getElementById("app");
 
 var DefaultRoute = Router.DefaultRoute;
@@ -38,10 +39,18 @@ var CalendarApp = React.createClass({
   }
 });
 
-var WeekOverviewApp= React.createClass({
+var WeekOverviewApp = React.createClass({
   render: function() {
     return (
       <WeekOverview />
+    );
+  }
+});
+      
+var DayStreamApp = React.createClass({
+  render: function() {
+    return (
+      <DayStream />
     );
   }
 });
@@ -51,6 +60,7 @@ var routes = (
     <DefaultRoute handler={WeekOverviewApp}/>
     {/* TEST ROUTES */}
     <Route name="calendar" handler={CalendarApp} />
+    <Route name="day" handler={DayStreamApp} />
   </Route>
 );
 
