@@ -1,0 +1,372 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>Day View</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->        
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/day.css">
+        <link rel="stylesheet" href="styles/calendar.css">
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        
+        <div class="container">
+            <div class="header">
+                <h3 class="text-muted"><a href="index.html">Steve's Time Card</a></h3>
+            </div>
+            
+            <div class="row"><br/></div><!-- For space -->
+            
+            <div class="row">
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default pull-left">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+                </div>
+                
+                <div class="col-xs-8">
+                    <h4 class="text-center">May 15 - May 31</h4>
+                </div>
+                
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default pull-right">
+                        <span class="glyphicon glyphicon-chevron-right  "></span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row"><br/></div><!-- For space -->
+            
+            <div class="row"><br/></div><!-- For space -->
+                
+            <div class="col-xs-12 col-md-5">
+                <div class="calendar hidden-xs hidden-sm">
+                    <table width="100%">
+                        <tr>
+                            <th>Sunday</th>  
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+
+                        <tr class="week">
+                            <td><a href="/day.html">1</a></td>
+                            <td><a href="/day.html">2</a></td>
+                            <td><a href="/day.html">3</a></td>
+                            <td><a href="/day.html">4</a></td>
+                            <td><a href="/day.html">5</a></td>
+                            <td><a href="/day.html">6</a></td>
+                            <td><a href="/day.html">7</a></td>
+                        </tr>
+
+                        <tr class="week">
+                            <td><a href="/day.html">8</a></td> 
+                            <td><a href="/day.html">9</a></td>
+                            <td><a href="/day.html">10</a></td>
+                            <td><a href="/day.html">11</a></td>
+                            <td><a href="/day.html">12</a></td>
+                            <td><a href="/day.html">13</a></td>
+                            <td><a href="/day.html">14</a></td>
+                        </tr>
+
+                        <tr class="week" id="current">
+                            <td><a href="/day.html">15</a></td> 
+                            <td><a href="/day.html">16</a></td>
+                            <td><a href="/day.html">17</a></td>
+                            <td><a href="/day.html">18</a></td>
+                            <td><a href="/day.html">19</a></td>
+                            <td><a href="/day.html">20</a></td>
+                            <td><a href="/day.html">21</a></td>
+                        </tr>
+
+                        <tr class="week">
+                            <td><a href="/day.html">22</a></td> 
+                            <td><a href="/day.html">23</a></td>
+                            <td><a href="/day.html">24</a></td>
+                            <td><a href="/day.html">25</a></td>
+                            <td><a href="/day.html">26</a></td>
+                            <td><a href="/day.html">27</a></td>
+                            <td><a href="/day.html">28</a></td>
+                        </tr>
+
+                        <tr class="week">
+                            <td><a href="/day.html">29</a></td> 
+                            <td><a href="/day.html">30</a></td>
+                            <td><a href="/day.html">31</a></td>
+                            <td class="hidden"><a href="/day.html"></a></td>
+                            <td class="hidden"><a href="/day.html"></a></td>
+                            <td class="hidden"><a href="/day.html"></a></td>
+                            <td class="hidden"><a href="/day.html"></a></td>
+                        </tr>   
+                    </table>
+                </div><!-- Replace with component -->
+                <!-- This gives me a whole years worth of calendars.. what if I only want one?
+                <div class="col-md-12" id="app">
+                    <CalendarApp/>
+                </div>-->
+                    
+                <div class="panel panel-default period-totals">
+                  <div class="panel-heading">
+                    <h4 class="panel-title"><a href="payperiod.html">May 1-15 Period</a> Totals</h4>
+                  </div>
+                  <div class="panel-body">
+                      <p><strong>Total Hours Worked:</strong> <span class="period-stat">40</span></p>
+                      <p><strong>Total Hours Scheduled:</strong> <span class="period-stat">55</span></p>
+                      <p><strong>Other Fact</strong> <span class="period-stat">Wow!</span></p>
+                  </div>
+                </div>
+
+            </div> <!--end calendar side-bar-->
+            
+            <div class="col-xs-12 col-md-7">
+            
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Sunday, May 15
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        <div class="entry-list">
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>8:57 a.m.</strong></p>
+                      </div>
+                    </div>   
+
+                     <div class="panel panel-default time-entry shift-info">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-time pull-left"></span>
+                          <p>Shift starts at <strong>9:00 a.m.</strong></p>
+                      </div>
+                    </div>  
+
+                     <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>12:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>1:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+                        
+                    <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>3:30 p.m.</strong></p>
+                      </div>
+                    </div> 
+
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>4:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+                          
+                    <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>5:29 p.m.</strong></p>
+                      </div>
+                    </div>                       
+                        
+                    <div class="panel panel-default time-entry shift-info">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-time pull-left"></span>
+                          <p>Shift starts at 5:30 p.m.</p>
+                      </div>
+                    </div>  
+                        
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Monday, May 16
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                      <div class="panel-body">
+                        <div class="entry-list">
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>8:57 a.m.</strong></p>
+                      </div>
+                    </div>   
+
+                     <div class="panel panel-default time-entry shift-info">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-time pull-left"></span>
+                          <p>Shift starts at <strong>9:00 a.m.</strong></p>
+                      </div>
+                    </div>  
+
+                     <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>12:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>1:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+                        
+                    <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>3:30 p.m.</strong></p>
+                      </div>
+                    </div> 
+
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>4:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+                          
+                    <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>5:29 p.m.</strong></p>
+                      </div>
+                    </div>                       
+                        
+                    <div class="panel panel-default time-entry shift-info">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-time pull-left"></span>
+                          <p>Shift starts at 5:30 p.m.</p>
+                      </div>
+                    </div>  
+                        
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                      <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Tuesday, May 17
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                      <div class="panel-body">
+                        <div class="entry-list">
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>8:57 a.m.</strong></p>
+                      </div>
+                    </div>   
+
+                     <div class="panel panel-default time-entry shift-info">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-time pull-left"></span>
+                          <p>Shift starts at <strong>9:00 a.m.</strong></p>
+                      </div>
+                    </div>  
+
+                     <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>12:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>1:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+                        
+                    <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>3:30 p.m.</strong></p>
+                      </div>
+                    </div> 
+
+                     <div class="panel panel-default time-entry time-in">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-ok-sign pull-left"></span>
+                          <p>Clocked in at <strong>4:00 p.m.</strong></p>
+                      </div>
+                    </div> 
+                          
+                    <div class="panel panel-default time-entry time-out">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-minus-sign pull-left"></span>
+                          <p>Clocked out at <strong>5:29 p.m.</strong></p>
+                      </div>
+                    </div>                       
+                        
+                    <div class="panel panel-default time-entry shift-info">
+                      <div class="panel-body">
+                          <span class="glyphicon glyphicon-time pull-left"></span>
+                          <p>Shift starts at 5:30 p.m.</p>
+                      </div>
+                    </div>  
+                        
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+            </div><!--end accordian-->
+        </div>
+        
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+        <script src="scripts/app.js"></script>
+        <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.min.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>

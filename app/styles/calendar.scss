@@ -1,23 +1,29 @@
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
-$border-color: #002b36;
+$border-color: #ddd;
 $hover-color: #e7e7e7;
+$current-border: #cecece;
 
 .calendar {
-    height: 100vh 
+//    height: 100vh // This isn't ideal for when using as a component
+    margin-bottom: 40px;
 }
 
 table {
-   height: 80vh;
-   border-spacing: 0.5em;
+//   height: 80vh;  
+   border-spacing: 0.3em;
    text-align: left;
+   word-break: break-all;
+    border-collapse: separate;
     
     th {
+        font-size: .5em;
         vertical-align: bottom;
         text-align: center;
     }   
 
     td {
+       font-size: .8em;
        vertical-align: top;
        padding: 5px;
        border: 1px solid $border-color;
@@ -25,6 +31,15 @@ table {
     
     td:hover {
       background-color: $hover-color;   
+    }
+    
+    td a { display: block; }
+    
+    tr#current {
+      td {
+          background-color: $hover-color;
+          border-color: $current-border !important;
+      }     
     }
 }
 
