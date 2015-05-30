@@ -7,10 +7,13 @@ var React = window.React = require('react'),
     _ = require("underscore"),
     mountNode = document.getElementById("app");
 
+import { Resolver } from "react-resolver"
+
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
+
 
 var App = React.createClass({
   render: function() {
@@ -58,5 +61,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, mountNode);
+  Resolver.render(<Handler/>, mountNode);
 });
