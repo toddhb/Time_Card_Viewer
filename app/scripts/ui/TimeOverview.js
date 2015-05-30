@@ -63,13 +63,12 @@ var days = [
   }
 ]
 
-var WeekOverview = React.createClass({
-  getInitialState: function() {
-    return {
-      days: days
-    }
-  },
-  render: function() {
+class WeekOverview extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {days: days};
+  }
+  render() {
     var weeks = _.chain(this.state.days)
       .groupBy((element, index) => Math.floor(index/7))
       .map(eachWeek => {
@@ -85,10 +84,10 @@ var WeekOverview = React.createClass({
       <div className="row time-overview">{weeks}</div>
     )
   }
-});
+}
 
-var Week = React.createClass({
-  render: function() {
+class Week extends React.Component {
+  render() {
     return (
       <div className="col-xs-12 time-entries">
         <h3>{this.props.date}</h3>
@@ -98,10 +97,10 @@ var Week = React.createClass({
       </div>
     );
   }
-});
+}
 
-var Day = React.createClass({
-  render: function() {
+class Day extends React.Component {
+  render() {
     return (
       <li className="day">
         <div className="time-entry">
@@ -113,6 +112,6 @@ var Day = React.createClass({
       </li>
     )
   }
-});
+}
 
 module.exports = WeekOverview;

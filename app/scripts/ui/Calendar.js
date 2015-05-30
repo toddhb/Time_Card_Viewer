@@ -3,19 +3,19 @@
 var React = require('react');
 var _ = require('underscore');
 
-var Calendar = React.createClass({
-  daysInMonth: function(year, month) {
+class Calendar extends React.Component {
+  daysInMonth(year, month) {
     return new Date(year, month+1, 0).getDate();
-  },
-  daysInPreviousMonth: function(year, month) {
+  }
+  daysInPreviousMonth(year, month) {
     var date = new Date(year, month, 1)
     date.setMonth(date.getMonth()-1)
     return this.daysInMonth(date.getYear(), date.getMonth())
-  },
-  dayOfDate: function(year,month,day) {
+  }
+  dayOfDate(year,month,day) {
     return new Date(year, month, day).getDay();
-  },
-  render: function() {
+  }
+  render() {
     var headers = !this.props.headers
                || this.props.headers.map(each => <th>{each}</th>)
 
@@ -53,6 +53,6 @@ var Calendar = React.createClass({
       </div>
     );
   }
-});
+};
     
 module.exports = Calendar

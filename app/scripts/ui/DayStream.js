@@ -36,8 +36,8 @@ var dayStamps = [
     }
 ]
 
-var DayStream = React.createClass({                              
-    render: function() {
+class DayStream extends React.Component {                              
+    render() {
         var punchLog = _.chain(dayStamps)
            .sortBy(punchLog => punchLog.time) 
            .map(punch => <Entry type={punch.type} time={punch.time} suffix={punch.suffix} />)
@@ -45,11 +45,11 @@ var DayStream = React.createClass({
             <div className="entry-list">{punchLog}</div>
         )
     }
-});
+}
 
 
-var Entry = React.createClass({
-    render: function() {
+class Entry extends React.Component {
+    render() {
         var action = '';
         var panelClass = 'panel panel-default time-entry';
         var glyphClass = 'glyphicon pull-left';
@@ -85,6 +85,6 @@ var Entry = React.createClass({
             </div> 
         )
     }
-});
+}
     
 module.exports = DayStream;
