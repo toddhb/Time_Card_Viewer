@@ -39,8 +39,8 @@ var dayStamps = [
 var DayStream = React.createClass({                              
     render: function() {
         var punchLog = _.chain(dayStamps)
-           .sortBy(function(punchLog){ return punchLog.time; }) 
-           .map(function(punch){ return ( <Entry type={punch.type} time={punch.time} suffix={punch.suffix} /> ) });
+           .sortBy(punchLog => punchLog.time) 
+           .map(punch => <Entry type={punch.type} time={punch.time} suffix={punch.suffix} />)
         return (
             <div className="entry-list">{punchLog}</div>
         )

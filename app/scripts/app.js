@@ -2,7 +2,9 @@ var React = window.React = require('react'),
     Router = window.ReactRouter = require('react-router'),
     Timer = require("./ui/Timer"),
     Calendar = require("./ui/Calendar"),
+    DayStream = require("./ui/DayStream"),
     WeekOverview = require("./ui/TimeOverview.js"),
+    _ = require("underscore"),
     mountNode = document.getElementById("app");
 
 var DefaultRoute = Router.DefaultRoute;
@@ -29,9 +31,9 @@ var App = React.createClass({
 
 var CalendarApp = React.createClass({
   render: function() {
-    var calendars = _.range(0, 12+1).map((i) => {
-      return <Calendar year="2015" month={i} />
-    })
+    var calendars = _.range(0, 12+1).map(i =>
+      <Calendar year="2015" month={i} />
+    )
     return (
       <div>{calendars}</div>
     );
@@ -51,6 +53,7 @@ var routes = (
     <DefaultRoute handler={WeekOverviewApp}/>
     {/* TEST ROUTES */}
     <Route name="calendar" handler={CalendarApp} />
+    <Route name="daystream" handler={DayStream} />
   </Route>
 );
 

@@ -17,7 +17,7 @@ var Calendar = React.createClass({
   },
   render: function() {
     var headers = !this.props.headers
-               || this.props.headers.map((each) => { return (<th>{each}</th>) })
+               || this.props.headers.map(each => <th>{each}</th>)
 
     var day = this.dayOfDate(+this.props.year, +this.props.month, 1)
     var daysInMonth = this.daysInMonth(+this.props.year, +this.props.month)
@@ -25,18 +25,18 @@ var Calendar = React.createClass({
 
     var days = [].concat(
         _.range(daysInPreviousMonth-day+1, daysInPreviousMonth+1)
-         .map((i) => { return (<td className="previousMonth">{i}</td>) })
+         .map(i => <td className="previousMonth">{i}</td>)
       ).concat(
         _.range(1, daysInMonth+1)
-         .map((i) => { return (<td>{i}</td>) })
+         .map(i => <td>{i}</td>)
       ).concat(
         _.range(1, (7-((day+daysInMonth)%7))%7+1)
-         .map((i) => { return (<td className="nextMonth">{i}</td>) })
+         .map(i => <td className="nextMonth">{i}</td>)
       )
 
     var rows = _.chain(days)
-      .groupBy((element, index) => { return Math.floor(index/7); })
-      .map((eachWeek) => { return <tr className="week">{eachWeek}</tr>})
+      .groupBy((element, index) => Math.floor(index/7))
+      .map(eachWeek => <tr className="week">{eachWeek}</tr>)
 
     return (
       <div className="container-fluid">

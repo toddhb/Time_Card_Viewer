@@ -11,6 +11,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babelify": "^6.1.2",
     "browser-sync": "latest",
     "browserify-shim": "^3.8.0",
     "codeclimate-test-reporter": "0.0.4",
@@ -57,13 +58,7 @@
   },
   "browserify": {
     "transform": [
-      "browserify-shim",
-      [
-        "reactify",
-        {
-          "es6": true
-        }
-      ]
+      "babelify"
     ]
   },
   "browser": {

@@ -71,17 +71,15 @@ var WeekOverview = React.createClass({
   },
   render: function() {
     var weeks = _.chain(this.state.days)
-      .groupBy(function(element, index){ return Math.floor(index/7); })
-      .map(function(eachWeek) {
-        var days = _.chain(eachWeek).map(function(eachDay) {
-          return (
+      .groupBy((element, index) => Math.floor(index/7))
+      .map(eachWeek => {
+        var days = _.chain(eachWeek).map(eachDay =>
             <Day dayOfTheWeek={eachDay.dayOfTheWeek} date={eachDay.date}
                  hours={eachDay.hours} url="/day.html"/>
           )
-        })
         var start_date = _.first(eachWeek).date
         var end_date = _.last(eachWeek).date
-        return <Week date={start_date+" - "+end_date}>{days}</Week>
+        return (<Week date={start_date+" - "+end_date}>{days}</Week>)
       })
     return (
       <div className="row time-overview">{weeks}</div>
