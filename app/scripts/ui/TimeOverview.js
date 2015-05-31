@@ -11,7 +11,7 @@ class WeekOverview extends React.Component {
       .map(eachWeek => {
         var days = _.chain(eachWeek).map(eachDay =>
             <Day dayOfTheWeek={eachDay.dayOfTheWeek} date={eachDay.date}
-                 hours={eachDay.hours} url="/day.html"/>
+                 hours={eachDay.hours} url="#/day/date" />
           )
         var start_date = _.first(eachWeek).date
         var end_date = _.last(eachWeek).date

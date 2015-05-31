@@ -22,7 +22,7 @@ var App = React.createClass({
       <div className="container">
         <div className="header">
           <h3 className="text-muted">
-            <a href="index.html">Steve's Time Card</a>
+            <a href="/">Steve's Time Card</a>
           </h3>
         </div>
         {/*div className="jumbotron" id="app"></div>*/}
@@ -65,7 +65,7 @@ var routes = (
     <DefaultRoute handler={WeekOverviewApp}/>
     {/* TEST ROUTES */}
     <Route name="calendar" handler={CalendarApp} />
-    <Route name="daystream" handler={DayStream} />
+    <Route name="day/:id" handler={DayStream} />
   </Route>
 );
 
