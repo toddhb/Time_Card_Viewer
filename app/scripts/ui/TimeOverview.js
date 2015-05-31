@@ -2,95 +2,31 @@
 
 var React = require('react');
 var _ = require('underscore');
+import { Resolver } from "react-resolver"
 
-var days = [
-  {
-    dayOfTheWeek: "Sunday",
-    date: "May 1",
-    hours: 8
-  },{
-    dayOfTheWeek: "Monday",
-    date: "May 2",
-    hours: 5
-  },{
-    dayOfTheWeek: "Tuesday",
-    date: "May 3",
-    hours: 8
-  },{
-    dayOfTheWeek: "Wednesday",
-    date: "May 4",
-    hours: 8
-  },{
-    dayOfTheWeek: "Thursday",
-    date: "May 5",
-    hours: 8
-  },{
-    dayOfTheWeek: "Friday",
-    date: "May 6",
-    hours: 8
-  },{
-    dayOfTheWeek: "Saturday",
-    date: "May 7",
-    hours: 8
-  },{
-    dayOfTheWeek: "Sunday",
-    date: "May 8",
-    hours: 8
-  },{
-    dayOfTheWeek: "Monday",
-    date: "May 9",
-    hours: 8
-  },{
-    dayOfTheWeek: "Tuesday",
-    date: "May 10",
-    hours: 8
-  },{
-    dayOfTheWeek: "Wednesday",
-    date: "May 11",
-    hours: 8
-  },{
-    dayOfTheWeek: "Thursday",
-    date: "May 12",
-    hours: 8
-  },{
-    dayOfTheWeek: "Friday",
-    date: "May 13",
-    hours: 8
-  },{
-    dayOfTheWeek: "Saturday",
-    date: "May 14",
-    hours: 8
-  }
-]
-
-var WeekOverview = React.createClass({
-  getInitialState: function() {
-    return {
-      days: days
-    }
-  },
-  render: function() {
-    var weeks = _.chain(this.state.days)
-      .groupBy(function(element, index){ return Math.floor(index/7); })
-      .map(function(eachWeek) {
-        var days = _.chain(eachWeek).map(function(eachDay) {
-          return (
+class WeekOverview extends React.Component {
+  render() {
+    var weeks = _.chain(this.props.days)
+      .groupBy((element, index) => Math.floor(index/7))
+      .map(eachWeek => {
+        var days = _.chain(eachWeek).map(eachDay =>
             <Day dayOfTheWeek={eachDay.dayOfTheWeek} date={eachDay.date}
                  hours={eachDay.hours} url="/day.html"/>
           )
-        })
         var start_date = _.first(eachWeek).date
         var end_date = _.last(eachWeek).date
-        return <Week date={start_date+" - "+end_date}>{days}</Week>
+        return (<Week date={start_date+" - "+end_date}>{days}</Week>)
       })
     return (
       <div className="row time-overview">{weeks}</div>
     )
   }
-});
+}
 
-var Week = React.createClass({
-  render: function() {
+WeekOverview.displayName = "WeekOverview"
+
+class Week extends React.Component {
+  render() {
     return (
       <div className="col-xs-12 time-entries">
         <h3>{this.props.date}</h3>
@@ -100,10 +36,10 @@ var Week = React.createClass({
       </div>
     );
   }
-});
+}
 
-var Day = React.createClass({
-  render: function() {
+class Day extends React.Component {
+  render() {
     return (
       <li className="day">
         <div className="time-entry">
@@ -115,6 +51,73 @@ var Day = React.createClass({
       </li>
     )
   }
-});
+}
 
-module.exports = WeekOverview;
+export default Resolver.createContainer(WeekOverview, {
+  contextTypes: {
+    router: React.PropTypes.func.isRequired,
+  },
+  resolve: {
+    days: (props, context) => {
+      return [
+          {
+            dayOfTheWeek: "Sunday",
+            date: "May 1",
+            hours: 8
+          },{
+            dayOfTheWeek: "Monday",
+            date: "May 2",
+            hours: 5
+          },{
+            dayOfTheWeek: "Tuesday",
+            date: "May 3",
+            hours: 3
+          },{
+            dayOfTheWeek: "Wednesday",
+            date: "May 4",
+            hours: 7.5
+          },{
+            dayOfTheWeek: "Thursday",
+            date: "May 5",
+            hours: 30
+          },{
+            dayOfTheWeek: "Friday",
+            date: "May 6",
+            hours: 16
+          },{
+            dayOfTheWeek: "Saturday",
+            date: "May 7",
+            hours: 8
+          },{
+            dayOfTheWeek: "Sunday",
+            date: "May 8",
+            hours: 8
+          },{
+            dayOfTheWeek: "Monday",
+            date: "May 9",
+            hours: 55
+          },{
+            dayOfTheWeek: "Tuesday",
+            date: "May 10",
+            hours: 40
+          },{
+            dayOfTheWeek: "Wednesday",
+            date: "May 11",
+            hours: 6
+          },{
+            dayOfTheWeek: "Thursday",
+            date: "May 12",
+            hours: 4
+          },{
+            dayOfTheWeek: "Friday",
+            date: "May 13",
+            hours: 90
+          },{
+            dayOfTheWeek: "Saturday",
+            date: "May 14",
+            hours: 100
+          }
+        ]
+    }
+  }
+})
