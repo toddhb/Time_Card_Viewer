@@ -81,9 +81,7 @@ class DayHeader extends React.Component {
         return ( 
             <div className="row">
                <div className="col-xs-2">
-                   <button type="button" className="btn btn-default pull-left">
-                        <span className="glyphicon glyphicon-chevron-left"></span>
-                    </button>
+                    <PrevDayButton />
                 </div>
 
                 <div className="col-xs-8">
@@ -91,9 +89,7 @@ class DayHeader extends React.Component {
                 </div>
 
                 <div className="col-xs-2">
-                    <button type="button" className="btn btn-default pull-right">
-                        <span className="glyphicon glyphicon-chevron-right  "></span>
-                    </button>
+                    <NextDayButton />
                 </div>
                 <div className="row"><br/></div> {/*For space*/}
                 <div className="row"><br/></div>
@@ -103,9 +99,34 @@ class DayHeader extends React.Component {
     }
 }
 
+class PrevDayButton extends React.Component {
+    handleClick() {
+      // stuff with the state 
+    }
+    render() { 
+        return(
+          <button onClick={this.handleClick} type="button" className="btn btn-default pull-left">
+              <span className="glyphicon glyphicon-chevron-left"></span>
+          </button> 
+        )
+    }
+}
+
+class NextDayButton extends React.Component {
+    handleClick() {
+      // stuff with the state 
+    }
+    render() { 
+        return(
+            <button type="button" className="btn btn-default pull-right">
+                <span className="glyphicon glyphicon-chevron-right "></span>
+            </button>
+        )
+    }
+}
+
 class DayStats extends React.Component {
     render() {
-        
         return (
             <div className="panel panel-default period-totals">
                 <div className="panel-heading">
