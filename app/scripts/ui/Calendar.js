@@ -43,7 +43,7 @@ class Calendar extends React.Component {
         <div className="calendar">
           <div className="row calendar-row">
             <div>
-              <table width="100%">
+              <table width="100%" id="calendar">
                 {headers}
                 {rows}
               </table>

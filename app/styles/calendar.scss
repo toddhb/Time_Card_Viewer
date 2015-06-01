@@ -9,12 +9,13 @@ $current-border: #cecece;
     margin-bottom: 40px;
 }
 
-table {
+// The calendar table
+#calendar {
 //   height: 80vh;  
    border-spacing: 0.3em;
    text-align: left;
    word-break: break-all;
-    border-collapse: separate;
+   border-collapse: separate;
     
     th {
         font-size: .5em;

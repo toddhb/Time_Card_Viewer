@@ -1,7 +1,8 @@
 'use strict';
 
-var React = require('react');
-var _ = require('underscore');
+var React = require('react'),
+    Calendar = require("./Calendar"),
+    _ = require('underscore');
 
 var dayStamps = [
     {
@@ -37,16 +38,74 @@ var dayStamps = [
 ]
 
 class DayStream extends React.Component {                              
-    render() {
+    render() {  
+        var year = 2015
+        var month = 1
         var punchLog = _.chain(dayStamps)
            .sortBy(punchLog => punchLog.time) 
            .map(punch => <Entry type={punch.type} time={punch.time} suffix={punch.suffix} />)
         return (
-            <div className="entry-list">{punchLog}</div>
+            <div>  
+                <DayHeader /> 
+                <div className="row">
+                    <div className="col-xs-12 col-md-7">
+                        {punchLog}
+                    </div>
+                    <div className="col-xs-12 col-md-5">
+                        <div className="calendar hidden-xs hidden-sm">
+                            <Calendar year={year} month={month} / >
+                        </div>
+                        <DayStats />
+                    </div>
+                </div>
+            </div>
         )
     }
 }
 
+class DayHeader extends React.Component {
+    render() {
+        return ( 
+            <div className="row">
+               <div className="col-xs-2">
+                   <button type="button" className="btn btn-default pull-left">
+                        <span className="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+                </div>
+
+                <div className="col-xs-8">
+                    <h4 className="text-center">Wednesday, May 18</h4>
+                </div>
+
+                <div className="col-xs-2">
+                    <button type="button" className="btn btn-default pull-right">
+                        <span className="glyphicon glyphicon-chevron-right  "></span>
+                    </button>
+                </div>
+                <div className="row"><br/></div> {/*For space*/}
+                <div className="row"><br/></div>
+            </div>
+
+        )
+    }
+}
+
+class DayStats extends React.Component {
+    render() {
+        return (
+            <div className="panel panel-default period-totals">
+                <div className="panel-heading">
+                    <h4 className="panel-title"><a href="payperiod">May 15-31 Period</a> Totals</h4>
+                </div>
+                <div className="panel-body">
+                    <p><strong>Total Hours Worked:</strong> <span className="period-stat">40</span></p>
+                    <p><strong>Total Hours Scheduled:</strong> <span className="period-stat">55</span></p>
+                    <p><strong>Other Fact</strong> <span className="period-stat">Wow!</span></p>
+                </div>
+            </div>   
+        )
+    }
+}
 
 class Entry extends React.Component {
     render() {
