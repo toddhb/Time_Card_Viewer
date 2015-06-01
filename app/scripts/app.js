@@ -1,6 +1,5 @@
 var React = window.React = require('react'),
     Router = window.ReactRouter = require('react-router'),
-    Timer = require("./ui/Timer"),
     Calendar = require("./ui/Calendar"),
     DayStream = require("./ui/DayStream"),
     WeekOverview = require("./ui/TimeOverview.js"),
