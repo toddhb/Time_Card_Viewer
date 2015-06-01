@@ -5,6 +5,7 @@ var React = window.React = require('react'),
     DayStream = require("./ui/DayStream"),
     WeekOverview = require("./ui/TimeOverview.js"),
     DayStream = require("./ui/DayStream.js"),
+    moment = require("moment"),
     _ = require("underscore"),
     mountNode = document.getElementById("app");
 

@@ -2,7 +2,18 @@
 
 var React = require('react'),
     Calendar = require("./Calendar"),
+    moment = require("moment"),
     _ = require('underscore');
+
+var date = moment()
+
+var payPeriod = {
+   start: "May 1",
+   end: "May 15",
+   hoursWorked: "50",
+   hoursScheduled: "55",
+   etc: "Wow!" // Replace with...
+}
 
 var dayStamps = [
     {
@@ -39,21 +50,22 @@ var dayStamps = [
 
 class DayStream extends React.Component {                              
     render() {  
-        var year = 2015
-        var month = 1
+        var year = date.year()
+        var month = date.month()
+        var dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
         var punchLog = _.chain(dayStamps)
            .sortBy(punchLog => punchLog.time) 
            .map(punch => <Entry type={punch.type} time={punch.time} suffix={punch.suffix} />)
         return (
             <div>  
-                <DayHeader /> 
+                <DayHeader date={date}/> 
                 <div className="row">
                     <div className="col-xs-12 col-md-7">
                         {punchLog}
                     </div>
                     <div className="col-xs-12 col-md-5">
                         <div className="calendar hidden-xs hidden-sm">
-                            <Calendar year={year} month={month} / >
+                            <Calendar year={year} month={month} headers={dayHeaders} / >
                         </div>
                         <DayStats />
                     </div>
@@ -64,7 +76,8 @@ class DayStream extends React.Component {
 }
 
 class DayHeader extends React.Component {
-    render() {
+    render() { 
+        var displayDate = date.format("dddd, MMMM Do") 
         return ( 
             <div className="row">
                <div className="col-xs-2">
@@ -74,7 +87,7 @@ class DayHeader extends React.Component {
                 </div>
 
                 <div className="col-xs-8">
-                    <h4 className="text-center">Wednesday, May 18</h4>
+                    <h4 className="text-center">{displayDate}</h4>
                 </div>
 
                 <div className="col-xs-2">
@@ -92,15 +105,16 @@ class DayHeader extends React.Component {
 
 class DayStats extends React.Component {
     render() {
+        
         return (
             <div className="panel panel-default period-totals">
                 <div className="panel-heading">
-                    <h4 className="panel-title"><a href="payperiod">May 15-31 Period</a> Totals</h4>
+                    <h4 className="panel-title"><a href="payperiod">{payPeriod.start} - {payPeriod.end} Period</a> Totals</h4>
                 </div>
                 <div className="panel-body">
-                    <p><strong>Total Hours Worked:</strong> <span className="period-stat">40</span></p>
-                    <p><strong>Total Hours Scheduled:</strong> <span className="period-stat">55</span></p>
-                    <p><strong>Other Fact</strong> <span className="period-stat">Wow!</span></p>
+                    <p><strong>Total Hours Worked:</strong> <span className="period-stat">{payPeriod.hoursWorked}</span></p>
+                    <p><strong>Total Hours Scheduled:</strong> <span className="period-stat">{payPeriod.hoursScheduled}</span></p>
+                    <p><strong>Other Fact</strong> <span className="period-stat">{payPeriod.etc}</span></p>
                 </div>
             </div>   
         )
