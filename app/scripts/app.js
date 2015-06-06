@@ -6,6 +6,7 @@ var React = window.React = require('react'),
     DayStream = require("./ui/DayStream.js"),
     moment = require("moment"),
     _ = require("underscore"),
+    fetch = window.fetch = require('node-fetch'),
     mountNode = document.getElementById("app");
 
 import { Resolver } from "react-resolver"
