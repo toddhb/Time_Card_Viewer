@@ -1,12 +1,12 @@
 'use strict';
 
 import React from 'react'
-import { Resolver } from "react-resolver"
 import Router from 'react-router'
 const RouteHandler = Router.RouteHandler;
 const Link = Router.Link;
 import _ from 'underscore'
 import moment from 'moment'
+import Resolver from '../resolvers/WeekOverview.js'
 
 class WeekOverview extends React.Component {
   render() {
@@ -57,23 +57,4 @@ class Day extends React.Component {
   }
 }
 
-var today = moment()
-
-export default Resolver.createContainer(WeekOverview, {
-  contextTypes: {
-    router: React.PropTypes.func.isRequired,
-  },
-  resolve: {
-    params: (props, context) => {
-        return props.params
-    },
-    days: (props, context) => {
-      return _.range(0, 28).map(i => {
-          return {
-            date: moment().add(i, "days"),
-            hours: _.random(0, 24) 
-          }
-      });
-    }
-  }
-})
+export default Resolver(WeekOverview)
