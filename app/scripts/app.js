@@ -4,6 +4,7 @@ var React = window.React = require('react'),
     DayStream = require("./ui/DayStream"),
     WeekOverview = require("./ui/TimeOverview.js"),
     DayStream = require("./ui/DayStream.js"),
+    Main = require("./ui/Main.js"),
     moment = require("moment"),
     _ = require("underscore"),
     fetch = window.fetch = require('node-fetch'),
@@ -15,20 +16,9 @@ var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
-
 var App = React.createClass({
   render: function() {
-    return (
-      <div className="container">
-        <div className="header">
-          <h3 className="text-muted">
-            <a href="/">Steve's Time Card</a>
-          </h3>
-        </div>
-        <div className="alert alert-info" role="alert">You're next due at work <strong>Wednesday at 8:00 am</strong></div>
-        <RouteHandler {...this.params} />
-      </div>
-    );
+    return (<Main />);
   }
 });
 
