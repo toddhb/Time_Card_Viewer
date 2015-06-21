@@ -1,15 +1,13 @@
 'use strict';
 
-var React = require('react');
-// Router
-var Router = require("react-router");
-var RouteHandler = Router.RouteHandler;
-var Link = Router.Link;
-
-var _ = require('underscore');
-var moment = require("moment");
-
+import React from 'react'
 import { Resolver } from "react-resolver"
+import Router from 'react-router'
+const RouteHandler = Router.RouteHandler;
+const Link = Router.Link;
+import _ from 'underscore'
+import moment from 'moment'
+
 
 class WeekOverview extends React.Component {
   render() {

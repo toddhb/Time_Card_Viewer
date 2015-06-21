@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Navbar from "./Navbar.js"
 import AlertBar from "./AlertBar.js"
 

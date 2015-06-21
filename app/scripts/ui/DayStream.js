@@ -1,11 +1,10 @@
 'use strict';
 
-var React = require('react'),
-  Calendar = require("./Calendar"),
-  moment = require("moment"),
-  _ = require('underscore');
-
+import React from 'react'
 import { Resolver } from "react-resolver"
+import Calendar from './Calendar.js'
+import moment from 'moment'
+import _ from 'underscore'
 
 class DayStream extends React.Component {                              
   render() {  

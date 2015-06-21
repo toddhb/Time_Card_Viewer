@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default class AlertBar {
 	render() {
 		return (

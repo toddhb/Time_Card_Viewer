@@ -1,6 +1,8 @@
+import React from 'react'
+
 import Router from "react-router"
-var RouteHandler = Router.RouteHandler;
-var Link = Router.Link;
+const RouteHandler = Router.RouteHandler;
+const Link = Router.Link;
 
 export default class Navbar {
 	render() {

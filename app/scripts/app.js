@@ -1,20 +1,17 @@
-var React = window.React = require('react'),
-    Router = window.ReactRouter = require('react-router'),
-    Calendar = require("./ui/Calendar"),
-    DayStream = require("./ui/DayStream"),
-    WeekOverview = require("./ui/TimeOverview.js"),
-    DayStream = require("./ui/DayStream.js"),
-    Main = require("./ui/Main.js"),
-    moment = require("moment"),
-    _ = require("underscore"),
-    fetch = window.fetch = require('node-fetch'),
-    mountNode = document.getElementById("app");
+import React from 'react'
+import Router from 'react-router'
+
+import DayStream from './ui/DayStream'
+import WeekOverview from './ui/TimeOverview.js'
+import Main from './ui/Main.js'
 
 import { Resolver } from "react-resolver"
-var DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link;
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
+const DefaultRoute = Router.DefaultRoute;
+const Link = Router.Link;
+const Route = Router.Route;
+const RouteHandler = Router.RouteHandler;
+
+const mountNode = document.getElementById("app");
 
 var App = React.createClass({
   render: function() {
@@ -22,7 +19,7 @@ var App = React.createClass({
   }
 });
 
-var routes = (
+const routes = (
   <Route name="app" handler={App} path="/">
     <DefaultRoute handler={WeekOverview}/>
     <Route name="day" path="day/:date" handler={DayStream} />

@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var _ = require('underscore');
+import React from 'react'
+import _ from 'underscore'
 
 class Calendar extends React.Component {
   daysInMonth(year, month) {
