@@ -8,13 +8,13 @@ const RouteHandler = Router.RouteHandler;
 const Link = Router.Link;
 
 export default class Main extends React.Component {
-	render() {
-		return (
+  render() {
+    return (
       <div className="container">
-      	<Navbar title="Steve's Time Card" />
-      	<AlertBar />
+        <Navbar title="Steve's Time Card" />
+        <AlertBar />
         <RouteHandler {...this.params} />
       </div>
-		)	
-	}	
+    ) 
+  } 
 }
