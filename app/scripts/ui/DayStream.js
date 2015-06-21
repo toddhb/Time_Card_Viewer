@@ -5,55 +5,15 @@ var React = require('react'),
     moment = require("moment"),
     _ = require('underscore');
 
-var date = moment()
-
-var payPeriod = {
-   start: "May 1",
-   end: "May 15",
-   hoursWorked: "50",
-   hoursScheduled: "55",
-   etc: "Wow!" // Replace with...
-}
-
-var dayStamps = [
-    {
-        type:   "scheduledIn",
-        time:   "08:00",  // Assuming this comes parsed from 24-hr format
-        suffix: "a.m."
-    },
-    {
-        type:   "scheduledOut",
-        time:   "17:00",
-        suffix: "p.m."   
-    },
-    {
-        type:   "timeIn",
-        time:   "07:59",
-        suffix: "a.m."   
-    },
-    {
-        type:   "timeIn",
-        time:   "12:00",
-        suffix: "a.m."     
-    },
-    {
-        type:   "timeOut",
-        time:   "13:31",
-        suffix: "p.m."   
-    },
-    {
-        type:   "timeOut",
-        time:   "16:48",
-        suffix: "p.m."     
-    }
-]
+import { Resolver } from "react-resolver"
 
 class DayStream extends React.Component {                              
     render() {  
-        var year = date.year()
-        var month = date.month()
+        var date = moment(this.props.params.date)
+        var year = date.format("YYYY")
+        var month = date.format("MM")
         var dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
-        var punchLog = _.chain(dayStamps)
+        var punchLog = _.chain(this.props.dayStamps)
            .sortBy(punchLog => punchLog.time) 
            .map(punch => <Entry type={punch.type} time={punch.time} suffix={punch.suffix} />)
         return (
@@ -65,9 +25,9 @@ class DayStream extends React.Component {
                     </div>
                     <div className="col-xs-12 col-md-5">
                         <div className="calendar hidden-xs hidden-sm">
-                            <Calendar year={year} month={month} headers={dayHeaders} / >
+                            <Calendar year={year} month={month} headers={dayHeaders} />
                         </div>
-                        <DayStats />
+                        <DayStats payPeriod={this.props.payPeriod}/>
                     </div>
                 </div>
             </div>
@@ -75,9 +35,11 @@ class DayStream extends React.Component {
     }
 }
 
+DayStream.displayName = "DayStream"
+
 class DayHeader extends React.Component {
     render() { 
-        var displayDate = date.format("dddd, MMMM Do") 
+        var displayDate = this.props.date.format("MMMM DD") 
         return ( 
             <div className="row">
                <div className="col-xs-2">
@@ -127,6 +89,7 @@ class NextDayButton extends React.Component {
 
 class DayStats extends React.Component {
     render() {
+        var payPeriod = this.props.payPeriod
         return (
             <div className="panel panel-default period-totals">
                 <div className="panel-heading">
@@ -180,5 +143,57 @@ class Entry extends React.Component {
         )
     }
 }
-    
-module.exports = DayStream;
+
+export default Resolver.createContainer(DayStream, {
+  contextTypes: {
+    router: React.PropTypes.func.isRequired,
+  },
+  resolve: {
+    params: (props, context) => {
+        return props.params
+    },
+    payPeriod: (props, context) => {
+       return {
+           start: "May 1",
+           end: "May 15",
+           hoursWorked: "50",
+           hoursScheduled: "55",
+           etc: "Wow!" // Replace with...
+       }
+    },
+    dayStamps: (props, context) => {
+        return [
+            {
+                type:   "scheduledIn",
+                time:   "08:00",  // Assuming this comes parsed from 24-hr format
+                suffix: "a.m."
+            },
+            {
+                type:   "scheduledOut",
+                time:   "17:00",
+                suffix: "p.m."   
+            },
+            {
+                type:   "timeIn",
+                time:   "07:59",
+                suffix: "a.m."   
+            },
+            {
+                type:   "timeIn",
+                time:   "12:00",
+                suffix: "a.m."     
+            },
+            {
+                type:   "timeOut",
+                time:   "13:31",
+                suffix: "p.m."   
+            },
+            {
+                type:   "timeOut",
+                time:   "16:48",
+                suffix: "p.m."     
+            }
+        ]
+    }
+  }
+})
