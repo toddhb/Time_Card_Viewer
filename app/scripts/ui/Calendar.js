@@ -3,12 +3,12 @@
 import React from 'react'
 import _ from 'underscore'
 
-class Calendar extends React.Component {
+export default class Calendar extends React.Component {
   daysInMonth(year, month) {
     return new Date(year, month+1, 0).getDate();
   }
   daysInPreviousMonth(year, month) {
-    var date = new Date(year, month, 1)
+    const date = new Date(year, month, 1)
     date.setMonth(date.getMonth()-1)
     return this.daysInMonth(date.getYear(), date.getMonth())
   }
@@ -16,14 +16,14 @@ class Calendar extends React.Component {
     return new Date(year, month, day).getDay();
   }
   render() {
-    var headers = !this.props.headers
+    const headers = !this.props.headers
                || this.props.headers.map(each => <th>{each}</th>)
 
-    var day = this.dayOfDate(+this.props.year, +this.props.month, 1)
-    var daysInMonth = this.daysInMonth(+this.props.year, +this.props.month)
-    var daysInPreviousMonth = this.daysInPreviousMonth(+this.props.year, +this.props.month)
+    const day = this.dayOfDate(+this.props.year, +this.props.month, 1)
+    const daysInMonth = this.daysInMonth(+this.props.year, +this.props.month)
+    const daysInPreviousMonth = this.daysInPreviousMonth(+this.props.year, +this.props.month)
 
-    var days = [].concat(
+    const days = [].concat(
         _.range(daysInPreviousMonth-day+1, daysInPreviousMonth+1)
          .map(i => <td className="previousMonth">{i}</td>)
       ).concat(
@@ -34,7 +34,7 @@ class Calendar extends React.Component {
          .map(i => <td className="nextMonth">{i}</td>)
       )
 
-    var rows = _.chain(days)
+    const rows = _.chain(days)
       .groupBy((element, index) => Math.floor(index/7))
       .map(eachWeek => <tr className="week">{eachWeek}</tr>)
 
@@ -54,5 +54,3 @@ class Calendar extends React.Component {
     );
   }
 };
-    
-module.exports = Calendar

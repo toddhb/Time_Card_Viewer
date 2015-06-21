@@ -4,8 +4,8 @@ import Navbar from "./Navbar.js"
 import AlertBar from "./AlertBar.js"
 
 import Router from "react-router"
-var RouteHandler = Router.RouteHandler;
-var Link = Router.Link;
+const RouteHandler = Router.RouteHandler;
+const Link = Router.Link;
 
 export default class Main extends React.Component {
 	render() {

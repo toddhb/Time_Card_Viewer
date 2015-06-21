@@ -8,15 +8,14 @@ const Link = Router.Link;
 import _ from 'underscore'
 import moment from 'moment'
 
-
 class WeekOverview extends React.Component {
   render() {
     var weeks = _.chain(this.props.days)
       .groupBy((element, index) => Math.floor(index/7))
       .map(eachWeek => {
-        var days = _.chain(eachWeek).map(eachDay => <Day {...eachDay} />)
-        var start_date = _.first(eachWeek).date.format("MMMM DD")
-        var end_date = _.last(eachWeek).date.format("MMMM DD")
+        const days = _.chain(eachWeek).map(eachDay => <Day {...eachDay} />)
+        const start_date = _.first(eachWeek).date.format("MMMM DD")
+        const end_date = _.last(eachWeek).date.format("MMMM DD")
         return (<Week>{days}</Week>)
       })
     return (
@@ -29,9 +28,9 @@ WeekOverview.displayName = "WeekOverview"
 
 class Week extends React.Component {
   render() {
-    var children = this.props.children
-    var startDate = children.first().value().props.date.format("MMMM DD")
-    var endDate = children.last().value().props.date.format("MMMM DD")
+    const children = this.props.children
+    const startDate = children.first().value().props.date.format("MMMM DD")
+    const endDate = children.last().value().props.date.format("MMMM DD")
     return (
       <div className="col-xs-12 time-entries">
         <h3>{startDate + " - " + endDate}</h3>

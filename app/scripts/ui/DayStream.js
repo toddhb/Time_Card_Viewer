@@ -8,11 +8,11 @@ import _ from 'underscore'
 
 class DayStream extends React.Component {                              
   render() {  
-    var date = moment(this.props.params.date)
-    var year = date.format("YYYY")
-    var month = date.format("MM")
-    var dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
-    var punchLog = _.chain(this.props.dayStamps)
+    const date = moment(this.props.params.date)
+    const year = date.format("YYYY")
+    const month = date.format("MM")
+    const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
+    const punchLog = _.chain(this.props.dayStamps)
        .sortBy(punchLog => punchLog.time) 
        .map(punch => <Entry type={punch.type} time={punch.time} suffix={punch.suffix} />)
     return (
@@ -38,7 +38,7 @@ DayStream.displayName = "DayStream"
 
 class DayHeader extends React.Component {
   render() { 
-    var displayDate = this.props.date.format("MMMM DD") 
+    const displayDate = this.props.date.format("MMMM DD") 
     return ( 
       <div className="row">
         <div className="col-xs-2">
@@ -85,7 +85,7 @@ class NextDayButton extends React.Component {
 
 class DayStats extends React.Component {
   render() {
-    var payPeriod = this.props.payPeriod
+    const payPeriod = this.props.payPeriod
     return (
       <div className="panel panel-default period-totals">
         <div className="panel-heading">

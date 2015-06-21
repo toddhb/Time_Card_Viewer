@@ -14,9 +14,9 @@ exports class Timer extends React.Component {
       setInterval(this.updateDate, 100);
   },
   render() {
-    var now = this.state.now
-    var end = this.props.end
-    var hours = minutes = secounds = days = 0
+    const now = this.state.now
+    const end = this.props.end
+    const hours = minutes = secounds = days = 0
     if (end > now) {
       hours = (end.getHours()-now.getHours())%24 - 1
       minutes = 60 + (60*end.getMinutes()-now.getMinutes())%60 - 1 
