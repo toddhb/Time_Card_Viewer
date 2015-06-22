@@ -1,6 +1,4 @@
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
-
-@import 'periodTotals';
+@import "conway-skin";
 
 $time-in: #178701;
 $time-out: #026475;
@@ -25,6 +23,12 @@ $info: #ddd;
 
 .shift-info {
     border-left: 3px solid $info !important; 
+}
+
+span.period-stat {
+    float: right;
+    margin-right: 15px;
+    font-size: 1.5em;
 }
 
 

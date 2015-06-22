@@ -1,9 +1,4 @@
-$icon-font-path: "../fonts/";
-
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
-
-$dark-gray: #333333;
-$gray: #b7b7b7;
+@import "conway-skin";
 
 ul.week-overview {
     margin: 0;
@@ -32,7 +27,7 @@ ul.week-overview {
     }
     
     .time-entry {
-        a { color: $dark-gray }
+        a { color: $gray-dark }
         p:nth-child(2) { 
             text-align: center; 
             font-size: .8em;
