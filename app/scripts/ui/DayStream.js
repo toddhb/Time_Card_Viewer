@@ -5,6 +5,7 @@ import Calendar from './Calendar.js'
 import moment from 'moment'
 import _ from 'underscore'
 import Resolver from '../resolvers/DayStream.js'
+import { Link } from "react-router" 
 
 class DayStream extends React.Component {                              
   render() {  
@@ -42,13 +43,19 @@ class DayHeader extends React.Component {
     return ( 
       <div className="row">
         <div className="col-xs-2">
-          <PrevDayButton />
+          <Link to="day" params={{date: this.props.date.clone().subtract(1, "days")}} 
+                type="button" className="btn btn-default pull-left">
+            <span className="glyphicon glyphicon-chevron-left"></span>
+          </Link> 
         </div>
         <div className="col-xs-8">
           <h4 className="text-center">{displayDate}</h4>
         </div>
         <div className="col-xs-2">
-          <NextDayButton />
+          <Link to="day" params={{date: this.props.date.clone().add(1, "days")}} 
+                type="button" className="btn btn-default pull-left">
+            <span className="glyphicon glyphicon-chevron-left"></span>
+          </Link> 
         </div>
         <div className="row"><br/></div> {/*For space*/}
         <div className="row"><br/></div>
@@ -57,31 +64,6 @@ class DayHeader extends React.Component {
   }
 }
 
-class PrevDayButton extends React.Component {
-  handleClick() {
-    // stuff with the state 
-  }
-  render() { 
-    return(
-      <button onClick={this.handleClick} type="button" className="btn btn-default pull-left">
-        <span className="glyphicon glyphicon-chevron-left"></span>
-      </button> 
-    )
-  }
-}
-
-class NextDayButton extends React.Component {
-  handleClick() {
-    // stuff with the state 
-  }
-  render() { 
-    return(
-      <button type="button" className="btn btn-default pull-right">
-        <span className="glyphicon glyphicon-chevron-right "></span>
-      </button>
-    )
-  }
-}
 
 class DayStats extends React.Component {
   render() {
