@@ -14,7 +14,7 @@ class DayStream extends React.Component {
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
     const punchLog = _.chain(this.props.dayStamps)
        .sortBy(punchLog => punchLog.time) 
-       .map(punch => <Entry type={punch.type} time={punch.time} suffix={punch.suffix} />)
+       .map(punch => <Entry {...punch} />)
     return (
       <div>  
         <DayHeader date={date}/> 
@@ -24,7 +24,7 @@ class DayStream extends React.Component {
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="calendar hidden-xs hidden-sm">
-              <Calendar year={year} month={month} headers={dayHeaders} />
+              <Calendar year={year} month={month-1} headers={dayHeaders} />
             </div>
               <DayStats payPeriod={this.props.payPeriod}/>
             </div>

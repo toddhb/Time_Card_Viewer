@@ -3,7 +3,8 @@
 import React from 'react'
 import _ from 'underscore'
 
-export default class Calendar extends React.Component {
+
+export const createCalendar = (Day) => class extends React.Component {
   daysInMonth(year, month) {
     return new Date(year, month+1, 0).getDate();
   }
@@ -15,23 +16,41 @@ export default class Calendar extends React.Component {
   dayOfDate(year,month,day) {
     return new Date(year, month, day).getDay();
   }
+  createDay(currentYear, currentMonth, year, month, day) {
+    const date = new Date(year, month, day)
+    return (
+      <Day currentYear={currentYear}
+           currentMonth={currentMonth}
+           date={date} />
+    )
+  }
   render() {
     const headers = !this.props.headers
                || this.props.headers.map(each => <th>{each}</th>)
-
-    const day = this.dayOfDate(+this.props.year, +this.props.month, 1)
-    const daysInMonth = this.daysInMonth(+this.props.year, +this.props.month)
-    const daysInPreviousMonth = this.daysInPreviousMonth(+this.props.year, +this.props.month)
+    const currentMonth = +this.props.month
+    const currentYear = +this.props.year
+    const day = this.dayOfDate(currentYear, currentMonth, 1)
+    const daysInMonth = this.daysInMonth(currentYear, currentMonth)
+    const daysInPreviousMonth = this.daysInPreviousMonth(currentYear, currentMonth)
 
     const days = [].concat(
         _.range(daysInPreviousMonth-day+1, daysInPreviousMonth+1)
-         .map(i => <td className="previousMonth">{i}</td>)
+         .map(i => <td className="previousMonth">
+              {this.createDay(currentYear, currentMonth, currentYear, currentMonth-1, i)}
+            </td>
+          )
       ).concat(
         _.range(1, daysInMonth+1)
-         .map(i => <td>{i}</td>)
+         .map(i => <td>
+              {this.createDay(currentYear, currentMonth, currentYear, currentMonth, i)}
+          </td>
+        )
       ).concat(
         _.range(1, (7-((day+daysInMonth)%7))%7+1)
-         .map(i => <td className="nextMonth">{i}</td>)
+         .map(i => <td className="nextMonth">
+              {this.createDay(currentYear, currentMonth, currentYear, currentMonth+1, i)}
+          </td>
+        )
       )
 
     const rows = _.chain(days)
@@ -54,3 +73,13 @@ export default class Calendar extends React.Component {
     );
   }
 };
+
+class DefaultDay extends React.Component {
+  render() {
+    return (
+      <div>{this.props.date.getDate()}</div>
+    )
+  } 
+}
+
+export default createCalendar(DefaultDay)
