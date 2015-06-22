@@ -1,12 +1,9 @@
-'use strict';
-
-import React from 'react'
-import _ from 'underscore'
-
+import React from "react"
+import _ from "underscore"
 
 export const createCalendar = (Day) => class extends React.Component {
   daysInMonth(year, month) {
-    return new Date(year, month+1, 0).getDate();
+    return new Date(year, month+1, 0).getDate()
   }
   daysInPreviousMonth(year, month) {
     const date = new Date(year, month, 1)
@@ -14,7 +11,7 @@ export const createCalendar = (Day) => class extends React.Component {
     return this.daysInMonth(date.getYear(), date.getMonth())
   }
   dayOfDate(year,month,day) {
-    return new Date(year, month, day).getDay();
+    return new Date(year, month, day).getDay()
   }
   render() {
     const headers = !this.props.headers
@@ -62,9 +59,9 @@ export const createCalendar = (Day) => class extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
-};
+}
 
 class DefaultDay extends React.Component {
   render() {

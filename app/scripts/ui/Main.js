@@ -1,11 +1,7 @@
 import React from 'react'
-
+import Router, { RouteHandler, Link} from "react-router"
 import Navbar from "./Navbar.js"
 import AlertBar from "./AlertBar.js"
-
-import Router from "react-router"
-const RouteHandler = Router.RouteHandler;
-const Link = Router.Link;
 
 export default class Main extends React.Component {
   render() {

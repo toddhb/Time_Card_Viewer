@@ -1,24 +1,18 @@
-import React from 'react'
-import Router from 'react-router'
-
-import DayStream from './ui/DayStream'
-import WeekOverview from './ui/TimeOverview.js'
-import Main from './ui/Main.js'
-
+import React from "react"
+import Router, { Route, RouteHandler, DefaultRoute } from "react-router"
 import { Resolver } from "react-resolver"
-const DefaultRoute = Router.DefaultRoute;
-const Link = Router.Link;
-const Route = Router.Route;
-const RouteHandler = Router.RouteHandler;
+import { createRedux } from "redux"
+import { Provider } from "redux/react"
 
-import { createRedux } from 'redux'
-import { Provider } from 'redux/react'
+import * as stores from "./stores"
 
-import * as stores from './stores'
+import DayStream from "./ui/DayStream"
+import WeekOverview from "./ui/TimeOverview.js"
+import Main from "./ui/Main.js"
 
-const mountNode = document.getElementById("app");
+const mountNode = document.getElementById("app")
 
-const redux = createRedux(stores);
+const redux = createRedux(stores)
 
 class App extends React.Component {
   render() {
@@ -35,9 +29,9 @@ const routes = (
     <DefaultRoute handler={WeekOverview}/>
     <Route name="day" path="day/:date" handler={DayStream} />
   </Route>
-);
+)
 
 Router.run(routes, (Handler, state) => {
-  const params = state.params;
-  Resolver.render(<Handler params={params}/>, mountNode);
-});
+  const params = state.params
+  Resolver.render(<Handler params={params}/>, mountNode)
+})

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Resolver } from 'react-resolver'
-import _ from 'underscore'
+import React from "react"
+import { Resolver } from "react-resolver"
+import _ from "underscore"
 
 export default (component) => Resolver.createContainer(component, {
   contextTypes: {

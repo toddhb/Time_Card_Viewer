@@ -1,12 +1,8 @@
-'use strict';
-
-import React from 'react'
-import Router from 'react-router'
-const RouteHandler = Router.RouteHandler;
-const Link = Router.Link;
-import _ from 'underscore'
-import moment from 'moment'
-import Resolver from '../resolvers/WeekOverview.js'
+import React from "react"
+import Router, { RouteHandler, Link} from "react-router"
+import _ from "underscore"
+import moment from "moment"
+import Resolver from "../resolvers/WeekOverview.js"
 
 class WeekOverview extends React.Component {
   render() {

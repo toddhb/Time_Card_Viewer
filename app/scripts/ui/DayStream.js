@@ -1,11 +1,9 @@
-'use strict';
-
-import React from 'react'
-import Calendar from './Calendar.js'
-import moment from 'moment'
-import _ from 'underscore'
-import Resolver from '../resolvers/DayStream.js'
+import React from "react"
 import { Link } from "react-router" 
+import moment from "moment"
+import _ from "underscore"
+import Calendar from "./Calendar.js"
+import Resolver from "../resolvers/DayStream.js"
 
 class DayStream extends React.Component {                              
   render() {  
@@ -64,7 +62,6 @@ class DayHeader extends React.Component {
   }
 }
 
-
 class DayStats extends React.Component {
   render() {
     const payPeriod = this.props.payPeriod
@@ -85,27 +82,27 @@ class DayStats extends React.Component {
 
 class Entry extends React.Component {
   render() {
-    var action = '';
-    var panelClass = 'panel panel-default time-entry';
-    var glyphClass = 'glyphicon pull-left';
+    var action = "";
+    var panelClass = "panel panel-default time-entry";
+    var glyphClass = "glyphicon pull-left";
 
-    // There's a better way than these ifs, I'm sure of it!
-    if(this.props.type == 'timeIn') {
+    // There"s a better way than these ifs, I"m sure of it!
+    if(this.props.type == "timeIn") {
       action = "Clocked in at ";
       panelClass += " " + "time-in";   
       glyphClass += " " + "glyphicon-ok-sign";
     }
-    if(this.props.type == 'timeOut') {
+    if(this.props.type == "timeOut") {
       action = "Clocked out at ";
       panelClass += " " + "time-out";   
       glyphClass += " " + "glyphicon-minus-sign";
     }
-    if(this.props.type == 'scheduledIn') {
+    if(this.props.type == "scheduledIn") {
       action = "Shift started at ";
       panelClass += " " + "shift-info";   
       glyphClass += " " + "glyphicon-time";
     }
-    if(this.props.type == 'scheduledOut') {
+    if(this.props.type == "scheduledOut") {
       action = "Shift ended at ";
       panelClass += " " + "shift-info";   
       glyphClass += " " + "glyphicon-time";

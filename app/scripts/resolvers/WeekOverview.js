@@ -1,7 +1,7 @@
-import React from 'react'
-import { Resolver } from 'react-resolver'
-import moment from 'moment'
-import _ from 'underscore'
+import React from "react"
+import { Resolver } from "react-resolver"
+import moment from "moment"
+import _ from "underscore"
 
 var today = moment()
 

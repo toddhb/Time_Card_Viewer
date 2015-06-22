@@ -1,3 +1,5 @@
+import React from "react"
+
 exports class Timer extends React.Component {
   getInitialState() {
     return {
@@ -11,7 +13,7 @@ exports class Timer extends React.Component {
   },
   componentDidMount() {
       this.updateDate()
-      setInterval(this.updateDate, 100);
+      setInterval(this.updateDate, 100)
   },
   render() {
     const now = this.state.now
