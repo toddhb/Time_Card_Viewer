@@ -82,31 +82,34 @@ class DayStats extends React.Component {
 
 class Entry extends React.Component {
   render() {
-    var action = "";
-    var panelClass = "panel panel-default time-entry";
-    var glyphClass = "glyphicon pull-left";
+    const panelClassDefault = "panel panel-default time-entry"
+    const glyphClassDefault = "glyphicon pull-left"
 
-    // There"s a better way than these ifs, I"m sure of it!
-    if(this.props.type == "timeIn") {
-      action = "Clocked in at ";
-      panelClass += " " + "time-in";   
-      glyphClass += " " + "glyphicon-ok-sign";
+    const settings = {
+      timeIn: {
+        action: "Clocked in at ",
+        panelClass: panelClassDefault + " " + "time-in",
+        glyphClass: glyphClassDefault + " " + "glyphicon-ok-sign"
+      },
+      timeOut: {
+        action: "Clocked out at ",
+        panelClass: panelClassDefault + " " + "time-out",
+        glyphClass: glyphClassDefault + " " + "glyphicon-minus-sign"
+      },
+      scheduledIn: {
+        action: "Shift started at ",
+        panelClass: panelClassDefault + " " + "time-out",
+        glyphClass: glyphClassDefault + " " + "glyphicon-time"
+      },
+      scheduledOut: {
+        action: "Shift ended at ",
+        panelClass: panelClassDefault + " " + "shiftl-info",
+        glyphClass: glyphClassDefault + " " + "glyphicon-time"
+      }
     }
-    if(this.props.type == "timeOut") {
-      action = "Clocked out at ";
-      panelClass += " " + "time-out";   
-      glyphClass += " " + "glyphicon-minus-sign";
-    }
-    if(this.props.type == "scheduledIn") {
-      action = "Shift started at ";
-      panelClass += " " + "shift-info";   
-      glyphClass += " " + "glyphicon-time";
-    }
-    if(this.props.type == "scheduledOut") {
-      action = "Shift ended at ";
-      panelClass += " " + "shift-info";   
-      glyphClass += " " + "glyphicon-time";
-    }
+
+    const {action, panelClass, glyphClass} = settings[this.props.type]
+
     return ( 
       <div className={panelClass}>
         <div className="panel-body">
