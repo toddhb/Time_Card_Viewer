@@ -16,14 +16,6 @@ export const createCalendar = (Day) => class extends React.Component {
   dayOfDate(year,month,day) {
     return new Date(year, month, day).getDay();
   }
-  createDay(currentYear, currentMonth, year, month, day) {
-    const date = new Date(year, month, day)
-    return (
-      <Day currentYear={currentYear}
-           currentMonth={currentMonth}
-           date={date} />
-    )
-  }
   render() {
     const headers = !this.props.headers
                || this.props.headers.map(each => <th>{each}</th>)
@@ -36,19 +28,19 @@ export const createCalendar = (Day) => class extends React.Component {
     const days = [].concat(
         _.range(daysInPreviousMonth-day+1, daysInPreviousMonth+1)
          .map(i => <td className="previousMonth">
-              {this.createDay(currentYear, currentMonth, currentYear, currentMonth-1, i)}
+              <Day date={new Date(currentYear, currentMonth-1, i)} />
             </td>
           )
       ).concat(
         _.range(1, daysInMonth+1)
          .map(i => <td>
-              {this.createDay(currentYear, currentMonth, currentYear, currentMonth, i)}
+              <Day date={new Date(currentYear, currentMonth, i)} />
           </td>
         )
       ).concat(
         _.range(1, (7-((day+daysInMonth)%7))%7+1)
          .map(i => <td className="nextMonth">
-              {this.createDay(currentYear, currentMonth, currentYear, currentMonth+1, i)}
+              <Day date={new Date(currentYear, currentMonth+1, i)} />
           </td>
         )
       )
