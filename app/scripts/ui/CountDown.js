@@ -5,16 +5,16 @@ exports class Timer extends React.Component {
     return {
       now: new Date(Date.now())
     }
-  },
+  }
   updateDate() {
-      this.setState({
-          now: new Date(Date.now())
-      })
-  },
+    this.setState({
+      now: new Date(Date.now())
+    })
+  }
   componentDidMount() {
-      this.updateDate()
-      setInterval(this.updateDate, 100)
-  },
+    this.updateDate()
+    setInterval(this.updateDate, 100)
+  }
   render() {
     const now = this.state.now
     const end = this.props.end
