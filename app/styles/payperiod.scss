@@ -94,7 +94,8 @@ ul.week-overview {
             font-size: 3em;
             margin-right: 5px;
             @media (min-width: $screen-md-min) {
-              display: block;   
+                display: block;  
+                width: inherit;
             }
         }
         
