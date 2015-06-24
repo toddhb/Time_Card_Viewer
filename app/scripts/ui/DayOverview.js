@@ -6,17 +6,17 @@ import Calendar from "./Calendar.js"
 import FluxComponent from 'flummox/component';
 import flux from "../stores/flux"
 
-export default class DayStream extends React.Component {
+export default class DayOverview extends React.Component {
   render() {
     return (
       <FluxComponent connectToStores={['daystream']}>
-        <Stream {...this.props} />
+        <Overview {...this.props} />
       </FluxComponent>
     )
   }
 }
 
-class Stream extends React.Component {                              
+class Overview extends React.Component {                              
   render() {  
     const date = moment(this.props.params.date)
     const year = date.format("YYYY")
@@ -43,8 +43,6 @@ class Stream extends React.Component {
     )
   }
 }
-
-DayStream.displayName = "DayStream"
 
 class DayHeader extends React.Component {
   render() { 

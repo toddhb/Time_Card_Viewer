@@ -4,8 +4,8 @@ import { Resolver } from "react-resolver"
 import { createRedux } from "redux"
 import { Provider } from "redux/react"
 import * as stores from "./stores"
-import DayStream from "./ui/DayStream"
-import WeekOverview from "./ui/TimeOverview.js"
+import DayOverview from "./ui/DayOverview"
+import PayPeriodsOverview from "./ui/PayPeriodsOverview"
 import Main from "./ui/Main.js"
 import FluxComponent from 'flummox/component';
 import flux from "./stores/flux"
@@ -24,8 +24,8 @@ class App extends React.Component {
 
 const routes = (
   <Route name="app" handler={App} path="/">
-    <DefaultRoute handler={WeekOverview} />
-    <Route name="day" path="day/:date" handler={DayStream} />
+    <DefaultRoute handler={PayPeriodsOverview} />
+    <Route name="day" path="day/:date" handler={DayOverview} />
   </Route>
 )
 
