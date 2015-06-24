@@ -6,7 +6,7 @@ ul.week-overview {
     
     li {
       display: inline;
-      border: 1px solid $gray;
+      border: 1px solid $gray-light;
       $width: 100%;
       @media (min-width: $screen-md-min) { width: $width / 7; }
       width: $width;
@@ -27,6 +27,7 @@ ul.week-overview {
     }
     
     .time-entry {
+        background-color: #fff;
         a { color: $gray-dark }
         p:nth-child(2) { 
             text-align: center; 
@@ -37,6 +38,9 @@ ul.week-overview {
             color: $gray;
         }
         span.hours {
+            font-family: $font-family-serif;
+            color: $brand-primary;
+            font-weight: 900;
             width: 100%;
             font-size: 3em;
         }
@@ -55,4 +59,9 @@ ul.week-overview {
                 }
         }
     }
+}
+
+.header-date {
+   color: #aaa;  
+   margin-bottom: 20px;
 }
