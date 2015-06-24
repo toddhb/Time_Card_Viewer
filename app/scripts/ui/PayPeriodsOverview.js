@@ -5,17 +5,17 @@ import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../stores/flux"
 
-export default class WeekOverview extends React.Component {
+export default class PayPeriodsOverview extends React.Component {
   render() {
     return (
       <FluxComponent connectToStores={['days']}>
-        <Weeks {...this.props}/>
+        <PayPeriods {...this.props}/>
       </FluxComponent>
     )
   }
 }
 
-class Weeks extends React.Component {
+class PayPeriods extends React.Component {
   render() {
     var weeks = _.chain(this.props.days)
       .groupBy((element, index) => Math.floor(index/7))
@@ -23,7 +23,7 @@ class Weeks extends React.Component {
         const days = _.chain(eachWeek).map(eachDay => <Day {...eachDay} />)
         const start_date = _.first(eachWeek).date.format("MMMM DD")
         const end_date = _.last(eachWeek).date.format("MMMM DD")
-        return (<Week>{days}</Week>)
+        return (<PayPeriod>{days}</PayPeriod>)
       })
     return (
       <div className="row time-overview">{weeks}</div>
@@ -31,9 +31,7 @@ class Weeks extends React.Component {
   }
 }
 
-WeekOverview.displayName = "WeekOverview"
-
-class Week extends React.Component {
+class PayPeriod extends React.Component {
   render() {
     const children = this.props.children
     const startDate = children.first().value().props.date.format("MMMM DD")
