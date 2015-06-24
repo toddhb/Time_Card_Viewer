@@ -3,9 +3,20 @@ import { Link } from "react-router"
 import moment from "moment"
 import _ from "underscore"
 import Calendar from "./Calendar.js"
-import Resolver from "../resolvers/DayStream.js"
+import FluxComponent from 'flummox/component';
+import flux from "../stores/flux"
 
-class DayStream extends React.Component {                              
+export default class DayStream extends React.Component {
+  render() {
+    return (
+      <FluxComponent connectToStores={['daystream']}>
+        <Stream {...this.props} />
+      </FluxComponent>
+    )
+  }
+}
+
+class Stream extends React.Component {                              
   render() {  
     const date = moment(this.props.params.date)
     const year = date.format("YYYY")
@@ -120,5 +131,3 @@ class Entry extends React.Component {
     )
   }
 }
-
-export default Resolver(DayStream)

@@ -2,9 +2,20 @@ import React from "react"
 import Router, { RouteHandler, Link} from "react-router"
 import _ from "underscore"
 import moment from "moment"
-import Resolver from "../resolvers/WeekOverview.js"
+import FluxComponent from 'flummox/component';
+import flux from "../stores/flux"
 
-class WeekOverview extends React.Component {
+export default class WeekOverview extends React.Component {
+  render() {
+    return (
+      <FluxComponent connectToStores={['days']}>
+        <Weeks {...this.props}/>
+      </FluxComponent>
+    )
+  }
+}
+
+class Weeks extends React.Component {
   render() {
     var weeks = _.chain(this.props.days)
       .groupBy((element, index) => Math.floor(index/7))
@@ -52,5 +63,3 @@ class Day extends React.Component {
     )
   }
 }
-
-export default Resolver(WeekOverview)

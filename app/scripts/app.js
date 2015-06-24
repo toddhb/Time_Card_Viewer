@@ -3,30 +3,28 @@ import Router, { Route, RouteHandler, DefaultRoute } from "react-router"
 import { Resolver } from "react-resolver"
 import { createRedux } from "redux"
 import { Provider } from "redux/react"
-
 import * as stores from "./stores"
-
 import DayStream from "./ui/DayStream"
 import WeekOverview from "./ui/TimeOverview.js"
 import Main from "./ui/Main.js"
+import FluxComponent from 'flummox/component';
+import flux from "./stores/flux"
 
 const mountNode = document.getElementById("app")
-
-const redux = createRedux(stores)
 
 class App extends React.Component {
   render() {
     return (
-      <Provider redux={redux}>
-        { () => <Main /> }
-      </Provider>
+      <FluxComponent flux={flux}>
+        <Main />
+      </FluxComponent>
     )
   }
 }
 
 const routes = (
   <Route name="app" handler={App} path="/">
-    <DefaultRoute handler={WeekOverview}/>
+    <DefaultRoute handler={WeekOverview} />
     <Route name="day" path="day/:date" handler={DayStream} />
   </Route>
 )
