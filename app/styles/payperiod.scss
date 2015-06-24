@@ -30,9 +30,14 @@ ul.week-overview {
         $min-height: 60px;
         min-height: $min-height;
         
-       @media (min-width: $screen-md-min) {
+        @media (min-width: $screen-md-min) {
             padding-top: $min-height + 17px;
         }
+        
+        .time-entry:hover {
+            box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.15);         /* Vendor prefixes needed */
+        }
+
         
         $box-width: 81px;
         .date-side-box {
@@ -63,25 +68,29 @@ ul.week-overview {
             padding: 0; 
             
             &:hover { 
+              text-decoration: none;
               color: darken(#fff, 15%);
             }
         }
     
         p.hours-worked-text { 
+            color: $gray-light;
             margin: 0 0 0px;
             margin-left: $box-width + 17px;
             @media (min-width: $screen-md-min) {
                 text-align: center;
                 margin-left: 0px;
+                padding-bottom: 3px;
             }
         }
 
 
         span.hours-worked-number {
+            display: inline-block;
+            width: 65px;
             font-family: $font-family-serif;
             color: $brand-primary;
             font-weight: 900;
-            width: 100%;
             font-size: 3em;
             margin-right: 5px;
             @media (min-width: $screen-md-min) {

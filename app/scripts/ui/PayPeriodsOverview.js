@@ -61,8 +61,9 @@ class Day extends React.Component {
                 <p className="day-as-text text-center">{this.props.date.format("dddd")}</p>
                 <p className="date text-center">{this.props.date.format("M.")}<span className="day-as-number">{this.props.date.format("D")}</span></p>
             </div>
-            <p className="hours-worked-text"><span className="hours-worked-number">{this.props.hours} </span>
+            <p className="hours-worked-text"><span className="hours-worked-number text-center">{this.props.hours} </span>
             hours worked</p>
+            <i className="fa fa-chevron-right"></i>
           </Link>
         </div>
       </li>

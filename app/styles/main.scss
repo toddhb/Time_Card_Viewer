@@ -50,6 +50,12 @@ body {
         margin-bottom: 0;
         line-height: 40px;
         padding-bottom: 6px;
+        @media (min-width: $screen-md-min) { padding-left: 15px; }
+    }
+    
+    .nav-icon {
+        @media (min-width: $screen-md-min) { padding-right: 15px; }
+    
     }
 }
 
