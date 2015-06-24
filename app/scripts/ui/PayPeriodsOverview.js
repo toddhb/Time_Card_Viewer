@@ -26,7 +26,11 @@ class PayPeriods extends React.Component {
         return (<PayPeriod>{days}</PayPeriod>)
       })
     return (
-      <div className="row time-overview">{weeks}</div>
+      <div className="row time-overview">
+        <div className="col-xs-12">
+        {weeks}
+        </div>
+      </div>
     )
   }
 }
@@ -37,10 +41,10 @@ class PayPeriod extends React.Component {
     const startDate = children.first().value().props.date.format("MMMM DD")
     const endDate = children.last().value().props.date.format("MMMM DD")
     return (
-      <div className="col-xs-12 time-entries">
-        <h3>{startDate + " - " + endDate}</h3>
+      <div className="payperiod-overview ">
+        <h3><a href="#">{startDate + " - " + endDate}</a></h3> {/*This should be wrapped with something like <Link to="payperiod" params={{ date: startDate}}>*/}
         <ul className="week-overview clearfix">
-          {this.props.children}
+        {this.props.children}
         </ul>
       </div>
     );
@@ -50,11 +54,15 @@ class PayPeriod extends React.Component {
 class Day extends React.Component {
   render() {
     return (
-      <li className="day">
+      <li className="day-as-txt">
         <div className="time-entry">
           <Link to="day" params={{ date: this.props.date}}>
-            <p>{this.props.date.format("dddd")} <span className="date">{this.props.date.format("MMMM DD")}</span></p>
-            <p><span className="hours">{this.props.hours}</span> hours worked</p>
+            <div className="date-side-box">
+                <p className="day-as-text text-center">{this.props.date.format("dddd")}</p>
+                <p className="date text-center">{this.props.date.format("M.")}<span className="day-as-number">{this.props.date.format("D")}</span></p>
+            </div>
+            <p className="hours-worked-text"><span className="hours-worked-number">{this.props.hours} </span>
+            hours worked</p>
           </Link>
         </div>
       </li>
