@@ -3,8 +3,8 @@ import React from "react"
 export default class AlertBar {
   render() {
     return (
-      <div className="alert alert-info" role="alert">
-        You"re next due at work <strong>Wednesday at 8:00 am</strong>
+      <div className="schedule-alert">
+        <h2 className="text-center">See you again in <span className="number-font">12</span> hours</h2>
       </div>
     )
   }

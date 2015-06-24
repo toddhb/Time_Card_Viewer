@@ -1,0 +1,63 @@
+@import "conway-skin";
+
+
+ul.week-overview {
+    margin: 0;
+    padding: 0;
+    
+    li {
+      display: inline;
+      border: 1px solid $gray-light;
+      $width: 100%;
+      @media (min-width: $screen-md-min) { width: $width / 7; }
+      width: $width;
+        
+        a {
+            display: block;
+            padding: 1em;
+        }
+        
+        a:hover,
+        a:active {
+          text-decoration: none;   
+        }
+    }
+        
+    li:hover {
+        background-color: $gray;
+    }
+    
+    .time-entry {
+        background-color: #fff;
+        a { color: $gray-dark }
+        p:nth-child(2) { 
+            text-align: center; 
+            font-size: .8em;
+        }
+        span { display: block; }
+        span.date {
+            color: $gray;
+        }
+        span.hours {
+            font-family: $font-family-serif;
+            color: $brand-primary;
+            font-weight: 900;
+            width: 100%;
+            font-size: 3em;
+        }
+        
+        p:nth-child(0) { 
+            float: right;
+        }
+        p:nth-child(1) { 
+            float: left;
+        }
+        
+        @media (min-width: $screen-md-min) { 
+                p:nth-child(0),
+                p:nth-child(1) { 
+                    float: none;
+                }
+        }
+    }
+}
