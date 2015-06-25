@@ -52,7 +52,7 @@ class DayHeader extends React.Component {
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().subtract(1, "days")}} 
                 type="button" className="btn btn-default pull-left">
-            <span className="glyphicon glyphicon-chevron-left"></span>
+            <i className="fa fa-chevron-left"></i>
           </Link> 
         </div>
         <div className="col-xs-8">
@@ -61,7 +61,7 @@ class DayHeader extends React.Component {
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().add(1, "days")}} 
                 type="button" className="btn btn-default pull-left">
-            <span className="glyphicon glyphicon-chevron-left"></span>
+            <i className="fa fa-chevron-right"></i>
           </Link> 
         </div>
         <div className="row"><br/></div> {/*For space*/}
@@ -92,28 +92,28 @@ class DayStats extends React.Component {
 class Entry extends React.Component {
   render() {
     const panelClassDefault = "panel panel-default time-entry"
-    const glyphClassDefault = "glyphicon pull-left"
+    const glyphClassDefault = "pull-left"
 
     const settings = {
       timeIn: {
         action: "Clocked in at ",
         panelClass: panelClassDefault + " " + "time-in",
-        glyphClass: glyphClassDefault + " " + "glyphicon-ok-sign"
+        glyphClass: glyphClassDefault + " fa-flip-horizontal" + " fa fa-truck"
       },
       timeOut: {
         action: "Clocked out at ",
         panelClass: panelClassDefault + " " + "time-out",
-        glyphClass: glyphClassDefault + " " + "glyphicon-minus-sign"
+        glyphClass: glyphClassDefault + " " + "fa fa-truck"
       },
       scheduledIn: {
         action: "Shift started at ",
         panelClass: panelClassDefault + " " + "time-out",
-        glyphClass: glyphClassDefault + " " + "glyphicon-time"
+        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       },
       scheduledOut: {
         action: "Shift ended at ",
         panelClass: panelClassDefault + " " + "shiftl-info",
-        glyphClass: glyphClassDefault + " " + "glyphicon-time"
+        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       }
     }
 
@@ -122,7 +122,7 @@ class Entry extends React.Component {
     return ( 
       <div className={panelClass}>
         <div className="panel-body">
-          <span className={glyphClass}></span>
+          <i className={glyphClass}></i>
           <p>{action}<strong>{this.props.time}{this.props.suffix}</strong> </p>
         </div>
       </div> 

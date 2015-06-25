@@ -5,8 +5,11 @@ $hover-color: #e7e7e7;
 $current-border: #cecece;
 
 .calendar {
-//    height: 100vh // This isn't ideal for when using as a component
     margin-bottom: 40px;
+}
+
+.full-height-calendar {
+    height:100vh;
 }
 
 // The calendar table
