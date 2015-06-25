@@ -12,6 +12,8 @@ import Main from "./ui/Main.js"
 import FluxComponent from 'flummox/component';
 import flux from "./stores/flux"
 
+require('../styles/main.scss')
+
 const mountNode = document.getElementById("app")
 
 class App extends React.Component {

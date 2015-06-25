@@ -111,11 +111,7 @@ dependencies under the `./app/bower_components/` directory.
 Run this command when developing. Gulp will watch for any changes and
 automatically rebuild and open in a browser.
 
-    gulp watch
-
-For windows:
-
-    .\node_modules\.bin\gulp watch
+    npm run watch
 
 ### Running the test suite
 
@@ -127,4 +123,4 @@ Command to run the test suite.
 
 Command to build for production. 
 
-    gulp build
+    npm run build
