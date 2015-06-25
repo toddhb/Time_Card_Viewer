@@ -6,6 +6,7 @@ import { Provider } from "redux/react"
 import * as stores from "./stores"
 import DayOverview from "./ui/DayOverview"
 import PayPeriodsOverview from "./ui/PayPeriodsOverview"
+import PayPeriodOverview from "./ui/PayPeriodOverview"
 import CalendarOverview from "./ui/CalendarOverview"
 import Main from "./ui/Main.js"
 import FluxComponent from 'flummox/component';
@@ -28,6 +29,7 @@ const routes = (
     <DefaultRoute handler={PayPeriodsOverview} />
     <Route name="day" path="day/:date" handler={DayOverview} />
     <Route name="calendar" handler={CalendarOverview} />
+    <Route name="payperiod" path="payperiod/:date" handler={PayPeriodOverview} />
   </Route>
 )
 

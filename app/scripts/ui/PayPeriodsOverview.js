@@ -44,7 +44,9 @@ class PayPeriod extends React.Component {
     const endDate = children.last().value().props.date.format("MMMM DD")
     return (
       <div className="payperiod-overview ">
-        <h3><a href="#">{startDate + " - " + endDate}</a></h3> {/*This should be wrapped with something like <Link to="payperiod" params={{ date: startDate}}>*/}
+        <Link to="payperiod" params={{date: startDate}}>
+          <h3>{startDate + " - " + endDate}</h3>
+        </Link>
         <ul className="week-overview clearfix">
         {this.props.children}
         </ul>
