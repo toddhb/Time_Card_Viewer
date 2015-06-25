@@ -47,18 +47,14 @@ export const createCalendar = (Day) => class extends React.Component {
       .map(eachWeek => <tr className="week">{eachWeek}</tr>)
 
     return (
-      <div className="col-xs-12">
         <div className="calendar">
-          <div className="row calendar-row">
             <div>
               <table width="100%" id="calendar">
                 {headers}
                 {rows}
               </table>
             </div>
-          </div>
         </div>
-      </div>
     )
   }
 }
