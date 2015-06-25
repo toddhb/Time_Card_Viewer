@@ -34,7 +34,7 @@ ul.week-overview {
             padding-top: $min-height + 17px;
         }
         
-        .time-entry:hover {
+        &:hover {
             box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.15);         /* Vendor prefixes needed */
         }
 
@@ -70,6 +70,10 @@ ul.week-overview {
             &:hover { 
               text-decoration: none;
               color: darken(#fff, 15%);
+            }
+            &:focus { 
+              text-decoration: none;
+              color: white;
             }
         }
     

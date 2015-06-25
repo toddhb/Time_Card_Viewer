@@ -4,6 +4,7 @@ import _ from "underscore"
 import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../stores/flux"
+import AlertBar from "./AlertBar.js"
 
 export default class PayPeriodsOverview extends React.Component {
   render() {
@@ -28,7 +29,8 @@ class PayPeriods extends React.Component {
     return (
       <div className="row time-overview">
         <div className="col-xs-12">
-        {weeks}
+            <AlertBar />
+            {weeks}
         </div>
       </div>
     )
@@ -63,7 +65,6 @@ class Day extends React.Component {
             </div>
             <p className="hours-worked-text"><span className="hours-worked-number text-center">{this.props.hours} </span>
             hours worked</p>
-            <i className="fa fa-chevron-right"></i>
           </Link>
         </div>
       </li>
