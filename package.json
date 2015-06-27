@@ -63,7 +63,8 @@
     "postinstall": "bower install",
     "test": "jest --coverage",
     "watch": "gulp webpack:watch",
-    "build": "gulp webpack:build"
+    "build": "gulp webpack:build",
+    "start": "gulp express:start"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",

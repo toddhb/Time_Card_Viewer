@@ -129,4 +129,4 @@ Command to build for production.
 
 Command to run express server.
 
-    gulp express:start
+    npm start
