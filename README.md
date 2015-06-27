@@ -124,3 +124,9 @@ Command to run the test suite.
 Command to build for production. 
 
     npm run build
+	
+### Running express server
+
+Command to run express server.
+
+    gulp express:start

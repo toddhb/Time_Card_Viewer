@@ -11,6 +11,15 @@ var $ = require("gulp-load-plugins")();
 
 var buildConfig = require("./webpack.config");
 
+// Express
+gulp.task('express', function() {
+    var express = require('express');
+    var app = express();
+    app.use(express.static('dist'));
+    app.listen(4000);
+});
+
+
 // HTML
 gulp.task("html", function() {
     return gulp.src("app/*.html")
@@ -65,6 +74,9 @@ gulp.task("webpack:watch", ["webpack:build"], function(done) {
         // keep the server alive or continue?
         // callback();
     });
+});
+
+gulp.task('express:start', ['express'], function() {
 });
 
 // Default task
