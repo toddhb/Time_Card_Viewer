@@ -12,7 +12,7 @@ var $ = require("gulp-load-plugins")();
 var buildConfig = require("./webpack.config");
 
 // Express
-gulp.task('express', function() {
+gulp.task('express:start', ['webpack:build'], function() {
     var express = require('express');
     var app = express();
     app.use(express.static('dist'));
@@ -74,9 +74,6 @@ gulp.task("webpack:watch", ["webpack:build"], function(done) {
         // keep the server alive or continue?
         // callback();
     });
-});
-
-gulp.task('express:start', ['express'], function() {
 });
 
 // Default task
