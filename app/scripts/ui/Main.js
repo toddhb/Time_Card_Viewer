@@ -1,6 +1,7 @@
 import React from 'react'
 import Router, { RouteHandler, Link} from "react-router"
 import Navbar from "./Navbar.js"
+import Footer from "./Footer.js"
     
 class NavContainer extends React.Component {
   render() {
@@ -15,7 +16,16 @@ class BodyContainer extends React.Component {
     return (
       <div className="container">
         <RouteHandler {...this.params} />
+        <FooterContainer />
       </div>
+    ) 
+  } 
+}
+
+class FooterContainer extends React.Component {
+  render() {
+    return (
+      <Footer />
     ) 
   } 
 }

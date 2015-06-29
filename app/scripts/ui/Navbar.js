@@ -1,10 +1,8 @@
 import React from 'react'
-import moment from "moment"
 import Router, { RouteHandler, Link} from "react-router"
 
 export default class Navbar {
   render() {
-    const currentMonth = moment().date();
     return (
       <div className="container-fluid">
         <div className="header">
