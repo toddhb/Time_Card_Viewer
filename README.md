@@ -123,11 +123,14 @@ Command to run the test suite.
 
     npm test
 
+### build for development
+
+    npm run watch
+
 ### build for deployment
 
 Command to build for production. 
 
-<<<<<<< HEAD
     npm run build
 	
 ### Running express server
@@ -135,6 +138,3 @@ Command to build for production.
 Command to run express server.
 
     npm start
-=======
-    gulp build
->>>>>>> parent of e3d69b9... TCV-84 Replace Browserify with Webpack
