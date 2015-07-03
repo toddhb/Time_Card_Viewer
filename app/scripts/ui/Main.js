@@ -14,7 +14,9 @@ import Footer from "./Footer.js"
 class NavContainer extends React.Component {
   render() {
     return (
-      <Navbar title="Steve's Time" />
+        <div className="container-fluid">
+            <Navbar title="Steve's Time" />
+        </div>
     ) 
   } 
 }
@@ -24,7 +26,6 @@ class BodyContainer extends React.Component {
     return (
       <div className="container">
         <RouteHandler {...this.params} />
-        <FooterContainer />
       </div>
     ) 
   } 
@@ -33,7 +34,9 @@ class BodyContainer extends React.Component {
 class FooterContainer extends React.Component {
   render() {
     return (
-      <Footer />
+        <div className="container-fluid">
+            <Footer />
+        </div>
     ) 
   } 
 }
@@ -44,6 +47,7 @@ export default class Main extends React.Component {
       <div>
         <NavContainer></NavContainer>
         <BodyContainer></BodyContainer>
+        <FooterContainer />
       </div>
     ) 
   } 
