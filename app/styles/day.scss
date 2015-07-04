@@ -12,6 +12,16 @@ $time-in: #178701;
 $time-out: #026475;
 $info: #ddd;
 
+/* Where does this really belong? */
+a.subtle-btn {
+    display: block;
+    height: 30px;
+    width: 30px;
+    
+    &:hover {  
+    }
+}
+
 .time-entry {
     .panel-body { padding: 15px 10px 10px 10px; }
 }

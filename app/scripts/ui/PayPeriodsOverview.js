@@ -67,7 +67,7 @@ class Day extends React.Component {
   render() {
     return (
       <li className="day-as-txt">
-        <div className="time-entry">
+        <div className="time-entry shadowed-box">
           <Link to="day" params={{ date: this.props.date}}>
             <div className="date-side-box">
                 <p className="day-as-text text-center">{this.props.date.format("dddd")}</p>

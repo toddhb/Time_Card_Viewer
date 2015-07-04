@@ -8,11 +8,6 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 @import "conway-skin";
 
-.payperiod-overview {
-    padding: 10px;
-}
-
-
 ul.week-overview {
     margin: 0;
     padding: 0;
@@ -31,9 +26,6 @@ ul.week-overview {
     
     .time-entry {
         position: relative;
-        background-color: white;
-        border-radius: 3px;                                   /* Vendor prefixes needed */
-        box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.15);         /* Vendor prefixes needed */
         margin-bottom: 15px;
         $min-height: 60px;
         min-height: $min-height;
@@ -42,10 +34,6 @@ ul.week-overview {
             padding-top: $min-height + 17px;
         }
         
-        &:hover {
-            box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.15);         /* Vendor prefixes needed */
-        }
-
         
         $box-width: 81px;
         .date-side-box {

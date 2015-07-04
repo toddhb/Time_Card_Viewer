@@ -59,7 +59,7 @@ class DayHeader extends React.Component {
       <div className="row">
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().subtract(1, "days")}} 
-                type="button" className="btn btn-default pull-left">
+             className="pull-left subtle-btn">
             <i className="fa fa-chevron-left"></i>
           </Link> 
         </div>
@@ -68,7 +68,7 @@ class DayHeader extends React.Component {
         </div>
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().add(1, "days")}} 
-                type="button" className="btn btn-default pull-left">
+                type="button" className="pull-right subtle-btn">
             <i className="fa fa-chevron-right"></i>
           </Link> 
         </div>
@@ -83,7 +83,7 @@ class DayStats extends React.Component {
   render() {
     const payPeriod = this.props.payPeriod
     return (
-      <div className="panel panel-default period-totals">
+      <div className="panel period-totals">
         <div className="panel-heading">
           <h4 className="panel-title"><a href="payperiod">{payPeriod.start} - {payPeriod.end} Period</a> Totals</h4>
         </div>
@@ -99,7 +99,7 @@ class DayStats extends React.Component {
 
 class Entry extends React.Component {
   render() {
-    const panelClassDefault = "panel panel-default time-entry"
+    const panelClassDefault = "panel time-entry"
     const glyphClassDefault = "pull-left"
 
     const settings = {
