@@ -51,12 +51,12 @@ class PayPeriod extends React.Component {
     const startDate = children.first().value().props.date.format("MMMM DD")
     const endDate = children.last().value().props.date.format("MMMM DD")
     return (
-      <div className="payperiod-overview ">
+      <div className="payperiod-overview">
         <Link to="payperiod" params={{date: startDate}}>
           <h3>{startDate + " - " + endDate}</h3>
         </Link>
         <ul className="week-overview clearfix">
-        {this.props.children}
+            {this.props.children}
         </ul>
       </div>
     );

@@ -8,42 +8,45 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 @import "conway-skin";
 
-$time-in: #178701;
-$time-out: #026475;
-$info: #ddd;
+.time-entry.day {
 
-/* Where does this really belong? */
-a.subtle-btn {
-    display: block;
-    height: 30px;
-    width: 30px;
-    
-    &:hover {  
+    .date-side-box {
+        p {
+            margin-bottom: 0px;
+            
+            i.day-icon {
+                padding-top: 5px;
+                font-size: 1.5em !important;
+            }
+        }    
     }
+    $panel-min-height: 60px;
+    $margin-top: 15px;
+    
+    p.hours-worked-text {
+        min-height: $panel-min-height - $margin-top;    /* This should be a variable/mixin */
+        margin-top: $margin-top;
+    }
+    
+    span.hours-worked-number {
+        display: inline;
+        width: inherit;
+        font-size: 1.5em;
+        margin-right: 0px;
+    } 
+    
 }
 
-.time-entry {
-    .panel-body { padding: 15px 10px 10px 10px; }
+.period-totals {
+    
+    .panel-heading {
+        background-color: $gray-lighter;
+    }
+    
+    span.period-stat {
+        float: right;
+        margin-right: 15px;
+        font-size: 1.5em;
+    }
+      
 }
-
-.time-in {
-    border-left: 3px solid $time-in !important; 
-}
-
-.time-out {
-    border-left: 3px solid $time-out !important; 
-}
-
-.shift-info {
-    border-left: 3px solid $info !important; 
-}
-
-span.period-stat {
-    float: right;
-    margin-right: 15px;
-    font-size: 1.5em;
-}
-
-
-
-

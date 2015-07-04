@@ -99,28 +99,28 @@ class DayStats extends React.Component {
 
 class Entry extends React.Component {
   render() {
-    const panelClassDefault = "panel time-entry"
-    const glyphClassDefault = "pull-left"
+    const panelClassDefault = "panel time-entry day"
+    const glyphClassDefault = "day-icon"
 
     const settings = {
       timeIn: {
-        action: "Clocked in at ",
+        action: "Clocked in",
         panelClass: panelClassDefault + " " + "time-in",
         glyphClass: glyphClassDefault + " fa-flip-horizontal" + " fa fa-truck"
       },
       timeOut: {
-        action: "Clocked out at ",
+        action: "Clocked out",
         panelClass: panelClassDefault + " " + "time-out",
         glyphClass: glyphClassDefault + " " + "fa fa-truck"
       },
       scheduledIn: {
-        action: "Shift started at ",
-        panelClass: panelClassDefault + " " + "time-out",
+        action: "Shift started",
+        panelClass: panelClassDefault + " " + "shift-info",
         glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       },
       scheduledOut: {
-        action: "Shift ended at ",
-        panelClass: panelClassDefault + " " + "shiftl-info",
+        action: "Shift ended",
+        panelClass: panelClassDefault + " " + "shift-info",
         glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       }
     }
@@ -128,12 +128,13 @@ class Entry extends React.Component {
     const {action, panelClass, glyphClass} = settings[this.props.type]
 
     return ( 
-      <div className={panelClass}>
-        <div className="panel-body">
-          <i className={glyphClass}></i>
-          <p>{action}<strong>{this.props.time}{this.props.suffix}</strong> </p>
+        <div className={panelClass}>
+            <div className="date-side-box">
+                <p className="text-center"><i className={glyphClass}></i></p>
+                <p>{action}</p>
+            </div>
+            <p className="hours-worked-text"><span className="hours-worked-number">{this.props.time} {this.props.suffix}</span></p>
         </div>
-      </div> 
     )
   }
 }

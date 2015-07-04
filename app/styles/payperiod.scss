@@ -23,81 +23,81 @@ ul.week-overview {
       }
       width: $width;
      }
-    
-    .time-entry {
-        position: relative;
-        margin-bottom: 15px;
-        $min-height: 60px;
-        min-height: $min-height;
-        
-        @media (min-width: $screen-md-min) {
-            padding-top: $min-height + 17px;
-        }
-        
-        
-        $box-width: 81px;
-        .date-side-box {
-          position: absolute;
-          @media (min-width: $screen-md-min) { 
-              top: 0;
-              width: 100%;
-          }
-          height: $min-height;
-          min-width: $box-width;
-          background-color: $brand-success;   
-        
-          p {
-            padding: 0px 5px;
-            font-weight: 700;
-            color: white;   
-          }
-            
-          p.day-as-text { margin-bottom: 0; }
-            
-          span.day-as-number {
-              font-size: 2em;
-          } 
-        }
-    
-        a { 
-            display: block;
-            padding: 0; 
-            
-            &:hover { 
-              text-decoration: none;
-              color: darken(#fff, 15%);
-            }
-            &:focus { 
-              text-decoration: none;
-              color: white;
-            }
-        }
-    
-        p.hours-worked-text { 
-            color: $gray-light;
-            margin: 0 0 0px;
-            margin-left: $box-width + 17px;
-            @media (min-width: $screen-md-min) {
-                text-align: center;
-                margin-left: 0px;
-                padding-bottom: 3px;
-            }
-        }
+}
 
+.time-entry {
+    position: relative;
+    margin-bottom: 15px;
+    $min-height: 60px;
+    min-height: $min-height;
 
-        span.hours-worked-number {
-            display: inline-block;
-            width: 65px;
-            font-family: $font-family-serif;
-            color: $brand-primary;
-            font-weight: 900;
-            font-size: 3em;
-            margin-right: 5px;
-            @media (min-width: $screen-md-min) {
-                display: block;  
-                width: inherit;
-            }
-        }
-        
+    @media (min-width: $screen-md-min) {
+        padding-top: $min-height + 17px;
     }
+
+
+    $box-width: 81px;
+    .date-side-box {
+      position: absolute;
+      @media (min-width: $screen-md-min) { 
+          top: 0;
+          width: 100%;
+      }
+      height: $min-height;
+      min-width: $box-width;
+      background-color: $brand-success;   
+
+      p {
+        padding: 0px 5px;
+//        font-weight: 700;
+        color: white;   
+      }
+
+      p.day-as-text { margin-bottom: 0; }
+
+      span.day-as-number {
+          font-size: 2em;
+      } 
+    }
+
+    a { 
+        display: block;
+        padding: 0; 
+
+        &:hover { 
+          text-decoration: none;
+          color: darken(#fff, 15%);
+        }
+        &:focus { 
+          text-decoration: none;
+          color: white;
+        }
+    }
+
+    p.hours-worked-text { 
+        color: $gray-light;
+        margin: 0 0 0px;
+        margin-left: $box-width + 17px;
+        @media (min-width: $screen-md-min) {
+            text-align: center;
+            margin-left: 0px;
+            padding-bottom: 3px;
+        }
+    }
+
+
+    span.hours-worked-number {
+        display: inline-block;
+        width: 65px;
+        font-family: $font-family-serif;
+        color: $brand-primary;
+        font-weight: 900;
+        font-size: 3em;
+        margin-right: 5px;
+        @media (min-width: $screen-md-min) {
+            display: block;  
+            width: inherit;
+        }
+    }
+
 }
