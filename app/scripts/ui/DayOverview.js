@@ -45,8 +45,8 @@ class Overview extends React.Component {
               <Calendar year={year} month={month-1} headers={dayHeaders} />
             </div>
               <DayStats payPeriod={this.props.payPeriod}/>
-            </div>
           </div>
+        </div>
       </div>
     )
   }
@@ -58,8 +58,8 @@ class DayHeader extends React.Component {
     return ( 
       <div className="row">
         <div className="col-xs-2">
-          <Link to="day" params={{date: this.props.date.clone().subtract(1, "days")}} 
-             className="pull-left subtle-btn">
+          <Link to="day" params={{date: this.props.date.clone().subtract(1, "days").format("YYYY-MM-DD")}} 
+                type="button" className="pull-left subtle-btn">
             <i className="fa fa-chevron-left"></i>
           </Link> 
         </div>
@@ -67,7 +67,7 @@ class DayHeader extends React.Component {
           <h4 className="text-center">{displayDate}</h4>
         </div>
         <div className="col-xs-2">
-          <Link to="day" params={{date: this.props.date.clone().add(1, "days")}} 
+          <Link to="day" params={{date: this.props.date.clone().add(1, "days").format("YYYY-MM-DD")}} 
                 type="button" className="pull-right subtle-btn">
             <i className="fa fa-chevron-right"></i>
           </Link> 

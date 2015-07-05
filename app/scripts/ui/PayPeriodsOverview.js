@@ -50,9 +50,10 @@ class PayPeriod extends React.Component {
     const children = this.props.children
     const startDate = children.first().value().props.date.format("MMMM DD")
     const endDate = children.last().value().props.date.format("MMMM DD")
+    const urlDate = children.first().value().props.date.format("YYYY-MM-DD")
     return (
       <div className="payperiod-overview">
-        <Link to="payperiod" params={{date: startDate}}>
+        <Link to="payperiod" params={{date: urlDate}}>
           <h3>{startDate + " - " + endDate}</h3>
         </Link>
         <ul className="week-overview clearfix">
@@ -68,7 +69,7 @@ class Day extends React.Component {
     return (
       <li className="day-as-txt">
         <div className="time-entry shadowed-box">
-          <Link to="day" params={{ date: this.props.date}}>
+          <Link to="day" params={{ date: this.props.date.format("YYYY-MM-DD")}}>
             <div className="date-side-box">
                 <p className="day-as-text text-center">{this.props.date.format("dddd")}</p>
                 <p className="date text-center">{this.props.date.format("M.")}<span className="day-as-number">{this.props.date.format("D")}</span></p>
