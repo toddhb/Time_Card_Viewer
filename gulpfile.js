@@ -87,6 +87,25 @@ gulp.task('express:start', function() {
     var express = require('express');
     var app = express();
     var expressPort = 4000;
+    
+    var options = {
+        root:  __dirname + '/dist'
+    }
+    
+    app.get('/', function (req, res, next) {
+      var ceid = req.get('ceid');
+      if(ceid == undefined)
+      {
+          console.log("ceid header was not in the get request");
+          res.redirect('https://employee.con-way.com/');
+      }
+      else
+      {
+        console.log(ceid);
+        res.sendFile('index.html', options);
+      }
+    });
+
     app.use(express.static('dist'));
     app.listen(expressPort);
     gutil.log("Express serving on port " + expressPort);
