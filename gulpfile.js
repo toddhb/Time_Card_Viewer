@@ -82,11 +82,14 @@ gulp.task("buildScripts", function() {
 });
 
 // Express
-gulp.task('express:start', ['webpack:build'], function() {
+gulp.task('express:start', function() {
+    var gutil = require('gulp-util');
     var express = require('express');
     var app = express();
+    var expressPort = 4000;
     app.use(express.static('dist'));
-    app.listen(4000);
+    app.listen(expressPort);
+    gutil.log("Express serving on port " + expressPort);
 });
 
 
