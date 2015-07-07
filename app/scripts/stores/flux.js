@@ -9,6 +9,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import { Flummox } from 'flummox';
 import { DayActions, DayStore } from "./days"
 import { DayStreamActions, DayStreamStore} from "./daystream"
+import { TimeSheetActions, TimeSheetStore} from "./timeSheet"
 
 class Flux extends Flummox {
   constructor() {
@@ -18,6 +19,8 @@ class Flux extends Flummox {
     this.createStore('days', DayStore, this);
     this.createActions('daystream', DayStreamActions);
     this.createStore('daystream', DayStreamStore, this);
+    this.createActions('timeSheet', TimeSheetActions);
+    this.createStore('timeSheet', TimeSheetStore, this);
   }
 }
 

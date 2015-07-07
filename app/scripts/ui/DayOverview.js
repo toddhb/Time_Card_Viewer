@@ -17,7 +17,7 @@ import flux from "../stores/flux"
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['daystream']}>
+      <FluxComponent connectToStores={['daystream', 'timeSheet']}>
         <Overview {...this.props} />
       </FluxComponent>
     )

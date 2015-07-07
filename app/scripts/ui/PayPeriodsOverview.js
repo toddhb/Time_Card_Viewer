@@ -17,7 +17,7 @@ import AlertBar from "./AlertBar.js"
 export default class PayPeriodsOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['days']}>
+      <FluxComponent connectToStores={['days', 'timeSheet']}>
         <PayPeriods {...this.props}/>
       </FluxComponent>
     )

@@ -1,0 +1,50 @@
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ */
+
+@import "conway-skin";
+
+.NotFound-distributed {}
+
+.NotFound-distributed .NotFound-top,
+.NotFound-distributed .NotFound-larger-type,
+.NotFound-distributed .NotFound-large-type {
+	display: inline-block;
+	vertical-align: text-top;
+        font-size: 64px;
+}
+
+.NotFound-large-type {
+    width: 100%; 
+    font-size: 24px;
+    font-weight: bold;
+    
+    p {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 16px 0px;    
+    }
+    
+    a {
+        text-decoration: none;      
+        &:hover {
+          text-decoration: none;
+        }      
+    }
+
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+	.NotFound-distributed .NotFound-large-type,
+	.NotFound-distributed .NotFound-larger-type{
+		width: 100%;
+		margin-bottom: 0px;
+	}
+
+}
