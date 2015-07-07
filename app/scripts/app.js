@@ -1,5 +1,13 @@
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ */
 import React from "react"
-import Router, { Route, RouteHandler, DefaultRoute } from "react-router"
+import Router, { Route, RouteHandler, DefaultRoute, NotFoundRoute} from "react-router"
 import { Resolver } from "react-resolver"
 import { createRedux } from "redux"
 import { Provider } from "redux/react"
@@ -11,8 +19,7 @@ import CalendarOverview from "./ui/CalendarOverview"
 import Main from "./ui/Main.js"
 import FluxComponent from 'flummox/component';
 import flux from "./stores/flux"
-
-require('../styles/main.scss')
+import NotFound from "./ui/NotFound"
 
 const mountNode = document.getElementById("app")
 
@@ -32,6 +39,7 @@ const routes = (
     <Route name="day" path="day/:date" handler={DayOverview} />
     <Route name="calendar" handler={CalendarOverview} />
     <Route name="payperiod" path="payperiod/:date" handler={PayPeriodOverview} />
+    <NotFoundRoute handler={NotFound} />
   </Route>
 )
 

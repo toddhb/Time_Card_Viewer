@@ -1,29 +1,52 @@
-$time-in: #178701;
-$time-out: #026475;
-$info: #ddd;
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ */
+@import "conway-skin";
 
-.time-entry {
-    .panel-body { padding: 15px 10px 10px 10px; }
+.time-entry.day {
+
+    .date-side-box {
+        p {
+            margin-bottom: 0px;
+            
+            i.day-icon {
+                padding-top: 5px;
+                font-size: 1.5em !important;
+            }
+        }    
+    }
+    $panel-min-height: 60px;
+    $margin-top: 15px;
+    
+    p.hours-worked-text {
+        min-height: $panel-min-height - $margin-top;    /* This should be a variable/mixin */
+        margin-top: $margin-top;
+    }
+    
+    span.hours-worked-number {
+        display: inline;
+        width: inherit;
+        font-size: 1.5em;
+        margin-right: 0px;
+    } 
+    
 }
 
-.time-in {
-    border-left: 3px solid $time-in !important; 
+.period-totals {
+    
+    .panel-heading {
+        background-color: $gray-lighter;
+    }
+    
+    span.period-stat {
+        float: right;
+        margin-right: 15px;
+        font-size: 1.5em;
+    }
+      
 }
-
-.time-out {
-    border-left: 3px solid $time-out !important; 
-}
-
-.shift-info {
-    border-left: 3px solid $info !important; 
-}
-
-span.period-stat {
-    float: right;
-    margin-right: 15px;
-    font-size: 1.5em;
-}
-
-
-
-

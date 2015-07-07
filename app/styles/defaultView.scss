@@ -1,3 +1,13 @@
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ */
+@import "conway-skin";
+
 .header-date {
    color: #aaa;  
    margin-bottom: 20px;
@@ -8,13 +18,11 @@
 }
 
 .schedule-alert {
-    background-color: white;
-    border-radius: 0px 0px 5px 5px;                       /* Vendor prefixes needed */
-    box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.15);         /* Vendor prefixes needed */
-    border-top: 5px solid $brand-warning;
+    border-top: 5px solid $brand-warning !important;
     padding-top: 15px;
     padding-bottom: 15px;
     margin-top: 15px;
+
     
     h2 {
         margin-top: 0;

@@ -1,0 +1,76 @@
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ */
+
+@import "conway-skin";
+
+.footer-distributed {
+	background-color: $brand-primary;        
+	padding: 15px 0px;       
+}
+
+.footer-distributed .footer-top,
+.footer-distributed .footer-large-type,
+.footer-distributed .footer-small-type {
+	display: inline-block;
+	vertical-align: text-top;
+}
+
+.footer-large-type {
+    width: 100%; 
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    
+    p {
+        display: inline-block;
+        vertical-align: middle;    
+    }
+    
+    a {
+        color: white; 
+        text-decoration: none;      
+        &:hover {
+          color: darken($body-bg, 15%);
+          text-decoration: none;
+        }      
+    }
+    
+    i {
+        background-color:  $gray-dark;
+        font-size: 25px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        line-height: 42px;  
+        margin: 10px 15px 10px 0px;
+        vertical-align: middle;
+        
+        &.fa-envelope {
+            font-size: 17px;    
+            line-height: 38px;   
+        }
+    }
+}
+
+.footer-distributed .footer-support,
+.footer-distributed .footer-team-about{
+	color:  lighten($gray-light, 15%);
+	font-size: 10px;
+	margin: 0;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+	.footer-distributed .footer-large-type,
+	.footer-distributed .footer-small-type{
+		width: 100%;
+		margin-bottom: 0px;
+	}
+
+}

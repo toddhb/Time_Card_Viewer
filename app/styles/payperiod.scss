@@ -1,7 +1,12 @@
-.payperiod-overview {
-    padding: 10px;
-}
-
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ */
+@import "conway-skin";
 
 ul.week-overview {
     margin: 0;
@@ -18,88 +23,81 @@ ul.week-overview {
       }
       width: $width;
      }
-    
-    .time-entry {
-        position: relative;
-        background-color: white;
-        border-radius: 3px;                                   /* Vendor prefixes needed */
-        box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.15);         /* Vendor prefixes needed */
-        margin-bottom: 15px;
-        $min-height: 60px;
-        min-height: $min-height;
-        
-        @media (min-width: $screen-md-min) {
-            padding-top: $min-height + 17px;
-        }
-        
-        &:hover {
-            box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.15);         /* Vendor prefixes needed */
-        }
+}
 
-        
-        $box-width: 81px;
-        .date-side-box {
-          position: absolute;
-          @media (min-width: $screen-md-min) { 
-              top: 0;
-              width: 100%;
-          }
-          height: $min-height;
-          min-width: $box-width;
-          background-color: $brand-success;   
-        
-          p {
-            padding: 0px 5px;
-            font-weight: 700;
-            color: white;   
-          }
-            
-          p.day-as-text { margin-bottom: 0; }
-            
-          span.day-as-number {
-              font-size: 2em;
-          } 
-        }
-    
-        a { 
-            display: block;
-            padding: 0; 
-            
-            &:hover { 
-              text-decoration: none;
-              color: darken(#fff, 15%);
-            }
-            &:focus { 
-              text-decoration: none;
-              color: white;
-            }
-        }
-    
-        p.hours-worked-text { 
-            color: $gray-light;
-            margin: 0 0 0px;
-            margin-left: $box-width + 17px;
-            @media (min-width: $screen-md-min) {
-                text-align: center;
-                margin-left: 0px;
-                padding-bottom: 3px;
-            }
-        }
+.time-entry {
+    position: relative;
+    margin-bottom: 15px;
+    $min-height: 60px;
+    min-height: $min-height;
 
-
-        span.hours-worked-number {
-            display: inline-block;
-            width: 65px;
-            font-family: $font-family-serif;
-            color: $brand-primary;
-            font-weight: 900;
-            font-size: 3em;
-            margin-right: 5px;
-            @media (min-width: $screen-md-min) {
-                display: block;  
-                width: inherit;
-            }
-        }
-        
+    @media (min-width: $screen-md-min) {
+        padding-top: $min-height + 17px;
     }
+
+
+    $box-width: 81px;
+    .date-side-box {
+      position: absolute;
+      @media (min-width: $screen-md-min) { 
+          top: 0;
+          width: 100%;
+      }
+      height: $min-height;
+      min-width: $box-width;
+      background-color: $brand-success;   
+
+      p {
+        padding: 0px 5px;
+//        font-weight: 700;
+        color: white;   
+      }
+
+      p.day-as-text { margin-bottom: 0; }
+
+      span.day-as-number {
+          font-size: 2em;
+      } 
+    }
+
+    a { 
+        display: block;
+        padding: 0; 
+
+        &:hover { 
+          text-decoration: none;
+          color: darken(#fff, 15%);
+        }
+        &:focus { 
+          text-decoration: none;
+          color: white;
+        }
+    }
+
+    p.hours-worked-text { 
+        color: $gray-light;
+        margin: 0 0 0px;
+        margin-left: $box-width + 17px;
+        @media (min-width: $screen-md-min) {
+            text-align: center;
+            margin-left: 0px;
+            padding-bottom: 3px;
+        }
+    }
+
+
+    span.hours-worked-number {
+        display: inline-block;
+        width: 65px;
+        font-family: $font-family-serif;
+        color: $brand-primary;
+        font-weight: 900;
+        font-size: 3em;
+        margin-right: 5px;
+        @media (min-width: $screen-md-min) {
+            display: block;  
+            width: inherit;
+        }
+    }
+
 }

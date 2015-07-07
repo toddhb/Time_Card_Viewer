@@ -1,3 +1,11 @@
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ */
 import React from "react"
 import { Link } from "react-router" 
 import moment from "moment"
@@ -9,7 +17,7 @@ import flux from "../stores/flux"
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['daystream']}>
+      <FluxComponent connectToStores={['daystream', 'timeSheet', 'schedule']}>
         <Overview {...this.props} />
       </FluxComponent>
     )
@@ -25,6 +33,8 @@ class Overview extends React.Component {
     const punchLog = _.chain(this.props.dayStamps)
        .sortBy(punchLog => punchLog.time) 
        .map(punch => <Entry {...punch} />)
+
+       console.log(this.props)
     return (
       <div>  
         <DayHeader date={date}/> 
@@ -37,8 +47,8 @@ class Overview extends React.Component {
               <Calendar year={year} month={month-1} headers={dayHeaders} />
             </div>
               <DayStats payPeriod={this.props.payPeriod}/>
-            </div>
           </div>
+        </div>
       </div>
     )
   }
@@ -50,8 +60,8 @@ class DayHeader extends React.Component {
     return ( 
       <div className="row">
         <div className="col-xs-2">
-          <Link to="day" params={{date: this.props.date.clone().subtract(1, "days")}} 
-                type="button" className="btn btn-default pull-left">
+          <Link to="day" params={{date: this.props.date.clone().subtract(1, "days").format("YYYY-MM-DD")}} 
+                type="button" className="pull-left subtle-btn">
             <i className="fa fa-chevron-left"></i>
           </Link> 
         </div>
@@ -59,8 +69,8 @@ class DayHeader extends React.Component {
           <h4 className="text-center">{displayDate}</h4>
         </div>
         <div className="col-xs-2">
-          <Link to="day" params={{date: this.props.date.clone().add(1, "days")}} 
-                type="button" className="btn btn-default pull-left">
+          <Link to="day" params={{date: this.props.date.clone().add(1, "days").format("YYYY-MM-DD")}} 
+                type="button" className="pull-right subtle-btn">
             <i className="fa fa-chevron-right"></i>
           </Link> 
         </div>
@@ -75,7 +85,7 @@ class DayStats extends React.Component {
   render() {
     const payPeriod = this.props.payPeriod
     return (
-      <div className="panel panel-default period-totals">
+      <div className="panel period-totals">
         <div className="panel-heading">
           <h4 className="panel-title"><a href="payperiod">{payPeriod.start} - {payPeriod.end} Period</a> Totals</h4>
         </div>
@@ -91,28 +101,28 @@ class DayStats extends React.Component {
 
 class Entry extends React.Component {
   render() {
-    const panelClassDefault = "panel panel-default time-entry"
-    const glyphClassDefault = "pull-left"
+    const panelClassDefault = "panel time-entry day"
+    const glyphClassDefault = "day-icon"
 
     const settings = {
       timeIn: {
-        action: "Clocked in at ",
+        action: "Clocked in",
         panelClass: panelClassDefault + " " + "time-in",
         glyphClass: glyphClassDefault + " fa-flip-horizontal" + " fa fa-truck"
       },
       timeOut: {
-        action: "Clocked out at ",
+        action: "Clocked out",
         panelClass: panelClassDefault + " " + "time-out",
         glyphClass: glyphClassDefault + " " + "fa fa-truck"
       },
       scheduledIn: {
-        action: "Shift started at ",
-        panelClass: panelClassDefault + " " + "time-out",
+        action: "Shift started",
+        panelClass: panelClassDefault + " " + "shift-info",
         glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       },
       scheduledOut: {
-        action: "Shift ended at ",
-        panelClass: panelClassDefault + " " + "shiftl-info",
+        action: "Shift ended",
+        panelClass: panelClassDefault + " " + "shift-info",
         glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       }
     }
@@ -120,12 +130,13 @@ class Entry extends React.Component {
     const {action, panelClass, glyphClass} = settings[this.props.type]
 
     return ( 
-      <div className={panelClass}>
-        <div className="panel-body">
-          <i className={glyphClass}></i>
-          <p>{action}<strong>{this.props.time}{this.props.suffix}</strong> </p>
+        <div className={panelClass}>
+            <div className="date-side-box">
+                <p className="text-center"><i className={glyphClass}></i></p>
+                <p>{action}</p>
+            </div>
+            <p className="hours-worked-text"><span className="hours-worked-number">{this.props.time} {this.props.suffix}</span></p>
         </div>
-      </div> 
     )
   }
 }
