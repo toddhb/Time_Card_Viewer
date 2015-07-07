@@ -17,7 +17,7 @@ import flux from "../stores/flux"
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['daystream', 'timeSheet']}>
+      <FluxComponent connectToStores={['daystream', 'timeSheet', 'schedule']}>
         <Overview {...this.props} />
       </FluxComponent>
     )
@@ -33,6 +33,8 @@ class Overview extends React.Component {
     const punchLog = _.chain(this.props.dayStamps)
        .sortBy(punchLog => punchLog.time) 
        .map(punch => <Entry {...punch} />)
+
+       console.log(this.props)
     return (
       <div>  
         <DayHeader date={date}/> 

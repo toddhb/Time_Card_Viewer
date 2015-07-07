@@ -10,6 +10,7 @@ import { Flummox } from 'flummox';
 import { DayActions, DayStore } from "./days"
 import { DayStreamActions, DayStreamStore} from "./daystream"
 import { TimeSheetActions, TimeSheetStore} from "./timeSheet"
+import { ScheduleActions, ScheduleStore } from "./schedule"
 
 class Flux extends Flummox {
   constructor() {
@@ -21,6 +22,8 @@ class Flux extends Flummox {
     this.createStore('daystream', DayStreamStore, this);
     this.createActions('timeSheet', TimeSheetActions);
     this.createStore('timeSheet', TimeSheetStore, this);
+    this.createActions('schedule', ScheduleActions);
+    this.createStore('schedule', ScheduleStore, this);
   }
 }
 
