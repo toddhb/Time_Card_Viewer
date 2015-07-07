@@ -20,7 +20,7 @@ export class ScheduleStore extends Store {
   constructor(flux) {
     super()
 
-    const ScheduleStore = flux.getActions('schedule')
+    const scheduleStore = flux.getActions('schedule')
     this.register(ScheduleActions.fetch, this.handleFetch)
 
     this.state = defaultState
