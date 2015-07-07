@@ -10,18 +10,18 @@ import { Actions, Store, Flummox } from 'flummox'
 import _ from "underscore"
 import moment from "moment"
 
-export class timeSheetActions extends Actions {
+export class TimeSheetActions extends Actions {
   fetch(content) {
     return content // automatically dispatched
   }
 }
 
-export class timeSheetStore extends Store {
+export class TimeSheetStore extends Store {
   constructor(flux) {
     super()
 
     const timeSheetStore = flux.getActions('timeSheet')
-    this.register(timeSheetActions.fetch, this.handleFetch)
+    this.register(TimeSheetActions.fetch, this.handleFetch)
 
     this.state = defaultState
   }
@@ -29,9 +29,6 @@ export class timeSheetStore extends Store {
 }
 
 const defaultState = {
-    "Response": {
-      "-Status": "Success",
-      "-Action": "Load",
       "Timesheet": {
         "-LastTotalizationDateTime": "6/20/2015 0:30",
         "-ManagerSignoffDateTime": "5/16/2015 0:00",
@@ -772,6 +769,5 @@ const defaultState = {
           ]
         }
       }
-    }
 
 }
