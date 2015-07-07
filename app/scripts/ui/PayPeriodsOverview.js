@@ -29,7 +29,7 @@ class PayPeriods extends React.Component {
     var weeks = _.chain(this.props.days)
       .groupBy((element, index) => Math.floor(index/7))
       .map(eachWeek => {
-        const days = _.chain(eachWeek).map(eachDay => <Day {...eachDay} />)
+        const days = _.chain(eachWeek).reverse().map(eachDay => <Day {...eachDay} />)
         const start_date = _.first(eachWeek).date.format("MMMM DD")
         const end_date = _.last(eachWeek).date.format("MMMM DD")
         return (<PayPeriod>{days}</PayPeriod>)
