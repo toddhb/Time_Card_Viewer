@@ -23,6 +23,7 @@ var source = require("vinyl-source-stream"),
 
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
+var gutil = require('gulp-util');
 
 // Styles
 gulp.task("styles", ["sass"  ]);
@@ -81,45 +82,40 @@ gulp.task("buildScripts", function() {
         .pipe(gulp.dest("dist/scripts"));
 });
 
+
+function checkHeaderSendResponse(req, res) {
+    var redirectAddress = 'https://employee.con-way.com/';
+    var options = {
+        root:  __dirname + '/dist'
+    }
+    var ceid = req.get('ceid');
+    if(ceid == undefined) {
+        gutil.log("ceid header was not in the get request");
+        res.redirect(redirectAddress);
+    } else {
+        gutil.log("ceid:" + ceid);
+        ceid = decodeURIComponent(ceid.replace(/\+/g, ' '));
+        gutil.log("URLdecoded:" + ceid);
+        ceid = new Buffer(ceid, 'base64');
+        gutil.log("base64decoded:" + ceid);
+        res.sendFile('index.html', options);
+    }
+}
+
 // Express
 gulp.task('express:start', function() {
-    var gutil = require('gulp-util');
     var express = require('express');
     var app = express();
     var expressPort = 4000;
     
-    var options = {
-        root:  __dirname + '/dist'
-    }
-    
     app.get('/', function (req, res) {
-        var ceid = req.get('ceid');
-        if(ceid == undefined)
-        {
-            gutil.log("ceid header was not in the get request");
-            res.redirect('https://employee.con-way.com/');
-        }
-        else
-        {
-            gutil.log("ceid=" + ceid);
-            res.sendFile('index.html', options);
-        }
+        checkHeaderSendResponse(req, res);
     });
     
     app.use(express.static('dist'));
     
     app.get('*', function (req, res) {
-        var ceid = req.get('ceid');
-        if(ceid == undefined)
-        {
-            gutil.log("ceid header was not in the get request");
-            res.redirect('https://employee.con-way.com/');
-        }
-        else
-        {
-            gutil.log("ceid=" + ceid);
-            res.sendFile('index.html', options);
-        }
+        checkHeaderSendResponse(req, res);
     });
 
     app.listen(expressPort);
