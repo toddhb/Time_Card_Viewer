@@ -46,9 +46,11 @@ body {
     a {
         &:link {
           color: $body-bg;
+          text-decoration: none;
         }
         &:visited {
           color: $body-bg;
+          text-decoration: none;
         }
         &:hover {
           color: darken($body-bg, 15%);
@@ -56,6 +58,7 @@ body {
         }
         &:active {
           color: $body-bg;
+          text-decoration: none;
         }
     }
     

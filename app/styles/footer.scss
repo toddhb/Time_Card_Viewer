@@ -35,9 +35,11 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
     a {
         &:link {
           color: $body-bg;
+          text-decoration: none;
         }
         &:visited {
           color: $body-bg;
+          text-decoration: none;
         }
         &:hover {
           color: darken($body-bg, 15%);
@@ -45,6 +47,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
         }
         &:active {
           color: $body-bg;
+          text-decoration: none;
         }
     }
     
