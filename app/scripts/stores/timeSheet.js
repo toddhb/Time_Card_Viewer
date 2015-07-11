@@ -38,7 +38,7 @@ const defaultState = {
       { "Date": "3/31/2015" },
       {
         "Date": "4/01/2015",
-        "GrandTotal": "10:23",
+        "-GrandTotal": "10:23",
         "Totals": {
           "Total": [
           {
@@ -101,7 +101,7 @@ const defaultState = {
       },
       {
         "Date": "4/02/2015",
-        "GrandTotal": "10:43",
+        "-GrandTotal": "10:43",
         "Totals": {
           "Total": [
           {
@@ -186,7 +186,7 @@ const defaultState = {
       },
       {
         "Date": "4/03/2015",
-        "GrandTotal": "9:36",
+        "-GrandTotal": "9:36",
         "Totals": {
           "Total": [
           {
@@ -249,15 +249,15 @@ const defaultState = {
       },
       {
         "Date": "4/04/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/05/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/06/2015",
-        "GrandTotal": "10:58",
+        "-GrandTotal": "10:58",
         "Totals": {
           "Total": [
           {
@@ -320,7 +320,7 @@ const defaultState = {
       },
       {
         "Date": "4/07/2015",
-        "GrandTotal": "11:01",
+        "-GrandTotal": "11:01",
         "Totals": {
           "Total": [
           {
@@ -383,7 +383,7 @@ const defaultState = {
       },
       {
         "Date": "4/08/2015",
-        "GrandTotal": "12:17",
+        "-GrandTotal": "12:17",
         "Totals": {
           "Total": [
           {
@@ -446,7 +446,7 @@ const defaultState = {
       },
       {
         "Date": "4/09/2015",
-        "GrandTotal": "9:36",
+        "-GrandTotal": "9:36",
         "Totals": {
           "Total": [
           {
@@ -531,7 +531,7 @@ const defaultState = {
       },
       {
         "Date": "4/10/2015",
-        "GrandTotal": "9:09",
+        "-GrandTotal": "9:09",
         "Totals": {
           "Total": [
           {
@@ -594,15 +594,15 @@ const defaultState = {
       },
       {
         "Date": "4/11/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/12/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/13/2015",
-        "GrandTotal": "10:50",
+        "-GrandTotal": "10:50",
         "Totals": {
           "Total": [
           {
@@ -665,7 +665,7 @@ const defaultState = {
       },
       {
         "Date": "4/14/2015",
-        "GrandTotal": "9:47",
+        "-GrandTotal": "9:47",
         "Totals": {
           "Total": [
           {
@@ -728,7 +728,7 @@ const defaultState = {
       },
       {
         "Date": "4/15/2015",
-        "GrandTotal": "9:00",
+        "-GrandTotal": "9:00",
         "Totals": {
           "Total": [
           {
@@ -791,7 +791,7 @@ const defaultState = {
       },
       {
         "Date": "4/16/2015",
-        "GrandTotal": "9:34",
+        "-GrandTotal": "9:34",
         "Totals": {
           "Total": [
           {
@@ -854,7 +854,7 @@ const defaultState = {
       },
       {
         "Date": "4/17/2015",
-        "GrandTotal": "8:00",
+        "-GrandTotal": "8:00",
         "Totals": {
           "Total": [
           {
@@ -939,15 +939,15 @@ const defaultState = {
       },
       {
         "Date": "4/18/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/19/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/20/2015",
-        "GrandTotal": "9:38",
+        "-GrandTotal": "9:38",
         "Totals": {
           "Total": [
           {
@@ -1010,7 +1010,7 @@ const defaultState = {
       },
       {
         "Date": "4/21/2015",
-        "GrandTotal": "10:44",
+        "-GrandTotal": "10:44",
         "Totals": {
           "Total": [
           {
@@ -1073,7 +1073,7 @@ const defaultState = {
       },
       {
         "Date": "4/22/2015",
-        "GrandTotal": "9:08",
+        "-GrandTotal": "9:08",
         "Totals": {
           "Total": [
           {
@@ -1136,7 +1136,7 @@ const defaultState = {
       },
       {
         "Date": "4/23/2015",
-        "GrandTotal": "8:06",
+        "-GrandTotal": "8:06",
         "Totals": {
           "Total": [
           {
@@ -1199,7 +1199,7 @@ const defaultState = {
       },
       {
         "Date": "4/24/2015",
-        "GrandTotal": "9:25",
+        "-GrandTotal": "9:25",
         "Totals": {
           "Total": [
           {
@@ -1284,15 +1284,15 @@ const defaultState = {
       },
       {
         "Date": "4/25/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/26/2015",
-        "GrandTotal": "0:00"
+        "-GrandTotal": "0:00"
       },
       {
         "Date": "4/27/2015",
-        "GrandTotal": "8:23",
+        "-GrandTotal": "8:23",
         "Totals": {
           "Total": [
           {
@@ -1355,7 +1355,7 @@ const defaultState = {
       },
       {
         "Date": "4/28/2015",
-        "GrandTotal": "8:26",
+        "-GrandTotal": "8:26",
         "Totals": {
           "Total": [
           {
@@ -1418,7 +1418,7 @@ const defaultState = {
       },
       {
         "Date": "4/29/2015",
-        "GrandTotal": "8:00",
+        "-GrandTotal": "8:00",
         "Totals": {
           "Total": [
           {
@@ -1457,10 +1457,9 @@ const defaultState = {
           ]
         }
       },
-      { "Date": "5/01/2015" },
       {
         "Date": "4/30/2015",
-        "GrandTotal": "8:00",
+        "-GrandTotal": "8:00",
         "Totals": {
           "Total": [
           {
@@ -1520,7 +1519,8 @@ const defaultState = {
           }
           ]
         }
-      }
+      },
+      { "Date": "5/01/2015" }
       ]
     },
     "Employee": {

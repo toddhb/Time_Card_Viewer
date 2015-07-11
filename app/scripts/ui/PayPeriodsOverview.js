@@ -108,11 +108,9 @@ class Day extends React.Component {
     var hoursWorked = this.props.GrandTotal
     console.log(this.props.GrandTotal)
     if((hoursWorked === "0:00") ||(hoursWorked === undefined)){
-      console.log("Here!")
       hoursWorked = "0" 
     }
     else {
-      console.log("There")
      hoursWorked = this.props.GrandTotal 
     }
     return (
