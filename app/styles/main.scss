@@ -44,11 +44,18 @@ body {
     background-color: $brand-primary;
 
     a {
-        color: $body-bg;   
-     
+        &:link {
+          color: $body-bg;
+        }
+        &:visited {
+          color: $body-bg;
+        }
         &:hover {
           color: darken($body-bg, 15%);
           text-decoration: none;
+        }
+        &:active {
+          color: $body-bg;
         }
     }
     

@@ -11,7 +11,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 
 .footer-distributed {
 	background-color: $brand-primary;        
-	padding: 15px 0px;       
+	padding: 15px 0px;
 }
 
 .footer-distributed .footer-top,
@@ -33,12 +33,19 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
     }
     
     a {
-        color: white; 
-        text-decoration: none;      
+        &:link {
+          color: $body-bg;
+        }
+        &:visited {
+          color: $body-bg;
+        }
         &:hover {
           color: darken($body-bg, 15%);
           text-decoration: none;
-        }      
+        }
+        &:active {
+          color: $body-bg;
+        }
     }
     
     i {
