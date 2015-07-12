@@ -14,11 +14,7 @@ import FluxComponent from 'flummox/component';
 import flux from "../stores/flux"
 import AlertBar from "./AlertBar.js"
   
-// Period.TimeFramePeriod.PeriodDateSpan = Gives a string of the time period span
-// as "startDate (MM/DD/YYYY) - endDate(MM/DD/YYYY)"
-
-  
-// TODO:  Rename this component..  
+ 
 export default class PayPeriodsOverview extends React.Component {
   // PayPeriodsOverview connects to the datastore timesheet
   // and produces a component that displays all recent timesheet
@@ -33,55 +29,45 @@ export default class PayPeriodsOverview extends React.Component {
 }
 
 class PayPeriods extends React.Component {
-  // PayPeriods
+  // PayPeriods creates a list of PayPeriod Components
+  // Needs tested with more data
   render() {
-    // An array of Objects with { -Date, -GrandTotal (hours) }
-    const dateTotals = this.props.Timesheet.DailyTotals.DateTotals;
+    var dateTotals = this.props.Timesheet.DailyTotals.DateTotals
     
-    var totalsByWeek = _.chain(dateTotals)
+    // Splits dateTotals into weeks arranged by descending recent dates
+    var weeks = _.chain(dateTotals)
+      .reverse()
       .groupBy((element, index) => Math.floor(index/7))
       .map(eachWeek => {
-        const days = _.chain(eachWeek).reverse().map(eachDay => <Day {...eachDay} />) 
-        // Produces array [month, day, year]
-        const start_parts = _.first(eachWeek).Date.split('/').map(part => parseInt(part))
-        // Creates a Moment object from the date parts
-        const start_date = moment().set({'M': (start_parts[0] - 1), 
-                                         'D': start_parts[1],
-                                         'Y': start_parts[2]}).format("MMMM DD")
-        const end_parts = _.last(eachWeek).Date.split('/').map(part => parseInt(part))
-        const end_date = moment().set({'M': (end_parts[0] - 1), 
-                                       'D': end_parts[1],
-                                       'Y': end_parts[2]}).format("MMMM DD")
-        return (<Week>{days}</Week>)
+        const days = _.chain(eachWeek).map(eachDay => <Day {...eachDay} />) 
+        return (<PayPeriod>{days}</PayPeriod>)
       })  
         
     return (
       <div className="row time-overview">
         <div className="col-xs-12">
             <AlertBar />
-            {totalsByWeek}
+            {weeks}
         </div>
       </div>
     )
   }
 }
 
-class Week extends React.Component {    
+class PayPeriod extends React.Component {    
+  // PayPeriod assumes a week pay period and creates a unordered list of 
+  // day components from the dates provided 
   render() {
-    const children = this.props.children
-    // How do I extract this operation out? I've written it too many times...  
-    const start_parts = children.first().value().props.Date.split('/').map(part =>
-                                                                           parseInt(part))
-    const start = moment().set({'M': (start_parts[0] - 1), 
-                                     'D': start_parts[1],
-                                     'Y': start_parts[2]})
-    const end_parts = children.last().value().props.Date.split('/').map(part =>
-                                                                           parseInt(part))
-    const end_date = moment().set({'M': (end_parts[0] - 1), 
-                                     'D': end_parts[1],
-                                     'Y': end_parts[2]}).format("MMMM DD")   
-    const start_date = start.format("MMMM DD")
-    const url_date = start.format("YYYY-MM-DD")
+    const week = this.props.children
+    var date_range = [ week.first(), week.last() ].map(date =>
+                                                        date.value().props.Date.split('/'))
+    date_range = date_range.map(date =>
+                                 moment().set({'M': (date[0] - 1), 
+                                               'D': date[1],
+                                               'Y': date[2]}))
+    const start_date = date_range[0].format("MMMM DD")
+    const url_date = date_range[0].format("MMMM DD")
+    const end_date = date_range[1].format("MMMM DD")
     return (
       <div className="payperiod-overview">
         <Link to="payperiod" params={{date: url_date}}>
@@ -101,17 +87,19 @@ class Day extends React.Component {
   // of hours worked that day. Both date and hours are 
   // passed through props.
   render() {
-    const dateSt = this.props.Date.split('/').map(part =>parseInt(part))
-    const date = moment().set({'M': (dateSt[0] - 1), 
-                                     'D': dateSt[1],
-                                     'Y': dateSt[2]}) 
+    var date = this.props.Date.split('/').map(part =>parseInt(part))
+    date = moment().set({'M': (date[0] - 1), 
+                         'D': date[1],
+                         'Y': date[2]}) 
     var hoursWorked = this.props.GrandTotal
-    console.log(this.props.GrandTotal)
-    if((hoursWorked === "0:00") ||(hoursWorked === undefined)){
+    if(hoursWorked === undefined){
       hoursWorked = "0" 
     }
     else {
-     hoursWorked = this.props.GrandTotal 
+      const minutes = hoursWorked.split(":")[1] 
+      if (minutes === "00") {
+        hoursWorked = hoursWorked.split(":")[0] 
+      }
     }
     return (
       <li className="day-as-txt">
