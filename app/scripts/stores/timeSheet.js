@@ -33,12 +33,12 @@ const defaultState = {
     "-LastTotalizationDateTime": "7/04/2015 0:30",
     "-ManagerSignoffDateTime": "5/16/2015 0:00",
     "-TotalsUpToDateFlag": "true",
-    "DailyTotals": {
+    "DailyTotals": {  
       "DateTotals": [
-      { "-Date": "3/31/2015" },
+      { "Date": "3/31/2015" },
       {
-        "-Date": "4/01/2015",
-        "-GrandTotal": "10:23",
+        "Date": "4/01/2015",
+        "GrandTotal": "10:23",
         "Totals": {
           "Total": [
           {
@@ -100,8 +100,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/02/2015",
-        "-GrandTotal": "10:43",
+        "Date": "4/02/2015",
+        "GrandTotal": "10:43",
         "Totals": {
           "Total": [
           {
@@ -185,8 +185,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/03/2015",
-        "-GrandTotal": "9:36",
+        "Date": "4/03/2015",
+        "GrandTotal": "9:36",
         "Totals": {
           "Total": [
           {
@@ -248,16 +248,16 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/04/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/04/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/05/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/05/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/06/2015",
-        "-GrandTotal": "10:58",
+        "Date": "4/06/2015",
+        "GrandTotal": "10:58",
         "Totals": {
           "Total": [
           {
@@ -319,8 +319,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/07/2015",
-        "-GrandTotal": "11:01",
+        "Date": "4/07/2015",
+        "GrandTotal": "11:01",
         "Totals": {
           "Total": [
           {
@@ -382,8 +382,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/08/2015",
-        "-GrandTotal": "12:17",
+        "Date": "4/08/2015",
+        "GrandTotal": "12:17",
         "Totals": {
           "Total": [
           {
@@ -445,8 +445,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/09/2015",
-        "-GrandTotal": "9:36",
+        "Date": "4/09/2015",
+        "GrandTotal": "9:36",
         "Totals": {
           "Total": [
           {
@@ -530,8 +530,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/10/2015",
-        "-GrandTotal": "9:09",
+        "Date": "4/10/2015",
+        "GrandTotal": "9:09",
         "Totals": {
           "Total": [
           {
@@ -593,16 +593,16 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/11/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/11/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/12/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/12/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/13/2015",
-        "-GrandTotal": "10:50",
+        "Date": "4/13/2015",
+        "GrandTotal": "10:50",
         "Totals": {
           "Total": [
           {
@@ -664,8 +664,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/14/2015",
-        "-GrandTotal": "9:47",
+        "Date": "4/14/2015",
+        "GrandTotal": "9:47",
         "Totals": {
           "Total": [
           {
@@ -727,8 +727,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/15/2015",
-        "-GrandTotal": "9:00",
+        "Date": "4/15/2015",
+        "GrandTotal": "9:00",
         "Totals": {
           "Total": [
           {
@@ -790,8 +790,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/16/2015",
-        "-GrandTotal": "9:34",
+        "Date": "4/16/2015",
+        "GrandTotal": "9:34",
         "Totals": {
           "Total": [
           {
@@ -853,8 +853,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/17/2015",
-        "-GrandTotal": "8:00",
+        "Date": "4/17/2015",
+        "GrandTotal": "8:00",
         "Totals": {
           "Total": [
           {
@@ -938,16 +938,16 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/18/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/18/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/19/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/19/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/20/2015",
-        "-GrandTotal": "9:38",
+        "Date": "4/20/2015",
+        "GrandTotal": "9:38",
         "Totals": {
           "Total": [
           {
@@ -1009,8 +1009,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/21/2015",
-        "-GrandTotal": "10:44",
+        "Date": "4/21/2015",
+        "GrandTotal": "10:44",
         "Totals": {
           "Total": [
           {
@@ -1072,8 +1072,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/22/2015",
-        "-GrandTotal": "9:08",
+        "Date": "4/22/2015",
+        "GrandTotal": "9:08",
         "Totals": {
           "Total": [
           {
@@ -1135,8 +1135,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/23/2015",
-        "-GrandTotal": "8:06",
+        "Date": "4/23/2015",
+        "GrandTotal": "8:06",
         "Totals": {
           "Total": [
           {
@@ -1198,8 +1198,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/24/2015",
-        "-GrandTotal": "9:25",
+        "Date": "4/24/2015",
+        "GrandTotal": "9:25",
         "Totals": {
           "Total": [
           {
@@ -1283,16 +1283,16 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/25/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/25/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/26/2015",
-        "-GrandTotal": "0:00"
+        "Date": "4/26/2015",
+        "GrandTotal": "0:00"
       },
       {
-        "-Date": "4/27/2015",
-        "-GrandTotal": "8:23",
+        "Date": "4/27/2015",
+        "GrandTotal": "8:23",
         "Totals": {
           "Total": [
           {
@@ -1354,8 +1354,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/28/2015",
-        "-GrandTotal": "8:26",
+        "Date": "4/28/2015",
+        "GrandTotal": "8:26",
         "Totals": {
           "Total": [
           {
@@ -1417,8 +1417,8 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/29/2015",
-        "-GrandTotal": "8:00",
+        "Date": "4/29/2015",
+        "GrandTotal": "8:00",
         "Totals": {
           "Total": [
           {
@@ -1457,10 +1457,9 @@ const defaultState = {
           ]
         }
       },
-      { "-Date": "5/01/2015" },
       {
-        "-Date": "4/30/2015",
-        "-GrandTotal": "8:00",
+        "Date": "4/30/2015",
+        "GrandTotal": "8:00",
         "Totals": {
           "Total": [
           {
@@ -1520,7 +1519,8 @@ const defaultState = {
           }
           ]
         }
-      }
+      },
+      { "Date": "5/01/2015" }
       ]
     },
     "Employee": {
@@ -1634,15 +1634,15 @@ const defaultState = {
         }
       }
     },
-    "Period": {
+    "Period": {  
       "TimeFramePeriod": {
-        "-PeriodDateSpan": "4/01/2015 - 4/30/2015",
-        "-TimeFrameName": "9"
-      }
+        "PeriodDateSpan": "4/01/2015 - 4/30/2015",
+        "TimeFrameName": "9"
+      } 
     },
     "TotaledPayCodeEdits": {
       "PayCodeEdit": {
-        "-Date": "4/29/2015",
+        "Date": "4/29/2015",
         "-EnteredOnDate": "5/04/2015",
         "-EnteredOnTime": "9:04",
         "-AmountInTimeOrCurrency": "8:00",
@@ -1653,10 +1653,10 @@ const defaultState = {
         }
       }
     },
-    "TotaledSpans": {
+    "TotaledSpans": { 
       "TotaledSpan": [
       {
-        "-Date": "4/01/2015",
+        "Date": "4/01/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1664,7 +1664,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/01/2015",
+            "Date": "4/01/2015",
             "-EnteredOnDate": "4/01/2015",
             "-EnteredOnTime": "5:02",
             "-DaylightSavingsFlag": "true",
@@ -1677,7 +1677,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/01/2015",
+            "Date": "4/01/2015",
             "-EnteredOnDate": "4/01/2015",
             "-EnteredOnTime": "12:33",
             "-DaylightSavingsFlag": "true",
@@ -1690,7 +1690,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/01/2015",
+        "Date": "4/01/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1706,7 +1706,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/01/2015",
+            "Date": "4/01/2015",
             "-EnteredOnDate": "4/01/2015",
             "-EnteredOnTime": "13:02",
             "-DaylightSavingsFlag": "true",
@@ -1719,7 +1719,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/01/2015",
+            "Date": "4/01/2015",
             "-EnteredOnDate": "4/01/2015",
             "-EnteredOnTime": "15:56",
             "-DaylightSavingsFlag": "true",
@@ -1735,7 +1735,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/02/2015",
+        "Date": "4/02/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1743,7 +1743,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/02/2015",
+            "Date": "4/02/2015",
             "-EnteredOnDate": "4/02/2015",
             "-EnteredOnTime": "4:58",
             "-DaylightSavingsFlag": "true",
@@ -1756,7 +1756,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/02/2015",
+            "Date": "4/02/2015",
             "-EnteredOnDate": "4/02/2015",
             "-EnteredOnTime": "12:33",
             "-DaylightSavingsFlag": "true",
@@ -1769,7 +1769,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/02/2015",
+        "Date": "4/02/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1785,7 +1785,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/02/2015",
+            "Date": "4/02/2015",
             "-EnteredOnDate": "4/02/2015",
             "-EnteredOnTime": "13:03",
             "-DaylightSavingsFlag": "true",
@@ -1798,7 +1798,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/02/2015",
+            "Date": "4/02/2015",
             "-EnteredOnDate": "4/02/2015",
             "-EnteredOnTime": "16:18",
             "-DaylightSavingsFlag": "true",
@@ -1814,7 +1814,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/03/2015",
+        "Date": "4/03/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1822,7 +1822,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/03/2015",
+            "Date": "4/03/2015",
             "-EnteredOnDate": "4/03/2015",
             "-EnteredOnTime": "4:58",
             "-DaylightSavingsFlag": "true",
@@ -1835,7 +1835,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/03/2015",
+            "Date": "4/03/2015",
             "-EnteredOnDate": "4/03/2015",
             "-EnteredOnTime": "12:32",
             "-DaylightSavingsFlag": "true",
@@ -1848,7 +1848,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/03/2015",
+        "Date": "4/03/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1864,7 +1864,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/03/2015",
+            "Date": "4/03/2015",
             "-EnteredOnDate": "4/03/2015",
             "-EnteredOnTime": "12:58",
             "-DaylightSavingsFlag": "true",
@@ -1877,7 +1877,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/03/2015",
+            "Date": "4/03/2015",
             "-EnteredOnDate": "4/03/2015",
             "-EnteredOnTime": "15:07",
             "-DaylightSavingsFlag": "true",
@@ -1893,7 +1893,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/06/2015",
+        "Date": "4/06/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1901,7 +1901,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/06/2015",
+            "Date": "4/06/2015",
             "-EnteredOnDate": "4/06/2015",
             "-EnteredOnTime": "4:59",
             "-DaylightSavingsFlag": "true",
@@ -1914,7 +1914,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/06/2015",
+            "Date": "4/06/2015",
             "-EnteredOnDate": "4/06/2015",
             "-EnteredOnTime": "11:34",
             "-DaylightSavingsFlag": "true",
@@ -1927,7 +1927,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/06/2015",
+        "Date": "4/06/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1943,7 +1943,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/06/2015",
+            "Date": "4/06/2015",
             "-EnteredOnDate": "4/06/2015",
             "-EnteredOnTime": "11:59",
             "-DaylightSavingsFlag": "true",
@@ -1956,7 +1956,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/06/2015",
+            "Date": "4/06/2015",
             "-EnteredOnDate": "4/06/2015",
             "-EnteredOnTime": "16:33",
             "-DaylightSavingsFlag": "true",
@@ -1972,7 +1972,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/07/2015",
+        "Date": "4/07/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -1980,7 +1980,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/07/2015",
+            "Date": "4/07/2015",
             "-EnteredOnDate": "4/07/2015",
             "-EnteredOnTime": "4:59",
             "-DaylightSavingsFlag": "true",
@@ -1993,7 +1993,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/07/2015",
+            "Date": "4/07/2015",
             "-EnteredOnDate": "4/07/2015",
             "-EnteredOnTime": "11:20",
             "-DaylightSavingsFlag": "true",
@@ -2006,7 +2006,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/07/2015",
+        "Date": "4/07/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2022,7 +2022,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/07/2015",
+            "Date": "4/07/2015",
             "-EnteredOnDate": "4/07/2015",
             "-EnteredOnTime": "11:49",
             "-DaylightSavingsFlag": "true",
@@ -2035,7 +2035,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/07/2015",
+            "Date": "4/07/2015",
             "-EnteredOnDate": "4/07/2015",
             "-EnteredOnTime": "16:34",
             "-DaylightSavingsFlag": "true",
@@ -2051,7 +2051,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/08/2015",
+        "Date": "4/08/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2059,7 +2059,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/08/2015",
+            "Date": "4/08/2015",
             "-EnteredOnDate": "4/08/2015",
             "-EnteredOnTime": "5:01",
             "-DaylightSavingsFlag": "true",
@@ -2072,7 +2072,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/08/2015",
+            "Date": "4/08/2015",
             "-EnteredOnDate": "4/08/2015",
             "-EnteredOnTime": "11:20",
             "-DaylightSavingsFlag": "true",
@@ -2085,7 +2085,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/08/2015",
+        "Date": "4/08/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2101,7 +2101,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/08/2015",
+            "Date": "4/08/2015",
             "-EnteredOnDate": "4/08/2015",
             "-EnteredOnTime": "11:51",
             "-DaylightSavingsFlag": "true",
@@ -2114,7 +2114,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/08/2015",
+            "Date": "4/08/2015",
             "-EnteredOnDate": "4/08/2015",
             "-EnteredOnTime": "17:50",
             "-DaylightSavingsFlag": "true",
@@ -2130,7 +2130,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/09/2015",
+        "Date": "4/09/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2138,7 +2138,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/09/2015",
+            "Date": "4/09/2015",
             "-EnteredOnDate": "4/09/2015",
             "-EnteredOnTime": "5:01",
             "-DaylightSavingsFlag": "true",
@@ -2151,7 +2151,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/09/2015",
+            "Date": "4/09/2015",
             "-EnteredOnDate": "4/09/2015",
             "-EnteredOnTime": "12:05",
             "-DaylightSavingsFlag": "true",
@@ -2164,7 +2164,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/09/2015",
+        "Date": "4/09/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2188,7 +2188,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/09/2015",
+            "Date": "4/09/2015",
             "-EnteredOnDate": "4/09/2015",
             "-EnteredOnTime": "12:31",
             "-DaylightSavingsFlag": "true",
@@ -2204,7 +2204,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/09/2015",
+            "Date": "4/09/2015",
             "-EnteredOnDate": "4/09/2015",
             "-EnteredOnTime": "15:06",
             "-DaylightSavingsFlag": "true",
@@ -2220,7 +2220,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/10/2015",
+        "Date": "4/10/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2228,7 +2228,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/10/2015",
+            "Date": "4/10/2015",
             "-EnteredOnDate": "4/10/2015",
             "-EnteredOnTime": "5:02",
             "-DaylightSavingsFlag": "true",
@@ -2241,7 +2241,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/10/2015",
+            "Date": "4/10/2015",
             "-EnteredOnDate": "4/10/2015",
             "-EnteredOnTime": "10:06",
             "-DaylightSavingsFlag": "true",
@@ -2254,7 +2254,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/10/2015",
+        "Date": "4/10/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2270,7 +2270,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/10/2015",
+            "Date": "4/10/2015",
             "-EnteredOnDate": "4/10/2015",
             "-EnteredOnTime": "10:37",
             "-DaylightSavingsFlag": "true",
@@ -2283,7 +2283,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/10/2015",
+            "Date": "4/10/2015",
             "-EnteredOnDate": "4/10/2015",
             "-EnteredOnTime": "14:42",
             "-DaylightSavingsFlag": "true",
@@ -2299,7 +2299,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/13/2015",
+        "Date": "4/13/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2307,7 +2307,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/13/2015",
+            "Date": "4/13/2015",
             "-EnteredOnDate": "4/13/2015",
             "-EnteredOnTime": "4:58",
             "-DaylightSavingsFlag": "true",
@@ -2320,7 +2320,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/13/2015",
+            "Date": "4/13/2015",
             "-EnteredOnDate": "4/13/2015",
             "-EnteredOnTime": "10:03",
             "-DaylightSavingsFlag": "true",
@@ -2333,7 +2333,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/13/2015",
+        "Date": "4/13/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2349,7 +2349,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/13/2015",
+            "Date": "4/13/2015",
             "-EnteredOnDate": "4/13/2015",
             "-EnteredOnTime": "10:34",
             "-DaylightSavingsFlag": "true",
@@ -2362,7 +2362,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/13/2015",
+            "Date": "4/13/2015",
             "-EnteredOnDate": "4/13/2015",
             "-EnteredOnTime": "16:24",
             "-DaylightSavingsFlag": "true",
@@ -2378,7 +2378,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/14/2015",
+        "Date": "4/14/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2386,7 +2386,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/14/2015",
+            "Date": "4/14/2015",
             "-EnteredOnDate": "4/14/2015",
             "-EnteredOnTime": "4:59",
             "-DaylightSavingsFlag": "true",
@@ -2399,7 +2399,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/14/2015",
+            "Date": "4/14/2015",
             "-EnteredOnDate": "4/14/2015",
             "-EnteredOnTime": "10:04",
             "-DaylightSavingsFlag": "true",
@@ -2412,7 +2412,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/14/2015",
+        "Date": "4/14/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2428,7 +2428,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/14/2015",
+            "Date": "4/14/2015",
             "-EnteredOnDate": "4/14/2015",
             "-EnteredOnTime": "10:39",
             "-DaylightSavingsFlag": "true",
@@ -2441,7 +2441,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/14/2015",
+            "Date": "4/14/2015",
             "-EnteredOnDate": "4/14/2015",
             "-EnteredOnTime": "15:24",
             "-DaylightSavingsFlag": "true",
@@ -2457,7 +2457,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/15/2015",
+        "Date": "4/15/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2465,7 +2465,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/15/2015",
+            "Date": "4/15/2015",
             "-EnteredOnDate": "4/15/2015",
             "-EnteredOnTime": "4:59",
             "-DaylightSavingsFlag": "true",
@@ -2478,7 +2478,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/15/2015",
+            "Date": "4/15/2015",
             "-EnteredOnDate": "4/15/2015",
             "-EnteredOnTime": "10:05",
             "-DaylightSavingsFlag": "true",
@@ -2491,7 +2491,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/15/2015",
+        "Date": "4/15/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2507,7 +2507,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/15/2015",
+            "Date": "4/15/2015",
             "-EnteredOnDate": "4/15/2015",
             "-EnteredOnTime": "10:35",
             "-DaylightSavingsFlag": "true",
@@ -2520,7 +2520,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/15/2015",
+            "Date": "4/15/2015",
             "-EnteredOnDate": "4/15/2015",
             "-EnteredOnTime": "14:35",
             "-DaylightSavingsFlag": "true",
@@ -2536,7 +2536,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/16/2015",
+        "Date": "4/16/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2544,7 +2544,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/16/2015",
+            "Date": "4/16/2015",
             "-EnteredOnDate": "4/16/2015",
             "-EnteredOnTime": "5:00",
             "-DaylightSavingsFlag": "true",
@@ -2557,7 +2557,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/16/2015",
+            "Date": "4/16/2015",
             "-EnteredOnDate": "4/16/2015",
             "-EnteredOnTime": "10:16",
             "-DaylightSavingsFlag": "true",
@@ -2570,7 +2570,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/16/2015",
+        "Date": "4/16/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2586,7 +2586,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/16/2015",
+            "Date": "4/16/2015",
             "-EnteredOnDate": "4/16/2015",
             "-EnteredOnTime": "10:46",
             "-DaylightSavingsFlag": "true",
@@ -2599,7 +2599,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/16/2015",
+            "Date": "4/16/2015",
             "-EnteredOnDate": "4/16/2015",
             "-EnteredOnTime": "15:05",
             "-DaylightSavingsFlag": "true",
@@ -2615,7 +2615,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/17/2015",
+        "Date": "4/17/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2623,7 +2623,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/17/2015",
+            "Date": "4/17/2015",
             "-EnteredOnDate": "4/17/2015",
             "-EnteredOnTime": "5:01",
             "-DaylightSavingsFlag": "true",
@@ -2636,7 +2636,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/17/2015",
+            "Date": "4/17/2015",
             "-EnteredOnDate": "4/17/2015",
             "-EnteredOnTime": "10:11",
             "-DaylightSavingsFlag": "true",
@@ -2649,7 +2649,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/17/2015",
+        "Date": "4/17/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2665,7 +2665,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/17/2015",
+            "Date": "4/17/2015",
             "-EnteredOnDate": "4/17/2015",
             "-EnteredOnTime": "10:41",
             "-DaylightSavingsFlag": "true",
@@ -2678,7 +2678,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/17/2015",
+            "Date": "4/17/2015",
             "-EnteredOnDate": "4/17/2015",
             "-EnteredOnTime": "13:31",
             "-DaylightSavingsFlag": "true",
@@ -2694,7 +2694,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/20/2015",
+        "Date": "4/20/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2702,7 +2702,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/20/2015",
+            "Date": "4/20/2015",
             "-EnteredOnDate": "4/20/2015",
             "-EnteredOnTime": "4:58",
             "-DaylightSavingsFlag": "true",
@@ -2715,7 +2715,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/20/2015",
+            "Date": "4/20/2015",
             "-EnteredOnDate": "4/20/2015",
             "-EnteredOnTime": "10:08",
             "-DaylightSavingsFlag": "true",
@@ -2728,7 +2728,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/20/2015",
+        "Date": "4/20/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2744,7 +2744,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/20/2015",
+            "Date": "4/20/2015",
             "-EnteredOnDate": "4/20/2015",
             "-EnteredOnTime": "10:38",
             "-DaylightSavingsFlag": "true",
@@ -2757,7 +2757,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/20/2015",
+            "Date": "4/20/2015",
             "-EnteredOnDate": "4/20/2015",
             "-EnteredOnTime": "15:14",
             "-DaylightSavingsFlag": "true",
@@ -2773,7 +2773,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/21/2015",
+        "Date": "4/21/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2781,7 +2781,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/21/2015",
+            "Date": "4/21/2015",
             "-EnteredOnDate": "4/21/2015",
             "-EnteredOnTime": "4:59",
             "-DaylightSavingsFlag": "true",
@@ -2794,7 +2794,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/21/2015",
+            "Date": "4/21/2015",
             "-EnteredOnDate": "4/21/2015",
             "-EnteredOnTime": "10:04",
             "-DaylightSavingsFlag": "true",
@@ -2807,7 +2807,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/21/2015",
+        "Date": "4/21/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2823,7 +2823,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/21/2015",
+            "Date": "4/21/2015",
             "-EnteredOnDate": "4/21/2015",
             "-EnteredOnTime": "10:35",
             "-DaylightSavingsFlag": "true",
@@ -2836,7 +2836,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/21/2015",
+            "Date": "4/21/2015",
             "-EnteredOnDate": "4/21/2015",
             "-EnteredOnTime": "16:14",
             "-DaylightSavingsFlag": "true",
@@ -2852,7 +2852,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/22/2015",
+        "Date": "4/22/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2860,7 +2860,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/22/2015",
+            "Date": "4/22/2015",
             "-EnteredOnDate": "4/22/2015",
             "-EnteredOnTime": "5:30",
             "-DaylightSavingsFlag": "true",
@@ -2873,7 +2873,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/22/2015",
+            "Date": "4/22/2015",
             "-EnteredOnDate": "4/22/2015",
             "-EnteredOnTime": "11:36",
             "-DaylightSavingsFlag": "true",
@@ -2886,7 +2886,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/22/2015",
+        "Date": "4/22/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2910,7 +2910,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/22/2015",
+            "Date": "4/22/2015",
             "-EnteredOnDate": "4/22/2015",
             "-EnteredOnTime": "12:06",
             "-DaylightSavingsFlag": "true",
@@ -2926,7 +2926,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/22/2015",
+            "Date": "4/22/2015",
             "-EnteredOnDate": "4/22/2015",
             "-EnteredOnTime": "15:11",
             "-DaylightSavingsFlag": "true",
@@ -2942,7 +2942,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/23/2015",
+        "Date": "4/23/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -2950,7 +2950,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/23/2015",
+            "Date": "4/23/2015",
             "-EnteredOnDate": "4/23/2015",
             "-EnteredOnTime": "5:01",
             "-DaylightSavingsFlag": "true",
@@ -2963,7 +2963,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/23/2015",
+            "Date": "4/23/2015",
             "-EnteredOnDate": "4/23/2015",
             "-EnteredOnTime": "10:11",
             "-DaylightSavingsFlag": "true",
@@ -2976,7 +2976,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/23/2015",
+        "Date": "4/23/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3000,7 +3000,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/23/2015",
+            "Date": "4/23/2015",
             "-EnteredOnDate": "4/23/2015",
             "-EnteredOnTime": "10:41",
             "-DaylightSavingsFlag": "true",
@@ -3016,7 +3016,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/23/2015",
+            "Date": "4/23/2015",
             "-EnteredOnDate": "4/23/2015",
             "-EnteredOnTime": "13:36",
             "-DaylightSavingsFlag": "true",
@@ -3032,7 +3032,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/24/2015",
+        "Date": "4/24/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3040,7 +3040,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/24/2015",
+            "Date": "4/24/2015",
             "-EnteredOnDate": "4/24/2015",
             "-EnteredOnTime": "5:01",
             "-DaylightSavingsFlag": "true",
@@ -3053,7 +3053,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/24/2015",
+            "Date": "4/24/2015",
             "-EnteredOnDate": "4/24/2015",
             "-EnteredOnTime": "10:17",
             "-DaylightSavingsFlag": "true",
@@ -3066,7 +3066,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/24/2015",
+        "Date": "4/24/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3082,7 +3082,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/24/2015",
+            "Date": "4/24/2015",
             "-EnteredOnDate": "4/24/2015",
             "-EnteredOnTime": "10:47",
             "-DaylightSavingsFlag": "true",
@@ -3095,7 +3095,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/24/2015",
+            "Date": "4/24/2015",
             "-EnteredOnDate": "4/24/2015",
             "-EnteredOnTime": "14:57",
             "-DaylightSavingsFlag": "true",
@@ -3111,7 +3111,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/27/2015",
+        "Date": "4/27/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3119,7 +3119,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/27/2015",
+            "Date": "4/27/2015",
             "-EnteredOnDate": "4/27/2015",
             "-EnteredOnTime": "4:59",
             "-DaylightSavingsFlag": "true",
@@ -3132,7 +3132,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/27/2015",
+            "Date": "4/27/2015",
             "-EnteredOnDate": "4/27/2015",
             "-EnteredOnTime": "10:09",
             "-DaylightSavingsFlag": "true",
@@ -3145,7 +3145,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/27/2015",
+        "Date": "4/27/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3161,7 +3161,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/27/2015",
+            "Date": "4/27/2015",
             "-EnteredOnDate": "4/27/2015",
             "-EnteredOnTime": "10:39",
             "-DaylightSavingsFlag": "true",
@@ -3174,7 +3174,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/27/2015",
+            "Date": "4/27/2015",
             "-EnteredOnDate": "4/27/2015",
             "-EnteredOnTime": "13:54",
             "-DaylightSavingsFlag": "true",
@@ -3190,7 +3190,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/28/2015",
+        "Date": "4/28/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3198,7 +3198,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/28/2015",
+            "Date": "4/28/2015",
             "-EnteredOnDate": "4/28/2015",
             "-EnteredOnTime": "5:00",
             "-DaylightSavingsFlag": "true",
@@ -3211,7 +3211,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/28/2015",
+            "Date": "4/28/2015",
             "-EnteredOnDate": "4/28/2015",
             "-EnteredOnTime": "10:09",
             "-DaylightSavingsFlag": "true",
@@ -3224,7 +3224,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/28/2015",
+        "Date": "4/28/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3248,7 +3248,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/28/2015",
+            "Date": "4/28/2015",
             "-EnteredOnDate": "4/28/2015",
             "-EnteredOnTime": "10:40",
             "-DaylightSavingsFlag": "true",
@@ -3264,7 +3264,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/28/2015",
+            "Date": "4/28/2015",
             "-EnteredOnDate": "4/28/2015",
             "-EnteredOnTime": "14:00",
             "-DaylightSavingsFlag": "true",
@@ -3280,7 +3280,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/30/2015",
+        "Date": "4/30/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3288,7 +3288,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/30/2015",
+            "Date": "4/30/2015",
             "-EnteredOnDate": "4/30/2015",
             "-EnteredOnTime": "5:01",
             "-DaylightSavingsFlag": "true",
@@ -3301,7 +3301,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/30/2015",
+            "Date": "4/30/2015",
             "-EnteredOnDate": "4/30/2015",
             "-EnteredOnTime": "10:06",
             "-DaylightSavingsFlag": "true",
@@ -3314,7 +3314,7 @@ const defaultState = {
         }
       },
       {
-        "-Date": "4/30/2015",
+        "Date": "4/30/2015",
         "-LaborAccountName": "MWW/MWL/CIG/HLT/QUN/914/-",
         "-LaborAccountId": "83249",
         "Employee": {
@@ -3322,7 +3322,7 @@ const defaultState = {
         },
         "InPunch": {
           "Punch": {
-            "-Date": "4/30/2015",
+            "Date": "4/30/2015",
             "-EnteredOnDate": "4/30/2015",
             "-EnteredOnTime": "10:37",
             "-DaylightSavingsFlag": "true",
@@ -3335,7 +3335,7 @@ const defaultState = {
         },
         "OutPunch": {
           "Punch": {
-            "-Date": "4/30/2015",
+            "Date": "4/30/2015",
             "-EnteredOnDate": "4/30/2015",
             "-EnteredOnTime": "13:32",
             "-DaylightSavingsFlag": "true",

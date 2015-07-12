@@ -13,11 +13,15 @@ import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../stores/flux"
 import AlertBar from "./AlertBar.js"
-
+  
+ 
 export default class PayPeriodsOverview extends React.Component {
+  // PayPeriodsOverview connects to the datastore timesheet
+  // and produces a component that displays all recent timesheet
+  // stamps with date and culmulative hours
   render() {
     return (
-      <FluxComponent connectToStores={['days', 'timeSheet']}>
+      <FluxComponent connectToStores={['timeSheet']}>
         <PayPeriods {...this.props}/>
       </FluxComponent>
     )
@@ -25,15 +29,20 @@ export default class PayPeriodsOverview extends React.Component {
 }
 
 class PayPeriods extends React.Component {
+  // PayPeriods creates a list of PayPeriod Components
+  // Needs tested with more data
   render() {
-    var weeks = _.chain(this.props.days)
+    var dateTotals = this.props.Timesheet.DailyTotals.DateTotals
+    
+    // Splits dateTotals into weeks arranged by descending recent dates
+    var weeks = _.chain(dateTotals)
+      .reverse()
       .groupBy((element, index) => Math.floor(index/7))
       .map(eachWeek => {
-        const days = _.chain(eachWeek).reverse().map(eachDay => <Day {...eachDay} />)
-        const start_date = _.first(eachWeek).date.format("MMMM DD")
-        const end_date = _.last(eachWeek).date.format("MMMM DD")
+        const days = _.chain(eachWeek).map(eachDay => <Day {...eachDay} />) 
         return (<PayPeriod>{days}</PayPeriod>)
-      })
+      })  
+        
     return (
       <div className="row time-overview">
         <div className="col-xs-12">
@@ -45,16 +54,24 @@ class PayPeriods extends React.Component {
   }
 }
 
-class PayPeriod extends React.Component {
+class PayPeriod extends React.Component {    
+  // PayPeriod assumes a week pay period and creates a unordered list of 
+  // day components from the dates provided 
   render() {
-    const children = this.props.children
-    const startDate = children.first().value().props.date.format("MMMM DD")
-    const endDate = children.last().value().props.date.format("MMMM DD")
-    const urlDate = children.first().value().props.date.format("YYYY-MM-DD")
+    const week = this.props.children
+    var date_range = [ week.first(), week.last() ].map(date =>
+                                                        date.value().props.Date.split('/'))
+    date_range = date_range.map(date =>
+                                 moment().set({'M': (date[0] - 1), 
+                                               'D': date[1],
+                                               'Y': date[2]}))
+    const start_date = date_range[0].format("MMMM DD")
+    const url_date = date_range[0].format("MMMM DD")
+    const end_date = date_range[1].format("MMMM DD")
     return (
       <div className="payperiod-overview">
-        <Link to="payperiod" params={{date: urlDate}}>
-          <h3>{startDate + " - " + endDate}</h3>
+        <Link to="payperiod" params={{date: url_date}}>
+          <h3>{start_date + " - " + end_date}</h3>
         </Link>
         <ul className="week-overview clearfix">
             {this.props.children}
@@ -64,19 +81,38 @@ class PayPeriod extends React.Component {
   }
 }
 
+
 class Day extends React.Component {
+  // Day component displays a date and the total number
+  // of hours worked that day. Both date and hours are 
+  // passed through props.
   render() {
+    var date = this.props.Date.split('/').map(part =>parseInt(part))
+    date = moment().set({'M': (date[0] - 1), 
+                         'D': date[1],
+                         'Y': date[2]}) 
+    var hoursWorked = this.props.GrandTotal
+    if(hoursWorked === undefined){
+      hoursWorked = "0" 
+    }
+    else {
+      const minutes = hoursWorked.split(":")[1] 
+      if (minutes === "00") {
+        hoursWorked = hoursWorked.split(":")[0] 
+      }
+    }
     return (
       <li className="day-as-txt">
         <div className="time-entry shadowed-box">
-          <Link to="day" params={{ date: this.props.date.format("YYYY-MM-DD")}}>
+      {<Link to="day" params={{ date: date.format("YYYY-MM-DD")}}>
             <div className="date-side-box">
-                <p className="day-as-text text-center">{this.props.date.format("dddd")}</p>
-                <p className="date text-center">{this.props.date.format("M.")}<span className="day-as-number">{this.props.date.format("D")}</span></p>
+                <p className="day-as-text text-center">{date.format("dddd")}</p>
+                <p className="date text-center">{date.format("M.")}<span className="day-as-number">{date.format("D")}</span></p>
             </div>
-            <p className="hours-worked-text"><span className="hours-worked-number text-center">{this.props.hours} </span>
-            hours worked</p>
+                {<p className="hours-worked-text"><span className="hours-worked-number text-center">{hoursWorked}</span>
+            hours worked</p>}
           </Link>
+        }
         </div>
       </li>
     )
