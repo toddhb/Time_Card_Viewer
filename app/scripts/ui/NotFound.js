@@ -13,7 +13,7 @@ export default class NotFound extends React.Component {
     return (
       <div className="NotFound-distributed text-center">
           <p className="NotFound-large-type">
-            Woops! We got lost somewhere...
+            Whoops! We got lost...
           </p>
 
         <div className="NotFound-large-type">
