@@ -91,14 +91,27 @@ class Day extends React.Component {
     date = moment().set({'M': (date[0] - 1), 
                          'D': date[1],
                          'Y': date[2]}) 
+    var timeDisplay = ""
     var hoursWorked = this.props.GrandTotal
+
+    //a day off from work
     if(hoursWorked === undefined){
-      hoursWorked = "0" 
+      timeDisplay = "0"
     }
+    //a workday
     else {
-      const minutes = hoursWorked.split(":")[1] 
-      if (minutes === "00") {
-        hoursWorked = hoursWorked.split(":")[0] 
+      const hours = hoursWorked.split(":")[0]
+      var minutes = hoursWorked.split(":")[1]
+
+      //convert minutes from
+      //time xx:xx to decimal xx.xx
+      minutes = Math.round((minutes*1)*(5/3))
+
+      if(minutes === 0) {
+        timeDisplay = hours
+      }
+      else {
+        timeDisplay = hours + "." + minutes
       }
     }
     return (
@@ -109,7 +122,7 @@ class Day extends React.Component {
                 <p className="day-as-text text-center">{date.format("dddd")}</p>
                 <p className="date text-center">{date.format("M.")}<span className="day-as-number">{date.format("D")}</span></p>
             </div>
-                {<p className="hours-worked-text"><span className="hours-worked-number text-center">{hoursWorked}</span>
+                {<p className="hours-worked-text"><span className="hours-worked-number text-center">{timeDisplay}</span>
             hours worked</p>}
           </Link>
         }
