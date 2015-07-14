@@ -78,7 +78,9 @@ ul.week-overview {
         color: $gray-light;
         margin: 0 0 0px;
         margin-left: $box-width + 17px;
+        line-height: 60px;
         @media (min-width: $screen-md-min) {
+            line-height: 40px;
             text-align: center;
             margin-left: 0px;
             padding-bottom: 3px;
@@ -92,9 +94,10 @@ ul.week-overview {
         font-family: $font-family-serif;
         color: $brand-primary;
         font-weight: 900;
-        font-size: 3em;
+        font-size: 20px;
         margin-right: 5px;
         @media (min-width: $screen-md-min) {
+            font-size: 2em;
             display: block;  
             width: inherit;
         }
