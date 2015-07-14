@@ -18,7 +18,6 @@ class ClickableDay extends React.Component {
   render() {
     const url_date = moment(this.props.date).format("YYYY-MM-DD")
     const url_day = moment(this.props.date).format("D")
-    console.log (url_date)
     return (
       <div>
         <Link to="day" params={{date: url_date}} >
