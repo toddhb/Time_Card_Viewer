@@ -42,12 +42,25 @@ export default class DayOverview extends React.Component {
 
 class Overview extends React.Component {                              
   render() {  
+    const punches = _.chain(this.props.Timesheet.TotaledSpans.TotaledSpan)
+      .filter((each) => {
+        return each.Date == moment(this.props.params.date).format("M/DD/YYYY")
+      })
+      .map((each) => {
+        const inPunch = each.InPunch.Punch
+        inPunch.type = "InPunch"
+        const outPunch = each.OutPunch.Punch
+        outPunch.type = "OutPunch"
+        return [ inPunch, outPunch ]
+      })
+      .flatten()
+    console.log(punches.value())
     const date = moment(this.props.params.date)
     const year = date.format("YYYY")
     const month = date.format("MM")
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
-    const punchLog = _.chain(this.props.dayStamps)
-       .sortBy(punchLog => punchLog.time) 
+    const punchLog = _.chain(punches)
+       .sortBy(punchLog => punchLog.Time) 
        .map(punch => <Entry {...punch} />)
     return (
       <div>  
@@ -119,12 +132,12 @@ class Entry extends React.Component {
     const glyphClassDefault = "day-icon"
 
     const settings = {
-      timeIn: {
+      InPunch: {
         action: "Clocked in",
         panelClass: panelClassDefault + " " + "time-in",
         glyphClass: glyphClassDefault + " fa-flip-horizontal" + " fa fa-truck"
       },
-      timeOut: {
+      OutPunch: {
         action: "Clocked out",
         panelClass: panelClassDefault + " " + "time-out",
         glyphClass: glyphClassDefault + " " + "fa fa-truck"
@@ -149,7 +162,7 @@ class Entry extends React.Component {
                 <p className="text-center"><i className={glyphClass}></i></p>
                 <p>{action}</p>
             </div>
-            <p className="hours-worked-text"><span className="hours-worked-number">{this.props.time} {this.props.suffix}</span></p>
+            <p className="hours-worked-text"><span className="hours-worked-number">{this.props.Time} {this.props.suffix}</span></p>
         </div>
     )
   }
