@@ -92,9 +92,7 @@ gulp.task("buildScripts", function() {
 
 function checkHeaderSendResponse(req, res) {
     var redirectAddress = 'https://employee.con-way.com/';
-    var options = {
-        root:  __dirname + '/dist'
-    }
+
     var ceid = req.get('ceid');
     if(ceid == undefined) {
         gutil.log("ceid header was not in the get request");
@@ -105,6 +103,11 @@ function checkHeaderSendResponse(req, res) {
         gutil.log("URLdecoded:" + ceid);
         ceid = new Buffer(ceid, 'base64');
         gutil.log("base64decoded:" + ceid);
+        
+        var options = {
+            root:  __dirname + '/dist',
+            headers: { 'eid': ceid }
+        }
         res.sendFile('index.html', options);
     }
 }
