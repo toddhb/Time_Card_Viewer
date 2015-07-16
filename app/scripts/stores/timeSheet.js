@@ -1,4 +1,4 @@
-e/*
+/*
  * TimeCard View
  * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
 Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
