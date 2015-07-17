@@ -16,7 +16,6 @@ export default class Navbar {
           <h3 className="text-muted">
             <Link to="/">{this.props.title}</Link>
             <Link to="/calendar" className="nav-icon pull-right">
-                <i className="fa fa-calendar"></i>
             </Link>
           </h3>
         </div>

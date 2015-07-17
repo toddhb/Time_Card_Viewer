@@ -12,14 +12,14 @@ import { Resolver } from "react-resolver"
 import { createRedux } from "redux"
 import { Provider } from "redux/react"
 import * as stores from "./stores"
-import DayOverview from "./ui/DayOverview"
-import PayPeriodsOverview from "./ui/PayPeriodsOverview"
-import PayPeriodOverview from "./ui/PayPeriodOverview"
-import CalendarOverview from "./ui/CalendarOverview"
-import Main from "./ui/Main.js"
+import DayOverview from "./components/DayOverview"
+import PayPeriodsOverview from "./components/PayPeriodsOverview"
+import PayPeriodOverview from "./components/PayPeriodOverview"
+import CalendarOverview from "./components/CalendarOverview"
+import Main from "./components/Main.js"
 import FluxComponent from 'flummox/component';
 import flux from "./stores/flux"
-import NotFound from "./ui/NotFound"
+import NotFound from "./components/NotFound"
 
 const mountNode = document.getElementById("app")
 
@@ -37,7 +37,6 @@ const routes = (
   <Route name="app" handler={App} path="/">
     <DefaultRoute handler={PayPeriodsOverview} />
     <Route name="day" path="day/:date" handler={DayOverview} />
-    <Route name="calendar" handler={CalendarOverview} />
     <Route name="payperiod" path="payperiod/:date" handler={PayPeriodOverview} />
     <NotFoundRoute handler={NotFound} />
   </Route>

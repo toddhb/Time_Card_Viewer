@@ -46,7 +46,7 @@ class PayPeriods extends React.Component {
     return (
       <div className="row time-overview">
         <div className="col-xs-12">
-            <AlertBar />
+            {/* <AlertBar />  Commenting this out for now until we have time to implement it */ }
             {weeks}
         </div>
       </div>
