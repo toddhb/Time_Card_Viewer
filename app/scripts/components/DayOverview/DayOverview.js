@@ -33,7 +33,7 @@ const Calendar = createCalendar(ClickableDay)
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['daystream', 'timeSheet', 'schedule']}>
+      <FluxComponent connectToStores={['daystream', 'timeSheet', 'schedule', 'test']}>
         <Overview {...this.props} />
       </FluxComponent>
     )
@@ -62,6 +62,8 @@ class Overview extends React.Component {
     const punchLog = _.chain(punches)
        .sortBy(punchLog => punchLog.Time) 
        .map(punch => <Entry {...punch} />)
+
+    console.log(this.props)
     return (
       <div>  
         <DayHeader date={date}/> 
