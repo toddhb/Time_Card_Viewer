@@ -12,14 +12,15 @@ import { Resolver } from "react-resolver"
 import { createRedux } from "redux"
 import { Provider } from "redux/react"
 import * as stores from "./stores"
-import DayOverview from "./components/DayOverview"
-import PayPeriodsOverview from "./components/PayPeriodsOverview"
-import PayPeriodOverview from "./components/PayPeriodOverview"
 import CalendarOverview from "./components/CalendarOverview"
-import Main from "./components/Main.js"
+import DayOverview from "./components/DayOverview/DayOverview"
+import Main from "./components/Main/Main"
+import NotFound from "./components/NotFound/NotFound"
+import PayPeriodOverview from "./components/PayPeriodOverview"
+import PayPeriodsOverview from "./components/PayPeriod/PayPeriod"
 import FluxComponent from 'flummox/component';
 import flux from "./stores/flux"
-import NotFound from "./components/NotFound"
+
 
 const mountNode = document.getElementById("app")
 

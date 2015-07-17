@@ -11,8 +11,8 @@ import Router, { RouteHandler, Link} from "react-router"
 import _ from "underscore"
 import moment from "moment"
 import FluxComponent from 'flummox/component';
-import flux from "../stores/flux"
-import AlertBar from "./AlertBar.js"
+import flux from "../../stores/flux"
+import AlertBar from "../AlertBar/AlertBar.js"
   
  
 export default class PayPeriodsOverview extends React.Component {

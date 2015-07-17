@@ -10,9 +10,9 @@ import React from "react"
 import { Link } from "react-router" 
 import moment from "moment"
 import _ from "underscore"
-import {createCalendar} from "./Calendar.js"
+import {createCalendar} from "../Calendar/Calendar.js"
 import FluxComponent from 'flummox/component';
-import flux from "../stores/flux"
+import flux from "../../stores/flux"
 
 class ClickableDay extends React.Component {
   render() {
