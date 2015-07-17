@@ -24,12 +24,19 @@ var source = require("vinyl-source-stream"),
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 var gutil = require('gulp-util');
+var src = {}
 
 // Styles
 gulp.task("styles", ["sass"  ]);
 
 gulp.task("sass", function() {
-    return gulp.src(["app/styles/**/*.scss", "app/styles/**/*.css"])
+    src.sass = [
+        "app/styles/**/*.scss", 
+        "app/styles/**/*.css",
+        "app/scripts/components/**/*.scss",
+        "app/scripts/components/**/*.css"
+    ]
+    return gulp.src(src.sass)
         .pipe($.rubySass({
             style: "expanded",
             precision: 10,
