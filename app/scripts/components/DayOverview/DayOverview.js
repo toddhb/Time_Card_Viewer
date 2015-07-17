@@ -33,15 +33,29 @@ const Calendar = createCalendar(ClickableDay)
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['daystream', 'timeSheet', 'schedule', 'test']}>
+      <FluxComponent connectToStores={['timeSheet', 'schedule']}>
         <Overview {...this.props} />
       </FluxComponent>
     )
   }
 }
 
+function kronosMoment(date, time, kronosTimeZone) {
+  // The following are the expected formats and examples
+  // date: M/DD/YYYY - 10/01/1990
+  // time: HH:mm - 10:14
+  // kronosTimeZone - (GMT -05:00) Eastern Time
+  const timeZoneOffset = kronosTimeZone ? kronosTimeZone.match(/[+-]\d\d:\d\d/)[0] : '-07:00'
+  return moment(
+    `${date} ${time} ${timeZoneOffset}`,
+    'M/DD/YYYY HH:mm Z'
+  )
+}
+
 class Overview extends React.Component {                              
   render() {  
+    // XXX Hack! Need to pull from API in a better way
+    let lastKronosTimeZone = ""
     const punches = _.chain(this.props.Timesheet.TotaledSpans.TotaledSpan)
       .filter((each) => {
         return each.Date == moment(this.props.params.date).format("M/DD/YYYY")
@@ -49,18 +63,38 @@ class Overview extends React.Component {
       .map((each) => {
         const inPunch = each.InPunch.Punch
         inPunch.type = "InPunch"
+        inPunch.time = kronosMoment(inPunch.Date, inPunch.Time, inPunch.KronosTimeZone)
         const outPunch = each.OutPunch.Punch
         outPunch.type = "OutPunch"
+        outPunch.time = kronosMoment(outPunch.Date, outPunch.Time, outPunch.KronosTimeZone)
+        // XXX Hack! Need to pull from API in a better way
+        lastKronosTimeZone = outPunch.KronosTimeZone
         return [ inPunch, outPunch ]
       })
       .flatten()
-    console.log(punches.value())
+    const scheduled = _.chain(this.props.Schedule.ScheduleItems.ScheduleShift)
+      .filter((each) => {
+        return each.StartDate == moment(this.props.params.date).format("M/DD/YYYY")
+      })
+      .map((each) => {
+        const { StartDate, EndDate, StartTime, EndTime} = each.ShiftSegments.ShiftSegment
+        return [
+          {
+            time: kronosMoment(StartDate, StartTime, lastKronosTimeZone),
+            type: 'scheduledIn'
+          },{
+            time: kronosMoment(EndDate, EndTime, lastKronosTimeZone),
+            type: 'scheduledOut'
+          }
+        ]
+      })
+      .flatten()
     const date = moment(this.props.params.date)
     const year = date.format("YYYY")
     const month = date.format("MM")
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
-    const punchLog = _.chain(punches)
-       .sortBy(punchLog => punchLog.Time) 
+    const punchLog = _.chain([].concat(scheduled.value()).concat(punches.value()))
+       .sortBy(punchLog => punchLog.time) 
        .map(punch => <Entry {...punch} />)
 
     console.log(this.props)
@@ -75,7 +109,9 @@ class Overview extends React.Component {
             <div className="calendar hidden-xs hidden-sm">
               <Calendar year={year} month={month-1} headers={dayHeaders} />
             </div>
-              <DayStats payPeriod={this.props.payPeriod}/>
+              <FluxComponent connectToStores={['timeSheet']}>
+                <DayStats date={this.props.params.date}/>
+              </FluxComponent>
           </div>
         </div>
       </div>
@@ -112,16 +148,22 @@ class DayHeader extends React.Component {
 
 class DayStats extends React.Component {
   render() {
-    const payPeriod = this.props.payPeriod
+    const { date, Timesheet } = this.props
+    const totals = _.chain(Timesheet.DailyTotals.DateTotals)
+        .filter(each => each.Date == moment(date).format("M/DD/YYYY"))
+        .pluck('Totals')
+        .pluck('Total')
+        .first()
+        .filter(each => each.PayCodeId == "140")
+        .first()
+        .value()
+    const AmountInTime = totals ? totals.AmountInTime : ""
+    const AmountInCurrency = totals ? totals.AmountInCurrency : ""
     return (
       <div className="panel period-totals">
-        <div className="panel-heading">
-          <h4 className="panel-title"><a href="payperiod">{payPeriod.start} - {payPeriod.end} Period</a> Totals</h4>
-        </div>
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{payPeriod.hoursWorked}</span></p>
-          <p><strong>Total Hours Scheduled:</strong> <span className="period-stat">{payPeriod.hoursScheduled}</span></p>
-          <p><strong>Other Fact</strong> <span className="period-stat">{payPeriod.etc}</span></p>
+          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{AmountInTime}</span></p>
+          <p><strong>Total Amount Made:</strong> <span className="period-stat">${AmountInCurrency}</span></p>
         </div>
       </div>   
     )
@@ -157,14 +199,14 @@ class Entry extends React.Component {
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
-
+    const time = this.props.time.format('hh:mm a') 
     return ( 
         <div className={panelClass}>
             <div className="date-side-box">
                 <p className="text-center"><i className={glyphClass}></i></p>
                 <p>{action}</p>
             </div>
-            <p className="hours-worked-text"><span className="hours-worked-number">{this.props.Time} {this.props.suffix}</span></p>
+            <p className="hours-worked-text"><span className="hours-worked-number">{time}</span></p>
         </div>
     )
   }
