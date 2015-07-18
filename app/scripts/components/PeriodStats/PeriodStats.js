@@ -14,6 +14,9 @@ import FluxComponent from 'flummox/component';
 import flux from "../../stores/flux"
 
 export default class PeriodStats extends React.Component {
+  componentWillMount() {
+    flux.getActions('currentPeriod').fetch()
+  }
   render() {
     const { Timesheet } = this.props
     const totals = _.chain(Timesheet.PeriodTotalData.PeriodTotals.Totals.Total)

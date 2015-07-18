@@ -6,6 +6,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  * This source code is licensed under the MIT license found in the
  * LICENSE text file in the root directory of this source tree.
  */
+require('babel/polyfill');
 import React from "react"
 import Router, { Route, RouteHandler, DefaultRoute, NotFoundRoute} from "react-router"
 import { Resolver } from "react-resolver"

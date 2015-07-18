@@ -24,6 +24,7 @@ class Flux extends Flummox {
     this.createStore('daystream', DayStreamStore, this);
     this.createActions('timeSheet', TimeSheetActions);
     this.createStore('timeSheet', TimeSheetStore, this);
+    this.createActions('currentPeriod', CurrentPeriodActions)
     this.createStore('currentPeriod', CurrentPeriodStore, this)
     this.createActions('schedule', ScheduleActions);
     this.createStore('schedule', ScheduleStore, this);

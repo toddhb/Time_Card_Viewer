@@ -7,10 +7,36 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  * LICENSE text file in the root directory of this source tree.
  */
 import { Actions, Store, Flummox } from 'flummox'
+import request from 'superagent-bluebird-promise'
+import config from '../config.js'
+import xml2jsParser from 'superagent-xml2jsparser'
+
+const { protocal, host, basepath } = config.api.location
+
+const API_BASENAME = `${protocal}://${host}${basepath}`
+
+async function apiRequest(payload) {
+  const response = await request
+    .post(API_BASENAME)
+    .send(payload)
+    .type('xml')
+    .accept('xml')
+    .withCredentials() 
+    .promise()
+  return response
+}
+
+async function login() {
+    return apiRequest(
+     `<?xml version='1.0' encoding='UTF-8' ?>
+<Kronos_WFC Version="1.0" WFCVersion="7.0.6.436" TimeStamp="7/14/2015 9:39PM GMT-07:00">
+    <Request Object="System" Action="Logon" Username="XMLUSER" Password="ibswutws" /> 
+</Kronos_WFC>`)
+}
 
 export class CurrentPeriodActions extends Actions {
-  fetch(content) {
-    return content // automatically dispatched
+  async fetch(content) {
+    console.log(await login())
   }
 }
 
@@ -18,8 +44,11 @@ export class CurrentPeriodStore extends Store {
   constructor(flux) {
     super()
 
-    const currentPeriodStore = flux.getActions('currentPeriod')
-    this.register(CurrentPeriodActions.fetch, this.handleFetch)
+    const currentPeriodActions = flux.getActions('currentPeriod')
+    this.registerAsync(currentPeriodActions.fetch, 
+      () => console.log('started'), 
+      this.handleFetch, 
+      () => console.log('errored'))
 
     this.state = defaultState
   }
