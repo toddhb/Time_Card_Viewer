@@ -96,6 +96,7 @@ class Overview extends React.Component {
     const punchLog = _.chain([].concat(scheduled.value()).concat(punches.value()))
        .sortBy(punchLog => punchLog.time) 
        .map(punch => <Entry {...punch} />)
+       .value()
     return (
       <div>  
         <DayHeader date={date}/> 
