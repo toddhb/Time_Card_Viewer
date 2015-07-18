@@ -15,27 +15,51 @@ import flux from "../../stores/flux"
 
 export default class PeriodStats extends React.Component {
   render() {
-    // TODO:  Where do these numbers come from in the current period API results?
-    var foo = (9.13 + 10.73 + 9.63 + 0)
-    const hoursWorked = Math.round((foo) * 100) / 100 // Me faking the math. Rounding the total hours to 2 decimal places
-    const hoursScheduled = 55
-    const overTimeWorked = 0 
-
+    const { Timesheet } = this.props
+    const totals = _.chain(Timesheet.PeriodTotalData.PeriodTotals.Totals.Total)
+        .map(each => 
+          _.chain(each)
+           .pick("AmountInCurrency", "AmountInTime", "PayCodeId", "PayCodeName")
+           .mapObject((value, key) => {
+              switch (key) {
+                case "AmountInCurrency":
+                  return Number(value.replace(/,/g, ""))
+                case "AmountInTime":
+                  return Number(value.replace(":", "."))
+                default:
+                  return value
+              }
+           })
+           .value()
+        )
+        .value()
+    const allPaidHours = _.chain(totals) 
+        .filter(each => each.PayCodeId == "142")
+        .first()
+        .value()
+    const allOvertime = _.chain(totals) 
+        .filter(each => each.PayCodeId == "141")
+        .first()
+        .value()
     return (
       <div className="clearfix" style={{minHeight: 170 + "px"}}>
         <hr/>
         <div className="col-xs-12 col-md-4 has-right-border">
           <div>
             <p className="pull-left">Hours Worked</p>
-            <p className="text-right"><strong>{hoursWorked}</strong></p>
+            <p className="text-right"><strong>{allPaidHours.AmountInTime}</strong></p>
           </div>
           <div>
-            <p className="pull-left">Hours Scheduled</p>
-            <p className="text-right"><strong>{hoursScheduled}</strong></p>
+            <p className="pull-left">Amount Made</p>
+            <p className="text-right"><strong>${allPaidHours.AmountInCurrency}</strong></p>
           </div>
           <div>
             <p className="pull-left">Overtime Hours</p>
-            <p className="text-right"><strong>{overTimeWorked}</strong></p>
+            <p className="text-right"><strong>{allOvertime.AmountInTime}</strong></p>
+          </div>
+          <div>
+            <p className="pull-left">Overtime Amount Made</p>
+            <p className="text-right"><strong>${allOvertime.AmountInCurrency}</strong></p>
           </div>
         </div>
         <div className="col-md-4 hidden-xs">
