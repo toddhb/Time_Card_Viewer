@@ -13,15 +13,17 @@ import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../../stores/flux"
 import AlertBar from "../AlertBar/AlertBar.js"
+import PeriodStats from "../PeriodStats/PeriodStats.js"
   
- 
-export default class PayPeriodsOverview extends React.Component {
+
+//TODO: Rename containing forlder to PayPeriodOverview and fix references 
+export default class PayPeriodOverview extends React.Component {
   // PayPeriodsOverview connects to the datastore timesheet
   // and produces a component that displays all recent timesheet
   // stamps with date and culmulative hours
   render() {
     return (
-      <FluxComponent connectToStores={['timeSheet']}>
+      <FluxComponent connectToStores={['currentPeriod']}>
         <PayPeriods {...this.props}/>
       </FluxComponent>
     )
@@ -33,16 +35,16 @@ class PayPeriods extends React.Component {
   // Needs tested with more data
   render() {
     var dateTotals = this.props.Timesheet.DailyTotals.DateTotals
-    
+  
     // Splits dateTotals into weeks arranged by descending recent dates
     var weeks = _.chain(dateTotals)
       .reverse()
       .groupBy((element, index) => Math.floor(index/7))
       .map(eachWeek => {
         const days = _.chain(eachWeek).map(eachDay => <Day {...eachDay} />) 
-        return (<PayPeriod>{days}</PayPeriod>)
+        return (<DailyTotals>{days}</DailyTotals>)
       })  
-        
+
     return (
       <div className="row time-overview">
         <div className="col-xs-12">
@@ -54,8 +56,18 @@ class PayPeriods extends React.Component {
   }
 }
 
-class PayPeriod extends React.Component {    
-  // PayPeriod assumes a week pay period and creates a unordered list of 
+class PeriodHeader extends React.Component {
+  // Returns the header for the period as period span and dates
+  render() {
+    return(
+      <h3 className="text-center"><strong>{this.props.periodType}</strong></h3>
+    );
+  }
+}
+
+
+class DailyTotals extends React.Component {    
+  // DailyTotals assumes a week pay period and creates a unordered list of 
   // day components from the dates provided 
   render() {
     const week = this.props.children
@@ -66,13 +78,12 @@ class PayPeriod extends React.Component {
                                                'D': date[1],
                                                'Y': date[2]}))
     const start_date = date_range[0].format("MMMM DD")
-    const url_date = date_range[0].format("MMMM DD")
     const end_date = date_range[1].format("MMMM DD")
     return (
-      <div className="payperiod-overview">
-        <Link to="payperiod" params={{date: url_date}}>
-          <h3>{start_date + " - " + end_date}</h3>
-        </Link>
+      <div className="payperiod-overview" style={{ minHeight: 500 + "px" }}>
+        <PeriodHeader periodType="Current Pay Period" />
+        <h3 className="text-center"><small>{start_date + " - " + end_date}</small></h3>
+        <PeriodStats />
         <ul className="week-overview clearfix">
             {this.props.children}
         </ul>
@@ -120,7 +131,7 @@ class Day extends React.Component {
       {<Link to="day" params={{ date: date.format("YYYY-MM-DD")}}>
             <div className="date-side-box">
                 <p className="day-as-text text-center">{date.format("dddd")}</p>
-                <p className="date text-center">{date.format("M.")}<span className="day-as-number">{date.format("D")}</span></p>
+                <p className="date text-center"><span className="day-as-number">{date.format("M/D")}</span></p>
             </div>
                 {<p className="hours-worked-text"><span className="hours-worked-number text-center">{timeDisplay}</span>
             hours worked</p>}
