@@ -54,16 +54,8 @@ export default class PeriodStats extends React.Component {
             <p className="text-right"><strong>{allPaidHours.AmountInTime}</strong></p>
           </div>
           <div>
-            <p className="pull-left">Amount Made</p>
-            <p className="text-right"><strong>${allPaidHours.AmountInCurrency}</strong></p>
-          </div>
-          <div>
             <p className="pull-left">Overtime Hours</p>
             <p className="text-right"><strong>{allOvertime.AmountInTime}</strong></p>
-          </div>
-          <div>
-            <p className="pull-left">Overtime Amount Made</p>
-            <p className="text-right"><strong>${allOvertime.AmountInCurrency}</strong></p>
           </div>
         </div>
         <div className="col-md-2 hidden-xs">
@@ -122,3 +114,4 @@ class LatePunches extends React.Component {
     );
   }
 }
+// 

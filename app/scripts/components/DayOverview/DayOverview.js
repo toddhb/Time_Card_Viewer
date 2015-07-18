@@ -162,7 +162,6 @@ class DayStats extends React.Component {
       <div className="panel period-totals">
         <div className="panel-body">
           <p><strong>Total Hours Worked:</strong> <span className="period-stat">{AmountInTime}</span></p>
-          <p><strong>Total Amount Made:</strong> <span className="period-stat">${AmountInCurrency}</span></p>
         </div>
       </div>   
     )
