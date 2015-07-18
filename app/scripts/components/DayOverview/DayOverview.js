@@ -96,14 +96,12 @@ class Overview extends React.Component {
     const punchLog = _.chain([].concat(scheduled.value()).concat(punches.value()))
        .sortBy(punchLog => punchLog.time) 
        .map(punch => <Entry {...punch} />)
-
-    console.log(this.props)
     return (
       <div>  
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            {punchLog}
+            { punchLog.length > 0 ? punchLog : <div><h3>No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="calendar hidden-xs hidden-sm">
@@ -157,8 +155,8 @@ class DayStats extends React.Component {
         .filter(each => each.PayCodeId == "140")
         .first()
         .value()
-    const AmountInTime = totals ? totals.AmountInTime : ""
-    const AmountInCurrency = totals ? totals.AmountInCurrency : ""
+    const AmountInTime = totals ? totals.AmountInTime : 0
+    const AmountInCurrency = totals ? totals.AmountInCurrency : 0
     return (
       <div className="panel period-totals">
         <div className="panel-body">
