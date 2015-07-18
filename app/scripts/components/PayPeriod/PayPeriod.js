@@ -83,7 +83,9 @@ class DailyTotals extends React.Component {
       <div className="payperiod-overview" style={{ minHeight: 500 + "px" }}>
         <PeriodHeader periodType="Current Pay Period" />
         <h3 className="text-center"><small>{start_date + " - " + end_date}</small></h3>
-        <PeriodStats />
+        <FluxComponent connectToStores={['currentPeriod']}>
+          <PeriodStats />
+        </FluxComponent>
         <ul className="week-overview clearfix">
             {this.props.children}
         </ul>

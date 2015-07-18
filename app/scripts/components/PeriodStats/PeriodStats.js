@@ -14,18 +14,6 @@ import FluxComponent from 'flummox/component';
 import flux from "../../stores/flux"
 
 export default class PeriodStats extends React.Component {
-  // Returns a three-columned Period Stats from the period's context
-    render() {
-    return (
-      <FluxComponent connectToStores={['currentPeriod']}>
-        <PeriodTotals {...this.props}/>
-      </FluxComponent>
-    )
-  }
-}
-
-
-class PeriodTotals extends React.Component {
   render() {
     // TODO:  Where do these numbers come from in the current period API results?
     var foo = (9.13 + 10.73 + 9.63 + 0)
