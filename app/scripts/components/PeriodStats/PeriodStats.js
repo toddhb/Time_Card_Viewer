@@ -70,7 +70,9 @@ export default class PeriodStats extends React.Component {
           <HoursPerCode />
         </div>
         <div className="col-md-2 hidden-xs">
-          <LatePunches />
+          <FluxComponent connectToStores={['currentPeriod']}>
+            <LatePunches />
+          </FluxComponent>
         </div>
         <div className="col-md-2 hidden-xs">
           <HoursPTO allPTO={allPTO}/>
@@ -98,13 +100,27 @@ class HoursPTO extends React.Component {
 class LatePunches extends React.Component {
   // Returns the number times the pay period has late punches
   render() {
-    // TODO: Replace with appropriate API result
-    const TimesLate = 0
+    const { Timesheet } = this.props
+    const timesLate = _.chain(Timesheet.TotaledSpans.TotaledSpan)
+        .pluck('Exceptions')
+        .compact()
+        .pluck('TimekeepingException')
+        .map(each => {
+          if (_.isObject(each) && each.ExceptionTypeName == "LATE") {
+            return 1
+          } else {
+            return _.chain(each)
+             .filter(each => each.ExceptionTypeName == "LATE") 
+             .value()
+             .length
+          }
+        })
+        .reduce((memo, each) => memo + each)
+        .value()
     return (
       <div>
-        <p className="text-center"><strong>{TimesLate}</strong></p>
+        <p className="text-center"><strong>{timesLate}</strong></p>
         <h4 className="text-center">Late Punches</h4>
-        <h5 className="text-center"><small>Needs Implementing</small></h5>
       </div>
     );
   }
