@@ -71,18 +71,16 @@ class DailyTotals extends React.Component {
   // day components from the dates provided 
   render() {
     const week = this.props.children
-    var date_range = [ week.first(), week.last() ].map(date =>
-                                                        date.value().props.Date.split('/'))
-    date_range = date_range.map(date =>
-                                 moment().set({'M': (date[0] - 1), 
-                                               'D': date[1],
-                                               'Y': date[2]}))
-    const start_date = date_range[0].format("MMMM DD")
-    const end_date = date_range[1].format("MMMM DD")
+    const dateRange = 
+        _.chain([week.first(), week.last()])
+         .map(each => moment(each.value().props.Date.split('/'), 'M/DD/YYY'))
+         .map(each => each.format("MMMM DD"))
+         .join(' - ')
+         .value()
     return (
       <div className="payperiod-overview" style={{ minHeight: 500 + "px" }}>
         <PeriodHeader periodType="Current Pay Period" />
-        <h3 className="text-center"><small>{start_date + " - " + end_date}</small></h3>
+        <h3 className="text-center"><small>{dateRange}</small></h3>
         <FluxComponent connectToStores={['currentPeriod']}>
           <PeriodStats />
         </FluxComponent>
