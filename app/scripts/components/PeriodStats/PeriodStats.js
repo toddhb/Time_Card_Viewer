@@ -41,6 +41,10 @@ export default class PeriodStats extends React.Component {
         .filter(each => each.PayCodeId == "141")
         .first()
         .value()
+    const allPTO = _.chain(totals) 
+        .filter(each => each.PayCodeId == "501")
+        .first()
+        .value()
     return (
       <div className="clearfix" style={{minHeight: 170 + "px"}}>
         <hr/>
@@ -69,7 +73,7 @@ export default class PeriodStats extends React.Component {
           <LatePunches />
         </div>
         <div className="col-md-2 hidden-xs">
-          <HoursPTO />
+          <HoursPTO allPTO={allPTO}/>
         </div>
         <hr/>
       </div>
@@ -81,12 +85,11 @@ class HoursPTO extends React.Component {
   // Returns the number of PTO hours used in the pay period
   render() {
     // TODO: Replace with appropriate API result
-    const PTOHours = 0
+    const {AmountInTime, AmountInCurrency} = this.props.allPTO
     return (
       <div>
-        <p className="text-center"><strong>{PTOHours}</strong></p>
+        <p className="text-center"><strong>{AmountInTime}</strong></p>
         <h4 className="text-center">PTO</h4>
-        <h5 className="text-center"><small>Needs Implementing</small></h5>
       </div>
     );
   }
