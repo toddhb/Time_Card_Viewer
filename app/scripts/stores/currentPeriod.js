@@ -9,7 +9,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import { Actions, Store, Flummox } from 'flummox'
 import request from 'superagent-bluebird-promise'
 import config from '../config.js'
-import xml2jsParser from 'superagent-xml2jsparser'
+import xmlparser from 'xmlparser'
 
 const { protocal, host, basepath } = config.api.location
 
@@ -26,6 +26,11 @@ async function apiRequest(payload) {
   return response
 }
 
+function parseXML(xml) {
+    const text = xml.match(/<Kronos_WFC[\s\S]*/)[0].replace(/(\r\n|\n|\r)/gm, '')
+    return xmlparser.parse(text)
+}
+
 async function login() {
     return apiRequest(
      `<?xml version='1.0' encoding='UTF-8' ?>
@@ -36,7 +41,8 @@ async function login() {
 
 export class CurrentPeriodActions extends Actions {
   async fetch(content) {
-    console.log(await login())
+    const response = (await login())
+    return parseXML(response.txt)
   }
 }
 
