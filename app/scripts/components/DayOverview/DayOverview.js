@@ -33,7 +33,7 @@ const Calendar = createCalendar(ClickableDay)
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['timeSheet', 'schedule']}>
+      <FluxComponent connectToStores={['currentPeriod', 'schedule']}>
         <Overview {...this.props} />
       </FluxComponent>
     )
@@ -56,7 +56,9 @@ class Overview extends React.Component {
   render() {  
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
-    const punches = _.chain(this.props.Timesheet.TotaledSpans.TotaledSpan)
+    const { Timesheet } = this.props
+    const totaledSpan = Timesheet.TotaledSpans ? Timesheet.TotaledSpans.TotaledSpan : []
+    const punches = _.chain(totaledSpan)
       .filter((each) => {
         return each.Date == moment(this.props.params.date).format("M/DD/YYYY")
       })

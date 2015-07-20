@@ -34,7 +34,8 @@ class PayPeriods extends React.Component {
   // PayPeriods creates a list of PayPeriod Components
   // Needs tested with more data
   render() {
-    var dateTotals = this.props.Timesheet.DailyTotals.DateTotals
+    const { Timesheet } = this.props
+    var dateTotals = Timesheet.DailyTotals ? Timesheet.DailyTotals : []
   
     // Splits dateTotals into weeks arranged by descending recent dates
     var weeks = _.chain(dateTotals)
@@ -71,12 +72,14 @@ class DailyTotals extends React.Component {
   // day components from the dates provided 
   render() {
     const week = this.props.children
-    const dateRange = 
+    const dateRange = 'your mom'
+    /*
         _.chain([week.first(), week.last()])
          .map(each => moment(each.value().props.Date.split('/'), 'M/DD/YYY'))
          .map(each => each.format("MMMM DD"))
          .join(' - ')
          .value()
+         */
     return (
       <div className="payperiod-overview" style={{ minHeight: 500 + "px" }}>
         <PeriodHeader periodType="Current Pay Period" />
