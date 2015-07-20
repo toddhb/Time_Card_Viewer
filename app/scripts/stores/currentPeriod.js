@@ -41,26 +41,34 @@ async function login() {
 </Kronos_WFC>`)
 }
 
-export class CurrentPeriodActions extends Actions {
-  async fetch() {
-    console.log("fetch action")
-    await login()
-    return parseXmlResponse(await apiRequest(
-      `<?xml version="1.0" encoding="UTF-8"?>
+function basicXmlRequest(body) {
+  return (
+    `<?xml version="1.0" encoding="UTF-8"?>
       <Kronos_WFC Version="1.0">
         <Request Action="Load">
-          <Timesheet>
-            <Employee>
-              <PersonIdentity PersonNumber="N0686" />
-            </Employee>
-            <Period>
-              <TimeFramePeriod>
-                <TimeFrameName>1</TimeFrameName>
-              </TimeFramePeriod>
-            </Period>
-          </Timesheet>
+          ${body}
         </Request>
-      </Kronos_WFC>`))
+    </Kronos_WFC>`
+  )
+}
+
+
+export class CurrentPeriodActions extends Actions {
+  async fetch() {
+    await login()
+    return parseXmlResponse(await apiRequest(
+      basicXmlRequest(
+        `<Timesheet>
+          <Employee>
+            <PersonIdentity PersonNumber="N0686" />
+          </Employee>
+          <Period>
+            <TimeFramePeriod>
+              <TimeFrameName>1</TimeFrameName>
+            </TimeFramePeriod>
+          </Period>
+        </Timesheet>`
+    )))
   }
 }
 
