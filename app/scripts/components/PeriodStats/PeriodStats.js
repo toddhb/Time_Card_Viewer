@@ -14,9 +14,6 @@ import FluxComponent from 'flummox/component';
 import flux from "../../stores/flux"
 
 export default class PeriodStats extends React.Component {
-  componentWillMount() {
-    flux.getActions('currentPeriod').fetch()
-  }
   render() {
     const { Timesheet } = this.props
     const totals = _.chain(Timesheet.PeriodTotalData.PeriodTotals.Totals.Total)
@@ -48,17 +45,18 @@ export default class PeriodStats extends React.Component {
         .filter(each => each.PayCodeId == "501")
         .first()
         .value()
+    const amountInTime = allPaidHours ? allPaidHours.AmountInTime : 0
     return (
       <div className="clearfix" style={{minHeight: 170 + "px"}}>
         <hr/>
         <div className="col-xs-12 col-md-4 has-right-border">
           <div>
             <p className="pull-left">Hours Worked</p>
-            <p className="text-right"><strong>{allPaidHours.AmountInTime}</strong></p>
+            <p className="text-right"><strong>{amountInTime}</strong></p>
           </div>
           <div>
             <p className="pull-left">Overtime Hours</p>
-            <p className="text-right"><strong>{allOvertime.AmountInTime}</strong></p>
+            <p className="text-right"><strong>{amountInTime}</strong></p>
           </div>
         </div>
         <div className="col-md-2 hidden-xs">
@@ -67,7 +65,6 @@ export default class PeriodStats extends React.Component {
           </FluxComponent>
         </div>
         <div className="col-md-2 hidden-xs">
-          <HoursPTO allPTO={allPTO}/>
         </div>
         <hr/>
       </div>
