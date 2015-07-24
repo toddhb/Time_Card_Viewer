@@ -102,9 +102,12 @@ class Day extends React.Component {
   // of hours worked that day. Both date and hours are 
   // passed through props.
   render() {
-    const { GrandTotal } = this.props
     const date = moment(this.props.Date, 'M/DD/YYYY')
-    const hoursWorked = GrandTotal ? Number(GrandTotal.replace(':', '.')) : 0
+    const grandTotal = this.props.GrandTotal
+    const AmountInTime = grandTotal ? grandTotal : '0:00'
+    var SplitTime = AmountInTime.split(':')
+    var hours = SplitTime[0]
+    var minutes = Math.round((SplitTime[1])*(5/3))
     return (
       <li className="day-as-txt">
         <div className="time-entry shadowed-box">
@@ -113,7 +116,7 @@ class Day extends React.Component {
                 <p className="day-as-text text-center">{date.format("dddd")}</p>
                 <p className="date text-center"><span className="day-as-number">{date.format("M/D")}</span></p>
             </div>
-            <p className="hours-worked-text"><span className="hours-worked-number text-center">{hoursWorked}</span> hours worked</p>
+            <p className="hours-worked-text"><span className="hours-worked-number text-center">{hours}.{minutes}</span> hours worked</p>
           </Link>
         </div>
       </li>

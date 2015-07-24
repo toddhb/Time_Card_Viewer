@@ -158,12 +158,15 @@ class DayStats extends React.Component {
         .filter(each => each.PayCodeId == "140")
         .first()
         .value()
-    const AmountInTime = totals ? totals.AmountInTime : 0
+    const AmountInTime = totals ? totals.AmountInTime : '0:00'
+    var SplitTime = AmountInTime.split(':')
+    var hours = SplitTime[0]
+    var minutes = Math.round((SplitTime[1])*(5/3))
     const AmountInCurrency = totals ? totals.AmountInCurrency : 0
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{AmountInTime}</span></p>
+          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{hours}.{minutes}</span></p>
         </div>
       </div>   
     )
