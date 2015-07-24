@@ -24,12 +24,14 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 .footer-large-type {
     width: 100%; 
     font-size: 16px;
+    line-height: 40px;
     font-weight: bold;
     color: white;
     
     p {
         display: inline-block;
-        vertical-align: middle;    
+        vertical-align: middle;
+        margin: 0px 0px 0px 10px;
     }
     
     a {
@@ -60,11 +62,6 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
         line-height: 42px;  
         margin: 10px 15px 10px 0px;
         vertical-align: middle;
-        
-        &.fa-envelope {
-            font-size: 17px;    
-            line-height: 38px;   
-        }
     }
 }
 
