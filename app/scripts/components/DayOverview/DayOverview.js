@@ -163,15 +163,13 @@ class DayHeader extends React.Component {
 class DayStats extends React.Component {
   render() {
     const { date, Timesheet } = this.props
-    console.log(Timesheet)
-    const timeString = _.chain(Timesheet)
+    const [hours, minutes] = _.chain(Timesheet)
         .get('DailyTotals.DateTotals', [])
         .find(each => each.Date == moment(date).format("M/DD/YYYY"))
         .get('GrandTotal', '0:00')
+        .thru(total => moment(total, 'h:mm'))
+        .thru(total => [total.hours(), total.minutes()*100/60])
         .value()
-    var SplitTime = timeString.split(':')
-    var hours = SplitTime[0]
-    var minutes = Math.round((SplitTime[1])*(5/3))
     return (
       <div className="panel period-totals">
         <div className="panel-body">
