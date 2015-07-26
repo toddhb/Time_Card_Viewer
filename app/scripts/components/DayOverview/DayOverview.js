@@ -9,7 +9,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import React from "react"
 import { Link } from "react-router" 
 import moment from "moment"
-import _ from "underscore"
+import _ from "lodash"
 import {createCalendar} from "../Calendar/Calendar.js"
 import FluxComponent from 'flummox/component';
 import flux from "../../stores/flux"
@@ -56,9 +56,11 @@ class Overview extends React.Component {
   render() {  
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
-    const { Timesheet } = this.props
-    const totaledSpan = Timesheet.TotaledSpans ? Timesheet.TotaledSpans.TotaledSpan : []
-    const punches = _.chain(totaledSpan)
+
+    const { Timesheet, Schedule, params } = this.props
+
+    const punches = _.chain(Timesheet)
+      .get('TotaledSpans.TotaledSpan', [])
       .filter((each) => {
         return each.Date == moment(this.props.params.date).format("M/DD/YYYY")
       })
@@ -74,10 +76,10 @@ class Overview extends React.Component {
         return [ inPunch, outPunch ]
       })
       .flatten()
-    const scheduled = _.chain(this.props.Schedule.ScheduleItems.ScheduleShift)
-      .filter((each) => {
-        return each.StartDate == moment(this.props.params.date).format("M/DD/YYYY")
-      })
+
+    const scheduled = _.chain(Schedule)
+      .get('ScheduleItems.ScheduleShift', [])
+      .filter((each) => each.StartDate == moment(params.date).format("M/DD/YYYY"))
       .map((each) => {
         const { StartDate, EndDate, StartTime, EndTime} = each.ShiftSegments.ShiftSegment
         return [
@@ -91,7 +93,8 @@ class Overview extends React.Component {
         ]
       })
       .flatten()
-    const date = moment(this.props.params.date)
+
+    const date = moment(params.date)
     const year = date.format("YYYY")
     const month = date.format("MM")
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
@@ -150,7 +153,8 @@ class DayHeader extends React.Component {
 class DayStats extends React.Component {
   render() {
     const { date, Timesheet } = this.props
-    const totals = _.chain(Timesheet.DailyTotals.DateTotals)
+    const totals = _.chain(Timesheet)
+        .get('DailyTotals.DateTotals', [])
         .filter(each => each.Date == moment(date).format("M/DD/YYYY"))
         .pluck('Totals')
         .pluck('Total')
