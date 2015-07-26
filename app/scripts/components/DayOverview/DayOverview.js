@@ -59,23 +59,33 @@ class Overview extends React.Component {
 
     const { Timesheet, Schedule, params } = this.props
 
-    const punches = _.chain(Timesheet)
+    const inPunchesChain = _.chain(Timesheet)
       .get('TotaledSpans.TotaledSpan', [])
-      .filter((each) => {
-        return each.Date == moment(this.props.params.date).format("M/DD/YYYY")
+      .filter(each => each.Date == moment(params.date).format("M/DD/YYYY"))
+      .filter('InPunch.Punch')
+      .pluck('InPunch.Punch')
+      .map(eachPunch => _.merge(eachPunch, {
+          type: "InPunch",
+          time: kronosMoment(eachPunch.Date, eachPunch.Time,
+              eachPunch.KronosTimeZone)
+      }))
+
+    const outPunchesChain = _.chain(Timesheet)
+      .get('TotaledSpans.TotaledSpan', [])
+      .filter(each => each.Date == moment(params.date).format("M/DD/YYYY"))
+      .filter('OutPunch.Punch')
+      .pluck('OutPunch.Punch')
+      .map(eachPunch => {
+          lastKronosTimeZone = eachPunch.KronosTimeZone
+          return _.merge(eachPunch, {
+            type: "OutPunch",
+            time: kronosMoment(eachPunch.Date, eachPunch.Time, 
+                eachPunch.KronosTimeZone)
+          })
       })
-      .map((each) => {
-        const inPunch = each.InPunch.Punch
-        inPunch.type = "InPunch"
-        inPunch.time = kronosMoment(inPunch.Date, inPunch.Time, inPunch.KronosTimeZone)
-        const outPunch = each.OutPunch.Punch
-        outPunch.type = "OutPunch"
-        outPunch.time = kronosMoment(outPunch.Date, outPunch.Time, outPunch.KronosTimeZone)
-        // XXX Hack! Need to pull from API in a better way
-        lastKronosTimeZone = outPunch.KronosTimeZone
-        return [ inPunch, outPunch ]
-      })
-      .flatten()
+
+    const punchesChain = inPunchesChain.concat(outPunchesChain.value())
+        .sortBy('time')
 
     const scheduled = _.chain(Schedule)
       .get('ScheduleItems.ScheduleShift', [])
@@ -98,7 +108,7 @@ class Overview extends React.Component {
     const year = date.format("YYYY")
     const month = date.format("MM")
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
-    const punchLog = _.chain([].concat(scheduled.value()).concat(punches.value()))
+    const punchLog = _.chain([].concat(scheduled.value()).concat(punchesChain.value()))
        .sortBy(punchLog => punchLog.time) 
        .map(punch => <Entry {...punch} />)
        .value()
@@ -153,7 +163,8 @@ class DayHeader extends React.Component {
 class DayStats extends React.Component {
   render() {
     const { date, Timesheet } = this.props
-    const totals = _.chain(Timesheet)
+    console.log(Timesheet)
+    const timeString = _.chain(Timesheet)
         .get('DailyTotals.DateTotals', [])
         .filter(each => each.Date == moment(date).format("M/DD/YYYY"))
         .pluck('Totals')
@@ -161,12 +172,13 @@ class DayStats extends React.Component {
         .first()
         .filter(each => each.PayCodeId == "140")
         .first()
+        .get('totals.AmountInTime', '0:00')
         .value()
-    const AmountInTime = totals ? totals.AmountInTime : '0:00'
-    var SplitTime = AmountInTime.split(':')
+    console.log(timeString)
+    var SplitTime = timeString.split(':')
     var hours = SplitTime[0]
     var minutes = Math.round((SplitTime[1])*(5/3))
-    const AmountInCurrency = totals ? totals.AmountInCurrency : 0
+
     return (
       <div className="panel period-totals">
         <div className="panel-body">
@@ -206,7 +218,8 @@ class Entry extends React.Component {
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
-    const time = this.props.time.format('hh:mm a') 
+
+    const time = moment(this.props.time).format('hh:mm a') 
     return ( 
         <div className={panelClass}>
             <div className="date-side-box">
