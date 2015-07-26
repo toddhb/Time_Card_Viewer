@@ -52,21 +52,48 @@ function basicXmlRequest(body) {
   )
 }
 
+function timesheetXmlRequest(personNumber, timeFrameName, periodDateSpan) {
+  const periodDateSpanXml = periodDateSpan 
+      ? `<PeriodDateSpan>${periodDateSpan}</PeriodDateSpan>`
+      : ''
+  return basicXmlRequest(
+    `<Timesheet>
+      <Employee>
+        <PersonIdentity PersonNumber="${personNumber}" />
+      </Employee>
+      <Period>
+        <TimeFramePeriod>
+          ${periodDateSpanXml}
+          <TimeFrameName>${timeFrameName}</TimeFrameName>
+        </TimeFramePeriod>
+      </Period>
+    </Timesheet>`
+  )
+}
+
 export default class KronosActions extends Actions {
-  async fetch() {
+  async fetchPerviousTimesheet() {
     await login()
     return parseXmlResponse(await apiRequest(
-      basicXmlRequest(
-        `<Timesheet>
-          <Employee>
-            <PersonIdentity PersonNumber="N0686" />
-          </Employee>
-          <Period>
-            <TimeFramePeriod>
-              <TimeFrameName>1</TimeFrameName>
-            </TimeFramePeriod>
-          </Period>
-        </Timesheet>`
-    )))
+      timesheetXmlRequest("N0686", 0) 
+    ))
+  }
+  async fetchCurrentTimesheet() {
+    await login()
+    return parseXmlResponse(await apiRequest(
+      timesheetXmlRequest("N0686", 1) 
+    ))
+  }
+  async fetchNextTimesheet() {
+    await login()
+    return parseXmlResponse(await apiRequest(
+      timesheetXmlRequest("N0686", 2) 
+    ))
+  }
+  async fetchDateRangeTimesheet(dateRange) {
+    await login()
+    return parseXmlResponse(await apiRequest(
+      timesheetXmlRequest("N0686", 9, dateRange) 
+    ))
   }
 }

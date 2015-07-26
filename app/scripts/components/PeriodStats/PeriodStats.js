@@ -11,7 +11,7 @@ import Router, { RouteHandler, Link} from "react-router"
 import _ from "lodash"
 import moment from "moment"
 import FluxComponent from 'flummox/component';
-import flux from "../../stores/flux"
+import flux from "../../flux/flux"
 
 export default class PeriodStats extends React.Component {
   render() {
@@ -21,17 +21,7 @@ export default class PeriodStats extends React.Component {
         .get('PeriodTotalData.PeriodTotals.Totals.Total', [])
         .map(each => 
           _.chain(each)
-           .pick("AmountInCurrency", "AmountInTime", "PayCodeId", "PayCodeName")
-           .mapObject((value, key) => {
-              switch (key) {
-                case "AmountInCurrency":
-                  return Number(value.replace(/,/g, ""))
-                case "AmountInTime":
-                  return Number(value.replace(":", "."))
-                default:
-                  return value
-              }
-           })
+           .pick("AmountInTime", "PayCodeId", "PayCodeName")
            .value()
         )
         .value()

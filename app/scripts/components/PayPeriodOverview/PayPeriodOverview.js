@@ -11,7 +11,7 @@ import Router, { RouteHandler, Link} from "react-router"
 import _ from "lodash"
 import moment from "moment"
 import FluxComponent from 'flummox/component';
-import flux from "../../stores/flux"
+import flux from "../../flux/flux"
 import AlertBar from "../AlertBar/AlertBar.js"
 import PeriodStats from "../PeriodStats/PeriodStats.js"
   
@@ -31,13 +31,13 @@ export default class PayPeriodOverview extends React.Component {
 
 class PayPeriod extends React.Component {
   componentWillMount() {
-    flux.getActions('kronos').fetch()
+    flux.getActions('kronos').fetchDateRangeTimesheet('5/1/2015 - 6/1/2015')
   }
   // PayPeriods creates a list of PayPeriod Components
   // Needs tested with more data
   render() {
     const { Timesheet } = this.props
-  
+    
     const days = _.chain(Timesheet)
       .get('DailyTotals.DateTotals', [])
       .compact()
@@ -90,7 +90,7 @@ class Day extends React.Component {
     const AmountInTime = grandTotal ? grandTotal : '0:00'
     var SplitTime = AmountInTime.split(':')
     var hours = SplitTime[0]
-    var minutes = Math.round((SplitTime[1])*(5/3))
+    var minutes = Math.round((SplitTime[1])/(5/3))
     return (
       <li className="day-as-txt">
         <div className="time-entry shadowed-box">

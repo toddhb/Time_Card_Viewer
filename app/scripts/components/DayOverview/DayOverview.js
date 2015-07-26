@@ -12,7 +12,7 @@ import moment from "moment"
 import _ from "lodash"
 import {createCalendar} from "../Calendar/Calendar.js"
 import FluxComponent from 'flummox/component';
-import flux from "../../stores/flux"
+import flux from "../../flux/flux"
 
 class ClickableDay extends React.Component {
   render() {
