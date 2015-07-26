@@ -17,8 +17,7 @@ import CalendarOverview from "./components/CalendarOverview"
 import DayOverview from "./components/DayOverview/DayOverview"
 import Main from "./components/Main/Main"
 import NotFound from "./components/NotFound/NotFound"
-import PayPeriodOverview from "./components/PayPeriodOverview"
-import PayPeriodsOverview from "./components/PayPeriod/PayPeriod"
+import PayPeriodOverview from "./components/PayPeriodOverview/PayPeriodOverview"
 import FluxComponent from 'flummox/component';
 import flux from "./stores/flux"
 
@@ -37,9 +36,8 @@ class App extends React.Component {
 
 const routes = (
   <Route name="app" handler={App} path="/">
-    <DefaultRoute handler={PayPeriodsOverview} />
+    <DefaultRoute handler={PayPeriodOverview} />
     <Route name="day" path="day/:date" handler={DayOverview} />
-    <Route name="payperiod" path="payperiod/:date" handler={PayPeriodOverview} />
     <NotFoundRoute handler={NotFound} />
   </Route>
 )
