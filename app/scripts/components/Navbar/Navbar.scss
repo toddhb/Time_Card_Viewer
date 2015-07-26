@@ -8,12 +8,18 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 @import "conway-skin";
 
-.navbar-logo {
+.navbar-home {
+    a {
+    position: absolute;
+    padding-left: 15px;
+    top: 15px;
+  }
+}
 
+.navbar-logo {
   a {
     line-height: 45px;
     position: relative;
     top: 12px;
   }
-
 }

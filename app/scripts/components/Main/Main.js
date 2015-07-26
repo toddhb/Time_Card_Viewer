@@ -15,7 +15,7 @@ class NavContainer extends React.Component {
   render() {
     return (
         <div className="container-fluid">
-            <Navbar title="Steve's Time" />
+            <Navbar />
         </div>
     ) 
   } 
