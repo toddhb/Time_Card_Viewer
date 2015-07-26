@@ -123,7 +123,7 @@ class Overview extends React.Component {
             <div className="calendar hidden-xs hidden-sm">
               <Calendar year={year} month={month-1} headers={dayHeaders} />
             </div>
-              <FluxComponent connectToStores={['timeSheet']}>
+              <FluxComponent connectToStores={['kronos']}>
                 <DayStats date={this.props.params.date}/>
               </FluxComponent>
           </div>
@@ -166,19 +166,12 @@ class DayStats extends React.Component {
     console.log(Timesheet)
     const timeString = _.chain(Timesheet)
         .get('DailyTotals.DateTotals', [])
-        .filter(each => each.Date == moment(date).format("M/DD/YYYY"))
-        .pluck('Totals')
-        .pluck('Total')
-        .first()
-        .filter(each => each.PayCodeId == "140")
-        .first()
-        .get('totals.AmountInTime', '0:00')
+        .find(each => each.Date == moment(date).format("M/DD/YYYY"))
+        .get('GrandTotal', '0:00')
         .value()
-    console.log(timeString)
     var SplitTime = timeString.split(':')
     var hours = SplitTime[0]
     var minutes = Math.round((SplitTime[1])*(5/3))
-
     return (
       <div className="panel period-totals">
         <div className="panel-body">
