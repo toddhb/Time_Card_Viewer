@@ -62,7 +62,7 @@ export default class PeriodStats extends React.Component {
           </div>
         </div>
         <div className="col-md-2 hidden-xs">
-          <FluxComponent connectToStores={['currentPeriod']}>
+          <FluxComponent connectToStores={['kronos']}>
             <LatePunches />
           </FluxComponent>
         </div>

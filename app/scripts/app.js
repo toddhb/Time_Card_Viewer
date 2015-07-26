@@ -12,14 +12,13 @@ import Router, { Route, RouteHandler, DefaultRoute, NotFoundRoute} from "react-r
 import { Resolver } from "react-resolver"
 import { createRedux } from "redux"
 import { Provider } from "redux/react"
-import * as stores from "./stores"
 import CalendarOverview from "./components/CalendarOverview"
 import DayOverview from "./components/DayOverview/DayOverview"
 import Main from "./components/Main/Main"
 import NotFound from "./components/NotFound/NotFound"
 import PayPeriodOverview from "./components/PayPeriodOverview/PayPeriodOverview"
 import FluxComponent from 'flummox/component';
-import flux from "./stores/flux"
+import flux from "./flux/flux"
 
 
 const mountNode = document.getElementById("app")

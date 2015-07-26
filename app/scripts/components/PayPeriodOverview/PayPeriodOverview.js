@@ -22,7 +22,7 @@ export default class PayPeriodOverview extends React.Component {
   // stamps with date and culmulative hours
   render() {
     return (
-      <FluxComponent connectToStores={['currentPeriod']}>
+      <FluxComponent connectToStores={['kronos']}>
         <PayPeriod {...this.props}/>
       </FluxComponent>
     )
@@ -31,7 +31,7 @@ export default class PayPeriodOverview extends React.Component {
 
 class PayPeriod extends React.Component {
   componentWillMount() {
-    flux.getActions('currentPeriod').fetch()
+    flux.getActions('kronos').fetch()
   }
   // PayPeriods creates a list of PayPeriod Components
   // Needs tested with more data
@@ -57,7 +57,7 @@ class PayPeriod extends React.Component {
           <div className="payperiod-overview" style={{ minHeight: 500 + "px" }}>
             <PeriodHeader periodType="Current Pay Period" />
             <h3 className="text-center"><small>{dateRange}</small></h3>
-            <FluxComponent connectToStores={['currentPeriod']}>
+            <FluxComponent connectToStores={['kronos']}>
               <PeriodStats />
             </FluxComponent>
             <ul className="week-overview clearfix">

@@ -7,29 +7,21 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  * LICENSE text file in the root directory of this source tree.
  */
 import { Flummox } from 'flummox';
-import { DayActions, DayStore } from "./days"
-import { DayStreamActions, DayStreamStore} from "./daystream"
 import { TimeSheetActions, TimeSheetStore} from "./timeSheet"
-import { CurrentPeriodActions, CurrentPeriodStore} from "./currentPeriod"
+import KronosActions from "./kronos/actions"
+import KronosStore from "./kronos/store"
 import { ScheduleActions, ScheduleStore } from "./schedule"
-import { TestActions, TestStore } from "./test"
 
 class Flux extends Flummox {
   constructor() {
     super();
 
-    this.createActions('days', DayActions);
-    this.createStore('days', DayStore, this);
-    this.createActions('daystream', DayStreamActions);
-    this.createStore('daystream', DayStreamStore, this);
+    this.createActions('kronos', KronosActions)
+    this.createStore('kronos', KronosStore, this)
     this.createActions('timeSheet', TimeSheetActions);
     this.createStore('timeSheet', TimeSheetStore, this);
-    this.createActions('currentPeriod', CurrentPeriodActions)
-    this.createStore('currentPeriod', CurrentPeriodStore, this)
     this.createActions('schedule', ScheduleActions);
     this.createStore('schedule', ScheduleStore, this);
-    this.createActions('test', TestActions);
-    this.createStore('test', TestStore, this);
   }
 }
 

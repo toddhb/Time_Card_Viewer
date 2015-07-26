@@ -33,7 +33,7 @@ const Calendar = createCalendar(ClickableDay)
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['currentPeriod', 'schedule']}>
+      <FluxComponent connectToStores={['kronos', 'schedule']}>
         <Overview {...this.props} />
       </FluxComponent>
     )

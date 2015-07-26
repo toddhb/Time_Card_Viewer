@@ -6,9 +6,9 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  * This source code is licensed under the MIT license found in the
  * LICENSE text file in the root directory of this source tree.
  */
-import { Actions, Store, Flummox } from 'flummox'
+import { Actions, Flummox } from 'flummox'
 import request from 'superagent-bluebird-promise'
-import config from '../config.js'
+import config from '../../config.js'
 import xmlparser from 'xmlparser'
 
 const { protocal, host, basepath } = config.api.location
@@ -52,8 +52,7 @@ function basicXmlRequest(body) {
   )
 }
 
-
-export class CurrentPeriodActions extends Actions {
+export default class KronosActions extends Actions {
   async fetch() {
     await login()
     return parseXmlResponse(await apiRequest(
@@ -69,28 +68,5 @@ export class CurrentPeriodActions extends Actions {
           </Period>
         </Timesheet>`
     )))
-  }
-}
-
-const DEFAULT_STATE = {
-  Timesheet: {}
-}
-
-export class CurrentPeriodStore extends Store {
-  constructor(flux) {
-    super()
-
-    const currentPeriodActions = flux.getActions('currentPeriod')
-    this.registerAsync(currentPeriodActions.fetch, 
-      () => console.log('started'), 
-      this.handleFetch, 
-      () => console.log('error'))
-
-    this.state = DEFAULT_STATE
-  }
-  async handleFetch(data) {
-    this.setState({
-      Timesheet: data.Kronos_WFC.Response.Timesheet
-    })
   }
 }
