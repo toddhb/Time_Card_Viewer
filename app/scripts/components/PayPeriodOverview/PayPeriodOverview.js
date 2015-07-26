@@ -37,11 +37,9 @@ class PayPeriod extends React.Component {
   // Needs tested with more data
   render() {
     const { Timesheet } = this.props
-    const dateTotals = Timesheet.DailyTotals 
-        ? Timesheet.DailyTotals.DateTotals 
-        : []
   
-    const days = _.chain(dateTotals)
+    const days = _.chain(Timesheet)
+      .get('DailyTotals.DateTotals', [])
       .compact()
       .map(each => <Day {...each} />)
       .value()
@@ -59,11 +57,9 @@ class PayPeriod extends React.Component {
           <div className="payperiod-overview" style={{ minHeight: 500 + "px" }}>
             <PeriodHeader periodType="Current Pay Period" />
             <h3 className="text-center"><small>{dateRange}</small></h3>
-            {/* 
             <FluxComponent connectToStores={['currentPeriod']}>
               <PeriodStats />
             </FluxComponent>
-            */}
             <ul className="week-overview clearfix">
                 {days}
             </ul>

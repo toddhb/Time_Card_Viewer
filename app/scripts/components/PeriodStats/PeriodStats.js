@@ -8,7 +8,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 import React from "react"
 import Router, { RouteHandler, Link} from "react-router"
-import _ from "underscore"
+import _ from "lodash"
 import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../../stores/flux"
@@ -16,7 +16,9 @@ import flux from "../../stores/flux"
 export default class PeriodStats extends React.Component {
   render() {
     const { Timesheet } = this.props
-    const totals = _.chain(Timesheet.PeriodTotalData.PeriodTotals.Totals.Total)
+
+    const totals = _.chain(Timesheet)
+        .get('PeriodTotalData.PeriodTotals.Totals.Total', [])
         .map(each => 
           _.chain(each)
            .pick("AmountInCurrency", "AmountInTime", "PayCodeId", "PayCodeName")
@@ -90,7 +92,8 @@ class LatePunches extends React.Component {
   // Returns the number times the pay period has late punches
   render() {
     const { Timesheet } = this.props
-    const timesLate = _.chain(Timesheet.TotaledSpans.TotaledSpan)
+    const timesLate = _.chain(Timesheet)
+        .get('TotaledSpans.TotaledSpan', {})
         .pluck('Exceptions')
         .compact()
         .pluck('TimekeepingException')
