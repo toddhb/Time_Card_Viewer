@@ -53,54 +53,130 @@ function kronosMoment(date, time, kronosTimeZone) {
 }
 
 class Overview extends React.Component {                              
-  componentWillMount() {
-    const periodDateSpan = _.get(this.props, 
-      'Timesheet.Period.TimeFramePeriod.PeriodDateSpan', null)
-    if (periodDateSpan) {
-      flux.getActions('kronos').fetchDateRangeSchedule(periodDateSpan)
-    }
-  }
   render() {  
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
 
     const { Timesheet, Schedule, params } = this.props
 
+    // inPunchesChain is a lodash chain which returns all the
+    // inpunches and adds a `type` and `time` property.
+    // 
+    // Expects:
+    // ```
+    // Timesheet: {
+    //   TotaledSpans: {
+    //     TotaledSpan: [
+    //       Date: "M/DD/YYYY", // The day the span.
+    //       InPunch.Punch: {
+    //          Date: "M/DD/YYYY, // The day of the span.
+    //          Time: "HH:mm", // The time of the in punch.
+    //          KronosTimeZone: {""}, // time zone of the Time.
+    //       }, 
+    //     ]
+    //   }
+    // }```
+    // Produces:
+    // ```
+    // [
+    //   {
+    //     type: "InPunch",
+    //     time: Moment, // A moment object represeting Time & KronosTimeZone
+    //     Date: "M/DD/YYYY, // The day of the span.
+    //   }
+    //  
+    // ]
+    // ```
     const inPunchesChain = _.chain(Timesheet)
       .get('TotaledSpans.TotaledSpan', [])
-      .filter(each => each.Date == moment(params.date).format("M/DD/YYYY"))
-      .filter('InPunch.Punch')
+      .filter({Date: moment(params.date).format("M/DD/YYYY")})
       .pluck('InPunch.Punch')
-      .map(eachPunch => _.merge(eachPunch, {
+      .compact()
+      .map(eachPunch => ({
           type: "InPunch",
           time: kronosMoment(eachPunch.Date, eachPunch.Time,
-              eachPunch.KronosTimeZone)
+              eachPunch.KronosTimeZone),
+          Date: eachPunch.Date,
       }))
 
+    // outPunchesChain is a lodash chain which returns all the
+    // outpunches and adds a `type` and `time` property.
+    // 
+    // Expects:
+    // ```
+    // Timesheet: {
+    //   TotaledSpans: {
+    //     TotaledSpan: [
+    //       Date: "M/DD/YYYY", // The day the span.
+    //       OutPunch.Punch: {
+    //          Date: "M/DD/YYYY, // The day of the span.
+    //          Time: "HH:mm", // The time of the in punch.
+    //          KronosTimeZone: {""}, // time zone of the Time.
+    //       }, 
+    //     ]
+    //   }
+    // }```
+    // Produces:
+    // ```
+    // [
+    //   {
+    //     type: "OutPunch",
+    //     time: Moment, // A moment object represeting Time & KronosTimeZone
+    //     Date: "M/DD/YYYY, // The day of the span.
+    //   }
+    // ]
+    // ```
     const outPunchesChain = _.chain(Timesheet)
       .get('TotaledSpans.TotaledSpan', [])
-      .filter(each => each.Date == moment(params.date).format("M/DD/YYYY"))
-      .filter('OutPunch.Punch')
+      .filter({Date: moment(params.date).format("M/DD/YYYY")})
       .pluck('OutPunch.Punch')
+      .compact()
       .map(eachPunch => {
+          // XXX Hack! Need to pull from API in a better way
           lastKronosTimeZone = eachPunch.KronosTimeZone
-          return _.merge(eachPunch, {
+          return {
             type: "OutPunch",
             time: kronosMoment(eachPunch.Date, eachPunch.Time, 
-                eachPunch.KronosTimeZone)
-          })
+                eachPunch.KronosTimeZone),
+            Date: eachPunch.Date,
+          }
       })
 
-    const punchesChain = inPunchesChain.concat(outPunchesChain.value())
-        .sortBy('time')
 
-    const scheduledChain = _.chain(Schedule)
+    // shiftsChain is a lodash chain which returns all the
+    // shifts and adds a `type` and `time` property.
+    // 
+    // Expects:
+    // ```
+    // Schedule: {
+    //   ScheduleItems: {
+    //     ScheduleShift: [
+    //       StartDate: "M/DD/YYY",
+    //       EndDate: "M/DD/YYY",
+    //       StartTime: "hh:mm",
+    //       EndTime: "hh:mm",
+    //     ]
+    //   }
+    // }```
+    // Produces:
+    // ```
+    // [
+    //   {
+    //     type: "scheduledIn",
+    //     time: Moment, // A moment object represeting Time & KronosTimeZone
+    //   }, {
+    //     type: "scheduledOut",
+    //     time: Moment, // A moment object represeting Time & KronosTimeZone
+    //   }
+    // ]
+    // ```
+    const shiftsChain = _.chain(Schedule)
       .get('ScheduleItems.ScheduleShift', [])
-      .filter((each) => each.StartDate == moment(params.date).format("M/DD/YYYY"))
+      .filter({StartDate: moment(params.date).format("M/DD/YYYY")})
       .pluck('ShiftSegments.ShiftSegment')
       .compact()
-      .map((each) => {
-        const { StartDate, EndDate, StartTime, EndTime} = each
+      .map(eachShift => {
+        const { StartDate, EndDate, StartTime, EndTime} = eachShift
         return [
           {
             time: kronosMoment(StartDate, StartTime, lastKronosTimeZone),
@@ -113,7 +189,9 @@ class Overview extends React.Component {
       })
       .flatten()
 
-    const punchLog = punchesChain.concat(scheduledChain.value())
+    const punches = inPunchesChain
+       .concat(outPunchesChain.value())
+       .concat(shiftsChain.value())
        .sortBy('time')
        .map(punch => <Entry {...punch} />)
        .value()
@@ -121,13 +199,15 @@ class Overview extends React.Component {
     const date = moment(params.date)
     const year = date.format("YYYY")
     const month = date.format("MM")
+
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
+    
     return (
       <div>  
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punchLog.length > 0 ? punchLog : <div><h3>No punches today</h3></div>}
+            { punches.length > 0 ? punches : <div><h3>No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="calendar hidden-xs hidden-sm">
