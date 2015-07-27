@@ -21,6 +21,7 @@ export default class KronosStore extends Store {
     super()
 
     const kronosActions = flux.getActions('kronos')
+
     this.registerAsync(kronosActions.fetchPreviousTimesheet, 
       () => console.log('kronosActions.fetchPreviousTimesheet: started'), 
       this.handleTimesheetFetch, 
@@ -37,12 +38,21 @@ export default class KronosStore extends Store {
       () => console.log('kronosActions.fetchDateRangeTimesheet: started'), 
       this.handleTimesheetFetch, 
       (error) => console.log('kronosActions.fetchDateRangeTimesheet: error', error))
+    this.registerAsync(kronosActions.fetchDateRangeSchedule, 
+      () => console.log('kronosActions.fetchDateRangeSchedule: started'), 
+      this.handleScheduleFetch, 
+      (error) => console.log('kronosActions.fetchDateRangeSchedule: error', error))
 
     this.state = DEFAULT_STATE
   }
   async handleTimesheetFetch(data) {
     this.setState({
       Timesheet: data.Kronos_WFC.Response.Timesheet
+    })
+  }
+  async handleScheduleFetch(data) {
+    this.setState({
+      Schedule: data.Kronos_WFC.Response.Schedule
     })
   }
 }

@@ -33,7 +33,7 @@ const Calendar = createCalendar(ClickableDay)
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['kronos', 'schedule']}>
+      <FluxComponent connectToStores={['kronos']}>
         <Overview {...this.props} />
       </FluxComponent>
     )
@@ -53,6 +53,9 @@ function kronosMoment(date, time, kronosTimeZone) {
 }
 
 class Overview extends React.Component {                              
+  componentWillMount() {
+    flux.getActions('kronos').fetchDateRangeTimesheet('5/1/2015 - 6/1/2015')
+  }
   render() {  
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""

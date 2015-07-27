@@ -71,6 +71,16 @@ function timesheetXmlRequest(personNumber, timeFrameName, periodDateSpan) {
   )
 }
 
+function scheduleRequest(personNumber, periodDateSpan) {
+  return basicXmlRequest(
+    `<Schedule QueryDateSpan="${periodDateSpan}">
+     <Employees>
+       <PersonIdentity PersonNumber="${personNumber}" />
+     </Employees>
+    </Schedule>`
+  )  
+}
+
 export default class KronosActions extends Actions {
   async fetchPerviousTimesheet() {
     await login()
@@ -94,6 +104,12 @@ export default class KronosActions extends Actions {
     await login()
     return parseXmlResponse(await apiRequest(
       timesheetXmlRequest("N0686", 9, dateRange) 
+    ))
+  }
+  async fetchDateRangeSchedule(dateRange) {
+    await login()
+    return parseXmlResponse(await apiRequest(
+      scheduleRequest("N0686", dateRange) 
     ))
   }
 }
