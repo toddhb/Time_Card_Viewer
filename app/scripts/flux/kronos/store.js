@@ -10,6 +10,8 @@ import { Store, } from 'flummox'
 import request from 'superagent-bluebird-promise'
 import config from '../../config.js'
 import xmlparser from 'xmlparser'
+import flux from '../flux'
+import _ from 'lodash'
 
 const DEFAULT_STATE = {
   Timesheet: {},
@@ -49,6 +51,11 @@ export default class KronosStore extends Store {
     this.setState({
       Timesheet: data.Kronos_WFC.Response.Timesheet
     })
+    const periodDateSpan = _.get(this.state.Timesheet, 
+      'Period.TimeFramePeriod.PeriodDateSpan', null)
+    if (periodDateSpan) {
+      flux.getActions('kronos').fetchDateRangeSchedule(periodDateSpan)
+    }
   }
   async handleScheduleFetch(data) {
     this.setState({
