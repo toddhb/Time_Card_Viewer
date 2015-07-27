@@ -90,7 +90,8 @@ class Day extends React.Component {
     const AmountInTime = grandTotal ? grandTotal : '0:00'
     var SplitTime = AmountInTime.split(':')
     var hours = SplitTime[0]
-    var minutes = Math.round((SplitTime[1])/(5/3))
+    var minutes = (((SplitTime[1])/60+'').charAt(2) + ((SplitTime[1])/60+'').charAt(3)) ?
+                  (((SplitTime[1])/60+'').charAt(2) + ((SplitTime[1])/60+'').charAt(3)) : '00'
     return (
       <li className="day-as-txt">
         <div className="time-entry shadowed-box">

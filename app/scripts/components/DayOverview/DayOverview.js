@@ -259,7 +259,8 @@ class DayStats extends React.Component {
         .get('GrandTotal', '0:00')
         .thru(total => moment(total, 'h:mm'))
         .thru(total => [
-            total.hours(), _.round(total.minutes()*100/60)
+            total.hours(), ((total.minutes()/60+'').charAt(2) + (total.minutes()/60+'').charAt(3)) ?
+                           ((total.minutes()/60+'').charAt(2) + (total.minutes()/60+'').charAt(3)) : '00'
         ])
         .value()
     return (
