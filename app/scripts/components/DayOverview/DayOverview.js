@@ -168,7 +168,9 @@ class DayStats extends React.Component {
         .find(each => each.Date == moment(date).format("M/DD/YYYY"))
         .get('GrandTotal', '0:00')
         .thru(total => moment(total, 'h:mm'))
-        .thru(total => [total.hours(), total.minutes()*100/60])
+        .thru(total => [
+            total.hours(), _.round(total.minutes()*100/60)
+        ])
         .value()
     return (
       <div className="panel period-totals">
