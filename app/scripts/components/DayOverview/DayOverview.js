@@ -54,7 +54,11 @@ function kronosMoment(date, time, kronosTimeZone) {
 
 class Overview extends React.Component {                              
   componentWillMount() {
-    flux.getActions('kronos').fetchDateRangeTimesheet('5/1/2015 - 6/1/2015')
+    const periodDateSpan = _.get(this.props, 
+      'Timesheet.Period.TimeFramePeriod.PeriodDateSpan', null)
+    if (periodDateSpan) {
+      flux.getActions('kronos').fetchDateRangeSchedule(periodDateSpan)
+    }
   }
   render() {  
     // XXX Hack! Need to pull from API in a better way
@@ -90,11 +94,13 @@ class Overview extends React.Component {
     const punchesChain = inPunchesChain.concat(outPunchesChain.value())
         .sortBy('time')
 
-    const scheduled = _.chain(Schedule)
+    const scheduledChain = _.chain(Schedule)
       .get('ScheduleItems.ScheduleShift', [])
       .filter((each) => each.StartDate == moment(params.date).format("M/DD/YYYY"))
+      .pluck('ShiftSegments.ShiftSegment')
+      .compact()
       .map((each) => {
-        const { StartDate, EndDate, StartTime, EndTime} = each.ShiftSegments.ShiftSegment
+        const { StartDate, EndDate, StartTime, EndTime} = each
         return [
           {
             time: kronosMoment(StartDate, StartTime, lastKronosTimeZone),
@@ -107,14 +113,15 @@ class Overview extends React.Component {
       })
       .flatten()
 
+    const punchLog = punchesChain.concat(scheduledChain.value())
+       .sortBy('time')
+       .map(punch => <Entry {...punch} />)
+       .value()
+
     const date = moment(params.date)
     const year = date.format("YYYY")
     const month = date.format("MM")
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
-    const punchLog = _.chain([].concat(scheduled.value()).concat(punchesChain.value()))
-       .sortBy(punchLog => punchLog.time) 
-       .map(punch => <Entry {...punch} />)
-       .value()
     return (
       <div>  
         <DayHeader date={date}/> 
