@@ -33,10 +33,27 @@ class App extends React.Component {
   }
 }
 
+class CurrentPayPeriod extends React.Component {
+  render() {
+    return(
+      <PayPeriodOverview dateRange="5/10/2015 - 5/16/2015" />
+    )
+  }
+}
+
+class PreviousPayPeriod extends React.Component {
+  render() {
+    return(
+      <PayPeriodOverview dateRange="5/3/2015 - 5/9/2015" />
+    )
+  }
+}
+
 const routes = (
   <Route name="app" handler={App} path="/">
-    <DefaultRoute handler={PayPeriodOverview} />
+    <DefaultRoute handler={CurrentPayPeriod} />
     <Route name="day" path="day/:date" handler={DayOverview} />
+    <Route name="previous" path="previous" handler={PreviousPayPeriod} />
     <NotFoundRoute handler={NotFound} />
   </Route>
 )

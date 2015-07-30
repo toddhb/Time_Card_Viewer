@@ -31,7 +31,8 @@ export default class PayPeriodOverview extends React.Component {
 
 class PayPeriod extends React.Component {
   componentWillMount() {
-    flux.getActions('kronos').fetchDateRangeTimesheet('5/1/2015 - 6/1/2015')
+
+    flux.getActions('kronos').fetchDateRangeTimesheet(this.props.dateRange)
   }
   // PayPeriods creates a list of PayPeriod Components
   // Needs tested with more data
