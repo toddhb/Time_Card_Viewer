@@ -14,7 +14,7 @@ import Footer from "../Footer/Footer.js"
 class NavContainer extends React.Component {
   render() {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid header">
             <Navbar />
         </div>
     ) 
@@ -24,7 +24,7 @@ class NavContainer extends React.Component {
 class BodyContainer extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="container main">
         <RouteHandler {...this.params} />
       </div>
     ) 

@@ -54,7 +54,7 @@ class PayPeriod extends React.Component {
     return (
       <div className="row time-overview">
         <div className="col-xs-12">
-          <div className="payperiod-overview" style={{ minHeight: 500 + "px" }}>
+          <div className="payperiod-overview">
             <PeriodHeader periodType="Current Pay Period" />
             <h3 className="text-center"><small>{dateRange}</small></h3>
             <FluxComponent connectToStores={['kronos']}>

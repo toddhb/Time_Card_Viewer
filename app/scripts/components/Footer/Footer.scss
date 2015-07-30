@@ -10,6 +10,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 @import "conway-skin";
 
 .footer-distributed {
+  min-height: $min-footer-height;   // Help the footer stick!
 	background-color: $brand-primary;        
 	padding: 15px 0px;
 }
