@@ -33,18 +33,30 @@ class App extends React.Component {
   }
 }
 
+// Pay period ranges are 7 days from Saturday - Sunday
+
+// The date range of the current pay period should be
+// today - last Sunday.  
+// Can have 1 to 7 days of data 
+// e.g. 06/30/2015  - 06/26/2015
 class CurrentPayPeriod extends React.Component {
   render() {
+    // "Today" = 05/15/2015
     return(
-      <PayPeriodOverview dateRange="5/10/2015 - 5/16/2015" />
+      <PayPeriodOverview dateRange="5/10/2015 - 5/15/2015" periodType="Current" />
     )
   }
 }
 
+
+// The date range of the previous pay period should be
+// (two Sunday's ago from today) - last Saturday
+// Will always have 7 days of data
+// e.g. 06/19/2015  - 06/25/2015
 class PreviousPayPeriod extends React.Component {
   render() {
     return(
-      <PayPeriodOverview dateRange="5/3/2015 - 5/9/2015" />
+      <PayPeriodOverview dateRange="5/3/2015 - 5/9/2015" periodType="Previous" />
     )
   }
 }

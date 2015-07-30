@@ -12,7 +12,6 @@ import _ from "lodash"
 import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
-import AlertBar from "../AlertBar/AlertBar.js"
 import PeriodStats from "../PeriodStats/PeriodStats.js"
   
 
@@ -56,7 +55,7 @@ class PayPeriod extends React.Component {
       <div className="row time-overview">
         <div className="col-xs-12">
           <div className="payperiod-overview">
-            <PeriodHeader periodType="Current Pay Period" />
+            <PeriodHeader periodType={this.props.periodType} />
             <h3 className="text-center"><small>{dateRange}</small></h3>
             <FluxComponent connectToStores={['kronos']}>
               <PeriodStats />
@@ -74,8 +73,9 @@ class PayPeriod extends React.Component {
 class PeriodHeader extends React.Component {
   // Returns the header for the period as period span and dates
   render() {
+    const header = this.props.periodType + " Pay Period"
     return(
-      <h3 className="text-center"><strong>{this.props.periodType}</strong></h3>
+      <h3 className="text-center"><strong>{{header}}</strong></h3>
     );
   }
 }
