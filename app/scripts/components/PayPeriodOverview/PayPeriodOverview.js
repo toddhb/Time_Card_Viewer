@@ -57,9 +57,13 @@ class PayPeriod extends React.Component {
           <div className="payperiod-overview">
             <PeriodHeader periodType={this.props.periodType} />
             <h3 className="text-center"><small>{dateRange}</small></h3>
+
+            <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
+
             <FluxComponent connectToStores={['kronos']}>
               <PeriodStats />
             </FluxComponent>
+
             <ul className="week-overview clearfix">
                 {days}
             </ul>
@@ -67,6 +71,26 @@ class PayPeriod extends React.Component {
         </div>
       </div>
     )
+  }
+}
+
+class OtherPayPeriodLink extends React.Component {
+  // Shows a link to previous payperiod if current component's props.periodType="current"
+  // else returns null
+  render() {
+    console.log(this.props.periodType)
+    if(this.props.periodType == "Current") {
+      return(
+        <Link to="previous" name="period-link previous">Previous Pay Period</Link>
+      )
+    } 
+    if(this.props.periodType == "Previous") {
+      return(
+        <Link to="app" name="period-link current">Current Pay Period</Link>
+      )
+    } else {
+      return null
+    }
   }
 }
 
