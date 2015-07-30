@@ -5,14 +5,24 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE text file in the root directory of this source tree.
+ *
+ *  home.svg and home_hover.svg are created by Filip Malinowski  (House at https://henounproject.com/search/?q=home&i=16506)
+ *
  */
 @import "conway-skin";
 
 .navbar-home {
-    a {
-    position: absolute;
-    padding-left: 15px;
-    top: 15px;
+    a.home {
+      background: url("/images/home.svg") no-repeat;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      height: 40px;
+      width: 40px;
+
+      &:hover {
+        background-image: url("/images/home_hover.svg"); // TODO: Replace with sprite
+      }
   }
 }
 

@@ -47,25 +47,7 @@ body {
 .header {
     min-height: $min-header-height;
     background-color: $gray-lighter;
-
-    a {
-        &:link {
-          color: $body-bg;
-          text-decoration: none;
-        }
-        &:visited {
-          color: $body-bg;
-          text-decoration: none;
-        }
-        &:hover {
-          color: darken($body-bg, 15%);
-          text-decoration: none;
-        }
-        &:active {
-          color: $body-bg;
-          text-decoration: none;
-        }
-    }
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.16);
     
     /* Make the masthead heading the same height as the navigation */
     h3 {
