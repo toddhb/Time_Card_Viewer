@@ -15,10 +15,10 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
     a.home {
       background: url("/images/home.svg") no-repeat;
       position: absolute;
-      top: 10px;
+      top: 20px;
       left: 15px;
-      height: 40px;
-      width: 40px;
+      height: 30px;
+      width: 30px;
 
       &:hover {
         background-image: url("/images/home_hover.svg"); // TODO: Replace with sprite
