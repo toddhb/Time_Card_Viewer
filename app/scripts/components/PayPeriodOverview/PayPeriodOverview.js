@@ -36,18 +36,12 @@ class PayPeriod extends React.Component {
   // PayPeriods creates a list of PayPeriod Components
   // Needs tested with more data
   render() {
-    const { Timesheet } = this.props
+    const { timesheet } = this.props
     
-    const days = _.chain(Timesheet)
-      .get('DailyTotals.DateTotals', [])
-      .compact()
-      .map(each => <Day {...each} />)
-      .value()
-
+    const days = _.map(timesheet.days, each => <Day {...each} />)
     const dateRange = _.chain([_.first(days), _.last(days)])
          .compact()
-         .map(each => moment(each.props.Date.split('/'), 'M/DD/YYY'))
-         .map(each => each.format("MMMM DD"))
+         .map(each => each.props.date.format("MMMM DD"))
          .join(' - ')
          .value()
 
@@ -59,11 +53,9 @@ class PayPeriod extends React.Component {
             <h3 className="text-center"><small>{dateRange}</small></h3>
 
             <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
-
             <FluxComponent connectToStores={['kronos']}>
               <PeriodStats />
             </FluxComponent>
-
             <ul className="week-overview clearfix">
                 {days}
             </ul>
@@ -78,7 +70,6 @@ class OtherPayPeriodLink extends React.Component {
   // Shows a link to previous payperiod if current component's props.periodType="current"
   // else returns null
   render() {
-    console.log(this.props.periodType)
     if(this.props.periodType == "Current") {
       return(
         <Link to="previous" name="period-link previous">Previous Pay Period</Link>
@@ -110,10 +101,9 @@ class Day extends React.Component {
   // of hours worked that day. Both date and hours are 
   // passed through props.
   render() {
-    const date = moment(this.props.Date, 'M/DD/YYYY')
-    const grandTotal = this.props.GrandTotal
-    const AmountInTime = grandTotal ? grandTotal : '0:00'
-    var SplitTime = AmountInTime.split(':')
+    const { date, total } = this.props
+    const amountInTime = total ? total : '0:00'
+    var SplitTime = amountInTime.split(':')
     var hours = SplitTime[0]
     var minutes = (((SplitTime[1])/60+'').charAt(2) + ((SplitTime[1])/60+'').charAt(3)) ?
                   (((SplitTime[1])/60+'').charAt(2) + ((SplitTime[1])/60+'').charAt(3)) : '00'

@@ -57,119 +57,27 @@ class Overview extends React.Component {
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
 
-    const { Timesheet, Schedule, params } = this.props
+    const { timesheet, Schedule, params } = this.props
 
-    // inPunchesChain is a lodash chain which returns all the
-    // inpunches and adds a `type` and `time` property.
-    // 
-    // Expects:
-    // ```
-    // Timesheet: {
-    //   TotaledSpans: {
-    //     TotaledSpan: [
-    //       Date: "M/DD/YYYY", // The day the span.
-    //       InPunch.Punch: {
-    //          Date: "M/DD/YYYY, // The day of the span.
-    //          Time: "HH:mm", // The time of the in punch.
-    //          KronosTimeZone: {""}, // time zone of the Time.
-    //       }, 
-    //     ]
-    //   }
-    // }```
-    // Produces:
-    // ```
-    // [
-    //   {
-    //     type: "InPunch",
-    //     time: Moment, // A moment object represeting Time & KronosTimeZone
-    //     Date: "M/DD/YYYY, // The day of the span.
-    //   }
-    //  
-    // ]
-    // ```
-    const inPunchesChain = _.chain(Timesheet)
-      .get('TotaledSpans.TotaledSpan', [])
-      .filter({Date: moment(params.date).format("M/DD/YYYY")})
-      .pluck('InPunch.Punch')
-      .compact()
+    const inPunchesChain = _.chain(timesheet.inPunches)
+      .filter(eachPunch => moment(params.date).isSame(eachPunch.time, 'day'))
       .map(eachPunch => ({
           type: "InPunch",
-          time: kronosMoment(eachPunch.Date, eachPunch.Time,
-              eachPunch.KronosTimeZone),
-          Date: eachPunch.Date,
+          time: eachPunch.time,
       }))
 
-    // outPunchesChain is a lodash chain which returns all the
-    // outpunches and adds a `type` and `time` property.
-    // 
-    // Expects:
-    // ```
-    // Timesheet: {
-    //   TotaledSpans: {
-    //     TotaledSpan: [
-    //       Date: "M/DD/YYYY", // The day the span.
-    //       OutPunch.Punch: {
-    //          Date: "M/DD/YYYY, // The day of the span.
-    //          Time: "HH:mm", // The time of the in punch.
-    //          KronosTimeZone: {""}, // time zone of the Time.
-    //       }, 
-    //     ]
-    //   }
-    // }```
-    // Produces:
-    // ```
-    // [
-    //   {
-    //     type: "OutPunch",
-    //     time: Moment, // A moment object represeting Time & KronosTimeZone
-    //     Date: "M/DD/YYYY, // The day of the span.
-    //   }
-    // ]
-    // ```
-    const outPunchesChain = _.chain(Timesheet)
-      .get('TotaledSpans.TotaledSpan', [])
-      .filter({Date: moment(params.date).format("M/DD/YYYY")})
-      .pluck('OutPunch.Punch')
-      .compact()
+    const outPunchesChain = _.chain(timesheet.outPunches)
+      .filter(eachPunch => moment(params.date).isSame(eachPunch.time, 'day'))
       .map(eachPunch => {
           // XXX Hack! Need to pull from API in a better way
-          lastKronosTimeZone = eachPunch.KronosTimeZone
+          //lastKronosTimeZone = eachPunch.KronosTimeZone
           return {
             type: "OutPunch",
-            time: kronosMoment(eachPunch.Date, eachPunch.Time, 
-                eachPunch.KronosTimeZone),
-            Date: eachPunch.Date,
+            time: eachPunch.time,
           }
       })
 
-
-    // shiftsChain is a lodash chain which returns all the
-    // shifts and adds a `type` and `time` property.
-    // 
-    // Expects:
-    // ```
-    // Schedule: {
-    //   ScheduleItems: {
-    //     ScheduleShift: [
-    //       StartDate: "M/DD/YYY",
-    //       EndDate: "M/DD/YYY",
-    //       StartTime: "hh:mm",
-    //       EndTime: "hh:mm",
-    //     ]
-    //   }
-    // }```
-    // Produces:
-    // ```
-    // [
-    //   {
-    //     type: "scheduledIn",
-    //     time: Moment, // A moment object represeting Time & KronosTimeZone
-    //   }, {
-    //     type: "scheduledOut",
-    //     time: Moment, // A moment object represeting Time & KronosTimeZone
-    //   }
-    // ]
-    // ```
+    /*
     const shiftsChain = _.chain(Schedule)
       .get('ScheduleItems.ScheduleShift', [])
       .filter({StartDate: moment(params.date).format("M/DD/YYYY")})
@@ -188,10 +96,11 @@ class Overview extends React.Component {
         ]
       })
       .flatten()
+    */
 
     const punches = inPunchesChain
        .concat(outPunchesChain.value())
-       .concat(shiftsChain.value())
+       //.concat(shiftsChain.value())
        .sortBy('time')
        .map(punch => <Entry {...punch} />)
        .value()
