@@ -9,7 +9,6 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import { Actions, Flummox } from 'flummox'
 import request from 'superagent-bluebird-promise'
 import config from '../../config.js'
-import xmlparser from 'xmlparser'
 
 const { protocal, host, basepath } = config.api.location
 
@@ -27,10 +26,13 @@ async function apiRequest(payload) {
 }
 
 function parseXmlResponse(response) {
-    const text = response
-      .text
-      .match(/<Kronos_WFC[\s\S]*/)[0].replace(/(\r\n|\n|\r)/gm, '')
-    return xmlparser.parser(text)
+    const text = response.text
+      // Remove `<?xml version="1.0" encoding="UTF-8"?>`
+      .match(/<Kronos_WFC[\s\S]*/)[0]
+      // Remove all newline characters
+      .replace(/(\r\n|\n|\r)/gm, '')
+    const x2js = new X2JS()
+    return x2js.xml_str2json(text)
 }
 
 async function login() {
