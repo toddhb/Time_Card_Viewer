@@ -10,11 +10,12 @@ import { Store, } from 'flummox'
 import request from 'superagent-bluebird-promise'
 import config from '../../config.js'
 import xmlparser from 'xmlparser'
+import parser from './parsers'
 import flux from '../flux'
 import _ from 'lodash'
 
 const DEFAULT_STATE = {
-  Timesheet: {},
+  timesheet: {},
   Schedule: {},
 }
 
@@ -48,9 +49,7 @@ export default class KronosStore extends Store {
     this.state = DEFAULT_STATE
   }
   async handleTimesheetFetch(data) {
-    this.setState({
-      Timesheet: data.Kronos_WFC.Response.Timesheet
-    })
+    this.setState(parser(data))
   }
   async handleScheduleFetch(data) {
     this.setState({
