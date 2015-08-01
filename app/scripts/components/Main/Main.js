@@ -8,14 +8,14 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 import React from 'react'
 import Router, { RouteHandler, Link} from "react-router"
-import Navbar from "./Navbar.js"
-import Footer from "./Footer.js"
+import Navbar from "../Navbar/Navbar.js"
+import Footer from "../Footer/Footer.js"
     
 class NavContainer extends React.Component {
   render() {
     return (
-        <div className="container-fluid">
-            <Navbar title="Steve's Time" />
+        <div className="container-fluid header">
+            <Navbar />
         </div>
     ) 
   } 
@@ -24,7 +24,7 @@ class NavContainer extends React.Component {
 class BodyContainer extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="container main">
         <RouteHandler {...this.params} />
       </div>
     ) 

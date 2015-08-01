@@ -1,0 +1,35 @@
+/*
+ * TimeCard View
+ * Copyright ©2015 Thomas Nelson, Jacob Nichols, David Opp, Todd Brochu,
+Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE text file in the root directory of this source tree.
+ *
+ *  home.svg and home_hover.svg are created by Filip Malinowski  (House at https://henounproject.com/search/?q=home&i=16506)
+ *
+ */
+@import "conway-skin";
+
+.navbar-home {
+    a.home {
+      background: url("/images/home.svg") no-repeat;
+      position: absolute;
+      top: 20px;
+      left: 15px;
+      height: 30px;
+      width: 30px;
+
+      &:hover {
+        background-image: url("/images/home_hover.svg"); // TODO: Replace with sprite
+      }
+  }
+}
+
+.navbar-logo {
+  a {
+    line-height: 45px;
+    position: relative;
+    top: 12px;
+  }
+}

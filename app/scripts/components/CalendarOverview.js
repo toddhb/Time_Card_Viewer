@@ -8,7 +8,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 import React from 'react'
 import moment from "moment"
-import Calendar from "./Calendar.js"
+import Calendar from "./Calendar/Calendar.js"
     
 class CalendarMonthHeader extends React.Component {
   render() {

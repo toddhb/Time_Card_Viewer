@@ -11,15 +11,19 @@ import Router, { RouteHandler, Link} from "react-router"
 
 export default class Navbar {
   render() {
+    const url = "http://www.con-way.com/en"
+    const companyLogo = "/images/logo.gif"
     return (
-        <div className="header">
-          <h3 className="text-muted">
-            <Link to="/">{this.props.title}</Link>
-            <Link to="/calendar" className="nav-icon pull-right">
-                <i className="fa fa-calendar"></i>
-            </Link>
-          </h3>
+      <div>
+        <div className="navbar-home">
+          <Link to="app" className="home"></Link>
         </div>
+        <div className="text-center navbar-logo">
+          <a href={url}>
+            <img src={companyLogo} width="104" height="30" />
+          </a>
+        </div>
+      </div>
     )
   }
 }
