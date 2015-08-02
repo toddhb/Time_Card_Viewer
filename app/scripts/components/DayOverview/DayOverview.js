@@ -161,21 +161,15 @@ class DayHeader extends React.Component {
 
 class DayStats extends React.Component {
   render() {
-    const { date, Timesheet } = this.props
-    const [hours, minutes] = _.chain(Timesheet)
-        .get('DailyTotals.DateTotals', [])
-        .find(each => each.Date == moment(date).format("M/DD/YYYY"))
-        .get('GrandTotal', '0:00')
-        .thru(total => moment(total, 'h:mm'))
-        .thru(total => [
-            total.hours(), ((total.minutes()/60+'').charAt(2) + (total.minutes()/60+'').charAt(3)) ?
-                           ((total.minutes()/60+'').charAt(2) + (total.minutes()/60+'').charAt(3)) : '00'
-        ])
+    const { date, timesheet } = this.props
+    const total = _.chain(timesheet.days)
+        .find(each => moment(date).isSame(each.date, 'day'))
+        .get('total')
         .value()
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{hours}.{minutes}</span></p>
+          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{total}</span></p>
         </div>
       </div>   
     )
