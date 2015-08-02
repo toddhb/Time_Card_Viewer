@@ -6,29 +6,13 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  * This source code is licensed under the MIT license found in the
  * LICENSE text file in the root directory of this source tree.
  */
-import React from "react"
+import React, { PropTypes } from "react"
 import { Link } from "react-router" 
 import moment from "moment"
 import _ from "lodash"
-import {createCalendar} from "../Calendar/Calendar.js"
 import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
-
-class ClickableDay extends React.Component {
-  render() {
-    const url_date = moment(this.props.date).format("YYYY-MM-DD")
-    const url_day = moment(this.props.date).format("D")
-    return (
-      <div>
-        <Link to="day" params={{date: url_date}} >
-          {url_day}
-        </Link>
-    </div>
-    )
-  }
-}
-
-const Calendar = createCalendar(ClickableDay)
+import DayOverviewCalendar from '../DayOverviewCalendar/DayOverviewCalendar'
 
 export default class DayOverview extends React.Component {
   render() {
@@ -120,7 +104,7 @@ class Overview extends React.Component {
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="calendar hidden-xs hidden-sm">
-              <Calendar year={year} month={month-1} headers={dayHeaders} />
+              <DayOverviewCalendar year={year} month={month-1} headers={dayHeaders} />
             </div>
               <FluxComponent connectToStores={['kronos']}>
                 <DayStats date={this.props.params.date}/>
@@ -160,6 +144,9 @@ class DayHeader extends React.Component {
 }
 
 class DayStats extends React.Component {
+  propTypes: {
+    timesheet: PropTypes.object.isRequired,
+  }
   render() {
     const { date, timesheet } = this.props
     const total = _.chain(timesheet.days)

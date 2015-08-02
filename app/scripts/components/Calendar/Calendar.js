@@ -9,7 +9,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import React from "react"
 import _ from "underscore"
 
-export const createCalendar = (Day) => class extends React.Component {
+export default (Day) => class extends React.Component {
   daysInMonth(year, month) {
     return new Date(year, month+1, 0).getDate()
   }
@@ -67,12 +67,10 @@ export const createCalendar = (Day) => class extends React.Component {
   }
 }
 
-class DefaultDay extends React.Component {
+export class DefaultDay extends React.Component {
   render() {
     return (
       <div>{this.props.date.getDate()}</div>
     )
   } 
 }
-
-export default createCalendar(DefaultDay)
