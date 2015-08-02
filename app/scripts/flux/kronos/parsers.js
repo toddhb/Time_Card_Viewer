@@ -88,6 +88,24 @@ export default function (kronosData) {
             ),
           }
         })
+        .value(),
+      exceptions: _.chain(KronosTimesheet)
+        .get('TotaledSpans.TotaledSpan', [])
+        .map(eachSpan => _.chain(eachSpan)
+            .get('Exceptions.TimekeepingException')
+            .thru(x => [x])
+            .flatten()
+            .compact()
+            .map(eachException => ({
+              date: moment(eachSpan._Date, 'M/DD/YYYY'),
+              differenceToLimit: eachException._DifferenceToLimit, // TODO parse
+              duration: eachException._DurationOfException, // TODO parse
+              inPunchFlag: eachException._InPunchFlag, // I don't know what this is
+            }))
+            .value()
+        )
+        .filter(each => each.length > 0)
+        .flatten()
         .value()
     }
   }
