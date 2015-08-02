@@ -32,6 +32,15 @@ export default function (kronosData) {
   //       {
   //          time: <Moment>
   //       }
+  //     ],
+  //     exceptions: [
+  //       {
+  //          date: <Moment>
+  //          date: <String>
+  //          differenceToLimit: <String> // TODO may change
+  //          duration: <String> // TODO may change
+  //          inPunchFlag: <String> // TODO may change
+  //       }
   //     ]
   // }
   const KronosTimesheet = kronosData.Kronos_WFC.Response.Timesheet
@@ -98,6 +107,7 @@ export default function (kronosData) {
             .compact()
             .map(eachException => ({
               date: moment(eachSpan._Date, 'M/DD/YYYY'),
+              type: eachException._ExceptionTypeName,
               differenceToLimit: eachException._DifferenceToLimit, // TODO parse
               duration: eachException._DurationOfException, // TODO parse
               inPunchFlag: eachException._InPunchFlag, // I don't know what this is
