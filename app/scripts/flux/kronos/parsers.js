@@ -36,7 +36,7 @@ export default function (kronosData) {
   //     exceptions: [
   //       {
   //          date: <Moment>
-  //          date: <String>
+  //          type: <String> // LATE or SHORT
   //          differenceToLimit: <String> // TODO may change
   //          duration: <String> // TODO may change
   //          inPunchFlag: <String> // TODO may change
@@ -57,7 +57,7 @@ export default function (kronosData) {
           .get('DailyTotals.DateTotals', [])
           .map(each => ({
               date: moment(each._Date, 'M/DD/YYYY'),
-              total: each._GrandTotal || "0:00", // TODO parse
+              total: parseTime(each._GrandTotal || "0:00"), // TODO parse
               totals: _.chain(each)
                   .get('Totals.Total', [])
                   .map(each => camelCaseProperties(each))
@@ -108,8 +108,8 @@ export default function (kronosData) {
             .map(eachException => ({
               date: moment(eachSpan._Date, 'M/DD/YYYY'),
               type: eachException._ExceptionTypeName,
-              differenceToLimit: eachException._DifferenceToLimit, // TODO parse
-              duration: eachException._DurationOfException, // TODO parse
+              differenceToLimit: parseTime(eachException._DifferenceToLimit),
+              duration: parseTime(eachException._DurationOfException), // TODO parse
               inPunchFlag: eachException._InPunchFlag, // I don't know what this is
             }))
             .value()
@@ -125,7 +125,10 @@ function camelCaseProperties(object) {
   return _.mapKeys(object, (value, key) => _.camelCase(key))
 }
 
-function parseTimesheet(timesheet) {
-  return {
-  }
+function parseTime(input) {
+  return _.chain(input)
+      .thru(x => moment(x, "HH:mm"))
+      .thru(x => x.hours() + (x.minutes() / 60))
+      .thru(x => _.round(x, 2))
+      .value()
 }

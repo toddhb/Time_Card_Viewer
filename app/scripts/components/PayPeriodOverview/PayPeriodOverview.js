@@ -37,7 +37,8 @@ class PayPeriod extends React.Component {
   // Needs tested with more data
   render() {
     const { timesheet } = this.props
-    
+    console.log(timesheet)
+
     const days = _.map(timesheet.days, each => <Day {...each} />)
     const dateRange = _.chain([_.first(days), _.last(days)])
          .compact()
@@ -103,10 +104,6 @@ class Day extends React.Component {
   render() {
     const { date, total } = this.props
     const amountInTime = total ? total : '0:00'
-    var SplitTime = amountInTime.split(':')
-    var hours = SplitTime[0]
-    var minutes = (((SplitTime[1])/60+'').charAt(2) + ((SplitTime[1])/60+'').charAt(3)) ?
-                  (((SplitTime[1])/60+'').charAt(2) + ((SplitTime[1])/60+'').charAt(3)) : '00'
     return (
       <li className="day-as-txt">
         <div className="time-entry shadowed-box">
@@ -115,7 +112,7 @@ class Day extends React.Component {
                 <p className="day-as-text text-center">{date.format("dddd")}</p>
                 <p className="date text-center"><span className="day-as-number">{date.format("M/D")}</span></p>
             </div>
-            <p className="hours-worked-text"><span className="hours-worked-number text-center">{hours}.{minutes}</span> hours worked</p>
+            <p className="hours-worked-text"><span className="hours-worked-number text-center">{total}</span> hours worked</p>
           </Link>
         </div>
       </li>
