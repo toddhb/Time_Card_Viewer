@@ -17,23 +17,25 @@ import DayOverviewCalendar from '../DayOverviewCalendar/DayOverviewCalendar'
 export default class DayOverview extends React.Component {
   render() {
     return (
-      <FluxComponent connectToStores={['kronos']}>
+      <FluxComponent 
+        connectToStores={['kronos']}
+        stateGetter={([kronos]) => {
+          const { params } = this.props
+          const date = moment(params.date, 'YYYY-MM-DD')
+          const day = kronos.getDay(date)
+          const inPunches = kronos.getInPunchesForDate(date)
+          const outPunches = kronos.getOutPunchesForDate(date)
+          return {
+            day,
+            inPunches, 
+            outPunches,
+          }
+        }}
+      >
         <Overview {...this.props} />
       </FluxComponent>
     )
   }
-}
-
-function kronosMoment(date, time, kronosTimeZone) {
-  // The following are the expected formats and examples
-  // date: M/DD/YYYY - 10/01/1990
-  // time: HH:mm - 10:14
-  // kronosTimeZone - (GMT -05:00) Eastern Time
-  const timeZoneOffset = kronosTimeZone ? kronosTimeZone.match(/[+-]\d\d:\d\d/)[0] : '-07:00'
-  return moment(
-    `${date} ${time} ${timeZoneOffset}`,
-    'M/DD/YYYY HH:mm Z'
-  )
 }
 
 class Overview extends React.Component {                              
@@ -41,25 +43,21 @@ class Overview extends React.Component {
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
 
-    const { timesheet, Schedule, params } = this.props
+    const { params, day, inPunches, outPunches } = this.props
 
-    const inPunchesChain = _.chain(timesheet.inPunches)
-      .filter(eachPunch => moment(params.date).isSame(eachPunch.time, 'day'))
-      .map(eachPunch => ({
-          type: "InPunch",
-          time: eachPunch.time,
-      }))
-
-    const outPunchesChain = _.chain(timesheet.outPunches)
-      .filter(eachPunch => moment(params.date).isSame(eachPunch.time, 'day'))
-      .map(eachPunch => {
+    const inPunchesChain = _.chain(inPunches)
+        .map(each => _.assign({
+            type: "InPunch",
+          })
+        )
+    const outPunchesChain = _.chain(inPunches)
+        .map(each => {
           // XXX Hack! Need to pull from API in a better way
           //lastKronosTimeZone = eachPunch.KronosTimeZone
-          return {
+          return _.assign(each, {
             type: "OutPunch",
-            time: eachPunch.time,
-          }
-      })
+          })
+        })
 
     /*
     const shiftsChain = _.chain(Schedule)
@@ -106,8 +104,12 @@ class Overview extends React.Component {
             <div className="calendar hidden-xs hidden-sm">
               <DayOverviewCalendar year={year} month={month-1} headers={dayHeaders} />
             </div>
-              <FluxComponent connectToStores={['kronos']}>
-                <DayStats date={this.props.params.date}/>
+              <FluxComponent connectToStores={{
+                  kronos: store => ({
+                    day: store.getDay(moment(this.props.params.date, 'YYYY-MM-DD'))
+                  })
+              }}>
+                <DayStats />
               </FluxComponent>
           </div>
         </div>
@@ -144,19 +146,12 @@ class DayHeader extends React.Component {
 }
 
 class DayStats extends React.Component {
-  propTypes: {
-    timesheet: PropTypes.object.isRequired,
-  }
   render() {
-    const { date, timesheet } = this.props
-    const total = _.chain(timesheet.days)
-        .find(each => moment(date).isSame(each.date, 'day'))
-        .get('total')
-        .value()
+    const { day } = this.props
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{total}</span></p>
+          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{day.total}</span></p>
         </div>
       </div>   
     )

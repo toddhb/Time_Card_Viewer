@@ -15,7 +15,12 @@ import flux from '../flux'
 import _ from 'lodash'
 
 const DEFAULT_STATE = {
-  timesheet: {},
+  timesheet: {
+    days: [],
+    inPunches: [],
+    outPunches: [],
+    exceptions: [],
+  },
   Schedule: {},
 }
 
@@ -55,5 +60,23 @@ export default class KronosStore extends Store {
     this.setState({
       Schedule: data.Kronos_WFC.Response.Schedule
     })
+  }
+  getDay(date) {
+    return _.find(
+        this.state.timesheet.days, 
+        eachDay => date.isSame(eachDay.date, 'day')
+      )
+  }
+  getInPunchesForDate(date) {
+    return _.filter(
+        this.state.timesheet.inPunches, 
+        eachDay => date.isSame(eachDay.time, 'day')
+      )
+  }
+  getOutPunchesForDate(date) {
+    return _.filter(
+        this.state.timesheet.outPunches, 
+        eachDay => date.isSame(eachDay.time, 'day')
+      )
   }
 }
