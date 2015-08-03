@@ -12,7 +12,6 @@ import Router, { Route, RouteHandler, DefaultRoute, NotFoundRoute} from "react-r
 import { Resolver } from "react-resolver"
 import { createRedux } from "redux"
 import { Provider } from "redux/react"
-import CalendarOverview from "./components/CalendarOverview"
 import DayOverview from "./components/DayOverview/DayOverview"
 import Main from "./components/Main/Main"
 import NotFound from "./components/NotFound/NotFound"
