@@ -12,7 +12,7 @@ import _ from "lodash"
 import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
-import PeriodStats from "../PeriodStats/PeriodStats.js"
+import PayPeriodStats from "../PayPeriodStats/PayPeriodStats.js"
   
 
 export default class PayPeriodOverview extends React.Component {
@@ -37,7 +37,6 @@ class PayPeriod extends React.Component {
   // Needs tested with more data
   render() {
     const { timesheet } = this.props
-    console.log(timesheet)
 
     const days = _.map(timesheet.days, each => <Day {...each} />)
     const dateRange = _.chain([_.first(days), _.last(days)])
@@ -55,7 +54,7 @@ class PayPeriod extends React.Component {
 
             <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
             <FluxComponent connectToStores={['kronos']}>
-              <PeriodStats />
+              <PayPeriodStats />
             </FluxComponent>
             <ul className="week-overview clearfix">
                 {days}

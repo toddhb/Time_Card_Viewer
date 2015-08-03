@@ -13,7 +13,7 @@ import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
 
-export default class PeriodStats extends React.Component {
+export default class PayPeriodStats extends React.Component {
   render() {
     const { Timesheet } = this.props
 
