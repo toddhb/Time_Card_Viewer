@@ -10,6 +10,8 @@ import React from 'react'
 import FluxComponent from 'flummox/component';
 import IsLoggedIn from "../IsLoggedIn/IsLoggedIn"
 import IsNotLoggedIn from "../IsNotLoggedIn/IsNotLoggedIn"
+import IsDataAvailable from "../IsDataAvailable/IsDataAvailable"
+import IsDataNotAvailable from "../IsDataNotAvailable/IsDataNotAvailable"
 
 export default class Page extends React.Component {
   render() {
@@ -26,7 +28,14 @@ export default class PageInner extends React.Component {
     return (
       <div>
         <IsLoggedIn>
+          <IsDataAvailable>
             {this.props.children}
+          </IsDataAvailable>
+        </IsLoggedIn>
+        <IsLoggedIn>
+          <IsDataNotAvailable>
+            <h1>No Data</h1>
+          </IsDataNotAvailable>
         </IsLoggedIn>
         <IsNotLoggedIn>
             <h1>Login Required</h1>

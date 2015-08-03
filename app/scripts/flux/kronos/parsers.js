@@ -43,9 +43,9 @@ export function parseTimesheet(kronosData) {
   //       }
   //     ]
   // }
-  const KronosTimesheet = kronosData.Kronos_WFC.Response.Timesheet
-  const [startDate, endDate] = _.chain(KronosTimesheet)
-      .get('Period.TimeFramePeriod._PeriodDateSpan')
+  const kronosResponse = kronosData.Kronos_WFC.Response
+  const [startDate, endDate] = _.chain(kronosResponse)
+      .get('Timesheet.Period.TimeFramePeriod._PeriodDateSpan', '')
       .thru(periodString => periodString.split(' - '))
       .map(date => moment(date, 'M/DD/YYYY'))
       .value()
@@ -53,8 +53,8 @@ export function parseTimesheet(kronosData) {
     timesheet: {
       startDate: startDate,
       endDate: endDate,
-      days: _.chain(KronosTimesheet)
-          .get('DailyTotals.DateTotals', [])
+      days: _.chain(kronosResponse)
+          .get('Timesheet.DailyTotals.DateTotals', [])
           .map(each => ({
               date: moment(each._Date, 'M/DD/YYYY'),
               total: parseTime(each._GrandTotal || "0:00"), // TODO parse
@@ -66,8 +66,8 @@ export function parseTimesheet(kronosData) {
           )
           .filter(each => (startDate <= each.date) && (each.date <= endDate))
           .value(),
-      inPunches: _.chain(KronosTimesheet)
-        .get('TotaledSpans.TotaledSpan', [])
+      inPunches: _.chain(kronosResponse)
+        .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => _.get(eachSpan, 'InPunch.Punch'))
         .compact()
         .map(eachPunch => {
@@ -82,8 +82,8 @@ export function parseTimesheet(kronosData) {
           }
         })
         .value(),
-      outPunches: _.chain(KronosTimesheet)
-        .get('TotaledSpans.TotaledSpan', [])
+      outPunches: _.chain(kronosResponse)
+        .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => _.get(eachSpan, 'OutPunch.Punch'))
         .compact()
         .map(eachPunch => {
@@ -98,8 +98,8 @@ export function parseTimesheet(kronosData) {
           }
         })
         .value(),
-      exceptions: _.chain(KronosTimesheet)
-        .get('TotaledSpans.TotaledSpan', [])
+      exceptions: _.chain(kronosResponse)
+        .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => _.chain(eachSpan)
             .get('Exceptions.TimekeepingException')
             .thru(x => [x])
