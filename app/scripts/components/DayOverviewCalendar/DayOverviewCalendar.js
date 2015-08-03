@@ -13,9 +13,6 @@ import moment from 'moment'
 
 @calendar
 export default class DayOverviewCalendar extends React.Component {
-  propTypes: {
-    date: PropTypes.instanceOf(moment)
-  }
   render() {
     const url_date = moment(this.props.date).format("YYYY-MM-DD")
     const url_day = moment(this.props.date).format("D")
@@ -27,5 +24,8 @@ export default class DayOverviewCalendar extends React.Component {
     </div>
     )
   }
+}
+DayOverviewCalendar.propTypes = {
+  date: PropTypes.string,
 }
 
