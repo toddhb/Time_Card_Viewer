@@ -14,7 +14,7 @@ import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
 import PayPeriodStats from "../PayPeriodStats/PayPeriodStats.js"
 import PayPeriodDay from "../PayPeriodDay/PayPeriodDay"
-  
+import Page from '../Page/Page'
 
 export default class PayPeriodOverview extends React.Component {
   // PayPeriodsOverview connects to the datastore timesheet
@@ -47,22 +47,24 @@ class PayPeriod extends React.Component {
          .value()
 
     return (
-      <div className="row time-overview">
-        <div className="col-xs-12">
-          <div className="payperiod-overview">
-            <PeriodHeader periodType={this.props.periodType} />
-            <h3 className="text-center"><small>{dateRange}</small></h3>
+      <Page>
+        <div className="row time-overview">
+          <div className="col-xs-12">
+            <div className="payperiod-overview">
+              <PeriodHeader periodType={this.props.periodType} />
+              <h3 className="text-center"><small>{dateRange}</small></h3>
 
-            <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
-            <FluxComponent connectToStores={['kronos']}>
-              <PayPeriodStats />
-            </FluxComponent>
-            <ul className="week-overview clearfix">
-                {days}
-            </ul>
+              <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
+              <FluxComponent connectToStores={['kronos']}>
+                <PayPeriodStats />
+              </FluxComponent>
+              <ul className="week-overview clearfix">
+                  {days}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      </Page>
     )
   }
 }

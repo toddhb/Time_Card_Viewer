@@ -13,6 +13,7 @@ import _ from "lodash"
 import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
 import DayOverviewCalendar from '../DayOverviewCalendar/DayOverviewCalendar'
+import Page from '../Page/Page'
 
 export default class DayOverview extends React.Component {
   render() {
@@ -94,7 +95,7 @@ class Overview extends React.Component {
     const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
     
     return (
-      <div>  
+      <Page>  
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
@@ -113,7 +114,7 @@ class Overview extends React.Component {
               </FluxComponent>
           </div>
         </div>
-      </div>
+      </Page>
     )
   }
 }

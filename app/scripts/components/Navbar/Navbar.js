@@ -8,8 +8,17 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 import React from 'react'
 import Router, { RouteHandler, Link} from "react-router"
+import IsLoggedIn from "../IsLoggedIn/IsLoggedIn"
+import IsNotLoggedIn from "../IsNotLoggedIn/IsNotLoggedIn"
+import flux from "../../flux/flux"
 
 export default class Navbar {
+  handleLogin = () => {
+    flux.getActions('kronos').login()
+  }
+  handleLogout = () => {
+    flux.getActions('kronos').logout()
+  }
   render() {
     const url = "http://www.con-way.com/en"
     const companyLogo = "/images/logo.gif"
@@ -22,6 +31,20 @@ export default class Navbar {
           <a href={url}>
             <img src={companyLogo} width="104" height="30" />
           </a>
+        </div>
+        <div className="pull-right">
+          <IsLoggedIn>
+            <button className="btn btn-default"
+                    onClick={this.handleLogout}>
+              Logout
+            </button>
+          </IsLoggedIn>
+          <IsNotLoggedIn>
+            <button className="btn btn-default"
+                    onClick={this.handleLogin}>
+              Login 
+            </button>
+          </IsNotLoggedIn>
         </div>
       </div>
     )

@@ -9,7 +9,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 
-export default function (kronosData) {
+export function parseTimesheet(kronosData) {
   // { 
   //   timesheet: {
   //     startDate: <Moment>
@@ -121,14 +121,33 @@ export default function (kronosData) {
   }
 }
 
+export function parseLogin(kronosData) {
+  const kronosResponse = kronosData.Kronos_WFC.Response
+  return {
+    status: kronosResponse._Status,
+    username: kronosResponse._Username,
+    errorCode: kronosResponse._ErrorCode || "",
+  } 
+}
+export function parseLogout(kronosData) {
+  const kronosResponse = kronosData.Kronos_WFC.Response
+  return {
+    status: kronosResponse._Status,
+    errorCode: kronosResponse._ErrorCode || "",
+  } 
+}
+
 function camelCaseProperties(object) {
   return _.mapKeys(object, (value, key) => _.camelCase(key))
 }
 
 function parseTime(input) {
   return _.chain(input)
+      // Convert input string to a moment object
       .thru(x => moment(x, "HH:mm"))
+      // Convert to the number of hours worked
       .thru(x => x.hours() + (x.minutes() / 60))
+      // Round to 2 digits
       .thru(x => _.round(x, 2))
       .value()
 }

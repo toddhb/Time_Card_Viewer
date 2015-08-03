@@ -10,11 +10,12 @@ import { Store, } from 'flummox'
 import request from 'superagent-bluebird-promise'
 import config from '../../config.js'
 import xmlparser from 'xmlparser'
-import parser from './parsers'
+import { parseTimesheet, parseLogin, parseLogout } from './parsers'
 import flux from '../flux'
 import _ from 'lodash'
 
 const DEFAULT_STATE = {
+  username: null,
   timesheet: {
     days: [],
     inPunches: [],
@@ -30,6 +31,14 @@ export default class KronosStore extends Store {
 
     const kronosActions = flux.getActions('kronos')
 
+    this.registerAsync(kronosActions.login, 
+      () => console.log('kronosActions.login: started'), 
+      this.handleLogin, 
+      (error) => console.log('kronosActions.login: error', error))
+    this.registerAsync(kronosActions.logout, 
+      () => console.log('kronosActions.logout: started'), 
+      this.handleLogout, 
+      (error) => console.log('kronosActions.logout: error', error))
     this.registerAsync(kronosActions.fetchPreviousTimesheet, 
       () => console.log('kronosActions.fetchPreviousTimesheet: started'), 
       this.handleTimesheetFetch, 
@@ -53,8 +62,24 @@ export default class KronosStore extends Store {
 
     this.state = DEFAULT_STATE
   }
+  async handleLogin(data) {
+    const parsedData = parseLogin(data)
+    if (parsedData.status == "Success"|| parsedData.errorCode == "1313") {
+      this.setState({
+        username: parsedData.username,
+      })
+    } 
+  }
+  async handleLogout(data) {
+    const parsedData = parseLogout(data)
+    if (parsedData.status == "Success") {
+      this.setState({
+        username: null,
+      })
+    }
+  }
   async handleTimesheetFetch(data) {
-    this.setState(parser(data))
+    this.setState(parseTimesheet(data))
   }
   async handleScheduleFetch(data) {
     this.setState({
@@ -78,5 +103,8 @@ export default class KronosStore extends Store {
         this.state.timesheet.outPunches, 
         eachDay => date.isSame(eachDay.time, 'day')
       )
+  }
+  isLoggedIn() {
+    return !!this.state.username
   }
 }

@@ -31,7 +31,8 @@ function parseXmlResponse(response) {
       .match(/<Kronos_WFC[\s\S]*/)[0]
       // Remove all newline characters
       .replace(/(\r\n|\n|\r)/gm, '')
-    const x2js = new X2JS()
+    const x2js = new X2JS({
+    })
     return x2js.xml_str2json(text)
 }
 
@@ -40,6 +41,14 @@ async function login() {
      `<?xml version='1.0' encoding='UTF-8' ?>
 <Kronos_WFC Version="1.0" WFCVersion="7.0.6.436" TimeStamp="7/14/2015 9:39PM GMT-07:00">
     <Request Object="System" Action="Logon" Username="XMLUSER" Password="ibswutws" /> 
+</Kronos_WFC>`)
+}
+
+async function logout() {
+    return apiRequest(
+     `<?xml version='1.0' encoding='UTF-8' ?>
+<Kronos_WFC Version="1.0" WFCVersion="7.0.6.436" TimeStamp="7/14/2015 9:39PM GMT-07:00">
+    <Request Object="System" Action="Logoff" /> 
 </Kronos_WFC>`)
 }
 
@@ -84,32 +93,33 @@ function scheduleRequest(personNumber, periodDateSpan) {
 }
 
 export default class KronosActions extends Actions {
+  async login() {
+    return parseXmlResponse(await login())
+  }
+  async logout() {
+    return parseXmlResponse(await logout())
+  }
   async fetchPerviousTimesheet() {
-    await login()
     return parseXmlResponse(await apiRequest(
       timesheetXmlRequest("N0686", 0) 
     ))
   }
   async fetchCurrentTimesheet() {
-    await login()
     return parseXmlResponse(await apiRequest(
       timesheetXmlRequest("N0686", 1) 
     ))
   }
   async fetchNextTimesheet() {
-    await login()
     return parseXmlResponse(await apiRequest(
       timesheetXmlRequest("N0686", 2) 
     ))
   }
   async fetchDateRangeTimesheet(dateRange) {
-    await login()
     return parseXmlResponse(await apiRequest(
       timesheetXmlRequest("N0686", 9, dateRange) 
     ))
   }
   async fetchDateRangeSchedule(dateRange) {
-    await login()
     return parseXmlResponse(await apiRequest(
       scheduleRequest("N0686", dateRange) 
     ))
