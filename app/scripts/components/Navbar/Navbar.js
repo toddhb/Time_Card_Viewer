@@ -32,18 +32,16 @@ export default class Navbar {
             <img src={companyLogo} width="104" height="30" />
           </a>
         </div>
-        <div className="pull-right">
+        <div className="navbar-button">
           <IsLoggedIn>
-            <button className="btn btn-default"
-                    onClick={this.handleLogout}>
-              Logout
-            </button>
+            <a onClick={this.handleLogout}>
+              Log out
+            </a>
           </IsLoggedIn>
           <IsNotLoggedIn>
-            <button className="btn btn-default"
-                    onClick={this.handleLogin}>
-              Login 
-            </button>
+            <a onClick={this.handleLogin}>
+              Log in
+            </a>
           </IsNotLoggedIn>
         </div>
       </div>
