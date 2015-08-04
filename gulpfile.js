@@ -95,14 +95,10 @@ function checkHeaderSendResponse(req, res) {
 
     var ceid = req.get('ceid');
     if(ceid == undefined) {
-        gutil.log("ceid header was not in the get request");
         res.redirect(redirectAddress);
     } else {
-        gutil.log("ceid:" + ceid);
         ceid = decodeURIComponent(ceid.replace(/\+/g, ' '));
-        gutil.log("URLdecoded:" + ceid);
         ceid = new Buffer(ceid, 'base64');
-        gutil.log("base64decoded:" + ceid);
         
         var options = {
             root:  __dirname + '/dist',
