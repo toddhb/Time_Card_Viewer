@@ -24,9 +24,11 @@ export default class Navbar {
     const companyLogo = "/images/logo.gif"
     return (
       <div>
-        <div className="navbar-home">
-          <Link to="app" className="home"></Link>
-        </div>
+        <IsLoggedIn>
+          <div className="navbar-home">
+            <Link to="app" className="home"></Link>
+          </div>
+        </IsLoggedIn>
         <div className="text-center navbar-logo">
           <a href={url}>
             <img src={companyLogo} width="104" height="30" />
