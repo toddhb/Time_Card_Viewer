@@ -97,6 +97,12 @@ export default class KronosStore extends Store {
         eachDay => date.isSame(eachDay.date, 'day')
       )
   }
+  getExceptionsForDate(date) {
+    return _.filter(
+        this.state.timesheet.exceptions, 
+        eachDay => date.isSame(eachDay.time, 'day')
+      )
+  }
   getInPunchesForDate(date) {
     return _.filter(
         this.state.timesheet.inPunches, 

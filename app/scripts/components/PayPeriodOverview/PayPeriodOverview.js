@@ -40,6 +40,7 @@ class PayPeriod extends React.Component {
     const { timesheet } = this.props
 
     const days = _.map(timesheet.days, each => <PayPeriodDay {...each} />)
+
     const startDate = timesheet.startDate 
       ? timesheet.startDate.format('MMMM DD')
       : ''
@@ -47,7 +48,13 @@ class PayPeriod extends React.Component {
       ? timesheet.endDate.format('MMMM DD')
       : ''
     const dateRange = startDate + " - " + endDate
-
+                       
+    const exceptions = (<FluxComponent connectToStores={{
+                         kronos: store => ({
+                           exceptions: store.getExceptionsForDate(each.date)
+                         })
+                       }}> 
+                       </FluxComponent>)
     return (
       <Page>
         <div className="row time-overview">
@@ -61,7 +68,7 @@ class PayPeriod extends React.Component {
                 <PayPeriodStats />
               </FluxComponent>
               <ul className="week-overview clearfix">
-                  {days}
+                {days}
               </ul>
             </div>
           </div>
