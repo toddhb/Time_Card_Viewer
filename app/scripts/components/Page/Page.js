@@ -31,7 +31,7 @@ export default class PageInner extends React.Component {
           {this.props.children}
         </IsLoggedIn>
         <IsNotLoggedIn>
-          <h1>Login Required</h1>
+          <h1 className="text-center">Login Required</h1>
         </IsNotLoggedIn>
       </div>
     )
