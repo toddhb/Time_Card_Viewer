@@ -99,7 +99,7 @@ class Overview extends React.Component {
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? punches : <div><h3>No punches today</h3></div>}
+            { punches.length > 0 ? punches : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="calendar hidden-xs hidden-sm">
