@@ -33,11 +33,12 @@ ul.week-overview {
 .time-entry {
     position: relative;
     margin-bottom: 15px;
-    $min-height: 60px;
-    min-height: $min-height;
+    $height: 60px;
+    height: 60px;
 
     @media (min-width: $screen-md-min) {
-        padding-top: $min-height + 17px;
+        padding-top: $height + 17px;
+        height: 120px;
     }
 
 
@@ -49,7 +50,7 @@ ul.week-overview {
           top: 0;
           width: 100%;
       }
-      height: $min-height;
+      height: $height;
       min-width: $box-width;
       background-color: $brand-success;   
 
