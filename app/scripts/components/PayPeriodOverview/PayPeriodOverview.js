@@ -46,7 +46,7 @@ class PayPeriod extends React.Component {
     const endDate = timesheet.endDate
       ? timesheet.endDate.format('MMMM DD')
       : ''
-    const dateRange = startDate + endDate
+    const dateRange = startDate + " - " + endDate
 
     return (
       <Page>
