@@ -25,7 +25,7 @@ export default class IsLoggedIn extends React.Component {
 class IsLoggedInInner extends React.Component {
   render() {
     if (this.props.isLoggedIn) {
-      return this.props.children
+      return <div>{this.props.children}</div>
     } else {
       return null
     }

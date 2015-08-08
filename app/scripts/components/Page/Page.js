@@ -28,17 +28,10 @@ export default class PageInner extends React.Component {
     return (
       <div>
         <IsLoggedIn>
-          <IsDataAvailable>
-            {this.props.children}
-          </IsDataAvailable>
-        </IsLoggedIn>
-        <IsLoggedIn>
-          <IsDataNotAvailable>
-            <h1>No Data</h1>
-          </IsDataNotAvailable>
+          {this.props.children}
         </IsLoggedIn>
         <IsNotLoggedIn>
-            <h1>Login Required</h1>
+          <h1>Login Required</h1>
         </IsNotLoggedIn>
       </div>
     )

@@ -27,7 +27,7 @@ class IsNotLoggedInInner extends React.Component {
     if (this.props.isLoggedIn) {
       return null
     } else {
-      return this.props.children
+      return <div>{this.props.children}</div>
     }
   }
 }

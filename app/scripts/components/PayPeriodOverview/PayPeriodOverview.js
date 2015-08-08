@@ -40,11 +40,13 @@ class PayPeriod extends React.Component {
     const { timesheet } = this.props
 
     const days = _.map(timesheet.days, each => <PayPeriodDay {...each} />)
-    const dateRange = _.chain([_.first(days), _.last(days)])
-         .compact()
-         .map(each => each.props.date.format("MMMM DD"))
-         .join(' - ')
-         .value()
+    const startDate = timesheet.startDate 
+      ? timesheet.startDate.format('MMMM DD')
+      : ''
+    const endDate = timesheet.endDate
+      ? timesheet.endDate.format('MMMM DD')
+      : ''
+    const dateRange = startDate + endDate
 
     return (
       <Page>
