@@ -127,7 +127,11 @@ class DayHeader extends React.Component {
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().subtract(1, "days").format("YYYY-MM-DD")}} 
                 type="button" className="pull-left subtle-btn">
-            <i className="fa fa-chevron-left"></i>
+            <h4>
+              <strong>
+                &#171;
+              </strong>
+            </h4>
           </Link> 
         </div>
         <div className="col-xs-8">
@@ -136,7 +140,11 @@ class DayHeader extends React.Component {
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().add(1, "days").format("YYYY-MM-DD")}} 
                 type="button" className="pull-right subtle-btn">
-            <i className="fa fa-chevron-right"></i>
+            <h4>
+                <strong>
+                  &#187;
+                </strong>
+            </h4>
           </Link> 
         </div>
         <div className="row"><br/></div> {/*For space*/}
