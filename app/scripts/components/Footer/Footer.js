@@ -30,7 +30,7 @@ export default class Footer {
 
 		  <div className="footer-small-type">
 	        <p className="footer-team-about">			
-              Website design by:<br/>Portland State University<br/>Maseeh College of Engineering<br/>Computer Science Capstone Program<br/>©{moment().year()}
+              Website design by:<br/>Portland State University<br/>Maseeh College of Engineering<br/>Computer Science Capstone Program<br/>© {moment().year()}
 		    </p>
 	      </div>  
         </div>
