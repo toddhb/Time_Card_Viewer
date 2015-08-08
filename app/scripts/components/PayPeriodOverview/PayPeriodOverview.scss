@@ -44,6 +44,7 @@ ul.week-overview {
     $box-width: 81px;
     .date-side-box {
       position: absolute;
+      width: 90px;
       @media (min-width: $screen-md-min) { 
           top: 0;
           width: 100%;
