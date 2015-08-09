@@ -16,6 +16,7 @@ import _ from 'lodash'
 
 const DEFAULT_STATE = {
   username: null,
+  storeDateRange: 'current',
   timesheet: {
     days: [],
     inPunches: [],
@@ -59,6 +60,7 @@ export default class KronosStore extends Store {
       () => console.log('kronosActions.fetchDateRangeSchedule: started'), 
       this.handleScheduleFetch, 
       (error) => console.log('kronosActions.fetchDateRangeSchedule: error', error))
+    this.register(kronosActions.setStoreDateRange, this.handleSetStoreDateRange)
 
     this.state = DEFAULT_STATE
   }
@@ -86,6 +88,9 @@ export default class KronosStore extends Store {
       Schedule: data.Kronos_WFC.Response.Schedule
     })
   }
+  handleSetStoreDateRange(dateRange) {
+    this.setState({ storeDateRange: dateRange})
+  }
   getDay(date) {
     return _.find(
         this.state.timesheet.days, 
@@ -103,6 +108,9 @@ export default class KronosStore extends Store {
         this.state.timesheet.outPunches, 
         eachDay => date.isSame(eachDay.time, 'day')
       )
+  }
+  getStoreDateRange() {
+    return this.state.storeDateRange
   }
   isLoggedIn() {
     return !!this.state.username

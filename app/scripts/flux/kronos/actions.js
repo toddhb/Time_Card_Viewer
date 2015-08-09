@@ -9,6 +9,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import { Actions, Flummox } from 'flummox'
 import request from 'superagent-bluebird-promise'
 import config from '../../config.js'
+import flux from '../flux'
 
 const { protocal, host, basepath } = config.api.location
 
@@ -37,7 +38,7 @@ function parseXmlResponse(response) {
 }
 
 async function login() {
-    return apiRequest(
+   return apiRequest(
      `<?xml version='1.0' encoding='UTF-8' ?>
 <Kronos_WFC Version="1.0" WFCVersion="7.0.6.436" TimeStamp="7/14/2015 9:39PM GMT-07:00">
     <Request Object="System" Action="Logon" Username="XMLUSER" Password="ibswutws" /> 
@@ -94,10 +95,22 @@ function scheduleRequest(personNumber, periodDateSpan) {
 
 export default class KronosActions extends Actions {
   async login() {
-    return parseXmlResponse(await login())
+    const result = await parseXmlResponse(await login())
+    this.fetchTimesheet()
+    return result
   }
   async logout() {
     return parseXmlResponse(await logout())
+  }
+  async fetchTimesheet() {
+    const dateRange = flux.getStore('kronos').getStoreDateRange()
+    if (dateRange === 'current') {
+      return this.fetchCurrentTimesheet()
+    } else if (dateRange === 'previous') {
+      return this.fetchPerviousTimesheet()
+    } else {
+      return this.fetchDateRangeTimesheet(dateRange)
+    }
   }
   async fetchPerviousTimesheet() {
     return parseXmlResponse(await apiRequest(
@@ -123,5 +136,8 @@ export default class KronosActions extends Actions {
     return parseXmlResponse(await apiRequest(
       scheduleRequest("N0686", dateRange) 
     ))
+  }
+  setStoreDateRange(dateRange) { 
+    return dateRange 
   }
 }
