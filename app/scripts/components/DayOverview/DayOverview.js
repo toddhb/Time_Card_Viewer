@@ -26,10 +26,12 @@ export default class DayOverview extends React.Component {
           const day = kronos.getDay(date)
           const inPunches = kronos.getInPunchesForDate(date)
           const outPunches = kronos.getOutPunchesForDate(date)
+          const exceptions = kronos.getExceptionsForDate(date)
           return {
             day,
             inPunches, 
             outPunches,
+            exceptions,
           }
         }}
       >
@@ -99,7 +101,7 @@ class Overview extends React.Component {
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? punches : <div><h3 className="text-center">No punches today</h3></div>}
+            { punches.length > 0 ? punches : <div><h3>No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="calendar hidden-xs hidden-sm">
@@ -127,11 +129,7 @@ class DayHeader extends React.Component {
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().subtract(1, "days").format("YYYY-MM-DD")}} 
                 type="button" className="pull-left subtle-btn">
-            <h4>
-              <strong>
-                &#171;
-              </strong>
-            </h4>
+            <i className="fa fa-chevron-left"></i>
           </Link> 
         </div>
         <div className="col-xs-8">
@@ -140,11 +138,7 @@ class DayHeader extends React.Component {
         <div className="col-xs-2">
           <Link to="day" params={{date: this.props.date.clone().add(1, "days").format("YYYY-MM-DD")}} 
                 type="button" className="pull-right subtle-btn">
-            <h4>
-                <strong>
-                  &#187;
-                </strong>
-            </h4>
+            <i className="fa fa-chevron-right"></i>
           </Link> 
         </div>
         <div className="row"><br/></div> {/*For space*/}
@@ -157,11 +151,10 @@ class DayHeader extends React.Component {
 class DayStats extends React.Component {
   render() {
     const { day } = this.props
-    const total = day ? day.total : ''
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{total}</span></p>
+          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{day.total}</span></p>
         </div>
       </div>   
     )
@@ -177,66 +170,36 @@ class Entry extends React.Component {
       InPunch: {
         action: "Clocked in",
         panelClass: panelClassDefault + " " + "time-in",
-        glyphClass: "icon-truck"
+        glyphClass: glyphClassDefault + " fa-flip-horizontal" + " fa fa-truck"
       },
       OutPunch: {
         action: "Clocked out",
         panelClass: panelClassDefault + " " + "time-out",
-        glyphClass: "icon-truck"
+        glyphClass: glyphClassDefault + " " + "fa fa-truck"
       },
       scheduledIn: {
         action: "Shift started",
         panelClass: panelClassDefault + " " + "shift-info",
-        glyphClass: "icon-clock"
+        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       },
       scheduledOut: {
         action: "Shift ended",
         panelClass: panelClassDefault + " " + "shift-info",
-        glyphClass: "icon-clock"
+        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
       }
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
 
-    const time = moment(this.props.time).format('hh:mm a')
+    const time = moment(this.props.time).format('hh:mm a') 
     return ( 
         <div className={panelClass}>
             <div className="date-side-box">
-              <p className="text-center">{action}</p>
-                <div className="text-center action-icon">
-                  <a>
-                    <ActionIcon action = {action}/>
-                  </a>
-                </div>
+                <p className="text-center"><i className={glyphClass}></i></p>
+                <p>{action}</p>
             </div>
             <p className="hours-worked-text"><span className="hours-worked-number">{time}</span></p>
         </div>
     )
   }
-}
-
-class ActionIcon extends React.Component {
-    render () {
-       if (this.props.action == "Clocked in") {
-         return (
-           <img src={"/images/truck-right.png"} width="39" height="20" /> 
-         )
-       }
-
-        if (this.props.action == "Clocked out") {
-         return (
-           <img src={"/images/truck-left.png"} width="39" height="20" /> 
-         )
-       }
-
-        if (this.props.action == "Shift started" || "Shift ended") {
-         return (
-           <img src={"/images/three_oclock.png"} width="20" height="20" /> 
-         )
-       }
-
-        else {
-           return null
-       }
-    }
 }
