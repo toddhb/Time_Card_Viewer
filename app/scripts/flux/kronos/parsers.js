@@ -19,7 +19,11 @@ export function parseTimesheet(kronosData) {
   //          date: <Moment>
   //          total: <String>
   //          totals: [
-  //            ...
+  //            {
+  //               amountInTime: <Number>,
+  //               payCodeId: <Number>,
+  //               payCodeName: <String>,
+  //            }
   //          ]
   //       }
   //     ],
@@ -41,6 +45,13 @@ export function parseTimesheet(kronosData) {
   //          duration: <String> // TODO may change
   //          inPunchFlag: <String> // TODO may change
   //       }
+  //     ],
+  //     totals: [
+  //       {
+  //          amountInTime: <Number>,
+  //          payCodeId: <Number>,
+  //          payCodeName: <String>,
+  //       }
   //     ]
   // }
   const kronosResponse = kronosData.Kronos_WFC.Response
@@ -57,11 +68,8 @@ export function parseTimesheet(kronosData) {
           .get('Timesheet.DailyTotals.DateTotals', [])
           .map(each => ({
               date: moment(each._Date, 'M/DD/YYYY'),
-              total: parseTime(each._GrandTotal || "0:00"), // TODO parse
-              totals: _.chain(each)
-                  .get('Totals.Total', [])
-                  .map(each => camelCaseProperties(each))
-                  .value()
+              total: parseTime(each._GrandTotal || "0:00"),
+              totals: _.map(each => parseTotal(each)),
             })
           )
           .filter(each => (startDate <= each.date) && (each.date <= endDate))
@@ -116,7 +124,11 @@ export function parseTimesheet(kronosData) {
         )
         .filter(each => each.length > 0)
         .flatten()
-        .value()
+        .value(),
+      totals: _.chain(kronosResponse)
+        .get('Timesheet.PeriodTotalData.PeriodTotals.Totals.Total', [])
+        .map(each => parseTotal(each))
+        .value(),
     }
   }
 }
@@ -150,4 +162,12 @@ function parseTime(input) {
       // Round to 2 digits
       .thru(x => _.round(x, 2))
       .value()
+}
+
+function parseTotal(input) {
+  return {
+    amountInTime: parseTime(input._AmountInTime),
+    payCodeId: input._PayCodeId,
+    payCodeName: input._PayCodeName,
+  }
 }
