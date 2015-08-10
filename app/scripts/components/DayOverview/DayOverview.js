@@ -177,36 +177,66 @@ class Entry extends React.Component {
       InPunch: {
         action: "Clocked in",
         panelClass: panelClassDefault + " " + "time-in",
-        glyphClass: glyphClassDefault + " fa-flip-horizontal" + " fa fa-truck"
+        glyphClass: "icon-truck"
       },
       OutPunch: {
         action: "Clocked out",
         panelClass: panelClassDefault + " " + "time-out",
-        glyphClass: glyphClassDefault + " " + "fa fa-truck"
+        glyphClass: "icon-truck"
       },
       scheduledIn: {
         action: "Shift started",
         panelClass: panelClassDefault + " " + "shift-info",
-        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
+        glyphClass: "icon-clock"
       },
       scheduledOut: {
         action: "Shift ended",
         panelClass: panelClassDefault + " " + "shift-info",
-        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
+        glyphClass: "icon-clock"
       }
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
 
-    const time = moment(this.props.time).format('hh:mm a') 
+    const time = moment(this.props.time).format('hh:mm a')
     return ( 
         <div className={panelClass}>
             <div className="date-side-box">
-                <p className="text-center"><i className={glyphClass}></i></p>
-                <p>{action}</p>
+              <p className="text-center">{action}</p>
+                <div className="text-center action-icon">
+                  <a>
+                    <ActionIcon action = {action}/>
+                  </a>
+                </div>
             </div>
             <p className="hours-worked-text"><span className="hours-worked-number">{time}</span></p>
         </div>
     )
   }
+}
+
+class ActionIcon extends React.Component {
+    render () {
+       if (this.props.action == "Clocked in") {
+         return (
+           <img src={"/images/truck-right.png"} width="39" height="20" /> 
+         )
+       }
+
+        if (this.props.action == "Clocked out") {
+         return (
+           <img src={"/images/truck-left.png"} width="39" height="20" /> 
+         )
+       }
+
+        if (this.props.action == "Shift started" || "Shift ended") {
+         return (
+           <img src={"/images/three_oclock.png"} width="20" height="20" /> 
+         )
+       }
+
+        else {
+           return null
+       }
+    }
 }

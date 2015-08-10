@@ -13,15 +13,22 @@ export default class NotFound extends React.Component {
     return (
       <div className="NotFound-distributed text-center">
           <p className="NotFound-large-type">
+            <br/><br/><br/><br/>
             Whoops! We got lost...
+            <br/><br/>
           </p>
 
-        <div className="NotFound-large-type">
-          <i className="fa fa-question"></i>
+        <div className="text-center">
+          <a>
+            <img src={"/images/question-mark.png"} width="47" height="76" />
+            <br/><br/>
+          </a>
         </div>
 
-        <div className="NotFound-larger-type">
-          <i className="fa fa-truck"></i>
+        <div className="text-center">
+          <a>
+            <img src={"/images/truck-right.png"} width="214" height="112" />
+          </a>
         </div>
       </div>
     );
