@@ -15,40 +15,37 @@ import flux from "../../flux/flux"
 
 export default class PayPeriodStats extends React.Component {
   render() {
-    const { Timesheet } = this.props
+    const { timesheet } = this.props
+    const totals = timesheet.totals
 
-    const totals = _.chain(Timesheet)
-        .get('PeriodTotalData.PeriodTotals.Totals.Total', [])
-        .map(each => 
-          _.chain(each)
-           .pick("AmountInTime", "PayCodeId", "PayCodeName")
-           .value()
-        )
+    const allPaidHours = _.chain(totals)
+        .find(each => each.payCodeId == "142")
+        .get('amountInTime', 0)
         .value()
-    const allPaidHours = _.chain(totals) 
-        .filter(each => each.PayCodeId == "142")
-        .first()
+    const allOvertime = _.chain(totals)
+        .find(each => each.payCodeId == "141")
+        .get('amountInTime', 0)
         .value()
-    const allOvertime = _.chain(totals) 
-        .filter(each => each.PayCodeId == "141")
-        .first()
+    const allPTO = _.chain(totals)
+        .find(each => each.payCodeId == "501")
+        .get('amountInTime', 0)
         .value()
-    const allPTO = _.chain(totals) 
-        .filter(each => each.PayCodeId == "501")
-        .first()
-        .value()
-    const amountInTime = allPaidHours ? allPaidHours.AmountInTime : 0
+
     return (
       <div className="clearfix" style={{minHeight: 170 + "px"}}>
         <hr/>
         <div className="col-xs-12 col-md-4 has-right-border">
           <div>
             <p className="pull-left">Hours Worked</p>
-            <p className="text-right"><strong>{amountInTime}</strong></p>
+            <p className="text-right"><strong>{allPaidHours}</strong></p>
           </div>
           <div>
             <p className="pull-left">Overtime Hours</p>
-            <p className="text-right"><strong>{amountInTime}</strong></p>
+            <p className="text-right"><strong>{allOvertime}</strong></p>
+          </div>
+          <div>
+            <p className="pull-left">PTO Hours</p>
+            <p className="text-right"><strong>{allPTO}</strong></p>
           </div>
         </div>
         <div className="col-md-2 hidden-xs">

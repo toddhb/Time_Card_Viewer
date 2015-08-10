@@ -151,10 +151,11 @@ class DayHeader extends React.Component {
 class DayStats extends React.Component {
   render() {
     const { day } = this.props
+    const total = day ? day.total : ''
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{day.total}</span></p>
+          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{total}</span></p>
         </div>
       </div>   
     )
