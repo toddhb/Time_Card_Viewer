@@ -1,0 +1,11 @@
+# TimeCardView
+
+## Authors
+
+Cameron White - https://github.com/cameronbwhite
+Sasha Fahrenkopf - https://github.com/asasha
+Todd Brochu - https://github.com/toddhb
+Andrew McGown - https://github.com/amcgown
+Thomas Nelson - https://github.com/HackerToad
+David Opp - https://github.com/OppDavid
+Jacob Nichols - https://github.com/nmjacob
