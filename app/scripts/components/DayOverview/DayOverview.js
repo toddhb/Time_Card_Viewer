@@ -101,7 +101,7 @@ class Overview extends React.Component {
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? punches : <div><h3>No punches today</h3></div>}
+            { punches.length > 0 ? punches : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="calendar hidden-xs hidden-sm">
@@ -171,22 +171,22 @@ class Entry extends React.Component {
       InPunch: {
         action: "Clocked in",
         panelClass: panelClassDefault + " " + "time-in",
-        glyphClass: glyphClassDefault + " fa-flip-horizontal" + " fa fa-truck"
+        glyphClass: "icon-truck"
       },
       OutPunch: {
         action: "Clocked out",
         panelClass: panelClassDefault + " " + "time-out",
-        glyphClass: glyphClassDefault + " " + "fa fa-truck"
+        glyphClass: "icon-truck"
       },
       scheduledIn: {
         action: "Shift started",
         panelClass: panelClassDefault + " " + "shift-info",
-        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
+        glyphClass: "icon-clock"
       },
       scheduledOut: {
         action: "Shift ended",
         panelClass: panelClassDefault + " " + "shift-info",
-        glyphClass: glyphClassDefault + " " + "fa fa-clock-o"
+        glyphClass: "icon-clock"
       }
     }
 
@@ -196,11 +196,41 @@ class Entry extends React.Component {
     return ( 
         <div className={panelClass}>
             <div className="date-side-box">
-                <p className="text-center"><i className={glyphClass}></i></p>
-                <p>{action}</p>
+                <p className="text-center">{action}</p>
+                <div className="text-center action-icon">
+                  <a>
+                    <ActionIcon action = {action}/>
+                  </a>
+                </div>
             </div>
             <p className="hours-worked-text"><span className="hours-worked-number">{time}</span></p>
         </div>
     )
   }
+}
+
+class ActionIcon extends React.Component {
+    render () {
+       if (this.props.action == "Clocked in") {
+         return (
+           <img src={"/images/truck-right.png"} width="39" height="20" /> 
+         )
+       }
+
+        if (this.props.action == "Clocked out") {
+         return (
+           <img src={"/images/truck-left.png"} width="39" height="20" /> 
+         )
+       }
+
+        if (this.props.action == "Shift started" || "Shift ended") {
+         return (
+           <img src={"/images/three_oclock.png"} width="20" height="20" /> 
+         )
+       }
+
+        else {
+           return null
+       }
+    }
 }
