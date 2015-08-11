@@ -32,25 +32,19 @@ export default class PayPeriodStats extends React.Component {
         .value()
 
     return (
-      <div className="clearfix" style={{minHeight: 170 + "px"}}>
-        <hr/>
-        <div className="col-xs-12 col-md-4 has-right-border">
-          <div>
-            <p className="pull-left">Hours Worked</p>
-            <p className="text-right"><strong>{allPaidHours}</strong></p>
-          </div>
-          <div>
-            <p className="pull-left">Overtime Hours</p>
-            <p className="text-right"><strong>{allOvertime}</strong></p>
-          </div>
-          <div>
-            <p className="pull-left">PTO Hours</p>
-            <p className="text-right"><strong>{allPTO}</strong></p>
-          </div>
+      <div className="well well-sm clearfix">
+        <div className="col-xs-12 col-md-4">
+          <p className="pull-left">Hours Worked</p>
+          <p className="badge pull-right"><strong>{allPaidHours}</strong></p>
         </div>
-        <div className="col-md-2 hidden-xs">
+        <div className="col-xs-12 col-md-4">
+          <p className="pull-left">Overtime Hours</p>
+          <p className="badge pull-right"><strong>{allOvertime}</strong></p>
         </div>
-        <hr/>
+        <div className="col-xs-12 col-md-4">
+          <p className="pull-left">PTO Hours</p>
+          <p className="badge pull-right"><strong>{allPTO}</strong></p>
+        </div>
       </div>
     );
   }
