@@ -49,11 +49,14 @@ class Overview extends React.Component {
     const { params, day, inPunches, outPunches } = this.props
 
     const inPunchesChain = _.chain(inPunches)
-        .map(each => _.assign({
+        .map(each => {
+          // XXX Hack! Need to pull from API in a better way
+          //lastKronosTimeZone = eachPunch.KronosTimeZone
+          return _.assign(each, {
             type: "InPunch",
           })
-        )
-    const outPunchesChain = _.chain(inPunches)
+        })
+    const outPunchesChain = _.chain(outPunches)
         .map(each => {
           // XXX Hack! Need to pull from API in a better way
           //lastKronosTimeZone = eachPunch.KronosTimeZone
