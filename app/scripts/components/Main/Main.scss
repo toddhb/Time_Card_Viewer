@@ -15,7 +15,58 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 }
 
 .container.main {
-    min-height: calc(100vh - #{$min-footer-height} - #{$min-header-height});
+    $container-height: calc(100vh - #{$min-footer-height} - #{$min-header-height});
+    min-height: $container-height;
+
+    @mixin shadowed-text {
+      font-size: 4em;
+      line-height: 1em;
+      color: rgba(#eee, 0.8);
+      text-shadow: 0px 2px 1px rgba(0,0,0,0.13);      
+    }
+
+    // This belongs somewhere else, but here it will live for now
+    h1#login-splash {
+      @include shadowed-text;
+      margin: 100px 0 50px 0;
+      font-weight: bold;
+
+      & + p { 
+        @include shadowed-text;
+        
+        & > [class^="fa fa-"] {  // Allows us to switch icon without messing with the style
+          margin: 0 0 50px 20px;
+          transition: color 0.5s ease;
+
+          &:hover {
+            color: $brand-primary;
+          }
+
+          // Is this tacky? 3a.m. Sasha didn't think so, 11a.m. Sasha doubts that other lady
+          /*
+          $delay: 0.0;
+          @for $i from 1 through 3 {
+            &#icon-#{$i} { 
+              @keyframes colorChange-#{$i} {
+                from { color: $brand-primary }
+                to { }
+              }
+
+              $delay: $delay + 0.2;
+              & {
+                animation-name: colorChange-#{$i};
+                animation-iteration-count: 1;
+                animation-timing-function: ease-in;
+                animation-duration: 0.4s;
+                animation-delay: #{$delay}s;                
+              }
+            }
+          }*/
+        }
+      }
+
+    }
+
 }
 
 li {
@@ -35,6 +86,7 @@ body {
     padding-top: 0px;
     padding-bottom: 0px;
 }
+
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,

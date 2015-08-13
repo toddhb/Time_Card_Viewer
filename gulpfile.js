@@ -43,7 +43,10 @@ gulp.task("sass", function() {
             style: "compressed",
             precision: 5,
             loadPath: ["app/bower_components"]
-        }))
+         }))
+        .on('error', function (err) {
+            console.error('Error!', err.message);   // So errors don't stop the task
+         })
         .pipe($.autoprefixer("last 1 version"))
         .pipe(gulp.dest("dist/styles"))
         .pipe($.size());

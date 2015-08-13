@@ -7,6 +7,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  * LICENSE text file in the root directory of this source tree.
  */
 import React from 'react'
+import _ from 'lodash'
 import FluxComponent from 'flummox/component';
 import IsLoggedIn from "../IsLoggedIn/IsLoggedIn"
 import IsNotLoggedIn from "../IsNotLoggedIn/IsNotLoggedIn"
@@ -25,13 +26,17 @@ export default class Page extends React.Component {
  
 export default class PageInner extends React.Component {
   render() {
+    const loginIcons = [<i className="fa fa-clock-o" id="icon-1"></i>, 
+                        <i className="fa fa-clock-o" id="icon-2"></i>, 
+                        <i className="fa fa-clock-o" id="icon-3"></i>]
     return (
       <div>
         <IsLoggedIn>
           {this.props.children}
         </IsLoggedIn>
         <IsNotLoggedIn>
-          <h1 className="text-center">Login Required</h1>
+          <h1 className="text-center" id="login-splash">Login to see your time card</h1>
+          <p className="text-center">{loginIcons}</p>
         </IsNotLoggedIn>
       </div>
     )
