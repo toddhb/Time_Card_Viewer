@@ -13,12 +13,6 @@ export default class PayPeriodDay extends React.Component {
   // Day component displays a date and the total number
   // of hours worked that day. Both date and hours are 
   // passed through props.
-  //
-  // Cameron: on line 29 are two CSS className references.
-  // If a day has an exception, my intention is to render that day
-  // with <div className="date-side-box">
-  // else <div className="date-side-box exception">
-
     render() {
     const { date, total } = this.props
     console.log(this.props.exceptions)
@@ -27,7 +21,7 @@ export default class PayPeriodDay extends React.Component {
       <li className="day-as-txt">
         <div className="time-entry shadowed-box">
           <Link to="day" params={{ date: date.format("YYYY-MM-DD")}}>
-            <div className="date-side-box exception">
+            <div className="date-side-box">
               <p className="day-as-text text-center">{date.format("dddd")}</p>
               <p className="date text-center"><span className="day-as-number">{date.format("M/D")}</span></p>
             </div>
