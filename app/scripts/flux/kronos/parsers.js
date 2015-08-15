@@ -72,7 +72,7 @@ export function parseTimesheet(kronosData) {
               totals: _.map(each => parseTotal(each)),
             })
           )
-          .filter(each => (startDate <= each.date) && (each.date <= endDate))
+          .filter(each => each.date.isBetween(startDate, endDate))
           .value(),
       inPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
@@ -110,15 +110,14 @@ export function parseTimesheet(kronosData) {
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => _.chain(eachSpan)
             .get('Exceptions.TimekeepingException')
-            .thru(x => [x])
-            .flatten()
-            .compact()
+            // Map {a:x} -> [{a:x}] and [{a:x},{b:y}] -> [{a:x},{b:y}]
+            .thru(x => [x]).flatten().compact()
             .map(eachException => ({
               date: moment(eachSpan._Date, 'M/DD/YYYY'),
-              type: eachException._ExceptionTypeName,
+              type: `${eachException._ExceptionTypeName}`,
               differenceToLimit: parseTime(eachException._DifferenceToLimit),
-              duration: parseTime(eachException._DurationOfException), // TODO parse
-              inPunchFlag: eachException._InPunchFlag, // I don't know what this is
+              duration: parseTime(eachException._DurationOfException), 
+              inPunchFlag: `${eachException._InPunchFlag}`, // I don't know what this is
             }))
             .value()
         )
@@ -134,6 +133,7 @@ export function parseTimesheet(kronosData) {
 }
 
 export function parseLogin(kronosData) {
+  // Object -> Object
   const kronosResponse = kronosData.Kronos_WFC.Response
   return {
     status: kronosResponse._Status,
@@ -142,6 +142,7 @@ export function parseLogin(kronosData) {
   } 
 }
 export function parseLogout(kronosData) {
+  // Object -> Object
   const kronosResponse = kronosData.Kronos_WFC.Response
   return {
     status: kronosResponse._Status,
@@ -149,11 +150,23 @@ export function parseLogout(kronosData) {
   } 
 }
 
-function camelCaseProperties(object) {
-  return _.mapKeys(object, (value, key) => _.camelCase(key))
+function parseTotal(input) {
+  // Object -> Object
+  return {
+    amountInTime: parseTime(input._AmountInTime),
+    payCodeId: input._PayCodeId,
+    payCodeName: input._PayCodeName,
+  }
 }
 
 function parseTime(input) {
+  // String -> Number
+  // The input is expected to have an `toString` 
+  // method that produces a string with  the syntax
+  // `HH:mm` Sematically `HH` represents the number
+  // of hours and `MM` represents the number of 
+  // minutes. The resulting number is the number of
+  // hours.
   return _.chain(input)
       // Convert input string to a moment object
       .thru(x => moment(x, "HH:mm"))
@@ -162,12 +175,4 @@ function parseTime(input) {
       // Round to 2 digits
       .thru(x => _.round(x, 2))
       .value()
-}
-
-function parseTotal(input) {
-  return {
-    amountInTime: parseTime(input._AmountInTime),
-    payCodeId: input._PayCodeId,
-    payCodeName: input._PayCodeName,
-  }
 }

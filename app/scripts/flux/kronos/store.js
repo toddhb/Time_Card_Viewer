@@ -65,6 +65,7 @@ export default class KronosStore extends Store {
     this.state = DEFAULT_STATE
   }
   async handleLogin(data) {
+    // Set the username of the logged in user
     const parsedData = parseLogin(data)
     if (parsedData.status == "Success"|| parsedData.errorCode == "1313") {
       this.setState({
@@ -73,6 +74,7 @@ export default class KronosStore extends Store {
     } 
   }
   async handleLogout(data) {
+    // Set the username to null
     const parsedData = parseLogout(data)
     if (parsedData.status == "Success") {
       this.setState({
@@ -92,28 +94,22 @@ export default class KronosStore extends Store {
     this.setState({ storeDateRange: dateRange})
   }
   getDay(date) {
-    return _.find(
-        this.state.timesheet.days, 
-        eachDay => date.isSame(eachDay.date, 'day')
-      )
+    return this.findByDate(this.state.timesheet.days, date)
   }
   getExceptionsForDate(date) {
-    return _.filter(
-        this.state.timesheet.exceptions, 
-        eachDay => date.isSame(eachDay.time, 'day')
-      )
+    return this.filterByDate(this.state.timesheet.exceptions, date)
   }
   getInPunchesForDate(date) {
-    return _.filter(
-        this.state.timesheet.inPunches, 
-        eachDay => date.isSame(eachDay.time, 'day')
-      )
+    return this.filterByDate(this.state.timesheet.inPunches, date)
   }
   getOutPunchesForDate(date) {
-    return _.filter(
-        this.state.timesheet.outPunches, 
-        eachDay => date.isSame(eachDay.time, 'day')
-      )
+    return this.filterByDate(this.state.timesheet.outPunches, date)
+  }
+  findByDate(xs, date) {
+    return _.find(xs, eachDay => date.isSame(eachDay.time, 'day'))
+  }
+  filterByDate(xs, date) {
+    return _.filter(xs, eachDay => date.isSame(eachDay.time, 'day'))
   }
   getStoreDateRange() {
     return this.state.storeDateRange
