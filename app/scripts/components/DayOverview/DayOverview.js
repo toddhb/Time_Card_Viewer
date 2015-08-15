@@ -203,7 +203,7 @@ class Entry extends React.Component {
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
 
-    const time = moment(this.props.time).format('hh:mm a') 
+    const time = moment(this.props.time).format('h:mma') 
     return ( 
         <div className={panelClass}>
             <div className="date-side-box">
