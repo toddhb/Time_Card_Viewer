@@ -38,7 +38,7 @@ export default class PageInner extends React.Component {
         <IsNotLoggedIn>
           <h1 className="text-center" id="login-splash">Login to see your time card</h1>
           <Login />
-          <p className="text-center">{loginIcons}</p>
+          <p className="text-center" id="login-icons">{loginIcons}</p>
         </IsNotLoggedIn>
       </div>
     )

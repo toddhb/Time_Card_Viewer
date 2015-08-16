@@ -24,32 +24,38 @@ export default class Login extends React.Component {
   }
 }
 
-// Default ID: N0686
+
 class LoginInner extends React.Component {
 	// Login will pass the username entered to the Kronos Store for API calls
 	// TODO: Include validation list of existing IDs for demo-validation
 	constructor(props) {
-    super(props);
-    this.state = {value: "N0686"};
+    super(props)
+    this.state = {value: "N0686"}
   }
 	handleChange = () => {
-		//console.log("handleChange called...state: " + this.state.value)
-    this.setState({value: event.target.value});
+    const keyCode = 13
+    this.setState({value: event.target.value})
+    if(event.which == keyCode) {
+    	this.handleLogin()
+    }
   }
 	handleLogin = () => {
-		//console.log("handleLogin called...state: " + this.state.value)
+		console.log("handleLogin called...")
 		const id = this.state.value
     flux.getActions('kronos').login(id)
   }
+  clearText = () => {
+  	this.setState({value: ""})
+  }
   render() {
+  	// The button and input could be seperate components and not include the column defintions here
   	var value = this.state.value
   	return (
-  		<div>
-  			<input type="text" value={value} onChange={this.handleChange} />
-        <a onClick={this.handleLogin} >
-          Login
-        </a>
-  		</div>
+			<div className="col-sm-12 text-center">
+				<input type="text" value={value} className="text-center" id="login"
+				   onChange={this.handleChange} onClick={this.clearText} />
+				<a onClick={this.handleLogin} id="login-btn">Login</a>
+			</div>
   	)
   }
 }
