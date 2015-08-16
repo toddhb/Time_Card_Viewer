@@ -13,13 +13,16 @@ import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
 import PayPeriodStats from "../PayPeriodStats/PayPeriodStats.js"
-import PayPeriodDay from "../PayPeriodDay/PayPeriodDay"
+import PayPeriodDays from "../PayPeriodDays/PayPeriodDays"
 import Page from '../Page/Page'
 
 export default class PayPeriodOverview extends React.Component {
   // PayPeriodsOverview connects to the datastore timesheet
   // and produces a component that displays all recent timesheet
   // stamps with date and culmulative hours
+  contextTypes: {
+      router: React.PropTypes.func,
+  }
   render() {
     return (
       <FluxComponent connectToStores={['kronos']}>
@@ -30,6 +33,9 @@ export default class PayPeriodOverview extends React.Component {
 }
 
 class PayPeriod extends React.Component {
+  contextTypes: {
+    router: React.PropTypes.func.isRequired,
+  }
   componentDidMount() {
     flux.getActions('kronos').setStoreDateRange(this.props.dateRange)
     flux.getActions('kronos').fetchTimesheet()
@@ -47,15 +53,6 @@ class PayPeriod extends React.Component {
       : ''
     const dateRange = startDate + " - " + endDate
                        
-    const days = _.chain(timesheet)
-        .get('days', [])
-        .map(each => (
-          <PayPeriodDay {...each} 
-              exceptions={flux.getStore('kronos').getExceptionsForDate(each.date)}
-          />
-        ))
-        .value()
-
     return (
       <Page>
         <div className="row time-overview">
@@ -68,16 +65,7 @@ class PayPeriod extends React.Component {
               <FluxComponent connectToStores={['kronos']}>
                 <PayPeriodStats />
               </FluxComponent>
-              <table className="table table-hover">
-                <tr>
-                  <th>Date</th>
-                  <th>worked</th>
-                  <th>PTO</th>
-                  <th>Overtime</th>
-                  <th>total</th>
-                </tr>
-                <tbody>{days}</tbody>
-              </table>
+              <PayPeriodDays days={timesheet.days} />
             </div>
           </div>
         </div>
