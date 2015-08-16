@@ -50,8 +50,10 @@ class PayPeriod extends React.Component {
     const days = _.chain(timesheet)
         .get('days', [])
         .map(each => (
-          <li><PayPeriodDay {...each} /></li>
-        )) 
+          <PayPeriodDay {...each} 
+              exceptions={flux.getStore('kronos').getExceptionsForDate(each.date)}
+          />
+        ))
         .value()
 
     return (
@@ -66,9 +68,16 @@ class PayPeriod extends React.Component {
               <FluxComponent connectToStores={['kronos']}>
                 <PayPeriodStats />
               </FluxComponent>
-              <ul className="week-overview clearfix">
-                {days}
-              </ul>
+              <table className="table table-hover">
+                <tr>
+                  <th>Date</th>
+                  <th>worked</th>
+                  <th>PTO</th>
+                  <th>Overtime</th>
+                  <th>total</th>
+                </tr>
+                <tbody>{days}</tbody>
+              </table>
             </div>
           </div>
         </div>
