@@ -9,6 +9,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import React from 'react';
 import FluxComponent from 'flummox/component'
 import flux from '../../flux/flux'
+import _ from 'lodash'
 
 export default class Login extends React.Component {
   render() {
@@ -30,22 +31,41 @@ class LoginInner extends React.Component {
 	// TODO: Include validation list of existing IDs for demo-validation
 	constructor(props) {
     super(props)
-    this.state = {value: "N0686"}
-  }
-	handleChange = () => {
-    const keyCode = 13
-    this.setState({value: event.target.value})
-    if(event.which == keyCode) {
-    	this.handleLogin()
+    this.state = {
+    	isValidUser: true,
+    	value: "N0686"
     }
   }
+  handleKeyDown = (keyPress) => {
+    const enterKey = 13
+    if(keyPress.which == enterKey) {
+    	this.handleLogin()
+    }	
+  }
+	handleChange = () => {
+    this.setState({
+    	isValidUser: false,
+    	value: event.target.value
+    })
+  }
 	handleLogin = () => {
-		console.log("handleLogin called...")
+		// This is a really good candidate for testing...
 		const id = this.state.value
-    flux.getActions('kronos').login(id)
+		const validIds = ["N0686", "F1585", "R2199", "N6989", "05400"]
+		console.log(id)
+		if(_.includes(validIds, id)) {
+			this.setState({isValidUser: true})
+    	flux.getActions('kronos').login(id)
+    } else {
+    	console.log("Bad ID provided..." + id)
+    	this.setState({isValidUser: false})
+    }
   }
   clearText = () => {
-  	this.setState({value: ""})
+  	this.setState({
+  		isValidUser: true,  // This isn't really the case, but removes it until re-"validated"
+  		value: ""
+  	})
   }
   render() {
   	// The button and input could be seperate components and not include the column defintions here
@@ -53,9 +73,20 @@ class LoginInner extends React.Component {
   	return (
 			<div className="col-sm-12 text-center">
 				<input type="text" value={value} className="text-center" id="login"
-				   onChange={this.handleChange} onClick={this.clearText} />
+				   onChange={this.handleChange} onClick={this.clearText} onKeyDown={this.handleKeyDown} />
+				<LoginError isVisible={this.state.isValidUser}/>
 				<a onClick={this.handleLogin} id="login-btn">Login</a>
 			</div>
   	)
   }
+}
+
+class LoginError extends React.Component {
+	render() {
+		console.log(this.props.isVisible)
+		var visibilityClass = this.props.isVisible ? "invisible" : "visible"
+		return (
+			<p id="login-error" className={visibilityClass}>That username is invalid...</p>
+		)
+	}
 }

@@ -38,3 +38,15 @@ a#login-btn {
     text-decoration: none;
   }
 }
+
+p#login-error {
+  color: $brand-warning;
+  margin-top: 10px;
+  font-size: 1.2em;
+
+  // Overriding bootstrap for layout stability
+  &.invisible {
+    margin-right: -9999px; // Old-school hiding fun
+  }
+}
+
