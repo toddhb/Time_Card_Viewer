@@ -19,7 +19,10 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
   min-height: $container-height;
 
   @mixin shadowed-text {
-    font-size: 4em;
+    @media (min-width: $screen-md-min) {
+      font-size: 4em;
+    }
+    font-size: 3em;
     line-height: 1em;
     color: rgba(#eee, 0.8);
     text-shadow: 0px 2px 1px rgba(0,0,0,0.13);      
@@ -27,8 +30,11 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 
   // This belongs somewhere else, but here it will live for now
   h1#login-splash {
+    @media (min-width: $screen-md-min) {
+      margin: 100px 0 50px 0;
+    }
     @include shadowed-text;
-    margin: 100px 0 50px 0;
+    margin: 50px 0 50px 0;
     font-weight: bold;
   }
 

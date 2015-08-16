@@ -10,6 +10,7 @@ import React from 'react';
 import FluxComponent from 'flummox/component'
 import flux from '../../flux/flux'
 import _ from 'lodash'
+import typeahead from 'typeahead'
 
 export default class Login extends React.Component {
   render() {
@@ -44,7 +45,6 @@ class LoginInner extends React.Component {
   }
 	handleChange = () => {
     this.setState({
-    	isValidUser: false,
     	value: event.target.value
     })
   }
