@@ -111,15 +111,16 @@ export default class KronosActions extends Actions {
   }
   async fetchTimesheet() {
     const dateRange = flux.getStore('kronos').getStoreDateRange()
+    console.log("fetchTimesheet ", dateRange)
     if (dateRange === 'current') {
       return this.fetchCurrentTimesheet()
     } else if (dateRange === 'previous') {
-      return this.fetchPerviousTimesheet()
+      return this.fetchPreviousTimesheet()
     } else {
       return this.fetchDateRangeTimesheet(dateRange)
     }
   }
-  async fetchPerviousTimesheet() {
+  async fetchPreviousTimesheet() {
     return parseXmlResponse(await apiRequest(
       timesheetXmlRequest(requestId, 0) 
     ))

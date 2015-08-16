@@ -56,7 +56,7 @@ export function parseTimesheet(kronosData) {
   // }
   const kronosResponse = kronosData.Kronos_WFC.Response
   const [startDate, endDate] = _.chain(kronosResponse)
-      .get('Timesheet.Period.TimeFramePeriod._PeriodDateSpan', '')
+      .get('Timesheet.PeriodTotalData.PeriodTotals._PeriodDateSpan', '')
       .thru(periodString => periodString.split(' - '))
       .map(date => moment(date, 'M/DD/YYYY'))
       .value()
