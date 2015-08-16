@@ -97,17 +97,18 @@ class Overview extends React.Component {
     const year = date.format("YYYY")
     const month = date.format("MM")
 
-    const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
+    const dayHeaders = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ]
     
     return (
       <Page>  
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? punches : <div><h3 className="text-center">No punches today</h3></div>}
+            { punches.length > 0 ? <table className="table">{punches}</table> : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
-            <div className="calendar hidden-xs hidden-sm">
+            <div className="panel hidden-xs hidden-sm"
+                 style={{padding: 10, marign: 0, border: 0}}>
               <DayOverviewCalendar year={year} month={month-1} headers={dayHeaders} />
             </div>
               <FluxComponent connectToStores={{
@@ -205,17 +206,11 @@ class Entry extends React.Component {
 
     const time = moment(this.props.time).format('h:mma') 
     return ( 
-        <div className={panelClass}>
-            <div className="date-side-box">
-                <p className="text-center">{action}</p>
-                <div className="text-center action-icon">
-                  <a>
-                    <ActionIcon action = {action}/>
-                  </a>
-                </div>
-            </div>
-            <p className="hours-worked-text"><span className="hours-worked-number">{time}</span></p>
-        </div>
+        <tr>
+          <td><ActionIcon action = {action}/></td>
+          <td>{action}</td>
+          <td>{time}</td>
+        </tr>
     )
   }
 }
