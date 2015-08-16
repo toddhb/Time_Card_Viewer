@@ -13,6 +13,7 @@ import IsLoggedIn from "../IsLoggedIn/IsLoggedIn"
 import IsNotLoggedIn from "../IsNotLoggedIn/IsNotLoggedIn"
 import IsDataAvailable from "../IsDataAvailable/IsDataAvailable"
 import IsDataNotAvailable from "../IsDataNotAvailable/IsDataNotAvailable"
+import Login from "../Login/Login"
 
 export default class Page extends React.Component {
   render() {
@@ -36,6 +37,7 @@ export default class PageInner extends React.Component {
         </IsLoggedIn>
         <IsNotLoggedIn>
           <h1 className="text-center" id="login-splash">Login to see your time card</h1>
+          <Login />
           <p className="text-center">{loginIcons}</p>
         </IsNotLoggedIn>
       </div>

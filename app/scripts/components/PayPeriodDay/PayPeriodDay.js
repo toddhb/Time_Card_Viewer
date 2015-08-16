@@ -16,9 +16,9 @@ export default class PayPeriodDay extends React.Component {
   // passed through props.
     render() {
     const { date, total, totals } = this.props
-    console.log(this.props.exceptions)
+    //console.log(this.props.exceptions)
     const amountInTime = total ? total : '0:00'
-    console.log(totals)
+    //console.log(totals)
 
     const workedTotal = _.chain(totals)
         .find(each => each.payCodeId == "134")

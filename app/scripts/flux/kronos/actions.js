@@ -14,6 +14,8 @@ import flux from '../flux'
 const { protocal, host, basepath } = config.api.location
 
 const API_BASENAME = `${protocal}://${host}${basepath}`
+// personNumber provided by login and passed through API calls
+var requestId
 
 async function apiRequest(payload) {
   const response = await request
@@ -37,7 +39,8 @@ function parseXmlResponse(response) {
     return x2js.xml_str2json(text)
 }
 
-async function login() {
+async function login(id) {
+   requestId = id
    return apiRequest(
      `<?xml version='1.0' encoding='UTF-8' ?>
 <Kronos_WFC Version="1.0" WFCVersion="7.0.6.436" TimeStamp="7/14/2015 9:39PM GMT-07:00">
@@ -93,9 +96,13 @@ function scheduleRequest(personNumber, periodDateSpan) {
   )  
 }
 
+// Default ID: N0686
 export default class KronosActions extends Actions {
-  async login() {
-    const result = await parseXmlResponse(await login())
+  async login(id) {
+    // ID should be checked for valid-ness 
+    // before passed around in the actions
+    console.log("KronosActions.login called with ID: " + id)
+    const result = await parseXmlResponse(await login(id))
     this.fetchTimesheet()
     return result
   }
@@ -114,27 +121,27 @@ export default class KronosActions extends Actions {
   }
   async fetchPerviousTimesheet() {
     return parseXmlResponse(await apiRequest(
-      timesheetXmlRequest("N0686", 0) 
+      timesheetXmlRequest(requestId, 0) 
     ))
   }
-  async fetchCurrentTimesheet() {
+  async fetchCurrentTimesheet(id) {
     return parseXmlResponse(await apiRequest(
-      timesheetXmlRequest("N0686", 1) 
+      timesheetXmlRequest(requestId, 1) 
     ))
   }
   async fetchNextTimesheet() {
     return parseXmlResponse(await apiRequest(
-      timesheetXmlRequest("N0686", 2) 
+      timesheetXmlRequest(requestId, 2) 
     ))
   }
   async fetchDateRangeTimesheet(dateRange) {
     return parseXmlResponse(await apiRequest(
-      timesheetXmlRequest("N0686", 9, dateRange) 
+      timesheetXmlRequest(requestId, 9, dateRange) 
     ))
   }
   async fetchDateRangeSchedule(dateRange) {
     return parseXmlResponse(await apiRequest(
-      scheduleRequest("N0686", dateRange) 
+      scheduleRequest(requestId, dateRange) 
     ))
   }
   setStoreDateRange(dateRange) { 

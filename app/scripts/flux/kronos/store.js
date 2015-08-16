@@ -64,7 +64,7 @@ export default class KronosStore extends Store {
 
     this.state = DEFAULT_STATE
   }
-  async handleLogin(data) {
+  async handleLogin(data, id) {
     // Set the username of the logged in user
     const parsedData = parseLogin(data)
     if (parsedData.status == "Success"|| parsedData.errorCode == "1313") {
