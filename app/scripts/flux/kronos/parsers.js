@@ -168,10 +168,10 @@ function parseTime(input) {
   // minutes. The resulting number is the number of
   // hours.
   return _.chain(input)
-      // Convert input string to a moment object
-      .thru(x => moment(x, "HH:mm"))
+      // Split string into hours and minutes
+      .thru(x => x.split(':'))
       // Convert to the number of hours worked
-      .thru(x => x.hours() + (x.minutes() / 60))
+      .thru(([hours, minutes]) => Number(hours) + (Number(minutes) / 60))
       // Round to 2 digits
       .thru(x => _.round(x, 2))
       .value()
