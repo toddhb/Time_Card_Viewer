@@ -38,7 +38,7 @@ export default class PayPeriodStats extends React.Component {
           <p className="badge pull-right"><strong>{allPaidHours}</strong></p>
         </div>
         <div className="col-xs-12 col-md-4">
-          <p className="pull-left">Overtime Hours</p>
+          <p className="pull-left">OT Hours</p>
           <p className="badge pull-right"><strong>{allOvertime}</strong></p>
         </div>
         <div className="col-xs-12 col-md-4">

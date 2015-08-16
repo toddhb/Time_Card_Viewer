@@ -43,10 +43,10 @@ class PayPeriod extends React.Component {
     const { timesheet } = this.props
 
     const startDate = timesheet.startDate 
-      ? timesheet.startDate.format('MMMM DD')
+      ? timesheet.startDate.format('MMMM DD, YYYY')
       : ''
     const endDate = timesheet.endDate
-      ? timesheet.endDate.format('MMMM DD')
+      ? timesheet.endDate.format('MMMM DD, YYYY')
       : ''
     const dateRange = startDate + " - " + endDate
      
@@ -56,9 +56,8 @@ class PayPeriod extends React.Component {
           <div className="col-xs-12">
             <div className="payperiod-overview">
               <PeriodHeader periodType={this.props.periodType} />
-              <h3 className="text-center"><small>{dateRange}</small></h3>
-
               <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
+              <h3 className="text-center"><small>{dateRange}</small></h3>
               <FluxComponent connectToStores={['kronos']}>
                 <PayPeriodStats />
               </FluxComponent>
@@ -82,12 +81,12 @@ class OtherPayPeriodLink extends React.Component {
   render() {
     if(this.props.periodType == "Current") {
       return(
-        <Link to="previous" name="period-link previous">Previous Pay Period</Link>
+        <Link to="previous" name="period-link previous">Go To Previous Pay Period</Link>
       )
     } 
     if(this.props.periodType == "Previous") {
       return(
-        <Link to="app" name="period-link current">Current Pay Period</Link>
+        <Link to="app" name="period-link current">Go To Current Pay Period</Link>
       )
     } else {
       return null
