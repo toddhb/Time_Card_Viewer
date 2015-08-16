@@ -69,7 +69,11 @@ export function parseTimesheet(kronosData) {
           .map(each => ({
               date: moment(each._Date, 'M/DD/YYYY'),
               total: parseTime(each._GrandTotal || "0:00"),
-              totals: _.map(each => parseTotal(each)),
+              totals: _.chain(each)
+                .get('Totals.Total')
+                .compact()
+                .map(each => parseTotal(each))
+                .value()
             })
           )
           .filter(each => each.date.isBetween(startDate, endDate))
