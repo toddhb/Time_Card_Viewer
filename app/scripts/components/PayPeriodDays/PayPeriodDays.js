@@ -7,7 +7,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  * LICENSE text file in the root directory of this source tree.
  */
 import React from 'react'
-import { Link } from "react-router"
+import Router, { Link } from "react-router"
 import _ from 'lodash'
 
 export default class PayPeriodDays extends React.Component {
@@ -36,14 +36,15 @@ export default class PayPeriodDays extends React.Component {
 }
 
 class Row extends React.Component {
-  propTypes: {
+  static propTypes ={
     totals: React.PropTypes.string.isRequired,
   }
-  contextTypes: {
+  static contextTypes = {
     router: React.PropTypes.func.isRequired,
   }
   handleClick = () => {
-    console.log(this.context)
+    this.context.router.transitionTo(
+        'day', { date: this.props.date.format('YYYY-MM-DD') })
   }
   render() {
     const { totals, total, date } = this.props

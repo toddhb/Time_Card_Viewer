@@ -20,9 +20,6 @@ export default class PayPeriodOverview extends React.Component {
   // PayPeriodsOverview connects to the datastore timesheet
   // and produces a component that displays all recent timesheet
   // stamps with date and culmulative hours
-  contextTypes: {
-      router: React.PropTypes.func,
-  }
   render() {
     return (
       <FluxComponent connectToStores={['kronos']}>
@@ -52,7 +49,7 @@ class PayPeriod extends React.Component {
       ? timesheet.endDate.format('MMMM DD')
       : ''
     const dateRange = startDate + " - " + endDate
-                       
+     
     return (
       <Page>
         <div className="row time-overview">
@@ -65,7 +62,12 @@ class PayPeriod extends React.Component {
               <FluxComponent connectToStores={['kronos']}>
                 <PayPeriodStats />
               </FluxComponent>
-              <PayPeriodDays days={timesheet.days} />
+              { timesheet.days.length
+                ? <PayPeriodDays days={timesheet.days} />
+                 : <div className="alert alert-info text-center" role="alert">
+                      No day data available.
+                  </div>
+              }
             </div>
           </div>
         </div>
