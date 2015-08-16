@@ -24,10 +24,10 @@ export default class PayPeriodDays extends React.Component {
       <table className="table table-hover">
         <tr>
           <th>Date</th>
-          <th>worked</th>
+          <th>Hours Worked</th>
           <th>PTO</th>
-          <th>Overtime</th>
-          <th>total</th>
+          <th>OT</th>
+          <th>Total</th>
         </tr>
         <tbody>{rows}</tbody>
       </table>
@@ -63,11 +63,11 @@ class Row extends React.Component {
         .value()
     return (
       <tr className="active" onClick={this.handleClick}>
-        <td>{date.format("dddd M/D")}</td>
-        <td><span className="badge">{workedTotal}</span></td>
-        <td><span className="badge">{ptoTotal}</span></td>
-        <td><span className="badge">{overtimeTotal}</span></td>
-        <td><span className="badge">{grandTotal}</span></td>
+        <td>{date.format("ddd M/D")}</td>
+        <td className="text-center"><span className="badge">{workedTotal}</span></td>
+        <td className="text-center"><span className="badge">{ptoTotal}</span></td>
+        <td className="text-center"><span className="badge">{overtimeTotal}</span></td>
+        <td className="text-center"><span className="badge">{grandTotal}</span></td>
       </tr>
     )
   }
