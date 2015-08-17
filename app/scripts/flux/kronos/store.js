@@ -9,7 +9,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
 import { Store, } from 'flummox'
 import request from 'superagent-bluebird-promise'
 import config from '../../config.js'
-import xmlparser from 'xmlparser'
+//import xmlparser from 'xmlparser'
 import { parseTimesheet, parseLogin, parseLogout } from './parsers'
 import flux from '../flux'
 import _ from 'lodash'
@@ -106,7 +106,7 @@ export default class KronosStore extends Store {
     return this.filterByDate(this.state.timesheet.outPunches, date)
   }
   findByDate(xs, date) {
-    return _.find(xs, eachDay => date.isSame(eachDay.time, 'day'))
+    return _.find(xs, eachDay => date.isSame(eachDay.date, 'day'))
   }
   filterByDate(xs, date) {
     return _.filter(xs, eachDay => date.isSame(eachDay.time, 'day'))
