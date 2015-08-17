@@ -109,7 +109,8 @@ export default class KronosStore extends Store {
     return _.find(xs, eachDay => date.isSame(eachDay.date, 'day'))
   }
   filterByDate(xs, date) {
-    return _.filter(xs, eachDay => date.isSame(eachDay.time, 'day'))
+    var x =  _.filter(xs, eachDay => date.isSame(eachDay.time, 'day'))
+	return _.filter(x, eachDay => eachDay != "")
   }
   getStoreDateRange() {
     return this.state.storeDateRange

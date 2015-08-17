@@ -207,6 +207,8 @@ function parseTime(input) {
   // of hours and `MM` represents the number of 
   // minutes. The resulting number is the number of
   // hours.
+  if(input == undefined)
+	return ""
   return _.chain(input)
       // Split string into hours and minutes
       .thru(x => x.split(':'))

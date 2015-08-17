@@ -47,7 +47,6 @@ class Overview extends React.Component {
     let lastKronosTimeZone = ""
 
     const { params, day, inPunches, outPunches } = this.props
-
     const inPunchesChain = _.chain(inPunches)
         .map(each => {
           // XXX Hack! Need to pull from API in a better way
@@ -64,7 +63,6 @@ class Overview extends React.Component {
             type: "OutPunch",
           })
         })
-
     /*
     const shiftsChain = _.chain(Schedule)
       .get('ScheduleItems.ScheduleShift', [])
@@ -85,14 +83,18 @@ class Overview extends React.Component {
       })
       .flatten()
     */
-
+	console.log(inPunchesChain
+       .concat(outPunchesChain.value())
+       //.concat(shiftsChain.value())
+       .sortBy('time').value());
+	   
     const punches = inPunchesChain
        .concat(outPunchesChain.value())
        //.concat(shiftsChain.value())
        .sortBy('time')
        .map(punch => <Entry {...punch} />)
        .value()
-
+	   
     const date = moment(params.date)
     const year = date.format("YYYY")
     const month = date.format("MM")
@@ -104,7 +106,7 @@ class Overview extends React.Component {
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? <table className="table">{punches}</table> : <div><h3 className="text-center">No punches today</h3></div>}
+            { punches.length > 0 ? <table className="table"><tbody>{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="panel hidden-xs hidden-sm"
@@ -203,10 +205,10 @@ class Entry extends React.Component {
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
-	
     const time = moment(this.props.time).format('h:mma') 
 	
 	const code = this.props.LaborName
+
     return ( 
         <tr>
           <td><ActionIcon action = {action}/></td>
