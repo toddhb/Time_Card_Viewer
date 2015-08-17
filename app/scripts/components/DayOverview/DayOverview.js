@@ -46,7 +46,7 @@ class Overview extends React.Component {
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
 
-    const { params, day, inPunches, outPunches } = this.props
+    const { params, day, inPunches, outPunches, exceptions } = this.props
     const inPunchesChain = _.chain(inPunches)
         .map(each => {
           // XXX Hack! Need to pull from API in a better way
@@ -61,6 +61,14 @@ class Overview extends React.Component {
           //lastKronosTimeZone = eachPunch.KronosTimeZone
           return _.assign(each, {
             type: "OutPunch",
+          })
+        })
+	const ExceptionsChain = _.chain(exceptions)
+        .map(each => {
+          // XXX Hack! Need to pull from API in a better way
+          //lastKronosTimeZone = eachPunch.KronosTimeZone
+          return _.assign(each, {
+            type: "Exception",
           })
         })
     /*
@@ -83,17 +91,16 @@ class Overview extends React.Component {
       })
       .flatten()
     */
-	console.log(inPunchesChain
-       .concat(outPunchesChain.value())
-       //.concat(shiftsChain.value())
-       .sortBy('time').value());
-	   
+    const execp = ExceptionsChain
+		.map(punch => <Entry {...punch} />)
+       .value()
     const punches = inPunchesChain
        .concat(outPunchesChain.value())
        //.concat(shiftsChain.value())
        .sortBy('time')
        .map(punch => <Entry {...punch} />)
        .value()
+	   
 	   
     const date = moment(params.date)
     const year = date.format("YYYY")
@@ -106,7 +113,7 @@ class Overview extends React.Component {
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? <table className="table"><tbody>{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
+            { punches.length > 0 ? <table className="table"><tbody>{execp}{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="panel hidden-xs hidden-sm"
@@ -201,22 +208,41 @@ class Entry extends React.Component {
         action: "Shift ended",
         panelClass: panelClassDefault + " " + "shift-info",
         glyphClass: "icon-clock"
-      }
+      },
+	  Exception: {
+        action: "Exception",
+        panelClass: panelClassDefault + " " + "time-in",
+        glyphClass: "icon-truck"
+      },
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
-    const time = moment(this.props.time).format('h:mma') 
-	
-	const code = this.props.LaborName
+	console.log(this.props)
+	if(this.props.type == "Exception") {
+		console.log(this.props.typeName)
+		const expection = this.props.typeName
+		return (
+			<tr>
+			  <td><ActionIcon action = {action}/></td>
+			  <td>{expection}</td>
+			  <td></td>
+			  <td></td>
+			</tr>	
+		)			
+	} else {
+		const time = moment(this.props.time).format('h:mma') 
+		
+		const code = this.props.LaborName
 
-    return ( 
-        <tr>
-          <td><ActionIcon action = {action}/></td>
-          <td>{action}</td>
-          <td>{time}</td>
-		  <td>{code}</td>
-        </tr>
-    )
+		return ( 
+			<tr>
+			  <td><ActionIcon action = {action}/></td>
+			  <td>{action}</td>
+			  <td>{time}</td>
+			  <td>{code}</td>
+			</tr>
+		)
+	}
   }
 }
 
@@ -239,6 +265,8 @@ class ActionIcon extends React.Component {
            <img src={"/images/three_oclock.png"} width="20" height="20" /> 
          )
        }
+	   
+	   
 
         else {
            return null

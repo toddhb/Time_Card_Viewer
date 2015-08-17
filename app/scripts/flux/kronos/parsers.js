@@ -154,7 +154,7 @@ export function parseTimesheet(kronosData) {
             .thru(x => [x]).flatten().compact()
             .map(eachException => ({
               date: moment(eachSpan._Date, 'M/DD/YYYY'),
-              type: `${eachException._ExceptionTypeName}`,
+              typeName: `${eachException._ExceptionTypeName}`,
               differenceToLimit: parseTime(eachException._DifferenceToLimit),
               duration: parseTime(eachException._DurationOfException), 
               inPunchFlag: `${eachException._InPunchFlag}`, // I don't know what this is

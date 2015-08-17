@@ -97,7 +97,7 @@ export default class KronosStore extends Store {
     return this.findByDate(this.state.timesheet.days, date)
   }
   getExceptionsForDate(date) {
-    return this.filterByDate(this.state.timesheet.exceptions, date)
+    return this.filterByDateExceptions(this.state.timesheet.exceptions, date)
   }
   getInPunchesForDate(date) {
     return this.filterByDate(this.state.timesheet.inPunches, date)
@@ -111,6 +111,9 @@ export default class KronosStore extends Store {
   filterByDate(xs, date) {
     var x =  _.filter(xs, eachDay => date.isSame(eachDay.time, 'day'))
 	return _.filter(x, eachDay => eachDay != "")
+  }
+  filterByDateExceptions(xs, date) {
+	return _.filter(xs, eachDay => date.isSame(eachDay.date, 'day'))
   }
   getStoreDateRange() {
     return this.state.storeDateRange
