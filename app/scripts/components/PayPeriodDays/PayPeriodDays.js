@@ -23,11 +23,11 @@ export default class PayPeriodDays extends React.Component {
     return (
       <table className="table table-hover">
         <tr>
-          <th>Date</th>
-          <th>Hours Worked</th>
-          <th>PTO</th>
-          <th>OT</th>
-          <th>Total</th>
+          <th className="text-center">Date</th>
+          <th className="text-center">Hours Worked</th>
+          <th className="text-center">PTO</th>
+          <th className="text-center">OT</th>
+          <th className="text-center">Total</th>
         </tr>
         <tbody>{rows}</tbody>
       </table>
