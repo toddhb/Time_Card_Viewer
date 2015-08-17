@@ -203,16 +203,13 @@ class Entry extends React.Component {
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
-	
+
     const time = moment(this.props.time).format('h:mma') 
-	
-	const code = this.props.LaborName
     return ( 
         <tr>
           <td><ActionIcon action = {action}/></td>
           <td>{action}</td>
           <td>{time}</td>
-		  <td>{code}</td>
         </tr>
     )
   }
