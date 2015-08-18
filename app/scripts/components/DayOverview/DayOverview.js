@@ -171,12 +171,28 @@ class DayHeader extends React.Component {
 
 class DayStats extends React.Component {
   render() {
-    const { day } = this.props
-    const total = day ? day.total : ''
+    const { totals, total } = this.props.day ? this.props.day : ""
+	
+    const grandTotal = total ? total : '0:00'
+    const workedTotal = _.chain(totals)
+        .find(total => total.payCodeId == "134")
+        .get('amountInTime', 0)
+        .value()
+    const overtimeTotal = _.chain(totals)
+        .find(total => total.payCodeId == "141")
+        .get('amountInTime', 0)
+        .value()
+    const ptoTotal = _.chain(totals)
+        .find(total => total.payCodeId == "501")
+        .get('amountInTime', 0)
+        .value()
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{total}</span></p>
+          <p><strong>Hours:</strong> <span className="period-stat">{workedTotal}</span></p>
+		  <p><strong>PTO:</strong> <span className="period-stat">{ptoTotal}</span></p>
+		  <p><strong>OT:</strong> <span className="period-stat">{overtimeTotal}</span></p>
+		  <p><strong>Total:</strong> <span className="period-stat">{grandTotal}</span></p>
         </div>
       </div>   
     )
@@ -217,9 +233,7 @@ class Entry extends React.Component {
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
-	console.log(this.props)
 	if(this.props.type == "Exception") {
-		console.log(this.props.typeName)
 		const expection = this.props.typeName
 		return (
 			<tr>
