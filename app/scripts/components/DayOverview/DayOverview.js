@@ -94,8 +94,8 @@ class Overview extends React.Component {
     /*const execp = ExceptionsChain
 		.map(punch => <Entry {...punch} />)
        .value()*/
-    const punches = inPunchesChain
-       .concat(outPunchesChain.value())
+    const punches = outPunchesChain
+       .concat(inPunchesChain.value())
        //.concat(shiftsChain.value())
        .sortBy('time')
        .map(punch => <Entry {...punch} />)
