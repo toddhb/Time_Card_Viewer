@@ -91,9 +91,9 @@ class Overview extends React.Component {
       })
       .flatten()
     */
-    const execp = ExceptionsChain
+    /*const execp = ExceptionsChain
 		.map(punch => <Entry {...punch} />)
-       .value()
+       .value()*/
     const punches = inPunchesChain
        .concat(outPunchesChain.value())
        //.concat(shiftsChain.value())
@@ -113,7 +113,7 @@ class Overview extends React.Component {
         <DayHeader date={date}/> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? <table className="table"><tbody>{execp}{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
+            { punches.length > 0 ? <table className="table"><tbody>{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="panel hidden-xs hidden-sm"
