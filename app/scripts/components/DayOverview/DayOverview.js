@@ -136,7 +136,7 @@ class Overview extends React.Component {
 
 class DayHeader extends React.Component {
   render() { 
-    const displayDate = this.props.date.format("MMMM DD") 
+    const displayDate = this.props.date.format("dddd, MMMM DD, YYYY")
     return ( 
       <div className="row">
         <div className="col-xs-2">
