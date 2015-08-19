@@ -105,7 +105,7 @@ class Overview extends React.Component {
           <div className="col-xs-12 col-md-5">
             <div className="panel hidden-xs hidden-sm"
                  style={{padding: 10, marign: 0, border: 0}}>
-              <DayOverviewCalendar year={year} month={month-1} headers={dayHeaders} />
+              <DayOverviewCalendar {...this.props} year={year} month={month-1} headers={dayHeaders}  />
             </div>
               <FluxComponent connectToStores={{
                   kronos: store => ({
@@ -125,7 +125,7 @@ class DayHeader extends React.Component {
   render() { 
     var id = getId()
 
-    const displayDate = this.props.date.format("dddd, MMMM DD, YYYY")
+    const displayDate = this.props.day.date.format("dddd, MMMM DD, YYYY")
 
     return ( 
       <div className="row">
