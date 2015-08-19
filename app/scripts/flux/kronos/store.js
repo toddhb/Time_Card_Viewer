@@ -118,6 +118,12 @@ export default class KronosStore extends Store {
   getStoreDateRange() {
     return this.state.storeDateRange
   }
+  getPeriodStartDate() {
+    return this.state.timesheet.startDate
+  }
+  getPeriodEndDate() {
+    return this.state.timesheet.endDate
+  }
   isLoggedIn() {
     return !!this.state.username
   }

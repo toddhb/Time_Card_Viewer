@@ -51,7 +51,6 @@ class LoginInner extends React.Component {
 		// This is a really good candidate for testing...
 		const id = this.state.value
 		const validIds = ["N0686", "F1585", "R2199", "N6989", "05400"]
-		console.log(id)
 		if(_.includes(validIds, id)) {
 			this.setState({isValidUser: true})
     	flux.getActions('kronos').login(id)
@@ -82,7 +81,6 @@ class LoginInner extends React.Component {
 
 class LoginError extends React.Component {
 	render() {
-		console.log(this.props.isVisible)
 		var visibilityClass = this.props.isVisible ? "invisible" : "visible"
 		return (
 			<p id="login-error" className={visibilityClass}>That username is invalid...</p>

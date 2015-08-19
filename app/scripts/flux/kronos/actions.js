@@ -101,7 +101,6 @@ export default class KronosActions extends Actions {
   async login(id) {
     // ID should be checked for valid-ness 
     // before passed around in the actions
-    console.log("KronosActions.login called with ID: " + id)
     const result = await parseXmlResponse(await login(id))
     this.fetchTimesheet()
     return result
