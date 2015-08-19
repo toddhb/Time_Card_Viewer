@@ -44,7 +44,7 @@ async function login(id) {
    return apiRequest(
      `<?xml version='1.0' encoding='UTF-8' ?>
 <Kronos_WFC Version="1.0" WFCVersion="7.0.6.436" TimeStamp="7/14/2015 9:39PM GMT-07:00">
-    <Request Object="System" Action="Logon" Username="XMLUSER" Password="ibswutws" /> 
+    <Request Object="System" Action="Logon" Username="XMLUSER" Password="ibswutws" />
 </Kronos_WFC>`)
 }
 

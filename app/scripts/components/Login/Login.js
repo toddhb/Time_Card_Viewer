@@ -11,6 +11,8 @@ import FluxComponent from 'flummox/component'
 import flux from '../../flux/flux'
 import _ from 'lodash'
 
+var Id = null
+
 export default class Login extends React.Component {
   render() {
     return (
@@ -50,6 +52,7 @@ class LoginInner extends React.Component {
 	handleLogin = () => {
 		// This is a really good candidate for testing...
 		const id = this.state.value
+        Id = this.state.value
 		const validIds = ["N0686", "F1585", "R2199", "N6989", "05400"]
 		console.log(id)
 		if(_.includes(validIds, id)) {
@@ -88,4 +91,10 @@ class LoginError extends React.Component {
 			<p id="login-error" className={visibilityClass}>That username is invalid...</p>
 		)
 	}
+}
+
+export function getId() {
+  return {
+      id: Id,
+  }
 }

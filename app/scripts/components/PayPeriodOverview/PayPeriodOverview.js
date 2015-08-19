@@ -15,6 +15,7 @@ import flux from "../../flux/flux"
 import PayPeriodStats from "../PayPeriodStats/PayPeriodStats.js"
 import PayPeriodDays from "../PayPeriodDays/PayPeriodDays"
 import Page from '../Page/Page'
+import { getId } from '../Login/Login'
 
 export default class PayPeriodOverview extends React.Component {
   // PayPeriodsOverview connects to the datastore timesheet
@@ -40,6 +41,8 @@ class PayPeriod extends React.Component {
   // PayPeriods creates a list of PayPeriod Components
   // Needs tested with more data
   render() {
+    var id = getId()
+
     const { timesheet } = this.props
 
     const startDate = timesheet.startDate 
@@ -55,6 +58,7 @@ class PayPeriod extends React.Component {
         <div className="row time-overview">
           <div className="col-xs-12">
             <div className="payperiod-overview">
+              <h3 className="text-center"><small>{id}</small></h3>
               <PeriodHeader periodType={this.props.periodType} />
               <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
               <h3 className="text-center"><small>{dateRange}</small></h3>
