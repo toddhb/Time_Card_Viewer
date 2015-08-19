@@ -14,6 +14,7 @@ import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
 import DayOverviewCalendar from '../DayOverviewCalendar/DayOverviewCalendar'
 import Page from '../Page/Page'
+import { getId } from '../Login/Login'
 
 export default class DayOverview extends React.Component {
   render() {
@@ -122,9 +123,13 @@ class Overview extends React.Component {
 
 class DayHeader extends React.Component {
   render() { 
-    const displayDate = this.props.day.date.format("dddd, MMMM DD, YYYY")
+    var id = getId()
+
+    const displayDate = this.props.date.format("dddd, MMMM DD, YYYY")
+
     return ( 
       <div className="row">
+        <h3 className="text-center"><small>{id}</small></h3>
         <div className="col-xs-2">
           <ChangeDayLink {...this.props} direction="Previous" />
         </div>
