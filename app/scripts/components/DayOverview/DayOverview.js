@@ -130,13 +130,13 @@ class DayHeader extends React.Component {
     return ( 
       <div className="row">
         <h3 className="text-center"><small>{id}</small></h3>
-        <div className="col-xs-2">
+        <div className="col-xs-1">
           <ChangeDayLink {...this.props} direction="Previous" />
         </div>
-        <div className="col-xs-8">
+        <div className="col-xs-10">
           <h4 className="text-center">{displayDate}</h4>
         </div>
-        <div className="col-xs-2">
+        <div className="col-xs-1">
           <ChangeDayLink {...this.props} direction="Next" />
         </div>
         <div className="row"><br/></div> {/*For space*/}
