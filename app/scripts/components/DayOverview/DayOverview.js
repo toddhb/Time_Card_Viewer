@@ -166,10 +166,28 @@ class DayStats extends React.Component {
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Hours:</strong> <span className="period-stat">{workedTotal}</span></p>
-		  <p><strong>PTO:</strong> <span className="period-stat">{ptoTotal}</span></p>
-		  <p><strong>OT:</strong> <span className="period-stat">{overtimeTotal}</span></p>
-		  <p><strong>Total:</strong> <span className="period-stat">{grandTotal}</span></p>
+          <table className="table">
+            <tr>
+              <th>Type</th> 
+              <th className="text-right">Total</th>
+            </tr>
+            <tr>
+              <th>Hours</th> 
+              <td className="text-right"><span className="badge">{workedTotal.toFixed(2)}</span></td>
+            </tr>
+      		  <tr>
+              <th>PTO</th> 
+              <td className="text-right"><span className="badge">{ptoTotal.toFixed(2)}</span></td>
+            </tr>
+      		  <tr>
+              <th>OT</th>
+              <td className="text-right"><span className="badge">{overtimeTotal.toFixed(2)}</span></td>
+            </tr>
+      		  <tr>
+              <th>Total</th> 
+              <td className="text-right"><span className="badge">{grandTotal.toFixed(2)}</span></td>
+            </tr>
+          </table>
         </div>
       </div>   
     )
