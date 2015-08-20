@@ -48,7 +48,7 @@ class Row extends React.Component {
   }
   render() {
     const { totals, total, date } = this.props
-    const grandTotal = total ? total : '0:00'
+    const grandTotal = total ? total : '0.00'
     const workedTotal = _.chain(totals)
         .find(total => total.payCodeId == "134")
         .get('amountInTime', 0)
