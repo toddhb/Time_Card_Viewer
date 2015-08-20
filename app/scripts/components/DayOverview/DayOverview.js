@@ -238,15 +238,18 @@ class Entry extends React.Component {
   			  <td></td>
   			</tr>	
   		)					
-	} else {
-		const time = moment(this.props.time).format('h:mma') 
-		const code = this.props.laborName.match(/[^/]+\/[^/]+$/)
+  	} else {
+  		const time = moment(this.props.time).format('h:mma') 
+      console.log(this.props)
+      const departmentCode = this.props.laborCodes[4]
+      const workTypeCode = this.props.laborCodes[5]
   		return ( 
   			<tr>
   			  <td><ActionIcon action = {action}/></td>
   			  <td>{action}</td>
   			  <td>{time}</td>
-  			  <td>{code}</td>
+  			  <td>{departmentCode}</td>
+          <td>{workTypeCode}</td>
   			</tr>
   		)
     }

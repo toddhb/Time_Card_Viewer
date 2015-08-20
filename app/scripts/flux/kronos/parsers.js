@@ -29,13 +29,13 @@ export function parseTimesheet(kronosData) {
   //     ],
   //     inPunches: [
   //       {
-  //          laborName: <String>
+  //          laborCodes: [<String>]
   //          time: <Moment>
   //       }
   //     ],
   //     outPunches: [
   //       {
-  //          laborName: <String>
+  //          laborCodes: [<String>]
   //          time: <Moment>
   //       }
   //     ],
@@ -86,12 +86,11 @@ export function parseTimesheet(kronosData) {
       inPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => {
-          const laborName = eachSpan._LaborAccountName
   				const dateString = _.get(eachSpan, 'InPunch.Punch._Date')
   				const timeString = _.get(eachSpan, 'InPunch.Punch._Time')
   				const timeZone = _.get(eachSpan, 'InPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
   				return {
-  					laborName,
+            laborCodes: _.get(eachSpan, '_LaborAccountName', '').split('/'),
   					time: moment(
     					`${dateString} ${timeString} ${timeZone}`, 
     					'M/DD/YYYY HH:mm Z'
@@ -102,12 +101,11 @@ export function parseTimesheet(kronosData) {
       outPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => {
-          const laborName = eachSpan._LaborAccountName
           const dateString = _.get(eachSpan, 'OutPunch.Punch._Date')
           const timeString = _.get(eachSpan, 'OutPunch.Punch._Time')
           const timeZone = _.get(eachSpan, 'OutPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
           return {
-            laborName,
+            laborCodes: _.get(eachSpan, '_LaborAccountName', '').split('/'),
             time: moment(
               `${dateString} ${timeString} ${timeZone}`, 
               'M/DD/YYYY HH:mm Z'
