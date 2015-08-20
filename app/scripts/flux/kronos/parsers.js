@@ -29,11 +29,13 @@ export function parseTimesheet(kronosData) {
   //     ],
   //     inPunches: [
   //       {
+  //          laborName: <String>
   //          time: <Moment>
   //       }
   //     ],
   //     outPunches: [
   //       {
+  //          laborName: <String>
   //          time: <Moment>
   //       }
   //     ],
@@ -81,70 +83,34 @@ export function parseTimesheet(kronosData) {
       inPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => {
-			if(eachSpan.InPunch.Punch != "") {
-				const laborName = eachSpan._LaborAccountName
-				const dateString = eachSpan.InPunch.Punch._Date
-				const timeString = eachSpan.InPunch.Punch._Time
-				const timeZone = eachSpan.InPunch.Punch._KronosTimeZone.match(/[+-]\d\d:\d\d/)[0]
-				return {
-					LaborName: laborName,
-					time: moment(
-					`${dateString} ${timeString} ${timeZone}`, 
-					'M/DD/YYYY HH:mm Z'
-					),					
-				}
-			} else {
-				return ""
-			}
-		/*.map(eachSpan => _.get(eachSpan, 'InPunch.Punch'))
-        .compact()
-        .map(eachPunch => {
-          const dateString = eachPunch._Date
-          const timeString = eachPunch._Time
-          const timeZone = eachPunch._KronosTimeZone.match(/[+-]\d\d:\d\d/)[0]
-          return {
-            time: moment(
-                `${dateString} ${timeString} ${timeZone}`, 
-                'M/DD/YYYY HH:mm Z'
-            ),
-          }*/
+          const laborName = eachSpan._LaborAccountName
+  				const dateString = _.get(eachSpan, 'InPunch.Punch._Date')
+  				const timeString = _.get(eachSpan, 'InPunch.Punch._Time')
+  				const timeZone = _.get(eachSpan, 'InPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
+  				return {
+  					laborName,
+  					time: moment(
+    					`${dateString} ${timeString} ${timeZone}`, 
+    					'M/DD/YYYY HH:mm Z'
+  					),					
+  				}
         })
         .value(),
       outPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => {
-			if(eachSpan.OutPunch.Punch != "") {
-				const laborName = eachSpan._LaborAccountName
-				const dateString = eachSpan.OutPunch.Punch._Date
-				const timeString = eachSpan.OutPunch.Punch._Time
-				const timeZone = eachSpan.OutPunch.Punch._KronosTimeZone.match(/[+-]\d\d:\d\d/)[0]
-				return {
-					LaborName: laborName,
-					time: moment(
-					`${dateString} ${timeString} ${timeZone}`, 
-					'M/DD/YYYY HH:mm Z'
-					),					
-				} 
-			}else {
-				return ""
-			}
-				/*_.chain(eachSpan)
-				.get(eachSpan, 'OutPunch.Punch')
-				.compact()
-				.map(eachPunch => {
-					const dateString = eachPunch._Date
-					const timeString = eachPunch._Time
-					const timeZone = eachPunch._KronosTimeZone.match(/[+-]\d\d:\d\d/)[0]
-					return {
-						LaborName: laborName,
-						time: moment(
-						`${dateString} ${timeString} ${timeZone}`, 
-						'M/DD/YYYY HH:mm Z'
-						),					
-					}
-				})
-				.value()*/
-		})		
+          const laborName = eachSpan._LaborAccountName
+          const dateString = _.get(eachSpan, 'OutPunch.Punch._Date')
+          const timeString = _.get(eachSpan, 'OutPunch.Punch._Time')
+          const timeZone = _.get(eachSpan, 'OutPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
+          return {
+            laborName,
+            time: moment(
+              `${dateString} ${timeString} ${timeZone}`, 
+              'M/DD/YYYY HH:mm Z'
+            ),          
+          }
+        })
         .value(),
       exceptions: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
