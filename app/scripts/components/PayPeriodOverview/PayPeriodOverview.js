@@ -23,7 +23,11 @@ export default class PayPeriodOverview extends React.Component {
   // stamps with date and culmulative hours
   render() {
     return (
-      <FluxComponent connectToStores={['kronos']}>
+      <FluxComponent connectToStores={{
+        kronos: store => ({
+          timesheet: store.getTimesheetByName(this.props.dateRange)
+        })
+      }}>
         <PayPeriod {...this.props}/>
       </FluxComponent>
     )
@@ -35,7 +39,6 @@ class PayPeriod extends React.Component {
     router: React.PropTypes.func.isRequired,
   }
   componentDidMount() {
-    flux.getActions('kronos').setStoreDateRange(this.props.dateRange)
     flux.getActions('kronos').fetchTimesheet()
   }
   // PayPeriods creates a list of PayPeriod Components
@@ -62,7 +65,11 @@ class PayPeriod extends React.Component {
               <PeriodHeader periodType={this.props.periodType} />
               <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
               <h3 className="text-center"><small>{dateRange}</small></h3>
-              <FluxComponent connectToStores={['kronos']}>
+              <FluxComponent connectToStores={{
+                  kronos: store => ({
+                    timesheet: store.getTimesheetByName(this.props.dateRange),
+                  })
+              }}>
                 <PayPeriodStats />
               </FluxComponent>
               { timesheet.days.length

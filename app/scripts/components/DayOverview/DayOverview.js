@@ -28,8 +28,8 @@ export default class DayOverview extends React.Component {
           const inPunches = kronos.getInPunchesForDate(date)
           const outPunches = kronos.getOutPunchesForDate(date)
           const exceptions = kronos.getExceptionsForDate(date)
-          const startPeriodDate = kronos.getPeriodStartDate()
-          const endPeriodDate = kronos.getPeriodEndDate()
+          const startPeriodDate = kronos.getPeriodStartDate('previous')
+          const endPeriodDate = kronos.getPeriodEndDate('current')
           return {
             day,
             inPunches, 
@@ -47,6 +47,9 @@ export default class DayOverview extends React.Component {
 }
 
 class Overview extends React.Component {                              
+  componentDidMount() {
+    flux.getActions('kronos').fetchTimesheet()
+  }
   render() {  
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
@@ -123,21 +126,22 @@ class Overview extends React.Component {
 
 class DayHeader extends React.Component {
   render() { 
-    var id = getId()
-
-    const displayDate = this.props.day.date.format("dddd, MMMM DD, YYYY")
+    const id = getId()
+    const displayDate = this.props.day
+      ? this.props.day.date.format("dddd, MMMM DD, YYYY")
+      : ''
 
     return ( 
       <div className="row">
         <h3 className="text-center"><small>{id}</small></h3>
         <div className="col-xs-1">
-          <ChangeDayLink {...this.props} direction="Previous" />
+          { displayDate && <ChangeDayLink {...this.props} direction="Previous" />}
         </div>
         <div className="col-xs-10">
           <h4 className="text-center">{displayDate}</h4>
         </div>
         <div className="col-xs-1">
-          <ChangeDayLink {...this.props} direction="Next" />
+          { displayDate && <ChangeDayLink {...this.props} direction="Next" /> }
         </div>
         <div className="row"><br/></div> {/*For space*/}
         <div className="row"><br/></div>
@@ -150,7 +154,7 @@ class DayStats extends React.Component {
   render() {
     const { totals, total } = this.props.day ? this.props.day : ""
 	
-    const grandTotal = total ? total : '0:00'
+    const grandTotal = total || 0
     const workedTotal = _.chain(totals)
         .find(total => total.payCodeId == "134")
         .get('amountInTime', 0)
@@ -240,7 +244,6 @@ class Entry extends React.Component {
   		)					
   	} else {
   		const time = moment(this.props.time).format('h:mma') 
-      console.log(this.props)
       const departmentCode = this.props.laborCodes[4]
       const workTypeCode = this.props.laborCodes[5]
   		return ( 

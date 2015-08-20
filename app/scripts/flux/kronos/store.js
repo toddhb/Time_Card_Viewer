@@ -16,12 +16,23 @@ import _ from 'lodash'
 
 const DEFAULT_STATE = {
   username: null,
-  storeDateRange: 'current',
-  timesheet: {
+  currentTimesheet: {
+    startDate: null,
+    endDate: null,
     days: [],
     inPunches: [],
     outPunches: [],
     exceptions: [],
+    totals: [],    
+  },
+  previousTimesheet: {
+    startDate: null,
+    endDate: null,
+    days: [],
+    inPunches: [],
+    outPunches: [],
+    exceptions: [],
+    totals: [],    
   },
   Schedule: {},
 }
@@ -40,18 +51,18 @@ export default class KronosStore extends Store {
       () => console.log('kronosActions.logout: started'), 
       this.handleLogout, 
       (error) => console.log('kronosActions.logout: error', error))
+    this.registerAsync(kronosActions.fetchTimesheet, 
+      () => console.log('kronosActions.fetchTimesheet: started'), 
+      () => {},
+      (error) => console.log('kronosActions.fetchTimesheet: error', error))
     this.registerAsync(kronosActions.fetchPreviousTimesheet, 
       () => console.log('kronosActions.fetchPreviousTimesheet: started'), 
-      this.handleTimesheetFetch, 
+      this.handlePreviousTimesheetFetch, 
       (error) => console.log('kronosActions.fetchPreviousTimesheet: error', error))
     this.registerAsync(kronosActions.fetchCurrentTimesheet, 
       () => console.log('kronosActions.fetchCurrentTimesheet: started'), 
-      this.handleTimesheetFetch, 
+      this.handleCurrentTimesheetFetch, 
       (error) => console.log('kronosActions.fetchCurrentTimesheet: error', error))
-    this.registerAsync(kronosActions.fetchNextTimesheet, 
-      () => console.log('kronosActions.fetchNextTimesheet: started'), 
-      this.handleTimesheetFetch, 
-      (error) => console.log('kronosActions.fetchNextTimesheet: error', error))
     this.registerAsync(kronosActions.fetchDateRangeTimesheet, 
       () => console.log('kronosActions.fetchDateRangeTimesheet: started'), 
       this.handleTimesheetFetch, 
@@ -60,7 +71,6 @@ export default class KronosStore extends Store {
       () => console.log('kronosActions.fetchDateRangeSchedule: started'), 
       this.handleScheduleFetch, 
       (error) => console.log('kronosActions.fetchDateRangeSchedule: error', error))
-    this.register(kronosActions.setStoreDateRange, this.handleSetStoreDateRange)
 
     this.state = DEFAULT_STATE
   }
@@ -82,28 +92,43 @@ export default class KronosStore extends Store {
       })
     }
   }
-  async handleTimesheetFetch(data) {
-    this.setState(parseTimesheet(data))
+  async handleCurrentTimesheetFetch(data) {
+    this.setState({
+      currentTimesheet: parseTimesheet(data).timesheet,
+    })
+  }
+  async handlePreviousTimesheetFetch(data) {
+    this.setState({
+      previousTimesheet: parseTimesheet(data).timesheet,
+    })
   }
   async handleScheduleFetch(data) {
     this.setState({
       Schedule: data.Kronos_WFC.Response.Schedule
     })
   }
-  handleSetStoreDateRange(dateRange) {
-    this.setState({ storeDateRange: dateRange})
+  getDay(date, name = 'current') {
+    const { currentTimesheet, previousTimesheet } = this.state
+    const days = currentTimesheet.days.concat(previousTimesheet.days)
+    return this.findByDate(days, date)
   }
-  getDay(date) {
-    return this.findByDate(this.state.timesheet.days, date)
+  getExceptionsForDate(date, name = 'current') {
+    const { currentTimesheet, previousTimesheet } = this.state
+    const exceptions = currentTimesheet.exceptions
+        .concat(previousTimesheet.exceptions)
+    return this.filterByDateExceptions(exceptions, date)
   }
-  getExceptionsForDate(date) {
-    return this.filterByDateExceptions(this.state.timesheet.exceptions, date)
+  getInPunchesForDate(date, name = 'current') {
+    const { currentTimesheet, previousTimesheet } = this.state
+    const inPunches = currentTimesheet.inPunches
+        .concat(previousTimesheet.inPunches)
+    return this.filterByDate(inPunches, date)
   }
-  getInPunchesForDate(date) {
-    return this.filterByDate(this.state.timesheet.inPunches, date)
-  }
-  getOutPunchesForDate(date) {
-    return this.filterByDate(this.state.timesheet.outPunches, date)
+  getOutPunchesForDate(date, name = 'current') {
+    const { currentTimesheet, previousTimesheet } = this.state
+    const outPunches = currentTimesheet.outPunches
+        .concat(previousTimesheet.outPunches)
+    return this.filterByDate(outPunches, date)
   }
   findByDate(xs, date) {
     return _.find(xs, eachDay => date.isSame(eachDay.date, 'day'))
@@ -115,14 +140,22 @@ export default class KronosStore extends Store {
   filterByDateExceptions(xs, date) {
 	return _.filter(xs, eachDay => date.isSame(eachDay.date, 'day'))
   }
-  getStoreDateRange() {
-    return this.state.storeDateRange
+  getTimesheetByName(name) {
+    if (name === 'current') {
+      return this.state.currentTimesheet
+    } else if (name === 'previous') {
+      return this.state.previousTimesheet
+    } else {
+      return null
+    }
   }
-  getPeriodStartDate() {
-    return this.state.timesheet.startDate
+  getPeriodStartDate(name = 'current') {
+    const timesheet = this.getTimesheetByName(name)
+    return timesheet.startDate
   }
-  getPeriodEndDate() {
-    return this.state.timesheet.endDate
+  getPeriodEndDate(name = 'current') {
+    const timesheet = this.getTimesheetByName(name)
+    return timesheet.endDate
   }
   isLoggedIn() {
     return !!this.state.username
