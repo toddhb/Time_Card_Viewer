@@ -52,14 +52,17 @@ class Row extends React.Component {
     const workedTotal = _.chain(totals)
         .find(total => total.payCodeId == "134")
         .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
         .value()
     const overtimeTotal = _.chain(totals)
         .find(total => total.payCodeId == "141")
         .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
         .value()
     const ptoTotal = _.chain(totals)
         .find(total => total.payCodeId == "501")
         .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
         .value()
     return (
       <tr className="active" onClick={this.handleClick}>
