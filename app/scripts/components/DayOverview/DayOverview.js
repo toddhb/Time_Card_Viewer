@@ -77,12 +77,12 @@ class Overview extends React.Component {
             type: "Exception",
           })
         })
-  
     const execp = ExceptionsChain
+    /*const execp = ExceptionsChain
 		.map(punch => <Entry {...punch} />)
-       .value()
-    const punches = inPunchesChain
-       .concat(outPunchesChain.value())
+       .value()*/
+    const punches = outPunchesChain
+       .concat(inPunchesChain.value())
        //.concat(shiftsChain.value())
        .sortBy('time')
        .map(punch => <Entry {...punch} />)
@@ -100,7 +100,7 @@ class Overview extends React.Component {
         <DayHeader {...this.props} /> 
         <div className="row">
           <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? <table className="table"><tbody>{execp}{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
+            { punches.length > 0 ? <table className="table"><tbody>{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="panel hidden-xs hidden-sm"
@@ -148,12 +148,28 @@ class DayHeader extends React.Component {
 
 class DayStats extends React.Component {
   render() {
-    const { day } = this.props
-    const total = day ? day.total : ''
+    const { totals, total } = this.props.day ? this.props.day : ""
+	
+    const grandTotal = total ? total : '0:00'
+    const workedTotal = _.chain(totals)
+        .find(total => total.payCodeId == "134")
+        .get('amountInTime', 0)
+        .value()
+    const overtimeTotal = _.chain(totals)
+        .find(total => total.payCodeId == "141")
+        .get('amountInTime', 0)
+        .value()
+    const ptoTotal = _.chain(totals)
+        .find(total => total.payCodeId == "501")
+        .get('amountInTime', 0)
+        .value()
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{total}</span></p>
+          <p><strong>Hours:</strong> <span className="period-stat">{workedTotal}</span></p>
+		  <p><strong>PTO:</strong> <span className="period-stat">{ptoTotal}</span></p>
+		  <p><strong>OT:</strong> <span className="period-stat">{overtimeTotal}</span></p>
+		  <p><strong>Total:</strong> <span className="period-stat">{grandTotal}</span></p>
         </div>
       </div>   
     )
@@ -203,11 +219,11 @@ class Entry extends React.Component {
   			  <td></td>
   			  <td></td>
   			</tr>	
-  		)			
-    } else {
-		  const time = moment(this.props.time).format('h:mma') 
-      const code = this.props.LaborName
-
+  		)					
+	} else {
+		const time = moment(this.props.time).format('h:mma') 
+		const code = this.props.LaborName
+		
   		return ( 
   			<tr>
   			  <td><ActionIcon action = {action}/></td>
