@@ -74,6 +74,7 @@ class LoginInner extends React.Component {
   	return (
 			<div className="col-sm-12 text-center">
 				<input type="text" value={value} className="text-center" id="login"
+                                  data-toggle="tooltip" title="Enter your employee ID"
 				   onChange={this.handleChange} onClick={this.clearText} onKeyDown={this.handleKeyDown} />
 				<LoginError isVisible={this.state.isValidUser}/>
 				<a onClick={this.handleLogin} id="login-btn">Login</a>
