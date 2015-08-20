@@ -15,16 +15,10 @@ export default class PayPeriodDays extends React.Component {
   // of hours worked that day. Both date and hours are 
   // passed through props.
   render() {
-    const { days, exceptions } = this.props
+    const { days } = this.props
 
     const rows = _.get(this.props, 'days', [])
-        .map(each => {
-          const hasExceptions = _.some(
-            exceptions, 
-            eachDay => each.date.isSame(eachDay.time, 'day'))
-          return (<Row hasExceptions={hasExceptions} {...each} />)
-        })
-
+        .map(each => <Row {...each} />)
 
     return (
       <div className="panel">
@@ -55,9 +49,8 @@ class Row extends React.Component {
         'day', { date: this.props.date.format('YYYY-MM-DD') })
   }
   render() {
-    const { totals, total, date, hasExceptions } = this.props
+    const { totals, total, date } = this.props
     const grandTotal = total ? total : '0.00'
-    const className = hasExceptions ? "danger" : ""
     const workedTotal = _.chain(totals)
         .find(total => total.payCodeId == "134")
         .get('amountInTime', 0)
@@ -74,7 +67,7 @@ class Row extends React.Component {
         .thru(total => total.toFixed(2))
         .value()
     return (
-      <tr className={className} onClick={this.handleClick}>
+      <tr onClick={this.handleClick}>
         <td>{date.format("ddd M/D")}</td>
         <td className="text-center"><span className="badge">{workedTotal}</span></td>
         <td className="text-center"><span className="badge">{ptoTotal}</span></td>

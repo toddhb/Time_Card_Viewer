@@ -73,7 +73,7 @@ class PayPeriod extends React.Component {
                 <PayPeriodStats />
               </FluxComponent>
               { timesheet.days.length
-                ? <PayPeriodDays days={timesheet.days} exceptions={timesheet.exceptions}/>
+                ? <PayPeriodDays days={timesheet.days} />
                  : <div className="alert alert-info text-center" role="alert">
                       No day data available.
                   </div>
