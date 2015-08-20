@@ -263,7 +263,7 @@ class ChangeDayLink extends React.Component {
       
       // This should be checking if the newDate.isBefore(startDate) or isSame(startDate), but store data
       // holds information for startDate + 1 to endDate - 1
-      if(!newDate.isSame(startDate)) {
+      if(!newDate.isBefore(startDate)) {
         newDate = newDate.format("YYYY-MM-DD")
       } else {
         //console.log("newDate null because " + newDate.toString("MM-DD") + " is before " + startDate.toString("MM-DD"))
@@ -276,7 +276,7 @@ class ChangeDayLink extends React.Component {
       newDate = newDate.add(1, "days")
 
       // This should be checking if the newDate.isAfter(startDate) or isSame(startDate) per note above
-      if(!newDate.isSame(endDate)) {
+      if(!newDate.isAfter(endDate)) {
         newDate = newDate.format("YYYY-MM-DD")
       } else {
         //console.log("newDate null because " + newDate.toString("MM-DD") + " is after " + endDate.toString("MM-DD"))

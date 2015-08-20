@@ -20,7 +20,7 @@ export default class DayOverviewCalendar extends React.Component {
 
     var url_date
     const url_day = day.format("D")
-    if(day.isBetween(startDate, endDate)) {
+    if(day.isBetween(startDate-1, endDate+1)) {
       url_date = day.format("YYYY-MM-DD")
     } else {
       url_date = null
