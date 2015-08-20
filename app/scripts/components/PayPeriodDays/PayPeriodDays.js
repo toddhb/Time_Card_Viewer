@@ -21,16 +21,18 @@ export default class PayPeriodDays extends React.Component {
         .map(each => <Row {...each} />)
 
     return (
-      <table className="table table-hover">
-        <tr>
-          <th>Date</th>
-          <th className="text-center">Hours Worked</th>
-          <th className="text-center">PTO</th>
-          <th className="text-center">OT</th>
-          <th className="text-center">Total</th>
-        </tr>
-        <tbody>{rows}</tbody>
-      </table>
+      <div className="panel">
+        <table className="table table-hover">
+          <tr>
+            <th>Date</th>
+            <th className="text-center">Hours Worked</th>
+            <th className="text-center">PTO</th>
+            <th className="text-center">OT</th>
+            <th className="text-center">Total</th>
+          </tr>
+          <tbody>{rows}</tbody>
+        </table>
+      </div>
     )
   }
 }
@@ -65,7 +67,7 @@ class Row extends React.Component {
         .thru(total => total.toFixed(2))
         .value()
     return (
-      <tr className="active" onClick={this.handleClick}>
+      <tr onClick={this.handleClick}>
         <td>{date.format("ddd M/D")}</td>
         <td className="text-center"><span className="badge">{workedTotal}</span></td>
         <td className="text-center"><span className="badge">{ptoTotal}</span></td>

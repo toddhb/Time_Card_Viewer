@@ -32,7 +32,8 @@ export default class PayPeriodStats extends React.Component {
         .value()
 
     return (
-      <div className="well well-sm clearfix">
+      <div className="well well-sm clearfix"
+           style={{ background: 'white' }}>
         <div className="col-xs-12 col-md-4">
           <p className="pull-left">Hours Worked</p>
           <p className="badge pull-right"><strong>{allPaidHours}</strong></p>

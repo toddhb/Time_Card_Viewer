@@ -102,7 +102,7 @@ class Overview extends React.Component {
       <Page>  
         <DayHeader {...this.props} /> 
         <div className="row">
-          <div className="col-xs-12 col-md-7">
+          <div className="panel col-xs-12 col-md-7">
             { punches.length > 0 ? <table className="table"><tbody>{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
