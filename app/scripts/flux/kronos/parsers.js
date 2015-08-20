@@ -78,7 +78,7 @@ export function parseTimesheet(kronosData) {
                 .value()
             })
           )
-          .filter(each => each.date.isBetween(startDate.subtract(1, 'day'), endDate.add(1, 'day')))
+          .filter(each => each.date.isBetween(startDate.subtract(1, 'days'), endDate.add(1, 'days')))
           .value(),
       inPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
