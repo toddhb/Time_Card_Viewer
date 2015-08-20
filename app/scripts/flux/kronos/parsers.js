@@ -88,7 +88,7 @@ export function parseTimesheet(kronosData) {
   				const timeString = _.get(eachSpan, 'InPunch.Punch._Time')
   				const timeZone = _.get(eachSpan, 'InPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
   				return {
-  					laborName: laborName,
+  					laborName,
   					time: moment(
     					`${dateString} ${timeString} ${timeZone}`, 
     					'M/DD/YYYY HH:mm Z'
@@ -104,7 +104,7 @@ export function parseTimesheet(kronosData) {
           const timeString = _.get(eachSpan, 'OutPunch.Punch._Time')
           const timeZone = _.get(eachSpan, 'OutPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
           return {
-            laborName: laborName,
+            laborName,
             time: moment(
               `${dateString} ${timeString} ${timeZone}`, 
               'M/DD/YYYY HH:mm Z'

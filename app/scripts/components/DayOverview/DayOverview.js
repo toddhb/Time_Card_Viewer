@@ -206,7 +206,7 @@ class Entry extends React.Component {
   		)			
     } else {
 		  const time = moment(this.props.time).format('h:mma') 
-      const code = this.props.LaborName
+      const code = this.props.laborName
 
   		return ( 
   			<tr>
