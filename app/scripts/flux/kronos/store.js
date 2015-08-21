@@ -40,39 +40,21 @@ const DEFAULT_STATE = {
 export default class KronosStore extends Store {
   constructor(flux) {
     super()
-
-    const kronosActions = flux.getActions('kronos')
-
-    this.registerAsync(kronosActions.login, 
-      () => console.log('kronosActions.login: started'), 
-      this.handleLogin, 
-      (error) => console.log('kronosActions.login: error', error))
-    this.registerAsync(kronosActions.logout, 
-      () => console.log('kronosActions.logout: started'), 
-      this.handleLogout, 
-      (error) => console.log('kronosActions.logout: error', error))
-    this.registerAsync(kronosActions.fetchTimesheet, 
-      () => console.log('kronosActions.fetchTimesheet: started'), 
-      () => {},
-      (error) => console.log('kronosActions.fetchTimesheet: error', error))
-    this.registerAsync(kronosActions.fetchPreviousTimesheet, 
-      () => console.log('kronosActions.fetchPreviousTimesheet: started'), 
-      this.handlePreviousTimesheetFetch, 
-      (error) => console.log('kronosActions.fetchPreviousTimesheet: error', error))
-    this.registerAsync(kronosActions.fetchCurrentTimesheet, 
-      () => console.log('kronosActions.fetchCurrentTimesheet: started'), 
-      this.handleCurrentTimesheetFetch, 
-      (error) => console.log('kronosActions.fetchCurrentTimesheet: error', error))
-    this.registerAsync(kronosActions.fetchDateRangeTimesheet, 
-      () => console.log('kronosActions.fetchDateRangeTimesheet: started'), 
-      this.handleTimesheetFetch, 
-      (error) => console.log('kronosActions.fetchDateRangeTimesheet: error', error))
-    this.registerAsync(kronosActions.fetchDateRangeSchedule, 
-      () => console.log('kronosActions.fetchDateRangeSchedule: started'), 
-      this.handleScheduleFetch, 
-      (error) => console.log('kronosActions.fetchDateRangeSchedule: error', error))
-
+    this.flux = flux
     this.state = DEFAULT_STATE
+    this.registerAction('login', this.handleLogin)
+    this.registerAction('logout', this.handleLogin)
+    this.registerAction('fetchPreviousTimesheet', this.handlePreviousTimesheetFetch)
+    this.registerAction('fetchCurrentTimesheet', this.handleCurrentTimesheetFetch)
+  }
+  registerAction(action, handler) {
+    const kronosActions = this.flux.getActions('kronos')
+    this.registerAsync(
+      kronosActions[action],
+      () => console.log(`kronosActions.${action}: started`),
+      handler,
+      (error) => console.log(`kronosActions.${action}: error:`, error),
+    )
   }
   async handleLogin(data) {
     // Set the username of the logged in user
