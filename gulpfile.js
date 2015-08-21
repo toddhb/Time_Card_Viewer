@@ -24,10 +24,11 @@ var source = require("vinyl-source-stream"),
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 var gutil = require('gulp-util');
+var changed = require('gulp-changed');
 var src = {}
 
 // Styles
-gulp.task("styles", ["sass"  ]);
+gulp.task("styles", ["sass"]);
 
 gulp.task("sass", function() {
     src.sass = [
@@ -37,11 +38,15 @@ gulp.task("sass", function() {
         "app/scripts/components/**/*.css"
     ]
     return gulp.src(src.sass)
+        .pipe(changed("dist/styles", { extension: '.css'} ))
         .pipe($.rubySass({
-            style: "expanded",
-            precision: 10,
+            style: "compressed",
+            precision: 5,
             loadPath: ["app/bower_components"]
-        }))
+         }))
+        .on('error', function (err) {
+            console.error('Error!', err.message);   // So errors don't stop the task
+         })
         .pipe($.autoprefixer("last 1 version"))
         .pipe(gulp.dest("dist/styles"))
         .pipe($.size());
@@ -160,7 +165,7 @@ gulp.task("fonts", function() {
 // Clean
 gulp.task("clean", function(cb) {
     $.cache.clearAll();
-    cb(del.sync(["dist/styles", "dist/scripts", "dist/images"]));
+    cb(del.sync(["dist/scripts", "dist/images"]));
 });
 
 // Bundle
@@ -221,7 +226,11 @@ gulp.task("watch", ["html", "fonts", "bundle"], function() {
     // Watch .html files
     gulp.watch("app/*.html", ["html"]);
 
-    gulp.watch(["app/styles/**/*.scss", "app/styles/**/*.css"], ["styles", reload]);
+    // Watch the .sass!
+    gulp.watch(["app/styles/**/*.scss", "app/styles/**/*.css", "app/scripts/components/**/*.scss"], ["styles", reload])
+        .on('change', function(event) {
+            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        });
 
     // Watch image files
     gulp.watch("app/images/**/*", reload);

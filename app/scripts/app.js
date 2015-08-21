@@ -42,7 +42,7 @@ class CurrentPayPeriod extends React.Component {
   render() {
     // "Today" = 05/15/2015
     return(
-      <PayPeriodOverview dateRange="5/10/2015 - 5/15/2015" periodType="Current" />
+      <PayPeriodOverview dateRange="current" periodType="Current" />
     )
   }
 }
@@ -55,7 +55,7 @@ class CurrentPayPeriod extends React.Component {
 class PreviousPayPeriod extends React.Component {
   render() {
     return(
-      <PayPeriodOverview dateRange="5/3/2015 - 5/9/2015" periodType="Previous" />
+      <PayPeriodOverview dateRange="previous" periodType="Previous" />
     )
   }
 }

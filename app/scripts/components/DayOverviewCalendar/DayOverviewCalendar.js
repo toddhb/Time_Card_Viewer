@@ -14,14 +14,27 @@ import moment from 'moment'
 @calendar
 export default class DayOverviewCalendar extends React.Component {
   render() {
-    const url_date = moment(this.props.date).format("YYYY-MM-DD")
-    const url_day = moment(this.props.date).format("D")
+    const day = moment(this.props.date)
+    const startDate = this.props.startPeriodDate
+    const endDate = this.props.endPeriodDate
+
+    var url_date
+    const url_day = day.format("D")
+    if(day.isBetween(startDate-1, endDate+1)) {
+      url_date = day.format("YYYY-MM-DD")
+    } else {
+      url_date = null
+    }
+
     return (
       <div>
-        <Link to="day" params={{date: url_date}} >
-          {url_day}
-        </Link>
-    </div>
+        {url_date 
+         ? <Link to="day" params={{date: url_date}} >
+            {url_day}
+           </Link>
+         : <p>{url_day}</p>
+        }
+      </div>
     )
   }
 }

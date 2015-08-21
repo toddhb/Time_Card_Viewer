@@ -40,11 +40,7 @@ export default class Navbar {
               Log out
             </a>
           </IsLoggedIn>
-          <IsNotLoggedIn>
-            <a onClick={this.handleLogin}>
-              Log in
-            </a>
-          </IsNotLoggedIn>
+
         </div>
       </div>
     )

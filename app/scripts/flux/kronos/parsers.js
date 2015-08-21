@@ -29,11 +29,13 @@ export function parseTimesheet(kronosData) {
   //     ],
   //     inPunches: [
   //       {
+  //          laborCodes: [<String>]
   //          time: <Moment>
   //       }
   //     ],
   //     outPunches: [
   //       {
+  //          laborCodes: [<String>]
   //          time: <Moment>
   //       }
   //     ],
@@ -56,7 +58,7 @@ export function parseTimesheet(kronosData) {
   // }
   const kronosResponse = kronosData.Kronos_WFC.Response
   const [startDate, endDate] = _.chain(kronosResponse)
-      .get('Timesheet.Period.TimeFramePeriod._PeriodDateSpan', '')
+      .get('Timesheet.PeriodTotalData.PeriodTotals._PeriodDateSpan', '')
       .thru(periodString => periodString.split(' - '))
       .map(date => moment(date, 'M/DD/YYYY'))
       .value()
@@ -69,40 +71,45 @@ export function parseTimesheet(kronosData) {
           .map(each => ({
               date: moment(each._Date, 'M/DD/YYYY'),
               total: parseTime(each._GrandTotal || "0:00"),
-              totals: _.map(each => parseTotal(each)),
+              totals: _.chain(each)
+                .get('Totals.Total')
+                .compact()
+                .map(each => parseTotal(each))
+                .value()
             })
           )
-          .filter(each => (startDate <= each.date) && (each.date <= endDate))
+          .filter(each => each.date.isBetween(
+            moment(startDate).subtract(1, 'days'),
+            moment(endDate).add(1, 'days')
+          ))
           .value(),
       inPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
-        .map(eachSpan => _.get(eachSpan, 'InPunch.Punch'))
-        .compact()
-        .map(eachPunch => {
-          const dateString = eachPunch._Date
-          const timeString = eachPunch._Time
-          const timeZone = eachPunch._KronosTimeZone.match(/[+-]\d\d:\d\d/)[0]
-          return {
-            time: moment(
-                `${dateString} ${timeString} ${timeZone}`, 
-                'M/DD/YYYY HH:mm Z'
-            ),
-          }
+        .map(eachSpan => {
+  				const dateString = _.get(eachSpan, 'InPunch.Punch._Date')
+  				const timeString = _.get(eachSpan, 'InPunch.Punch._Time')
+  				const timeZone = _.get(eachSpan, 'InPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
+  				return {
+            laborCodes: _.get(eachSpan, '_LaborAccountName', '').split('/'),
+  					time: moment(
+    					`${dateString} ${timeString} ${timeZone}`, 
+    					'M/DD/YYYY HH:mm Z'
+  					),					
+  				}
         })
         .value(),
       outPunches: _.chain(kronosResponse)
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
-        .map(eachSpan => _.get(eachSpan, 'OutPunch.Punch'))
-        .compact()
-        .map(eachPunch => {
-          const dateString = eachPunch._Date
-          const timeString = eachPunch._Time
-          const timeZone = eachPunch._KronosTimeZone.match(/[+-]\d\d:\d\d/)[0]
+        .map(eachSpan => {
+          const dateString = _.get(eachSpan, 'OutPunch.Punch._Date')
+          const timeString = _.get(eachSpan, 'OutPunch.Punch._Time')
+          const timeZone = _.get(eachSpan, 'OutPunch.Punch._KronosTimeZone').match(/[+-]\d\d:\d\d/)[0]
           return {
+            laborCodes: _.get(eachSpan, '_LaborAccountName', '').split('/'),
             time: moment(
-                `${dateString} ${timeString} ${timeZone}`, 
-                'M/DD/YYYY HH:mm Z'
-            ),
+              `${dateString} ${timeString} ${timeZone}`, 
+              'M/DD/YYYY HH:mm Z'
+            ),          
           }
         })
         .value(),
@@ -110,15 +117,14 @@ export function parseTimesheet(kronosData) {
         .get('Timesheet.TotaledSpans.TotaledSpan', [])
         .map(eachSpan => _.chain(eachSpan)
             .get('Exceptions.TimekeepingException')
-            .thru(x => [x])
-            .flatten()
-            .compact()
+            // Map {a:x} -> [{a:x}] and [{a:x},{b:y}] -> [{a:x},{b:y}]
+            .thru(x => [x]).flatten().compact()
             .map(eachException => ({
               date: moment(eachSpan._Date, 'M/DD/YYYY'),
-              type: eachException._ExceptionTypeName,
+              typeName: `${eachException._ExceptionTypeName}`,
               differenceToLimit: parseTime(eachException._DifferenceToLimit),
-              duration: parseTime(eachException._DurationOfException), // TODO parse
-              inPunchFlag: eachException._InPunchFlag, // I don't know what this is
+              duration: parseTime(eachException._DurationOfException), 
+              inPunchFlag: `${eachException._InPunchFlag}`, // I don't know what this is
             }))
             .value()
         )
@@ -134,6 +140,7 @@ export function parseTimesheet(kronosData) {
 }
 
 export function parseLogin(kronosData) {
+  // Object -> Object
   const kronosResponse = kronosData.Kronos_WFC.Response
   return {
     status: kronosResponse._Status,
@@ -142,6 +149,7 @@ export function parseLogin(kronosData) {
   } 
 }
 export function parseLogout(kronosData) {
+  // Object -> Object
   const kronosResponse = kronosData.Kronos_WFC.Response
   return {
     status: kronosResponse._Status,
@@ -149,25 +157,31 @@ export function parseLogout(kronosData) {
   } 
 }
 
-function camelCaseProperties(object) {
-  return _.mapKeys(object, (value, key) => _.camelCase(key))
-}
-
-function parseTime(input) {
-  return _.chain(input)
-      // Convert input string to a moment object
-      .thru(x => moment(x, "HH:mm"))
-      // Convert to the number of hours worked
-      .thru(x => x.hours() + (x.minutes() / 60))
-      // Round to 2 digits
-      .thru(x => _.round(x, 2))
-      .value()
-}
-
 function parseTotal(input) {
+  // Object -> Object
   return {
     amountInTime: parseTime(input._AmountInTime),
     payCodeId: input._PayCodeId,
     payCodeName: input._PayCodeName,
   }
+}
+
+function parseTime(input) {
+  // String -> Number
+  // The input is expected to have an `toString` 
+  // method that produces a string with  the syntax
+  // `HH:mm` Sematically `HH` represents the number
+  // of hours and `MM` represents the number of 
+  // minutes. The resulting number is the number of
+  // hours.
+  if(input == undefined)
+	return ""
+  return _.chain(input)
+      // Split string into hours and minutes
+      .thru(x => x.split(':'))
+      // Convert to the number of hours worked
+      .thru(([hours, minutes]) => Number(hours) + (Number(minutes) / 60))
+      // Round to 2 digits
+      .thru(x => _.round(x, 2))
+      .value()
 }

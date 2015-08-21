@@ -13,8 +13,9 @@ import moment from "moment"
 import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
 import PayPeriodStats from "../PayPeriodStats/PayPeriodStats.js"
-import PayPeriodDay from "../PayPeriodDay/PayPeriodDay"
+import PayPeriodDays from "../PayPeriodDays/PayPeriodDays"
 import Page from '../Page/Page'
+import { getId } from '../Login/Login'
 
 export default class PayPeriodOverview extends React.Component {
   // PayPeriodsOverview connects to the datastore timesheet
@@ -22,7 +23,11 @@ export default class PayPeriodOverview extends React.Component {
   // stamps with date and culmulative hours
   render() {
     return (
-      <FluxComponent connectToStores={['kronos']}>
+      <FluxComponent connectToStores={{
+        kronos: store => ({
+          timesheet: store.getTimesheetByName(this.props.dateRange)
+        })
+      }}>
         <PayPeriod {...this.props}/>
       </FluxComponent>
     )
@@ -30,42 +35,49 @@ export default class PayPeriodOverview extends React.Component {
 }
 
 class PayPeriod extends React.Component {
+  contextTypes: {
+    router: React.PropTypes.func.isRequired,
+  }
   componentDidMount() {
-    flux.getActions('kronos').setStoreDateRange(this.props.dateRange)
     flux.getActions('kronos').fetchTimesheet()
   }
   // PayPeriods creates a list of PayPeriod Components
   // Needs tested with more data
   render() {
+    var id = getId()
+
     const { timesheet } = this.props
 
     const startDate = timesheet.startDate 
-      ? timesheet.startDate.format('MMMM DD')
+      ? timesheet.startDate.format('MMMM DD, YYYY')
       : ''
     const endDate = timesheet.endDate
-      ? timesheet.endDate.format('MMMM DD')
+      ? timesheet.endDate.format('MMMM DD, YYYY')
       : ''
     const dateRange = startDate + " - " + endDate
-                       
-    const days = _.map(timesheet.days, each => (
-        <li><PayPeriodDay {...each} /></li>
-    ))
-
+     
     return (
       <Page>
         <div className="row time-overview">
           <div className="col-xs-12">
             <div className="payperiod-overview">
+              <h3 className="text-center"><small>{id}</small></h3>
               <PeriodHeader periodType={this.props.periodType} />
-              <h3 className="text-center"><small>{dateRange}</small></h3>
-
               <h6 className="text-center"><OtherPayPeriodLink {...this.props} /></h6>
-              <FluxComponent connectToStores={['kronos']}>
+              <h3 className="text-center"><small>{dateRange}</small></h3>
+              <FluxComponent connectToStores={{
+                  kronos: store => ({
+                    timesheet: store.getTimesheetByName(this.props.dateRange),
+                  })
+              }}>
                 <PayPeriodStats />
               </FluxComponent>
-              <ul className="week-overview clearfix">
-                {days}
-              </ul>
+              { timesheet.days.length
+                ? <PayPeriodDays days={timesheet.days} />
+                 : <div className="alert alert-info text-center" role="alert">
+                      No day data available.
+                  </div>
+              }
             </div>
           </div>
         </div>
@@ -80,12 +92,12 @@ class OtherPayPeriodLink extends React.Component {
   render() {
     if(this.props.periodType == "Current") {
       return(
-        <Link to="previous" name="period-link previous">Previous Pay Period</Link>
+        <Link to="previous" name="period-link previous">Go To Previous Pay Period</Link>
       )
     } 
     if(this.props.periodType == "Previous") {
       return(
-        <Link to="app" name="period-link current">Current Pay Period</Link>
+        <Link to="app" name="period-link current">Go To Current Pay Period</Link>
       )
     } else {
       return null

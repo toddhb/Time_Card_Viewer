@@ -14,6 +14,7 @@ import FluxComponent from 'flummox/component';
 import flux from "../../flux/flux"
 import DayOverviewCalendar from '../DayOverviewCalendar/DayOverviewCalendar'
 import Page from '../Page/Page'
+import { getId } from '../Login/Login'
 
 export default class DayOverview extends React.Component {
   render() {
@@ -27,11 +28,15 @@ export default class DayOverview extends React.Component {
           const inPunches = kronos.getInPunchesForDate(date)
           const outPunches = kronos.getOutPunchesForDate(date)
           const exceptions = kronos.getExceptionsForDate(date)
+          const startPeriodDate = kronos.getPeriodStartDate('previous')
+          const endPeriodDate = kronos.getPeriodEndDate('current')
           return {
             day,
             inPunches, 
             outPunches,
             exceptions,
+            startPeriodDate,
+            endPeriodDate,
           }
         }}
       >
@@ -42,18 +47,24 @@ export default class DayOverview extends React.Component {
 }
 
 class Overview extends React.Component {                              
+  componentDidMount() {
+    flux.getActions('kronos').fetchTimesheet()
+  }
   render() {  
     // XXX Hack! Need to pull from API in a better way
     let lastKronosTimeZone = ""
 
-    const { params, day, inPunches, outPunches } = this.props
+    const { params, day, inPunches, outPunches, exceptions, startPeriodDate, endPeriodDate} = this.props
 
     const inPunchesChain = _.chain(inPunches)
-        .map(each => _.assign({
+        .map(each => {
+          // XXX Hack! Need to pull from API in a better way
+          //lastKronosTimeZone = eachPunch.KronosTimeZone
+          return _.assign(each, {
             type: "InPunch",
           })
-        )
-    const outPunchesChain = _.chain(inPunches)
+        })
+    const outPunchesChain = _.chain(outPunches)
         .map(each => {
           // XXX Hack! Need to pull from API in a better way
           //lastKronosTimeZone = eachPunch.KronosTimeZone
@@ -61,51 +72,43 @@ class Overview extends React.Component {
             type: "OutPunch",
           })
         })
-
-    /*
-    const shiftsChain = _.chain(Schedule)
-      .get('ScheduleItems.ScheduleShift', [])
-      .filter({StartDate: moment(params.date).format("M/DD/YYYY")})
-      .pluck('ShiftSegments.ShiftSegment')
-      .compact()
-      .map(eachShift => {
-        const { StartDate, EndDate, StartTime, EndTime} = eachShift
-        return [
-          {
-            time: kronosMoment(StartDate, StartTime, lastKronosTimeZone),
-            type: 'scheduledIn'
-          },{
-            time: kronosMoment(EndDate, EndTime, lastKronosTimeZone),
-            type: 'scheduledOut'
-          }
-        ]
-      })
-      .flatten()
-    */
-
-    const punches = inPunchesChain
-       .concat(outPunchesChain.value())
+    const ExceptionsChain = _.chain(exceptions)
+        .map(each => {
+          // XXX Hack! Need to pull from API in a better way
+          //lastKronosTimeZone = eachPunch.KronosTimeZone
+          return _.assign(each, {
+            type: "Exception",
+          })
+        })
+    const execp = ExceptionsChain
+    /*const execp = ExceptionsChain
+		.map(punch => <Entry {...punch} />)
+       .value()*/
+    const punches = outPunchesChain
+       .concat(inPunchesChain.value())
        //.concat(shiftsChain.value())
        .sortBy('time')
        .map(punch => <Entry {...punch} />)
        .value()
-
+	   
+	   
     const date = moment(params.date)
     const year = date.format("YYYY")
     const month = date.format("MM")
 
-    const dayHeaders = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
+    const dayHeaders = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ]
     
     return (
       <Page>  
-        <DayHeader date={date}/> 
+        <DayHeader {...this.props} /> 
         <div className="row">
-          <div className="col-xs-12 col-md-7">
-            { punches.length > 0 ? punches : <div><h3 className="text-center">No punches today</h3></div>}
+          <div className="panel col-xs-12 col-md-7">
+            { punches.length > 0 ? <table className="table"><tbody>{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
           </div>
           <div className="col-xs-12 col-md-5">
-            <div className="calendar hidden-xs hidden-sm">
-              <DayOverviewCalendar year={year} month={month-1} headers={dayHeaders} />
+            <div className="panel hidden-xs hidden-sm"
+                 style={{padding: 10, marign: 0, border: 0}}>
+              <DayOverviewCalendar {...this.props} year={year} month={month-1} headers={dayHeaders}  />
             </div>
               <FluxComponent connectToStores={{
                   kronos: store => ({
@@ -123,23 +126,22 @@ class Overview extends React.Component {
 
 class DayHeader extends React.Component {
   render() { 
-    const displayDate = this.props.date.format("MMMM DD") 
+    const id = getId()
+    const displayDate = this.props.day
+      ? this.props.day.date.format("dddd, MMMM DD, YYYY")
+      : ''
+
     return ( 
       <div className="row">
-        <div className="col-xs-2">
-          <Link to="day" params={{date: this.props.date.clone().subtract(1, "days").format("YYYY-MM-DD")}} 
-                type="button" className="pull-left subtle-btn">
-            <i className="fa fa-chevron-left"></i>
-          </Link> 
+        <h3 className="text-center"><small>{id}</small></h3>
+        <div className="col-xs-1">
+          { displayDate && <ChangeDayLink {...this.props} direction="Previous" />}
         </div>
-        <div className="col-xs-8">
+        <div className="col-xs-10">
           <h4 className="text-center">{displayDate}</h4>
         </div>
-        <div className="col-xs-2">
-          <Link to="day" params={{date: this.props.date.clone().add(1, "days").format("YYYY-MM-DD")}} 
-                type="button" className="pull-right subtle-btn">
-            <i className="fa fa-chevron-right"></i>
-          </Link> 
+        <div className="col-xs-1">
+          { displayDate && <ChangeDayLink {...this.props} direction="Next" /> }
         </div>
         <div className="row"><br/></div> {/*For space*/}
         <div className="row"><br/></div>
@@ -150,12 +152,46 @@ class DayHeader extends React.Component {
 
 class DayStats extends React.Component {
   render() {
-    const { day } = this.props
-    const total = day ? day.total : ''
+    const { totals, total } = this.props.day ? this.props.day : ""
+	
+    const grandTotal = total || 0
+    const workedTotal = _.chain(totals)
+        .find(total => total.payCodeId == "134")
+        .get('amountInTime', 0)
+        .value()
+    const overtimeTotal = _.chain(totals)
+        .find(total => total.payCodeId == "141")
+        .get('amountInTime', 0)
+        .value()
+    const ptoTotal = _.chain(totals)
+        .find(total => total.payCodeId == "501")
+        .get('amountInTime', 0)
+        .value()
     return (
       <div className="panel period-totals">
         <div className="panel-body">
-          <p><strong>Total Hours Worked:</strong> <span className="period-stat">{total}</span></p>
+          <table className="table">
+            <tr>
+              <th>Type</th> 
+              <th className="text-right">Total</th>
+            </tr>
+            <tr>
+              <th>Hours</th> 
+              <td className="text-right"><span className="badge">{workedTotal.toFixed(2)}</span></td>
+            </tr>
+      		  <tr>
+              <th>PTO</th> 
+              <td className="text-right"><span className="badge">{ptoTotal.toFixed(2)}</span></td>
+            </tr>
+      		  <tr>
+              <th>OT</th>
+              <td className="text-right"><span className="badge">{overtimeTotal.toFixed(2)}</span></td>
+            </tr>
+      		  <tr>
+              <th>Total</th> 
+              <td className="text-right"><span className="badge">{grandTotal.toFixed(2)}</span></td>
+            </tr>
+          </table>
         </div>
       </div>   
     )
@@ -187,27 +223,43 @@ class Entry extends React.Component {
         action: "Shift ended",
         panelClass: panelClassDefault + " " + "shift-info",
         glyphClass: "icon-clock"
-      }
+      },
+	  Exception: {
+        action: "Exception",
+        panelClass: panelClassDefault + " " + "time-in",
+        glyphClass: "icon-truck"
+      },
     }
 
     const {action, panelClass, glyphClass} = settings[this.props.type]
-
-    const time = moment(this.props.time).format('hh:mm a') 
-    return ( 
-        <div className={panelClass}>
-            <div className="date-side-box">
-                <p className="text-center">{action}</p>
-                <div className="text-center action-icon">
-                  <a>
-                    <ActionIcon action = {action}/>
-                  </a>
-                </div>
-            </div>
-            <p className="hours-worked-text"><span className="hours-worked-number">{time}</span></p>
-        </div>
-    )
+    if(this.props.type == "Exception") {
+      const expection = this.props.typeName
+  		return (
+  			<tr>
+  			  <td><ActionIcon action = {action}/></td>
+  			  <td>{expection}</td>
+  			  <td></td>
+  			  <td></td>
+  			</tr>	
+  		)					
+  	} else {
+  		const time = moment(this.props.time).format('h:mma') 
+      const departmentCode = this.props.laborCodes[4]
+      const workTypeCode = this.props.laborCodes[5]
+  		return ( 
+  			<tr>
+  			  <td><ActionIcon action = {action}/></td>
+  			  <td>{action}</td>
+  			  <td>{time}</td>
+  			  <td>{departmentCode}</td>
+          <td>{workTypeCode}</td>
+  			</tr>
+  		)
+    }
   }
 }
+
+
 
 class ActionIcon extends React.Component {
     render () {
@@ -234,3 +286,56 @@ class ActionIcon extends React.Component {
        }
     }
 }
+
+class ChangeDayLink extends React.Component {
+  render() {
+    const startDate = this.props.startPeriodDate 
+    const endDate = this.props.endPeriodDate
+    const currentDate = this.props.day.date
+
+    var newDate = currentDate.clone()
+    var arrowCode  
+
+    if(this.props.direction === "Previous") {
+      arrowCode = '\u00ab'
+      newDate = newDate.subtract(1, "days")
+      
+      // This should be checking if the newDate.isBefore(startDate) or isSame(startDate), but store data
+      // holds information for startDate + 1 to endDate - 1
+      if(!newDate.isBefore(startDate)) {
+        newDate = newDate.format("YYYY-MM-DD")
+      } else {
+        //console.log("newDate null because " + newDate.toString("MM-DD") + " is before " + startDate.toString("MM-DD"))
+        newDate = null
+      }
+    }
+
+    if(this.props.direction == "Next") {
+      arrowCode = '\u00bb'
+      newDate = newDate.add(1, "days")
+
+      // This should be checking if the newDate.isAfter(startDate) or isSame(startDate) per note above
+      if(!newDate.isAfter(endDate)) {
+        newDate = newDate.format("YYYY-MM-DD")
+      } else {
+        //console.log("newDate null because " + newDate.toString("MM-DD") + " is after " + endDate.toString("MM-DD"))
+        newDate = null
+      }
+    } 
+
+    return (
+      <div>
+      { newDate
+        ? <Link to="day" params={{date: newDate}} 
+                   type="button" className="pull-left subtle-btn">
+              <h4><strong>
+                {arrowCode}
+              </strong></h4>
+            </Link>
+        : null
+      }
+      </div>
+    )
+  }
+}
+ChangeDayLink.propTypes = { direction: React.PropTypes.oneOf(['Next', 'Previous']) };
