@@ -46,7 +46,7 @@ p#login-error {
 
   // Overriding bootstrap for layout stability
   &.invisible {
-    margin-right: -9999px; // Old-school hiding fun
+    display: none;
   }
 }
 
