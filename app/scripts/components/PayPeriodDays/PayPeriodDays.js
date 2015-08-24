@@ -50,9 +50,9 @@ class Row extends React.Component {
   }
   render() {
     const { totals, total, date } = this.props
-    const grandTotal = total ? total : '0.00'
+    const grandTotal = (total ? total : 0).toFixed(2)
     const workedTotal = _.chain(totals)
-        .find(total => total.payCodeId == "134")
+        .find(total => total.payCodeId == "140")  // All hours worked plus UAOT
         .get('amountInTime', 0)
         .thru(total => total.toFixed(2))
         .value()
