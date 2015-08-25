@@ -66,13 +66,18 @@ class Row extends React.Component {
         .get('amountInTime', 0)
         .thru(total => total.toFixed(2))
         .value()
+    const allHoursPaid = _.chain(totals)
+        .find(total => total.payCodeId == "142") // All Hours Paid
+        .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
+        .value()
     return (
       <tr onClick={this.handleClick}>
         <td>{date.format("ddd M/D")}</td>
         <td className="text-center"><span className="badge">{workedTotal}</span></td>
         <td className="text-center"><span className="badge">{ptoTotal}</span></td>
         <td className="text-center"><span className="badge">{overtimeTotal}</span></td>
-        <td className="text-center"><span className="badge">{grandTotal}</span></td>
+        <td className="text-center"><span className="badge">{allHoursPaid}</span></td>
       </tr>
     )
   }
