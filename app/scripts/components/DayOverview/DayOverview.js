@@ -159,7 +159,6 @@ class DayStats extends React.Component {
   render() {
     const { totals, total } = this.props.day ? this.props.day : ""
 	
-    const grandTotal = total || 0
     const workedTotal = _.chain(totals)
         .find(total => total.payCodeId == "134")
         .get('amountInTime', 0)
@@ -170,6 +169,10 @@ class DayStats extends React.Component {
         .value()
     const ptoTotal = _.chain(totals)
         .find(total => total.payCodeId == "501")
+        .get('amountInTime', 0)
+        .value()
+    const allHoursPaid = _.chain(totals)
+        .find(total => total.payCodeId == "142")
         .get('amountInTime', 0)
         .value()
     return (
@@ -194,7 +197,7 @@ class DayStats extends React.Component {
             </tr>
       		  <tr>
               <th>Total</th> 
-              <td className="text-right"><span className="badge">{grandTotal.toFixed(2)}</span></td>
+              <td className="text-right"><span className="badge">{allHoursPaid.toFixed(2)}</span></td>
             </tr>
           </table>
         </div>
