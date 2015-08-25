@@ -24,7 +24,7 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
     }
     font-size: 3em;
     line-height: 1em;
-    color: rgba(#eee, 0.8);
+    color: lighten($gray-light, 25%);
     text-shadow: 0px 2px 1px rgba(0,0,0,0.13);      
   }
 

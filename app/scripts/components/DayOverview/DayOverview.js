@@ -102,12 +102,17 @@ class Overview extends React.Component {
       <Page>  
         <DayHeader {...this.props} /> 
         <div className="row">
-          <div className="panel col-xs-12 col-md-7">
-            { punches.length > 0 ? <table className="table"><tbody>{punches}</tbody></table> : <div><h3 className="text-center">No punches today</h3></div>}
+          <div className="panel col-xs-12 col-md-7" style={{padding: 0}}>
+            { 
+              punches.length > 0 
+              ? <table className="table"><tbody>{punches}</tbody></table> 
+              : <div><h3 className="text-center">No punches today</h3></div>
+            }
           </div>
           <div className="col-xs-12 col-md-5">
             <div className="panel hidden-xs hidden-sm"
-                 style={{padding: 10, marign: 0, border: 0}}>
+                 style={{padding: 10, margin: 0, border: 0}}>
+              <h6 className="text-center">{date.format("MMMM")}</h6>
               <DayOverviewCalendar {...this.props} year={year} month={month-1} headers={dayHeaders}  />
             </div>
               <FluxComponent connectToStores={{
@@ -154,7 +159,6 @@ class DayStats extends React.Component {
   render() {
     const { totals, total } = this.props.day ? this.props.day : ""
 	
-    const grandTotal = total || 0
     const workedTotal = _.chain(totals)
         .find(total => total.payCodeId == "134")
         .get('amountInTime', 0)
@@ -165,6 +169,10 @@ class DayStats extends React.Component {
         .value()
     const ptoTotal = _.chain(totals)
         .find(total => total.payCodeId == "501")
+        .get('amountInTime', 0)
+        .value()
+    const allHoursPaid = _.chain(totals)
+        .find(total => total.payCodeId == "142")
         .get('amountInTime', 0)
         .value()
     return (
@@ -189,7 +197,7 @@ class DayStats extends React.Component {
             </tr>
       		  <tr>
               <th>Total</th> 
-              <td className="text-right"><span className="badge">{grandTotal.toFixed(2)}</span></td>
+              <td className="text-right"><span className="badge">{allHoursPaid.toFixed(2)}</span></td>
             </tr>
           </table>
         </div>
@@ -293,15 +301,15 @@ class ChangeDayLink extends React.Component {
     const endDate = this.props.endPeriodDate
     const currentDate = this.props.day.date
 
+    var classStr = 'date-chevron'
     var newDate = currentDate.clone()
     var arrowCode  
 
     if(this.props.direction === "Previous") {
+      classStr = classStr + ' pull-left'
       arrowCode = '\u00ab'
       newDate = newDate.subtract(1, "days")
       
-      // This should be checking if the newDate.isBefore(startDate) or isSame(startDate), but store data
-      // holds information for startDate + 1 to endDate - 1
       if(!newDate.isBefore(startDate)) {
         newDate = newDate.format("YYYY-MM-DD")
       } else {
@@ -311,10 +319,10 @@ class ChangeDayLink extends React.Component {
     }
 
     if(this.props.direction == "Next") {
+      classStr = classStr + ' pull-right'
       arrowCode = '\u00bb'
       newDate = newDate.add(1, "days")
 
-      // This should be checking if the newDate.isAfter(startDate) or isSame(startDate) per note above
       if(!newDate.isAfter(endDate)) {
         newDate = newDate.format("YYYY-MM-DD")
       } else {
@@ -327,10 +335,10 @@ class ChangeDayLink extends React.Component {
       <div>
       { newDate
         ? <Link to="day" params={{date: newDate}} 
-                   type="button" className="pull-left subtle-btn">
-              <h4><strong>
+                   type="button" className={classStr}>
+              <strong>
                 {arrowCode}
-              </strong></h4>
+              </strong>
             </Link>
         : null
       }

@@ -18,33 +18,45 @@ export default class PayPeriodStats extends React.Component {
     const { timesheet } = this.props
     const totals = timesheet.totals
 
-    const allPaidHours = _.chain(totals)
-        .find(each => each.payCodeId == "142")
+    const allWorkedHours = _.chain(totals)
+        .find(each => each.payCodeId == "140") // All Hours workd plus UAOT
         .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
         .value()
     const allOvertime = _.chain(totals)
         .find(each => each.payCodeId == "141")
         .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
         .value()
     const allPTO = _.chain(totals)
         .find(each => each.payCodeId == "501")
         .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
+        .value()
+    const allPaidHours = _.chain(totals)
+        .find(each => each.payCodeId == "142") // All Paid Hours
+        .get('amountInTime', 0)
+        .thru(total => total.toFixed(2))
         .value()
 
     return (
       <div className="well well-sm clearfix"
            style={{ background: 'white' }}>
-        <div className="col-xs-12 col-md-4">
+        <div className="col-xs-12 col-md-3">
           <p className="pull-left">Hours Worked</p>
-          <p className="badge pull-right"><strong>{allPaidHours}</strong></p>
+          <p className="badge pull-right"><strong>{allWorkedHours}</strong></p>
         </div>
-        <div className="col-xs-12 col-md-4">
+        <div className="col-xs-12 col-md-3">
           <p className="pull-left">PTO Hours</p>
           <p className="badge pull-right"><strong>{allPTO}</strong></p>
         </div>
-		<div className="col-xs-12 col-md-4">
+    		<div className="col-xs-12 col-md-3">
           <p className="pull-left">OT Hours</p>
           <p className="badge pull-right"><strong>{allOvertime}</strong></p>
+        </div>
+        <div className="col-xs-12 col-md-3">
+          <p className="pull-left">Totals</p>
+          <p className="badge pull-right"><strong>{allPaidHours}</strong></p>
         </div>
       </div>
     );

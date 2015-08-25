@@ -8,8 +8,8 @@ Andrew McGown, Sasha Fahrenkopf, Cameron B. White.
  */
 @import "conway-skin";
 
-$border-color: #ddd;
-$hover-color: #e7e7e7;
+$border-color: #e7e7e7;
+$hover-color: #f8f8f8;
 $current-border: #cecece;
 
 .calendar {
@@ -36,15 +36,36 @@ $current-border: #cecece;
     td {
        font-size: .8em;
        vertical-align: top;
-       padding: 5px;
-       border: 1px solid $border-color;
+       border: 1px solid $gray-lighter;
+
+       p {
+        background-color: $hover-color;
+        padding: 5px;
+        margin-bottom: 0px;
+        color: #777;
+       }
+
+       a {
+        padding: 5px;
+        color: $brand-primary;
+        display: block;
+
+        &.active {
+          color: $hover-color;
+          background-color: $brand-primary;
+
+          &:hover {  // This should really use inherit
+            color: $hover-color;
+            background-color: $brand-primary;
+            text-decoration: none;
+          }
+        }
+
+        &:hover {
+          background-color: $hover-color; 
+        }
+       }
     }
-    
-    td:hover {
-      background-color: $hover-color;   
-    }
-    
-    td a { display: block; }
     
     tr#current {
       td {
